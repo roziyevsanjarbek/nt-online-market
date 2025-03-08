@@ -3,10 +3,10 @@ services:
         container_name: market_web
         image: nginx:alpine
         ports:
-            - "8040:80"
+            - "8050:80"
         volumes:
             - ./:/var/www
-            - ./nginx.conf:/etc/nginx/conf.d/default.conf
+            - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf
         depends_on:
             - market_app
         networks:
@@ -16,7 +16,7 @@ services:
         container_name: market_app
         build:
             context: .
-            dockerfile: ./Dockerfile
+            dockerfile: ./docker/Dockerfile
         depends_on:
             - market_db
         volumes:
@@ -24,7 +24,7 @@ services:
         networks:
             - market_network
         ports:
-            - "9090:9000"
+            - "9080:9000"
 
     market_db:
         image: mysql
@@ -37,12 +37,13 @@ services:
         volumes:
             - market_database:/var/lib/mysql
         networks:
-            - marker_network
+            - market_network  # ❌ Noto‘g‘ri "marker_network" emas, "market_network" bo‘lishi kerak!
         expose:
             - 3344
+
 networks:
     market_network:
         driver: bridge
+
 volumes:
     market_database:
-
