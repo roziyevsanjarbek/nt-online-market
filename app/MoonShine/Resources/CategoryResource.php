@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources;
 
-use Faker\Provider\Text;
+use \MoonShine\UI\Fields\Text;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
 
@@ -31,7 +31,7 @@ class CategoryResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            \MoonShine\UI\Fields\Text::make('name'),
+            Text::make('name'),
 
 
         ];
@@ -45,7 +45,7 @@ class CategoryResource extends ModelResource
         return [
             Box::make([
                 ID::make(),
-                \MoonShine\UI\Fields\Text::make('name'),
+                Text::make('name'),
             ])
         ];
     }
@@ -57,7 +57,7 @@ class CategoryResource extends ModelResource
     {
         return [
             ID::make(),
-            \MoonShine\UI\Fields\Text::make('name'),
+            Text::make('name'),
         ];
     }
 
@@ -69,6 +69,7 @@ class CategoryResource extends ModelResource
      */
     protected function rules(mixed $item): array
     {
-        return [];
+        return [
+        ];
     }
 }
