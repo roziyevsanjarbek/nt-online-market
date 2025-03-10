@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Model;
 
 class ProductVolume extends Model
@@ -12,7 +13,7 @@ class ProductVolume extends Model
 
     public function products()
     {
-        return $this->hasMany(Product::class, 'product_volume');
+        return $this->hasMany(Products::class, 'product_volume');
     }
 
 }

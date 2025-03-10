@@ -49,16 +49,17 @@ class PostResource extends ModelResource
         return [
             Box::make([
                 ID::make(),
-                Text::make('Title'),
+                Text::make('Title', 'title'),
                 Text::make('Content'),
-                Image::make('Image'),
-                \MoonShine\Laravel\Fields\Relationships\BelongsTo::make('Category',
+                Image::make('Image', 'image'),
+                \MoonShine\Laravel\Fields\Relationships\BelongsTo::make(
+                    'Category',
                     'postCategory',
                     fn($item)=>"$item->id. $item->name",
                     PostCategoryResource::class)
                     ->afterFill(
                         fn($field) => $field->setColumn('category_id')
-                    )
+                    ),
             ])
         ];
     }
