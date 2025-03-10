@@ -20,8 +20,6 @@ return new class extends Migration
             $table->decimal('sale_price', 10, 2)->default(0);
             $table->integer('category_id')->nullable();
             $table->integer('stock_quantity');
-            $table->dateTime('created_at')->nullable();
-            $table->dateTime('updated_at')->nullable();
             $table->timestamps();
         });
     }
