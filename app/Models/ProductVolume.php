@@ -10,4 +10,9 @@ class ProductVolume extends Model
         'name',
     ];
 
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'product_volume');
+    }
+
 }

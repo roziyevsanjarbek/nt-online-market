@@ -22,4 +22,14 @@ class Products extends Model
             'created_at',
             'updated_at'
         ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function productVolume()
+    {
+        return $this->belongsTo(ProductVolume::class, 'product_volume');
+    }
 }
