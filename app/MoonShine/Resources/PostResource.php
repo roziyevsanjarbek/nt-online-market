@@ -55,7 +55,7 @@ class PostResource extends ModelResource
                 Image::make('Image', 'image'),
                 BelongsTo::make(
                     'Category',
-                    'postCategory',
+                    'PostCategory',
                     fn($item)=>"$item->id. $item->name",
                     PostCategoryResource::class)
                     ->afterFill(
@@ -77,7 +77,7 @@ class PostResource extends ModelResource
             Image::make('Image', 'image'),
             BelongsTo::make(
                 'Category',
-                'postCategory',
+                'PostCategory',
                 fn($item)=>"$item->id. $item->name",
                 PostCategoryResource::class)
                 ->afterFill(

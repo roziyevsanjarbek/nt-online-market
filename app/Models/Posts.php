@@ -11,7 +11,7 @@ class Posts extends Model
     protected static function boot(){
         parent::boot();
         static::creating(function($model){
-            $model->slug = Carbon::now() . Str::slug($model->title); // Column name 'title'
+            $model->slug = Carbon::now() . Str::slug($model->title);
         });
     }
 
