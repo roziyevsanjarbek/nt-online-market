@@ -35,12 +35,6 @@ class PostCategoryResource extends ModelResource
             ID::make()->sortable(),
             Text::make('Title', 'name'),
             Date::make('Created At', 'created_at')->sortable(),
-//            HasMany::make('posts', 'posts', fn($item)=>"$item->id. $item->name",
-//                PostResource::class)
-//                    ->afterFill(
-//                        fn($field)=>$field->setColumn('category_id')
-//                )
-//            ,
         ];
     }
 
@@ -66,6 +60,8 @@ class PostCategoryResource extends ModelResource
             ID::make(),
             Text::make('Title', 'name'),
             Date::make('Created At', 'created_at'),
+            HasMany::make('posts', 'posts', fn($item)=>"$item->id. $item->name",
+                PostResource::class),
         ];
     }
 
