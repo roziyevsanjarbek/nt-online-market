@@ -36,7 +36,6 @@ use App\MoonShine\Resources\PostResource;
 use App\MoonShine\Resources\CategoryResource;
 use App\MoonShine\Resources\ProductResource;
 use App\MoonShine\Resources\VolumeResource;
-use App\MoonShine\Resources\ProductVolumeResource;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -56,7 +55,6 @@ final class MoonShineLayout extends AppLayout
             MenuItem::make('Product Categories', CategoryResource::class),
             MenuItem::make('Product Volumes', VolumeResource::class),
             MenuItem::make('Product', ProductResource::class),
-            MenuItem::make('ProductVolumes', ProductVolumeResource::class),
         ];
     }
 
