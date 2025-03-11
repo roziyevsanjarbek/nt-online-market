@@ -9,8 +9,7 @@ class CreateProductVolumesTable extends Migration
     {
         Schema::create('product_volumes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained()->onDelete('cascade');
-            $table->foreignId('volume_id')->constrained()->onDelete('cascade');
+            $table->string('volume');
             $table->timestamps();
         });
     }
