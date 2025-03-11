@@ -4,28 +4,26 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources;
 
-use App\MoonShine\Pages\Dashboard;
+use App\Models\ProductVolume;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Volume;
+use App\Models\Product;
 
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
-use MoonShine\Laravel\Fields\Relationships\HasMany;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\UI\Components\Layout\Box;
-use MoonShine\UI\Fields\Date;
 use MoonShine\UI\Fields\ID;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\UI\Fields\Text;
 
 /**
- * @extends ModelResource<Volume>
+ * @extends ModelResource<ProductVolume>
  */
-class VolumeResource extends ModelResource
+class ProductVolumeResource extends ModelResource
 {
-    protected string $model = Volume::class;
+    protected string $model = ProductVolume::class;
 
-    protected string $title = 'Volumes';
+    protected string $title = 'ProductVolumes';
 
     /**
      * @return list<FieldContract>
@@ -34,10 +32,6 @@ class VolumeResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Name', 'name')->sortable(),
-            Date::make('Created At', 'created_at')->sortable(),
-
-
         ];
     }
 
@@ -48,16 +42,9 @@ class VolumeResource extends ModelResource
     {
         return [
             Box::make([
-                ID::make(),
-                Text::make('Name','name'),
-                BelongsTo::make(
-                    'Volume',
-                    'volume',
-                    fn($item)=>"$item->id. $item->name",
-                    VolumeResource::class)
-                    ->afterFill(
-                        fn($field) => $field->setColumn('product_volume_id')
-                    ),
+                ID::make()->sortable(),
+                BelongsTo::make('Product', 'product', 'name')->sortable(),
+                BelongsTo::make('Volume', 'volume', 'name')->sortable(),
             ])
         ];
     }
@@ -69,16 +56,11 @@ class VolumeResource extends ModelResource
     {
         return [
             ID::make(),
-            Text::make('Name', 'name'),
-            Date::make('Created At', 'created_at'),
-//            HasMany::make('Categories', '', fn($item)=>"$item->id. $item->name",
-//                CategoryResource::class),
-
         ];
     }
 
     /**
-     * @param Volume $item
+     * @param ProductVolume $item
      *
      * @return array<string, string[]|string>
      * @see https://laravel.com/docs/validation#available-validation-rules

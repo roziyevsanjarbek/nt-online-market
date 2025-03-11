@@ -1,29 +1,21 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
+namespace App\Models;
 
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
-        Schema::create('product_volumes', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('slug');
-            $table->timestamps();
-        });
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+
+class ProductVolume extends Model {
+
+    protected $fillable = ['product_id', 'volume_id'];
+
+    public function product() {
+        return $this->belongsTo(Product::class);
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('product_volumes');
+    public function volume() {
+        return $this->belongsTo(Volume::class);
     }
-};
+}
+
