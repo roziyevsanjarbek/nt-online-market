@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\MoonShine\Resources;
 
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
+use MoonShine\Laravel\Fields\Relationships\HasMany;
 use \MoonShine\UI\Fields\Text;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
@@ -63,6 +64,8 @@ class CategoryResource extends ModelResource
             ID::make(),
             Text::make('name'),
             Text::make('parent_id')->nullable(),
+            HasMany::make('Products', 'products', fn($item)=>"$item->id. $item->name",
+                ProductResource::class),
         ];
     }
 
