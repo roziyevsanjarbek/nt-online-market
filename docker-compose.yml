@@ -11,7 +11,7 @@ services:
             - market_app
         networks:
             - market_network
-
+    
     market_app:
         container_name: market_app
         build:
