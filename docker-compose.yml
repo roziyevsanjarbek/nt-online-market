@@ -11,7 +11,7 @@ services:
             - market_app
         networks:
             - market_network
-    
+
     market_app:
         container_name: market_app
         build:
@@ -33,16 +33,17 @@ services:
         environment:
             MYSQL_DATABASE: ${DB_DATABASE}
             MYSQL_PASSWORD: ${DB_PASSWORD}
-            MYSQL_USER: ${DB_USERNAME}
             MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
         volumes:
             - market_database:/var/lib/mysql
         networks:
-            - market_network
+            - market_network  # ❌ Noto‘g‘ri "marker_network" emas, "market_network" bo‘lishi kerak!
         expose:
             - 3344
+
 networks:
     market_network:
         driver: bridge
+
 volumes:
     market_database:
