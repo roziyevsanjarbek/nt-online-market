@@ -37,9 +37,17 @@ services:
         volumes:
             - market_database:/var/lib/mysql
         networks:
-            - market_network  # ❌ Noto‘g‘ri "marker_network" emas, "market_network" bo‘lishi kerak!
+            - market_network
         expose:
             - 3344
+    market_node:
+        container_name: market_node
+        image: node:alpine
+        volumes:
+            - ./:/var/www
+        command: npm run dev
+        ports:
+            - "8010:8000"
 
 networks:
     market_network:
