@@ -8,11 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
 
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
+use MoonShine\Laravel\Fields\Relationships\HasMany;
+use MoonShine\Laravel\Fields\Relationships\MorphMany;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\ID;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\UI\ComponentContract;
+use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Text;
 
 /**
@@ -32,7 +35,13 @@ class CategoryResource extends ModelResource
         return [
             ID::make()->sortable(),
             Text::make('name'),
-            BelongsTo::make('parent', 'parent', fn($item) => "$item->id. $item->name", CategoryResource::class)
+            BelongsTo::make('parent', 'parent', fn($item) => "$item->id. $item->name", CategoryResource::class),
+            MorphMany::make('Images', 'images')
+            ->fields([
+                Image::make('Image', 'path')
+                ->disk('public')
+                ->dir('images')
+            ])
         ];
     }
 
@@ -49,7 +58,13 @@ class CategoryResource extends ModelResource
                     'Parent', 'parent',
                     fn($item) => "$item->id. $item->name",
                     CategoryResource::class)
-                ->nullable()
+                ->nullable(),
+                MorphMany::make('Images', 'images')
+                ->fields([
+                    Image::make('Image', 'path')
+                    ->disk('public')
+                    ->dir('images')
+                ])
             ])
         ];
     }
@@ -62,7 +77,13 @@ class CategoryResource extends ModelResource
         return [
             ID::make(),
             Text::make('name'),
-            BelongsTo::make('parent', 'parent', fn($item) => "$item->id. $item->name", CategoryResource::class)
+            BelongsTo::make('parent', 'parent', fn($item) => "$item->id. $item->name", CategoryResource::class),
+            MorphMany::make('Images', 'images')
+            ->fields([
+                Image::make('Image', 'path')
+                ->disk('public')
+                ->dir('images')
+            ])
         ];
     }
 
