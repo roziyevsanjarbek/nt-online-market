@@ -19,4 +19,3 @@ class CreateProductVolumesTable extends Migration
         Schema::dropIfExists('product_volumes');
     }
 }
-

@@ -45,14 +45,9 @@ services:
         image: node:alpine
         volumes:
             - ./:/var/www
-        networks:
-            - market_network
-        command: sh -c "cd /var/www && yarn install && yarn run dev"
-        depends_on:
-            - market_app
+        command: npm run dev
         ports:
             - "8010:8000"
-
 
 networks:
     market_network:
