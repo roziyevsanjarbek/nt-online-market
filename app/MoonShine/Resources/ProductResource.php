@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Product;
 
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
+use MoonShine\Laravel\Fields\Relationships\MorphMany;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\ID;
@@ -48,7 +49,8 @@ class ProductResource extends ModelResource
                 'Volume',
                 'volume',
                 fn ($item) => $item->id . '-' . $item->name,
-                ProductResource::class)
+                ProductVolumeResource::class),
+            MorphMany::make('Images', 'images')
         ];
     }
 
@@ -75,7 +77,8 @@ class ProductResource extends ModelResource
                     'Volume',
                     'volume',
                     fn ($item) => $item->id . '-' . $item->name,
-                    ProductResource::class)
+                    ProductVolumeResource::class),
+                MorphMany::make('Images', 'images', )
             ])
         ];
     }
@@ -102,7 +105,8 @@ class ProductResource extends ModelResource
                 'Volume',
                 'volume',
                 fn ($item) => $item->id . '-' . $item->name,
-                ProductResource::class)
+                ProductVolumeResource::class),
+            MorphMany::make('Images', 'images')
         ];
     }
 

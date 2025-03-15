@@ -16,7 +16,7 @@ class Product extends Model
         return $this->belongsTo(ProductVolume::class, 'volume_id', 'id');
     }
     public function images () {
-        return $this->morphMany(Image::class, 'imageable','imageable_type','imageable_id');
+        return $this->morphMany(Image::class, 'imageable');
         //imageable_type=App\Models\Product, imageable_id=product_id
     }
 }
