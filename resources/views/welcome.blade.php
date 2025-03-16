@@ -25,7 +25,9 @@ Copyright 2024
             <div class="w-full">
                 <div class="hero-slider swiper-container">
                     <div class="swiper-wrapper">
-                        <?php $banners = \App\Models\Banner::query()->where('position', 'top')->get();?>
+                        <?php use App\Models\Banner;
+
+                        $banners = Banner::query()->where('position', 'top')->get(); ?>
                         @foreach($banners as $banner)
                                 <?php
                                 $title = trim(preg_replace('/\s+/', ' ', $banner->title));
@@ -89,16 +91,30 @@ Copyright 2024
 </section>
 
 <!-- Category -->
+<?php
+$banner = Banner::query()
+    ->where('position', 'middle')
+    ->orderBy('created_at', 'desc')
+    ->first();
+?>
+
+@if($banner)
+        <?php
+        $title=trim(preg_replace('/\s+/', ' ', $banner->title));
+        $words=explode(' ', $title);
+        ?>
+@endif
+
 <section class="section-category overflow-hidden py-[50px] max-[1199px]:py-[35px]">
     <div
         class="flex flex-wrap justify-between relative items-center mx-auto min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
         <div class="flex flex-wrap w-full mb-[-24px]">
             <div class="min-[992px]:w-[41.66%] w-full px-[12px] mb-[24px]">
                 <div class="bb-category-img relative max-[991px]:hidden">
-                    <img src="assets/img/category/category.jpg" alt="category" class="w-full rounded-[30px]">
+                    <img src="{{ Storage::url($banner->image) }}" alt="category" class="w-full rounded-[30px]">
                     <div
                         class="bb-offers py-[5px] px-[15px] absolute top-[20px] right-[20px] bg-[#000] opacity-[0.8] rounded-[15px]">
-                        <span class="text-[14px] font-normal text-[#fff]">50% Off</span>
+                        <span class="text-[14px] font-normal text-[#fff]">{{ $banner->description }}</span>
                     </div>
                 </div>
             </div>
@@ -107,7 +123,7 @@ Copyright 2024
                     <div class="category-title mb-[30px] max-[991px]:hidden" data-aos="fade-up" data-aos-duration="1000"
                          data-aos-delay="600">
                         <h2 class="font-quicksand text-[124px] text-[#fff] opacity-[0.15] font-bold leading-[1.2] tracking-[0.03rem] max-[1399px]:text-[95px] max-[1199px]:text-[70px] max-[767px]:text-[42px]">
-                            Explore Categories</h2>
+                            {{ $banner->title }}</h2>
                     </div>
                     <div
                         class="bb-category-block owl-carousel ml-[-150px] w-[calc(100%+150px)] pt-[30px] pl-[30px] bg-[#fff] rounded-tl-[30px] relative max-[991px]:ml-[0] max-[991px]:w-full max-[991px]:p-[0]">
@@ -181,6 +197,7 @@ Copyright 2024
         </div>
     </div>
 </section>
+
 
 <!-- Day of the deal -->
 <section class="section-deal overflow-hidden py-[50px] max-[1199px]:py-[35px]">
@@ -509,24 +526,30 @@ Copyright 2024
 
 <!-- Banner-one -->
 <section class="section-banner-one overflow-hidden py-[50px] max-[1199px]:py-[35px]">
-    <div
-        class="flex flex-wrap justify-between relative items-center mx-auto min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
+    <div class="flex flex-wrap justify-between relative items-center mx-auto min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
         <div class="flex flex-wrap w-full mb-[-24px]">
+            <?php
+            $banners = Banner::query()->where('position', 'one_bottom')->get(); ?>
+            @foreach($banners as $banner)
+                    <?php
+                    $title = trim(preg_replace('/\s+/', ' ', $banner->title));
+                    ?>
+
             <div class="min-[992px]:w-[50%] w-full px-[12px] mb-[24px]" data-aos="fade-up" data-aos-duration="1000"
                  data-aos-delay="400">
                 <div class="banner-box p-[30px] rounded-[20px] relative overflow-hidden bg-box-color-one bg-[#fbf2e5]">
                     <div class="inner-banner-box relative z-[1] flex justify-between max-[480px]:flex-col">
                         <div
                             class="side-image px-[12px] flex items-center max-[480px]:p-[0] max-[480px]:mb-[12px] max-[480px]:justify-center">
-                            <img src="assets/img/banner-one/one.png" alt="one"
+                            <img src="{{Storage::url($banner->image)}}" alt="banners"
                                  class="max-w-max w-[280px] h-[280px] max-[1399px]:w-[230px] max-[1399px]:h-[230px] max-[1199px]:w-[140px] max-[1199px]:h-[140px] max-[991px]:w-[280px] max-[991px]:h-[280px] max-[767px]:h-[200px] max-[767px]:w-[200px] max-[575px]:w-full max-[575px]:h-[auto] max-[480px]:w-[calc(100%-70px)]">
                         </div>
                         <div
                             class="inner-contact max-w-[250px] px-[12px] flex flex-col items-start justify-center max-[480px]:p-[0] max-[480px]:max-w-[100%] max-[480px]:text-center max-[480px]:items-center">
                             <h5 class="font-quicksand mb-[15px] text-[31px] text-[#3d4750] font-bold tracking-[0.03rem] text-[#3d4750] leading-[1.2] max-[991px]:text-[28px] max-[575px]:text-[24px] max-[480px]:mb-[2px] max-[480px]:text-[22px]">
-                                Tasty Snack & Fast food</h5>
+                                {!! $title !!}</h5>
                             <p class="font-Poppins text-[16px] font-light leading-[28px] tracking-[0.03rem] text-[#686e7d] mb-[15px] max-[480px]:mb-[8px] max-[480px]:text-[14px]">
-                                The flavour of something special</p>
+                                {{$banner->description}}</p>
                             <a href="shop-left-sidebar-col-3.html"
                                class="bb-btn-1 transition-all duration-[0.3s] ease-in-out font-Poppins leading-[28px] tracking-[0.03rem] py-[5px] px-[15px] text-[14px] font-normal text-[#3d4750] bg-transparent rounded-[10px] border-[1px] border-solid border-[#3d4750] hover:bg-[#6c7fd8] hover:border-[#6c7fd8] hover:text-[#fff]">Shop
                                 Now</a>
@@ -534,35 +557,25 @@ Copyright 2024
                     </div>
                 </div>
             </div>
-            <div class="min-[992px]:w-[50%] w-full px-[12px] mb-[24px]" data-aos="fade-up" data-aos-duration="1000"
-                 data-aos-delay="400">
-                <div class="banner-box p-[30px] rounded-[20px] relative overflow-hidden bg-box-color-two bg-[#ffe8ee]">
-                    <div class="inner-banner-box relative z-[1] flex justify-between max-[480px]:flex-col">
-                        <div
-                            class="side-image px-[12px] flex items-center max-[480px]:p-[0] max-[480px]:mb-[12px] max-[480px]:justify-center">
-                            <img src="assets/img/banner-one/two.png" alt="two"
-                                 class="max-w-max w-[280px] h-[280px] max-[1399px]:w-[230px] max-[1399px]:h-[230px] max-[1199px]:w-[140px] max-[1199px]:h-[140px] max-[991px]:w-[280px] max-[991px]:h-[280px] max-[767px]:h-[200px] max-[767px]:w-[200px] max-[575px]:w-full max-[575px]:h-[auto] max-[480px]:w-[calc(100%-70px)]">
-                        </div>
-                        <div
-                            class="inner-contact max-w-[250px] px-[12px] flex flex-col items-start justify-center max-[480px]:p-[0] max-[480px]:max-w-[100%] max-[480px]:text-center max-[480px]:items-center">
-                            <h5 class="font-quicksand mb-[15px] text-[31px] text-[#3d4750] font-bold tracking-[0.03rem] text-[#3d4750] leading-[1.2] max-[991px]:text-[28px] max-[575px]:text-[24px] max-[480px]:mb-[2px] max-[480px]:text-[22px]">
-                                Fresh Fruits & Vegetables</h5>
-                            <p class="font-Poppins text-[16px] font-light leading-[28px] tracking-[0.03rem] text-[#686e7d] mb-[15px] max-[480px]:mb-[8px] max-[480px]:text-[14px]">
-                                A healthy meal for every one</p>
-                            <a href="shop-left-sidebar-col-3.html"
-                               class="bb-btn-1 transition-all duration-[0.3s] ease-in-out font-Poppins leading-[28px] tracking-[0.03rem] py-[5px] px-[15px] text-[14px] font-normal text-[#3d4750] bg-transparent rounded-[10px] border-[1px] border-solid border-[#3d4750] hover:bg-[#6c7fd8] hover:border-[#6c7fd8] hover:text-[#fff]">Shop
-                                Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>
 
 <!-- Banner-two -->
+<?php
+$banner = Banner::query()
+    ->where('position', 'bottom')
+        ->orderBy('created_at', 'desc')
+            ->first();
+?>
+@if($banner)
+        <?php
+        $title = trim(preg_replace('/\s+/', ' ', $banner->title));
+        $words = explode(" ", $title);
+        ?>
 <section
-    class="section-banner-two overflow-hidden my-[50px] max-[1199px]:my-[35px] bg-[url('assets/img/banner-two/banner.jpg')] min-h-[600px] overflow-hidden bg-no-repeat bg-cover bg-center max-[991px]:max-h-[400px] max-[991px]:min-h-[auto]">
+    class="section-banner-two overflow-hidden my-[50px] max-[1199px]:my-[35px] bg-[url('{{ asset('storage/' . $banner->image) }}')] min-h-[600px] overflow-hidden bg-no-repeat bg-cover bg-center max-[991px]:max-h-[400px] max-[991px]:min-h-[auto]">
     <div
         class="flex flex-wrap justify-between relative items-center mx-auto min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
         <div class="flex flex-wrap w-full">
@@ -570,9 +583,9 @@ Copyright 2024
                 class="w-full px-[12px] banner-justify-box-contact w-full h-[600px] flex justify-end items-end max-[991px]:h-[400px]">
                 <div
                     class="banner-two-box bg-[#fff] rounded-t-[30px] max-w-[400px] pt-[30px] px-[30px] flex flex-col items-start relative max-[991px]:max-w-[250px] max-[575px]:my-[0] max-[575px]:mx-[auto]">
-                    <span class="text-[20px] font-semibold text-[#6c7fd8] leading-[26px] max-[991px]:text-[16px]">25% Off</span>
+                    <span class="text-[20px] font-semibold text-[#6c7fd8] leading-[26px] max-[991px]:text-[16px]">{{$banner->description}}</span>
                     <h4 class="font-quicksand mb-[20px] text-[40px] font-bold text-[#3d4750] tracking-[0.03rem] leading-[1.2] max-[991px]:text-[22px]">
-                        Fresh & Organic vegetables</h4>
+                        {{$banner->title}}</h4>
                     <a href="javascript:void(0)"
                        class="bb-btn-1 transition-all duration-[0.3s] ease-in-out font-Poppins leading-[28px] tracking-[0.03rem] py-[8px] px-[20px] max-[1199px]:py-[3px] max-[1199px]:px-[15px] text-[14px] font-normal text-[#3d4750] bg-transparent rounded-[10px] border-[1px] border-solid border-[#3d4750] hover:bg-[#6c7fd8] hover:border-[#6c7fd8] hover:text-[#fff]">Shop
                         Now</a>
@@ -581,6 +594,7 @@ Copyright 2024
         </div>
     </div>
 </section>
+@endif
 
 <!-- New Product tab Area -->
 <section class="section-product-tabs overflow-hidden py-[50px] max-[1199px]:py-[35px]">
