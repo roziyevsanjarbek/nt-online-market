@@ -31,6 +31,7 @@ class CategoryResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
+            Text::make('Name', 'name'),
         ];
     }
 
@@ -59,6 +60,7 @@ class CategoryResource extends ModelResource
     {
         return [
             ID::make(),
+            Text::make('Name','name'),
         ];
     }
 
