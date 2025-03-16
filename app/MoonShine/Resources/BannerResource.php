@@ -41,8 +41,8 @@ class BannerResource extends ModelResource
             ->options([
                 'top'=>'top',
                 'middle'=>'middle',
-                'bottom'=>'bottom'
-            ]),
+                'one_bottom'=>'one_bottom',
+                'bottom'=>'bottom'            ]),
             BelongsTo::make('Category','category',
                     fn($item)=>$item->id . ". " . $item->name,
                     CategoryResource::class)
@@ -64,7 +64,8 @@ class BannerResource extends ModelResource
                 ->options([
                     'top'=>'top',
                     'middle'=>'middle',
-                    'bottom'=>'bottom',
+                    'one_bottom'=>'one_bottom',
+                    'bottom'=>'bottom'
                 ]),
                 BelongsTo::make('Category','category',
                         fn($item)=>$item->id . ". " . $item->name,
@@ -87,8 +88,8 @@ class BannerResource extends ModelResource
             ->options([
                 'top'=>'top',
                 'middle'=>'middle',
-                'bottom'=>'bottom'
-            ]),
+                'one_bottom'=>'one_bottom',
+                'bottom'=>'bottom'            ]),
             BelongsTo::make('Category','category',
                     fn($item)=>$item->id . ". " . $item->name,
                     CategoryResource::class)
