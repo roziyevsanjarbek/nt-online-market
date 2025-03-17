@@ -7,8 +7,10 @@ namespace App\MoonShine\Resources;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ProductVolume;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\UI\Components\Layout\Box;
+use MoonShine\UI\Fields\Date;
 use MoonShine\UI\Fields\ID;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\UI\ComponentContract;
@@ -30,7 +32,7 @@ class ProductVolumeResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Text::make('name')
+            Text::make('Name'),
         ];
     }
 
@@ -42,7 +44,8 @@ class ProductVolumeResource extends ModelResource
         return [
             Box::make([
                 ID::make(),
-                Text::make('name')
+                Text::make('Name'),
+
             ])
         ];
     }
@@ -54,7 +57,7 @@ class ProductVolumeResource extends ModelResource
     {
         return [
             ID::make(),
-            Text::make('name')
+            Text::make('Name'),
         ];
     }
 

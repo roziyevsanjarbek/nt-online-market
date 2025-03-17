@@ -4,14 +4,18 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources;
 
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Image;
-use MoonShine\Contracts\UI\ComponentContract;
-use MoonShine\Contracts\UI\FieldContract;
+
+use MoonShine\Laravel\Fields\Relationships\MorphTo;
 use MoonShine\Laravel\Resources\ModelResource;
+use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\ID;
-use MoonShine\UI\Fields\Text;
-use MoonShine\UI\Fields\File;
+use MoonShine\Contracts\UI\FieldContract;
+use MoonShine\Contracts\UI\ComponentContract;
+use MoonShine\UI\Fields\Image as ImageField;
 
 /**
  * @extends ModelResource<Image>
@@ -29,8 +33,12 @@ class ImageResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Text::make('name'),
-            File::make('path'),
+            ImageField::make('image'),
+            MorphTo::make('Imageable')
+                ->types([
+                    Category::class => ['Categories', 'Organization'],
+                    Product::class => ['Products', 'Name']
+                ])
         ];
     }
 
@@ -40,9 +48,15 @@ class ImageResource extends ModelResource
     protected function formFields(): iterable
     {
         return [
-            ID::make(),
-            Text::make('name'),
-            File::make('path'),
+            Box::make([
+                ID::make(),
+                ImageField::make('image'),
+                MorphTo::make('Imageable')
+                    ->types([
+                        Category::class => ['Categories', 'Organization'],
+                        Product::class => ['Products', 'Name']
+                    ])
+            ])
         ];
     }
 
@@ -53,8 +67,12 @@ class ImageResource extends ModelResource
     {
         return [
             ID::make(),
-            Text::make('name'),
-            File::make('path'),
+            ImageField::make('image'),
+            MorphTo::make('Imageable')
+                ->types([
+                    Category::class => ['Categories', 'Organization'],
+                    Product::class => ['Products', 'Name']
+                ])
         ];
     }
 

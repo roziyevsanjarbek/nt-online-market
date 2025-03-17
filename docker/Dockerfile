@@ -21,6 +21,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         zip \
         pdo \
         pdo_mysql \
+        pdo_pgsql \
         intl \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
@@ -32,6 +33,6 @@ COPY . /var/www
 RUN composer install
 
 RUN php artisan key:generate
-
-RUN chown -R www-data:www-data /var/www
-RUN chmod -R 777 /var/www
+#RUN chown -R www-data:www-data /var/www
+#RUN chmod -R 755 /var/www
+#RUN chmod -R 755 /var/www/storage

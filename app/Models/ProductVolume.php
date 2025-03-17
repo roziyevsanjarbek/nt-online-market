@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductVolume extends Model
 {
-    protected $fillable = ['name'];
+   protected $table = 'product_volume';
 }

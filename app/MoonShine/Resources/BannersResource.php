@@ -38,11 +38,12 @@ class BannersResource extends ModelResource
             Text::make('description'),
             Image::make('image'),
             Select::make('position')
-            ->options([
-               'top'=>'top',
-               'middle'=>'middle',
-               'bottom'=>'bottom'
-            ]),
+                ->options([
+                    'top'=>'top',
+                    'middle'=>'middle',
+                    'bottom'=>'bottom',
+                    'ad' => 'ad'
+                ]),
             BelongsTo::make(
                 'Category',
                 'category',
@@ -63,11 +64,12 @@ class BannersResource extends ModelResource
                 Text::make('description'),
                 Image::make('image'),
                 Select::make('position')
-                ->options([
-                   'top'=>'top',
-                   'middle'=>'middle',
-                   'bottom'=>'bottom'
-                ]),
+                    ->options([
+                        'top'=>'top',
+                        'middle'=>'middle',
+                        'bottom'=>'bottom',
+                        'ad' => 'ad'
+                    ]),
                 BelongsTo::make(
                     'Category',
                     'category',
@@ -88,11 +90,12 @@ class BannersResource extends ModelResource
             Text::make('description'),
             Image::make('image'),
             Select::make('position')
-            ->options([
-               'top'=>'top',
-               'middle'=>'middle',
-               'bottom'=>'bottom'
-            ]),
+                ->options([
+                    'top'=>'top',
+                    'middle'=>'middle',
+                    'bottom'=>'bottom',
+                    'ad' => 'ad'
+                ]),
             BelongsTo::make(
                 'Category',
                 'category',

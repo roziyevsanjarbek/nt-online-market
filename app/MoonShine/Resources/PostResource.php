@@ -6,8 +6,9 @@ namespace App\MoonShine\Resources;
 
 use App\Models\PostCategory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Post;
+use App\Models\Posts;
 
+use MoonShine\Core\Resources\Resource;
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\UI\Components\Layout\Box;
@@ -19,11 +20,11 @@ use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Text;
 
 /**
- * @extends ModelResource<Post>
+ * @extends ModelResource<Posts>
  */
 class PostResource extends ModelResource
 {
-    protected string $model = Post::class;
+    protected string $model = Posts::class;
 
     protected string $title = 'Posts';
 
@@ -34,9 +35,9 @@ class PostResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Title'),
+            Text::make('Title', 'title'),
             Text::make('Content'),
-            Image::make('Image'),
+            Image::make('Image', 'image'),
             Date::make('Published at', 'updated_at')->sortable()
         ];
     }
@@ -49,17 +50,17 @@ class PostResource extends ModelResource
         return [
             Box::make([
                 ID::make(),
-                Text::make('Title'),
+                Text::make('Title', 'title'),
                 Text::make('Content'),
-                Image::make('Image'),
+                Image::make('Image', 'image'),
                 BelongsTo::make(
                     'Category',
-                    'postCategory',
-                    fn($item) => "$item->id. $item->name",
+                    'PostCategory',
+                    fn($item)=>"$item->id. $item->name",
                     PostCategoryResource::class)
                     ->afterFill(
                         fn($field) => $field->setColumn('category_id')
-                    )
+                    ),
             ])
         ];
     }
@@ -71,22 +72,22 @@ class PostResource extends ModelResource
     {
         return [
             ID::make(),
-            Text::make('Title'),
+            Text::make('Title', 'title'),
             Text::make('Content'),
-            Image::make('Image'),
+            Image::make('Image', 'image'),
             BelongsTo::make(
                 'Category',
-                'postCategory',
-                fn($item) => "$item->id. $item->name",
+                'PostCategory',
+                fn($item)=>"$item->id. $item->name",
                 PostCategoryResource::class)
                 ->afterFill(
                     fn($field) => $field->setColumn('category_id')
-                )
+                ),
         ];
     }
 
     /**
-     * @param Post $item
+     * @param Posts $item
      *
      * @return array<string, string[]|string>
      * @see https://laravel.com/docs/validation#available-validation-rules

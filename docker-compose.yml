@@ -33,28 +33,28 @@ services:
         environment:
             MYSQL_DATABASE: ${DB_DATABASE}
             MYSQL_PASSWORD: ${DB_PASSWORD}
-            MYSQL_USER: ${DB_USERNAME}
             MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
         volumes:
             - market_database:/var/lib/mysql
         networks:
-            - market_network
+            - market_network  # ❌ Noto‘g‘ri "marker_network" emas, "market_network" bo‘lishi kerak!
         expose:
             - 3344
+
     market_node:
         container_name: market_node
         image: node:alpine
         volumes:
             - ./:/var/www
-        networks:
-            - market_network
-        command: sh -c "cd /var/www rm -rf node_modules package-lock.json && npm install && npm run dev"
+        command: sh -c "cd /var/www yarn install && run dev"
         depends_on:
-            - market_app
+            -   market_app
         ports:
-            - "5173:5173"
+            - "8010:8000"
+
 networks:
     market_network:
         driver: bridge
+
 volumes:
     market_database:

@@ -7,16 +7,13 @@ namespace App\MoonShine\Resources;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
 
-use MoonShine\Laravel\Fields\Relationships\BelongsTo;
-use MoonShine\Laravel\Fields\Relationships\HasMany;
-use MoonShine\Laravel\Fields\Relationships\MorphMany;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\ID;
+use MoonShine\UI\Fields\Text;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\UI\ComponentContract;
-use MoonShine\UI\Fields\Image;
-use MoonShine\UI\Fields\Text;
+use MoonShine\Laravel\Fields\Relationships\BelongsTo;
 
 /**
  * @extends ModelResource<Category>
@@ -34,14 +31,7 @@ class CategoryResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Text::make('name'),
-            BelongsTo::make('parent', 'parent', fn($item) => "$item->id. $item->name", CategoryResource::class),
-            MorphMany::make('Images', 'images')
-            ->fields([
-                Image::make('Image', 'path')
-                ->disk('public')
-                ->dir('images')
-            ])
+            Text::make('Name', 'name'),
         ];
     }
 
@@ -52,23 +42,17 @@ class CategoryResource extends ModelResource
     {
         return [
             Box::make([
-                ID::make(),
-                Text::make('name'),
+//                ID::make(),
+                Text::make('Name','name'),
                 BelongsTo::make(
-                    'Parent', 'parent',
-                    fn($item) => "$item->id. $item->name",
+                    'Category',
+                    'getCategory',
+                    fn($item)=>"$item->id",
                     CategoryResource::class)
-                ->nullable(),
-                MorphMany::make('Images', 'images')
-                ->fields([
-                    Image::make('Image', 'path')
-                    ->disk('public')
-                    ->dir('images')
-                ])
+                    ->afterFill(fn($field) => $field->setColumn('id'))->nullable(),
             ])
         ];
     }
-
     /**
      * @return list<FieldContract>
      */
@@ -76,14 +60,7 @@ class CategoryResource extends ModelResource
     {
         return [
             ID::make(),
-            Text::make('name'),
-            BelongsTo::make('parent', 'parent', fn($item) => "$item->id. $item->name", CategoryResource::class),
-            MorphMany::make('Images', 'images')
-            ->fields([
-                Image::make('Image', 'path')
-                ->disk('public')
-                ->dir('images')
-            ])
+            Text::make('Name','name'),
         ];
     }
 

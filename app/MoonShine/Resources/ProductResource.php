@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources;
 
+
+use App\Models\ProductVolume;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Product;
 
+
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
-use MoonShine\Laravel\Fields\Relationships\MorphMany;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\ID;
@@ -34,23 +36,16 @@ class ProductResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Text::make('name'),
-            Textarea::make('description'),
+            Text::make('Name'),
+            Textarea::make('Description'),
             Number::make('price'),
             Number::make('sale_price'),
-            BelongsTo::make(
-                'Category',
-                'category',
-                fn($item) => $item->id . '. ' . $item->name,
-                CategoryResource::class
-            ),
+            BelongsTo::make('Category', 'category', fn($item) => $item->id . '.'. $item->name,
+                CategoryResource::class),
             Number::make('quantity'),
-            BelongsTo::make(
-                'Volume',
-                'volume',
-                fn ($item) => $item->id . '-' . $item->name,
-                ProductVolumeResource::class),
-            MorphMany::make('Images', 'images')
+            BelongsTo::make('Volume', 'volume', fn($item) => $item->id . '-'. $item->name,
+                ProductVolumeResource::class
+            )
         ];
     }
 
@@ -62,23 +57,16 @@ class ProductResource extends ModelResource
         return [
             Box::make([
                 ID::make(),
-                Text::make('name'),
-                Textarea::make('description'),
+                Text::make('Name'),
+                Textarea::make('Description'),
                 Number::make('price'),
                 Number::make('sale_price'),
-                BelongsTo::make(
-                    'Category',
-                    'category',
-                    fn($item) => $item->id . '. ' . $item->name,
-                    CategoryResource::class
-                ),
+                BelongsTo::make('Category', 'category', fn($item) => $item->id . '.'. $item->name,
+                    CategoryResource::class),
                 Number::make('quantity'),
-                BelongsTo::make(
-                    'Volume',
-                    'volume',
-                    fn ($item) => $item->id . '-' . $item->name,
-                    ProductVolumeResource::class),
-                MorphMany::make('Images', 'images', )
+                BelongsTo::make('Volume', 'volume', fn($item) => $item->id . '-'. $item->name,
+                ProductResource::class
+                )
             ])
         ];
     }
@@ -90,23 +78,16 @@ class ProductResource extends ModelResource
     {
         return [
             ID::make(),
-            Text::make('name'),
-            Textarea::make('description'),
+            Text::make('Name'),
+            Textarea::make('Description'),
             Number::make('price'),
             Number::make('sale_price'),
-            BelongsTo::make(
-                'Category',
-                'category',
-                fn($item) => $item->id . '. ' . $item->name,
-                CategoryResource::class
-            ),
+            BelongsTo::make('Category', 'category', fn($item) => $item->id . '.'. $item->name,
+                CategoryResource::class),
             Number::make('quantity'),
-            BelongsTo::make(
-                'Volume',
-                'volume',
-                fn ($item) => $item->id . '-' . $item->name,
-                ProductVolumeResource::class),
-            MorphMany::make('Images', 'images')
+            BelongsTo::make('Volume', 'volume', fn($item) => $item->id . '-'. $item->name,
+                ProductResource::class
+            )
         ];
     }
 
