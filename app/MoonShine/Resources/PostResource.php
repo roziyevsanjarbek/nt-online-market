@@ -18,6 +18,7 @@ use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Text;
+use MoonShine\UI\Fields\Textarea;
 
 /**
  * @extends ModelResource<Posts>
@@ -36,7 +37,7 @@ class PostResource extends ModelResource
         return [
             ID::make()->sortable(),
             Text::make('Title', 'title'),
-            Text::make('Content'),
+            Textarea::make('Content'),
             Image::make('Image', 'image'),
             Date::make('Published at', 'updated_at')->sortable()
         ];
@@ -51,7 +52,7 @@ class PostResource extends ModelResource
             Box::make([
                 ID::make(),
                 Text::make('Title', 'title'),
-                Text::make('Content'),
+                Textarea::make('Content'),
                 Image::make('Image', 'image'),
                 BelongsTo::make(
                     'Category',
@@ -73,7 +74,7 @@ class PostResource extends ModelResource
         return [
             ID::make(),
             Text::make('Title', 'title'),
-            Text::make('Content'),
+            Textarea::make('Content'),
             Image::make('Image', 'image'),
             BelongsTo::make(
                 'Category',

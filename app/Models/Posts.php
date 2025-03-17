@@ -14,7 +14,6 @@ class Posts extends Model
             $model->slug = Carbon::now() . Str::slug($model->title);
         });
     }
-
     public function postCategory()
     {
         return $this->belongsTo(PostCategory::class, 'category_id');

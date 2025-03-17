@@ -33,11 +33,11 @@ class ImageResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            ImageField::make('image'),
+            ImageField::make('image', 'path'),
             MorphTo::make('Imageable')
                 ->types([
-                    Category::class => ['Categories', 'Organization'],
-                    Product::class => ['Products', 'Name']
+                    Category::class => ['Categories', 'Categories'],
+                    Product::class => ['Products', 'Products']
                 ])
         ];
     }
@@ -50,11 +50,11 @@ class ImageResource extends ModelResource
         return [
             Box::make([
                 ID::make(),
-                ImageField::make('image'),
+                ImageField::make('image', 'path'),
                 MorphTo::make('Imageable')
                     ->types([
-                        Category::class => ['Categories', 'Organization'],
-                        Product::class => ['Products', 'Name']
+                        Category::class => ['Categories', 'Categories'],
+                        Product::class => ['Products', 'Products']
                     ])
             ])
         ];
@@ -67,11 +67,11 @@ class ImageResource extends ModelResource
     {
         return [
             ID::make(),
-            ImageField::make('image'),
+            ImageField::make('image', 'path'),
             MorphTo::make('Imageable')
                 ->types([
-                    Category::class => ['Categories', 'Organization'],
-                    Product::class => ['Products', 'Name']
+                    Category::class => ['Categories', 'Categories'],
+                    Product::class => ['Products', 'Products']
                 ])
         ];
     }

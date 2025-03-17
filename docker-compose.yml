@@ -38,8 +38,8 @@ services:
             - market_database:/var/lib/mysql
         networks:
             - market_network  # ❌ Noto‘g‘ri "marker_network" emas, "market_network" bo‘lishi kerak!
-        expose:
-            - 3344
+        ports:
+            -   "3307:3306"
 
     market_node:
         container_name: market_node
