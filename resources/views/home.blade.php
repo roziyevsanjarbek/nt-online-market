@@ -35,7 +35,7 @@
         class="flex flex-wrap justify-between relative items-center mx-auto min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
         <div class="flex flex-wrap w-full">
             <div class="w-full">
-                <div class="hero-slider swiper-container">
+                    <div class="hero-slider swiper-container">
                     <div class="swiper-wrapper">
                         @foreach($top_banners as $banner)
                                 <?php
