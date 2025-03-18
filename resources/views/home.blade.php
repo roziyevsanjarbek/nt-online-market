@@ -133,7 +133,6 @@
                                              class="w-[50px] h-[50px] max-[1399px]:h-[65px]"
                                              alt="category">
                                     @endif
-                                         class="w-[50px] h-[50px] max-[1399px]:h-[65px] max-[1399px]:w-[65px] max-[1199px]:h-[50px] max-[1199px]:w-[50px]">
                                 </div>
                                 <div class="category-sub-contact">
                                     <h5 class="mb-[2px] text-[16px] font-quicksand text-[#3d4750] font-semibold tracking-[0.03rem] leading-[1.2]">
