@@ -264,10 +264,10 @@
                                 </svg>
                                 <div class="custom-select transition-all duration-[0.3s] ease-in-out w-full h-full pr-[15px] text-[#777] flex items-center justify-between text-[14px] relative">
                                     <select>
-                                        <option value="option1">Surat</option>
-                                        <option value="option2">Delhi</option>
-                                        <option value="option3">Rajkot</option>
-                                        <option value="option4">Udaipur</option>
+                                        <option value="option1">Tashkent</option>
+                                        <option value="option2">Samarkhand</option>
+                                        <option value="option3">Fergana</option>
+                                        <option value="option4">Bukhara</option>
                                     </select>
                                 </div>
                             </div>

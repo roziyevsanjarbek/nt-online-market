@@ -286,19 +286,19 @@
                                                 <span class="mt-[5px] w-[25px] basis-[auto] grow-[0] shrink-[0]">
                                                     <i class="ri-map-pin-line leading-[0] text-[18px] text-[#6c7fd8]"></i>
                                                 </span>
-                                            <p class="m-[0] font-Poppins text-[14px] text-[#686e7d] font-normal leading-[28px] tracking-[0.03rem]">971 Lajamni, Motavarachha, Surat, Gujarat, Bharat 394101.</p>
+                                            <p class="m-[0] font-Poppins text-[14px] text-[#686e7d] font-normal leading-[28px] tracking-[0.03rem]">Toshkent Shahar Chilonzor tumani Najot Ta'lim</p>
                                         </li>
                                         <li class="bb-footer-link bb-foo-call flex items-start max-[991px]:mb-[15px] mb-[16px]">
                                                 <span class="w-[25px] basis-[auto] grow-[0] shrink-[0]">
                                                     <i class="ri-whatsapp-line leading-[0] text-[18px] text-[#6c7fd8]"></i>
                                                 </span>
-                                            <a href="tel:+009876543210" class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[14px] leading-[20px] text-[#686e7d] inline-block relative break-all tracking-[0] font-normal max-[1399px]:text-[15px] max-[1199px]:text-[14px]">+00 9876543210</a>
+                                            <a href="tel:+998 77 010 08 06" class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[14px] leading-[20px] text-[#686e7d] inline-block relative break-all tracking-[0] font-normal max-[1399px]:text-[15px] max-[1199px]:text-[14px]">+998 77 010 08 06</a>
                                         </li>
                                         <li class="bb-footer-link bb-foo-mail flex">
                                                 <span class="w-[25px] basis-[auto] grow-[0] shrink-[0]">
                                                     <i class="ri-mail-line leading-[0] text-[18px] text-[#6c7fd8]"></i>
                                                 </span>
-                                            <a href="mailto:example@email.com" class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[14px] leading-[20px] text-[#686e7d] inline-block relative break-all tracking-[0] font-normal max-[1399px]:text-[15px] max-[1199px]:text-[14px]">example@email.com</a>
+                                            <a href="mailto:mexriddinnuriddinovv@gmail.com" class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[14px] leading-[20px] text-[#686e7d] inline-block relative break-all tracking-[0] font-normal max-[1399px]:text-[15px] max-[1199px]:text-[14px]">mexriddinnuriddinovv@gmail.com</a>
                                         </li>
                                     </ul>
                                 </div>
