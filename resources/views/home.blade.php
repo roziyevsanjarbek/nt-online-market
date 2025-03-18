@@ -128,7 +128,11 @@
                                 class="bb-category-box p-[30px] rounded-[20px] flex flex-col items-center text-center max-[1399px]:p-[20px] category-items-4 bg-[#fbf9e4]"
                                 data-aos="flip-left" data-aos-duration="1000" data-aos-delay="800">
                                 <div class="category-image mb-[12px]">
-                                    <img src="{{ \Illuminate\Support\Facades\Storage::url($category->images[0]->path) }}" alt="category"
+                                    @if ($category->images->isNotEmpty())
+                                        <img src="{{ Illuminate\Support\Facades\Storage::url($category->images->first()->path) }}"
+                                             class="w-[50px] h-[50px] max-[1399px]:h-[65px]"
+                                             alt="category">
+                                    @endif
                                          class="w-[50px] h-[50px] max-[1399px]:h-[65px] max-[1399px]:w-[65px] max-[1199px]:h-[50px] max-[1199px]:w-[50px]">
                                 </div>
                                 <div class="category-sub-contact">

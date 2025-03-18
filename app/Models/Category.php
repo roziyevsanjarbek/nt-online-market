@@ -8,11 +8,11 @@ class Category extends Model
 {
     protected $table = 'categories';
 
-    protected $fillable = ['name', 'parent_id'];
+    protected $fillable = ['name', 'category_id'];
 
-    public function parent()
+    public function category()
     {
-        return $this->belongsTo(Category::class, 'parent_id');
+        return $this->belongsTo(Category::class, 'category_id');
     }
 
     public function images (){

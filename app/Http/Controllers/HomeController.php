@@ -29,7 +29,7 @@ class HomeController extends Controller
                     ->first();
         $categories = Category::query()
             ->orderBy('id', 'desc')
-                ->with(['images', 'parent'])
+                ->with(['images', 'category'])
                     ->get();
         $latestPosts = Posts::query()
             ->orderBy('id', 'desc')

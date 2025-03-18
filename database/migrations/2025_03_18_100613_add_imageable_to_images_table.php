@@ -11,18 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('images', function (Blueprint $table) {
-            $table->id();
-            $table->morphs('imageable'); // imageable_id->primary_key imageable_type->namespace
-            $table->timestamps();
+        Schema::table('images', function (Blueprint $table) {
+            $table->unsignedBigInteger('imageable_id');
+            $table->string('imageable_type');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('images');
+        Schema::table('images', function (Blueprint $table) {
+            $table->dropColumn(['imageable_id', 'imageable_type']);
+        });
     }
+
 };
