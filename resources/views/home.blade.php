@@ -25,10 +25,10 @@ Copyright 2024
             <div class="w-full">
                 <div class="hero-slider swiper-container">
                     <div class="swiper-wrapper">
-                        <?php use App\Models\Banner;
 
-                        $banners = Banner::query()->where('position', 'top')->get(); ?>
-                        @foreach($banners as $banner)
+
+
+                        @foreach($topBanners as $banner)
                                 <?php
                                 $title = trim(preg_replace('/\s+/', ' ', $banner->title));
 
@@ -91,16 +91,10 @@ Copyright 2024
 </section>
 
 <!-- Category -->
-<?php
-$banner = Banner::query()
-    ->where('position', 'middle')
-    ->orderBy('created_at', 'desc')
-    ->first();
-?>
 
-@if($banner)
+@if($midBanner)
         <?php
-        $title=trim(preg_replace('/\s+/', ' ', $banner->title));
+        $title=trim(preg_replace('/\s+/', ' ', $midBanner->title));
         $words=explode(' ', $title);
         ?>
 @endif
@@ -111,10 +105,10 @@ $banner = Banner::query()
         <div class="flex flex-wrap w-full mb-[-24px]">
             <div class="min-[992px]:w-[41.66%] w-full px-[12px] mb-[24px]">
                 <div class="bb-category-img relative max-[991px]:hidden">
-                    <img src="{{ Storage::url($banner->image) }}" alt="category" class="w-full rounded-[30px]">
+                    <img src="{{ Storage::url($midBanner->image) }}" alt="category" class="w-full rounded-[30px]">
                     <div
                         class="bb-offers py-[5px] px-[15px] absolute top-[20px] right-[20px] bg-[#000] opacity-[0.8] rounded-[15px]">
-                        <span class="text-[14px] font-normal text-[#fff]">{{ $banner->description }}</span>
+                        <span class="text-[14px] font-normal text-[#fff]">{{ $midBanner->description }}</span>
                     </div>
                 </div>
             </div>
@@ -123,7 +117,7 @@ $banner = Banner::query()
                     <div class="category-title mb-[30px] max-[991px]:hidden" data-aos="fade-up" data-aos-duration="1000"
                          data-aos-delay="600">
                         <h2 class="font-quicksand text-[124px] text-[#fff] opacity-[0.15] font-bold leading-[1.2] tracking-[0.03rem] max-[1399px]:text-[95px] max-[1199px]:text-[70px] max-[767px]:text-[42px]">
-                            {{ $banner->title }}</h2>
+                            {{ $midBanner->title }}</h2>
                     </div>
                     <div
                         class="bb-category-block owl-carousel ml-[-150px] w-[calc(100%+150px)] pt-[30px] pl-[30px] bg-[#fff] rounded-tl-[30px] relative max-[991px]:ml-[0] max-[991px]:w-full max-[991px]:p-[0]">
@@ -143,54 +137,7 @@ $banner = Banner::query()
                                     485 items</p>
                             </div>
                         </div>
-                        <div
-                            class="bb-category-box p-[30px] rounded-[20px] flex flex-col items-center text-center max-[1399px]:p-[20px] category-items-2 bg-[#e1fcf2]"
-                            data-aos="flip-left" data-aos-duration="1000" data-aos-delay="400">
-                            <div class="category-image mb-[12px]">
-                                <img src="assets/img/category/2.svg" alt="category"
-                                     class="w-[50px] h-[50px] max-[1399px]:h-[65px] max-[1399px]:w-[65px] max-[1199px]:h-[50px] max-[1199px]:w-[50px]">
-                            </div>
-                            <div class="category-sub-contact">
-                                <h5 class="mb-[2px] text-[16px] font-quicksand text-[#3d4750] font-semibold tracking-[0.03rem] leading-[1.2]">
-                                    <a href="shop-left-sidebar-col-3.html"
-                                       class="font-Poppins text-[16px] font-medium leading-[1.2] tracking-[0.03rem] text-[#3d4750] capitalize">Fruits</a>
-                                </h5>
-                                <p class="font-Poppins text-[13px] text-[#686e7d] leading-[25px] font-light tracking-[0.03rem]">
-                                    291 items</p>
-                            </div>
-                        </div>
-                        <div
-                            class="bb-category-box p-[30px] rounded-[20px] flex flex-col items-center text-center max-[1399px]:p-[20px] category-items-3 bg-[#f4f1fe]"
-                            data-aos="flip-left" data-aos-duration="1000" data-aos-delay="600">
-                            <div class="category-image mb-[12px]">
-                                <img src="assets/img/category/3.svg" alt="category"
-                                     class="w-[50px] h-[50px] max-[1399px]:h-[65px] max-[1399px]:w-[65px] max-[1199px]:h-[50px] max-[1199px]:w-[50px]">
-                            </div>
-                            <div class="category-sub-contact">
-                                <h5 class="mb-[2px] text-[16px] font-quicksand text-[#3d4750] font-semibold tracking-[0.03rem] leading-[1.2]">
-                                    <a href="shop-left-sidebar-col-3.html"
-                                       class="font-Poppins text-[16px] font-medium leading-[1.2] tracking-[0.03rem] text-[#3d4750] capitalize">Cold
-                                        Drinks</a></h5>
-                                <p class="font-Poppins text-[13px] text-[#686e7d] leading-[25px] font-light tracking-[0.03rem]">
-                                    49 items</p>
-                            </div>
-                        </div>
-                        <div
-                            class="bb-category-box p-[30px] rounded-[20px] flex flex-col items-center text-center max-[1399px]:p-[20px] category-items-4 bg-[#fbf9e4]"
-                            data-aos="flip-left" data-aos-duration="1000" data-aos-delay="800">
-                            <div class="category-image mb-[12px]">
-                                <img src="assets/img/category/4.svg" alt="category"
-                                     class="w-[50px] h-[50px] max-[1399px]:h-[65px] max-[1399px]:w-[65px] max-[1199px]:h-[50px] max-[1199px]:w-[50px]">
-                            </div>
-                            <div class="category-sub-contact">
-                                <h5 class="mb-[2px] text-[16px] font-quicksand text-[#3d4750] font-semibold tracking-[0.03rem] leading-[1.2]">
-                                    <a href="shop-left-sidebar-col-3.html"
-                                       class="font-Poppins text-[16px] font-medium leading-[1.2] tracking-[0.03rem] text-[#3d4750] capitalize">Bakery</a>
-                                </h5>
-                                <p class="font-Poppins text-[13px] text-[#686e7d] leading-[25px] font-light tracking-[0.03rem]">
-                                    08 items</p>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -528,9 +475,8 @@ $banner = Banner::query()
 <section class="section-banner-one overflow-hidden py-[50px] max-[1199px]:py-[35px]">
     <div class="flex flex-wrap justify-between relative items-center mx-auto min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
         <div class="flex flex-wrap w-full mb-[-24px]">
-            <?php
-            $banners = Banner::query()->where('position', 'one_bottom')->get(); ?>
-            @foreach($banners as $banner)
+
+            @foreach($oneBottomBanners as $banner)
                     <?php
                     $title = trim(preg_replace('/\s+/', ' ', $banner->title));
                     ?>
@@ -563,19 +509,14 @@ $banner = Banner::query()
 </section>
 
 <!-- Banner-two -->
-<?php
-$banner = Banner::query()
-    ->where('position', 'bottom')
-        ->orderBy('created_at', 'desc')
-            ->first();
-?>
-@if($banner)
+
+@if($bottomBanner)
         <?php
-        $title = trim(preg_replace('/\s+/', ' ', $banner->title));
+        $title = trim(preg_replace('/\s+/', ' ', $bottomBanner->title));
         $words = explode(" ", $title);
         ?>
 <section
-    class="section-banner-two overflow-hidden my-[50px] max-[1199px]:my-[35px] bg-[url('{{ asset('storage/' . $banner->image) }}')] min-h-[600px] overflow-hidden bg-no-repeat bg-cover bg-center max-[991px]:max-h-[400px] max-[991px]:min-h-[auto]">
+    class="section-banner-two overflow-hidden my-[50px] max-[1199px]:my-[35px] bg-[url('{{ asset('storage/' . $bottomBanner->image) }}')] min-h-[600px] overflow-hidden bg-no-repeat bg-cover bg-center max-[991px]:max-h-[400px] max-[991px]:min-h-[auto]">
     <div
         class="flex flex-wrap justify-between relative items-center mx-auto min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
         <div class="flex flex-wrap w-full">
@@ -583,9 +524,9 @@ $banner = Banner::query()
                 class="w-full px-[12px] banner-justify-box-contact w-full h-[600px] flex justify-end items-end max-[991px]:h-[400px]">
                 <div
                     class="banner-two-box bg-[#fff] rounded-t-[30px] max-w-[400px] pt-[30px] px-[30px] flex flex-col items-start relative max-[991px]:max-w-[250px] max-[575px]:my-[0] max-[575px]:mx-[auto]">
-                    <span class="text-[20px] font-semibold text-[#6c7fd8] leading-[26px] max-[991px]:text-[16px]">{{$banner->description}}</span>
+                    <span class="text-[20px] font-semibold text-[#6c7fd8] leading-[26px] max-[991px]:text-[16px]">{{$bottomBanner->description}}</span>
                     <h4 class="font-quicksand mb-[20px] text-[40px] font-bold text-[#3d4750] tracking-[0.03rem] leading-[1.2] max-[991px]:text-[22px]">
-                        {{$banner->title}}</h4>
+                        {{$bottomBanner->title}}</h4>
                     <a href="javascript:void(0)"
                        class="bb-btn-1 transition-all duration-[0.3s] ease-in-out font-Poppins leading-[28px] tracking-[0.03rem] py-[8px] px-[20px] max-[1199px]:py-[3px] max-[1199px]:px-[15px] text-[14px] font-normal text-[#3d4750] bg-transparent rounded-[10px] border-[1px] border-solid border-[#3d4750] hover:bg-[#6c7fd8] hover:border-[#6c7fd8] hover:text-[#fff]">Shop
                         Now</a>
