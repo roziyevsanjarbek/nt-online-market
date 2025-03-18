@@ -21,6 +21,7 @@ class HomeController extends Controller
                 ->orderBy('created_at', 'desc')
                     ->first();
 
+
         $bottomBanner = Banner::query()
             ->where('position', 'bottom')
                 ->orderBy('created_at', 'desc')
