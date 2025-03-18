@@ -28,10 +28,7 @@ class HomeController extends Controller
         $oneBottomBanners = Banner::query()
             ->where('position', 'one_bottom')
                 ->get();
-        $categories = Category::query()
-            ->orderBy('position', 'asc')
-                ->with(['images','parent'])
-                ->get();
+
         return view('home',[
             'topBanners' => $topBanners,
             'midBanner' => $midBanner,
