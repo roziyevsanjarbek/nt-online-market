@@ -66,7 +66,7 @@ class PostResource extends ModelResource
                     PostCategoryResource::class)
                     ->afterFill(
                         fn($field) => $field->setColumn('category_id')
-                    ),
+                    )->nullable(),
             ])
         ];
     }
@@ -90,7 +90,7 @@ class PostResource extends ModelResource
                 PostCategoryResource::class)
                 ->afterFill(
                     fn($field) => $field->setColumn('category_id')
-                )
+                )->nullable(),
         ];
     }
 

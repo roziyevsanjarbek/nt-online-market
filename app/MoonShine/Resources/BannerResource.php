@@ -42,10 +42,10 @@ class BannerResource extends ModelResource
                 'top'=>'top',
                 'middle'=>'middle',
                 'one_bottom'=>'one_bottom',
-                'bottom'=>'bottom'            ]),
+                'bottom'=>'bottom'            ])->nullable(),
             BelongsTo::make('Category','category',
                     fn($item)=>$item->id . ". " . $item->name,
-                    CategoryResource::class)
+                    CategoryResource::class)->nullable()
         ];
     }
 
@@ -66,10 +66,10 @@ class BannerResource extends ModelResource
                     'middle'=>'middle',
                     'one_bottom'=>'one_bottom',
                     'bottom'=>'bottom'
-                ]),
+                ])->nullable(),
                 BelongsTo::make('Category','category',
                         fn($item)=>$item->id . ". " . $item->name,
-                        CategoryResource::class)
+                        CategoryResource::class)->nullable()
             ])
         ];
     }
@@ -89,10 +89,10 @@ class BannerResource extends ModelResource
                 'top'=>'top',
                 'middle'=>'middle',
                 'one_bottom'=>'one_bottom',
-                'bottom'=>'bottom'            ]),
+                'bottom'=>'bottom'            ])->nullable(),
             BelongsTo::make('Category','category',
                     fn($item)=>$item->id . ". " . $item->name,
-                    CategoryResource::class)
+                    CategoryResource::class)->nullable()
         ];
     }
 

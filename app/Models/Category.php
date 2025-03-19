@@ -15,14 +15,14 @@ class Category extends Model
 
     protected $fillable = [
         'name',
-        'category_id',
+        'parent_id',
     ];
 
 
 
     public function parent()
     {
-        return $this->belongsTo(Category::class, 'parent_id', 'id');
+        return $this->belongsTo(Category::class, 'parent_id');
     }
     public function products()
     {
@@ -30,7 +30,10 @@ class Category extends Model
     }
     public function images()
     {
-        return $this->morphMany(Image::class, 'imageable');
+        return $this->morphMany(Image::class, 'imageable', 'imageable_type', 'imageable_id');
     }
-
+    public function productCount()
+    {
+        return $this->hasMany(Product::class, 'category_id')->count();
+    }
 }

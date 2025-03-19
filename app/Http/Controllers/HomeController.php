@@ -18,32 +18,34 @@ class HomeController extends Controller
                 ->get();
         $midBanner = Banner::query()
             ->where('position', 'middle')
-                ->orderBy('created_at', 'desc')
+                ->latest('updated_at')
                     ->first();
-
-
-
         $bottomBanner = Banner::query()
             ->where('position', 'bottom')
-                ->orderBy('created_at', 'desc')
+                ->latest('updated_at')
                     ->first();
         $oneBottomBanners = Banner::query()
             ->where('position', 'one_bottom')
-                ->get();
-
+                ->latest('updated_at')
+                    ->limit(2)
+                        ->get();
+        $categories = Category::query()
+            ->orderBy('id', 'desc')
+                ->with(['images', 'parent'])
+                    ->get();
         return view('home',[
             'topBanners' => $topBanners,
             'midBanner' => $midBanner,
             'bottomBanner' => $bottomBanner,
-            'oneBottomBanners' => $oneBottomBanners
-
+            'oneBottomBanners' => $oneBottomBanners,
+            'categories' => $categories
         ]);
     }
 
 
     public function show(string $id)
     {
-        //
+
     }
 
 }

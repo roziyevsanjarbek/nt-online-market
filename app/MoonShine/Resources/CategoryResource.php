@@ -36,9 +36,6 @@ class CategoryResource extends ModelResource
             Text::make('name'),
             Text::make('parent_id')->nullable(),
             HasMany::make('Images','images')
-
-
-
         ];
     }
 
@@ -51,7 +48,7 @@ class CategoryResource extends ModelResource
             Box::make([
                 ID::make(),
                 Text::make('name'),
-                BelongsTo::make('parent', 'parent', fn($item)=>"$item->id. $item->name",CategoryResource::class)
+                BelongsTo::make('parent', 'parent', fn($item)=>"$item->id. $item->name",CategoryResource::class)->nullable(),
 
             ]),
             HasMany::make('Images','images')
@@ -68,7 +65,7 @@ class CategoryResource extends ModelResource
             ID::make(),
             Text::make('name'),
             Text::make('parent_id')->nullable(),
-            BelongsTo::make('parent', 'parent', fn($item)=>"$item->id. $item->name",CategoryResource::class),
+            BelongsTo::make('parent', 'parent', fn($item)=>"$item->id. $item->name",CategoryResource::class)->nullable(),
             HasMany::make('Products', 'products', fn($item)=>"$item->id. $item->name",
                 ProductResource::class),
             HasMany::make('Images','images')
