@@ -18,6 +18,7 @@ use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
+use Illuminate\Support\Str;
 
 /**
  * @extends ModelResource<Post>
@@ -38,7 +39,7 @@ class PostResource extends ModelResource
             Text::make('Title')->sortable(),
             Textarea::make('Content')
             ->customAttributes([
-                'rows'=>6,
+                'rows'=>1,
             ]),
             Image::make('Image'),
             Date::make('Published At','updated_at')->sortable()
@@ -81,7 +82,7 @@ class PostResource extends ModelResource
             Text::make('Title'),
             Textarea::make('Content')
             ->customAttributes([
-                'rows'=>6,
+                'rows'=>1,
             ]),
             Image::make('Image'),
             BelongsTo::make('Category',
@@ -102,6 +103,11 @@ class PostResource extends ModelResource
      */
     protected function rules(mixed $item): array
     {
-        return [];
+        return [
+            'title' => ['required', 'max:255'],
+            'content' => ['required' ],
+            'image' => ['required', 'max:255'],
+            'category_id' => ['required', 'max:255'],
+        ];
     }
 }
