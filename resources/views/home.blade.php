@@ -126,7 +126,7 @@ Copyright 2024
                                 class="bb-category-box p-[30px] rounded-[20px] flex flex-col items-center text-center max-[1399px]:p-[20px] category-items-1 bg-[#fef1f1]"
                                 data-aos="flip-left" data-aos-duration="1000" data-aos-delay="200">
                                 <div class="category-image mb-[12px]">
-                                    <img src="{{\Illuminate\Support\Facades\Storage::url($category->images[0]->path) }}" alt="category"
+                                    <img src="{{\Illuminate\Support\Facades\Storage::url($category->images[1]->path) }}" alt="category"
                                          class="w-[50px] h-[50px] max-[1399px]:h-[65px] max-[1399px]:w-[65px] max-[1199px]:h-[50px] max-[1199px]:w-[50px]">
                                 </div>
                                 <div class="category-sub-contact">
@@ -1130,66 +1130,23 @@ Copyright 2024
         <div class="flex flex-wrap w-full">
             <div class="w-full px-[12px]">
                 <div class="blog-2-slider owl-carousel">
-                    <div class="blog-2-card relative overflow-hidden rounded-[30px]" data-aos="fade-up"
-                         data-aos-duration="1000" data-aos-delay="200">
-                        <div class="blog-img">
-                            <img src="assets/img/blog/7.jpg" alt="blog-7"
-                                 class="transition-all duration-[0.3s] ease-in-out w-full block">
-                        </div>
-                        <div
-                            class="blog-contact transition-all duration-[0.3s] ease-in-out m-[5px] p-[15px] absolute bottom-[0] right-[0] left-[0] bg-[#ffffffe6] rounded-[30px]">
+                    @foreach($latestPosts as $latestPost)
+                        <div class="blog-2-card relative overflow-hidden rounded-[30px]" data-aos="fade-up"
+                             data-aos-duration="1000" data-aos-delay="800">
+                            <div class="blog-img">
+                                <img src="{{ \Illuminate\Support\Facades\Storage::url($latestPost->image) }}" alt="blog-10"
+                                     class="transition-all duration-[0.3s] ease-in-out w-full block">
+                            </div>
+                            <div
+                                class="blog-contact transition-all duration-[0.3s] ease-in-out m-[5px] p-[15px] absolute bottom-[0] right-[0] left-[0] bg-[#ffffffe6] rounded-[30px]">
                             <span
-                                class="font-Poppins font-normal text-[13px] leading-[26px] tracking-[0.02rem] text-[#686e7d]">June 30,2024 - organic</span>
-                            <h4 class="text-[16px] leading-[1.2]"><a href="blog-detail-left-sidebar.html"
-                                                                     class="font-Poppins tracking-[0.03rem] text-[16px] font-medium leading-[1.3] text-[#3d4750]">Marketing
-                                    Guide: 5 Steps to Success.</a></h4>
+                                class="font-Poppins font-normal text-[13px] leading-[26px] tracking-[0.02rem] text-[#686e7d]">{{ $latestPost->updated_at->diffForHumans() }} - {{ $latestPost->postCategory->name }}</span>
+                                <h4 class="text-[16px] leading-[1.2]"><a href="blog-detail-left-sidebar.html"
+                                                                         class="font-Poppins tracking-[0.03rem] text-[16px] font-medium leading-[1.3] text-[#3d4750]">31
+                                        customer stats know in 2020.</a></h4>
+                            </div>
                         </div>
-                    </div>
-                    <div class="blog-2-card relative overflow-hidden rounded-[30px]" data-aos="fade-up"
-                         data-aos-duration="1000" data-aos-delay="400">
-                        <div class="blog-img">
-                            <img src="assets/img/blog/8.jpg" alt="blog-8"
-                                 class="transition-all duration-[0.3s] ease-in-out w-full block">
-                        </div>
-                        <div
-                            class="blog-contact transition-all duration-[0.3s] ease-in-out m-[5px] p-[15px] absolute bottom-[0] right-[0] left-[0] bg-[#ffffffe6] rounded-[30px]">
-                            <span
-                                class="font-Poppins font-normal text-[13px] leading-[26px] tracking-[0.02rem] text-[#686e7d]">May 10,2023 - organic</span>
-                            <h4 class="text-[16px] leading-[1.2]"><a href="blog-detail-left-sidebar.html"
-                                                                     class="font-Poppins tracking-[0.03rem] text-[16px] font-medium leading-[1.3] text-[#3d4750]">Best
-                                    way to solve business deal issue.</a></h4>
-                        </div>
-                    </div>
-                    <div class="blog-2-card relative overflow-hidden rounded-[30px]" data-aos="fade-up"
-                         data-aos-duration="1000" data-aos-delay="600">
-                        <div class="blog-img">
-                            <img src="assets/img/blog/9.jpg" alt="blog-9"
-                                 class="transition-all duration-[0.3s] ease-in-out w-full block">
-                        </div>
-                        <div
-                            class="blog-contact transition-all duration-[0.3s] ease-in-out m-[5px] p-[15px] absolute bottom-[0] right-[0] left-[0] bg-[#ffffffe6] rounded-[30px]">
-                            <span
-                                class="font-Poppins font-normal text-[13px] leading-[26px] tracking-[0.02rem] text-[#686e7d]">Jan 10,2022 - organic</span>
-                            <h4 class="text-[16px] leading-[1.2]"><a href="blog-detail-left-sidebar.html"
-                                                                     class="font-Poppins tracking-[0.03rem] text-[16px] font-medium leading-[1.3] text-[#3d4750]">Business
-                                    ideas to grow your business.</a></h4>
-                        </div>
-                    </div>
-                    <div class="blog-2-card relative overflow-hidden rounded-[30px]" data-aos="fade-up"
-                         data-aos-duration="1000" data-aos-delay="800">
-                        <div class="blog-img">
-                            <img src="assets/img/blog/10.jpg" alt="blog-10"
-                                 class="transition-all duration-[0.3s] ease-in-out w-full block">
-                        </div>
-                        <div
-                            class="blog-contact transition-all duration-[0.3s] ease-in-out m-[5px] p-[15px] absolute bottom-[0] right-[0] left-[0] bg-[#ffffffe6] rounded-[30px]">
-                            <span
-                                class="font-Poppins font-normal text-[13px] leading-[26px] tracking-[0.02rem] text-[#686e7d]">Feb 12,2022 - organic</span>
-                            <h4 class="text-[16px] leading-[1.2]"><a href="blog-detail-left-sidebar.html"
-                                                                     class="font-Poppins tracking-[0.03rem] text-[16px] font-medium leading-[1.3] text-[#3d4750]">31
-                                    customer stats know in 2020.</a></h4>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
