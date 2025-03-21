@@ -43,7 +43,7 @@ class ProductResource extends ModelResource
             BelongsTo::make('Category', 'category', fn($item) => $item->id . '.'. $item->name,
                 CategoryResource::class),
             Number::make('quantity'),
-            BelongsTo::make('Volume', 'volume', fn($item) => $item->id . '-'. $item->name,
+            BelongsTo::make('Volume', 'volume', fn($item) => $item->name,
                 ProductVolumeResource::class
             )
         ];
@@ -64,7 +64,7 @@ class ProductResource extends ModelResource
                 BelongsTo::make('Category', 'category', fn($item) => $item->id . '.'. $item->name,
                     CategoryResource::class),
                 Number::make('quantity'),
-                BelongsTo::make('Volume', 'volume', fn($item) => $item->id . '-'. $item->name,
+                BelongsTo::make('Volume', 'volume', fn($item) => $item->name,
                 ProductResource::class
                 )
             ])
@@ -85,7 +85,7 @@ class ProductResource extends ModelResource
             BelongsTo::make('Category', 'category', fn($item) => $item->id . '.'. $item->name,
                 CategoryResource::class),
             Number::make('quantity'),
-            BelongsTo::make('Volume', 'volume', fn($item) => $item->id . '-'. $item->name,
+            BelongsTo::make('Volume', 'volume', fn($item) =>  $item->name,
                 ProductResource::class
             )
         ];
