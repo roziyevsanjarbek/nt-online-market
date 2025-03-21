@@ -16,32 +16,39 @@ class HomeController extends Controller
     {
         $top_banners = Banner::query()
             ->where('position', 'top')
-                ->get();
+            ->get();
+
         $midBanner = Banner::where('position', 'middle')
             ->latest('updated_at')
-                ->first();
+            ->first();
+
         $addBanners = Banner::where('position','ad')
             ->latest('updated_at')
-                ->limit(2)
-                    ->get();
+            ->limit(2)
+            ->get();
+
         $bottomBanner = Banner::where('position','bottom')
-                ->latest('updated_at')
-                    ->first();
+            ->latest('updated_at')
+            ->first();
+
         $categories = Category::query()
             ->orderBy('id', 'desc')
-                ->with(['images', 'parent'])
-                    ->get();
+            ->with(['images', 'parent'])
+            ->get();
+
         $latestPosts = Posts::query()
             ->orderBy('id', 'desc')
-                ->with('postCategory')
-                    ->limit(10)
-                        ->get();
+            ->with('postCategory')
+            ->limit(10)
+            ->get();
+
         $parentCategories = Category::query()
-            ->whereNull('parent_id')
-                ->orderBy('id', 'desc')
-                    ->limit(4)
-                        ->with('categories')
-                            ->get();
+            ->whereNull('category_id') // "parent_id" emas, "category_id" ishlatilmoqda
+            ->orderBy('id', 'desc')
+            ->limit(4)
+            ->with('categories')
+            ->get();
+
         return view('home', [
             'top_banners' => $top_banners,
             'midBanner' => $midBanner,
