@@ -25,8 +25,5 @@ class Category extends Model
     public function productCount () {
         return $this->hasMany(Product::class, 'category_id')->count();
     }
-    public function parent()
-    {
-        return $this->belongsTo(Category::class, 'parent_id');
-    }
+
 }

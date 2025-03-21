@@ -56,8 +56,32 @@ class HomeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
-        //
+        $categories = Category::query()
+            ->orderBy('id', 'desc')
+            ->with(['images', 'parent'])
+            ->get();
+        $latestPosts = Posts::query()
+            ->orderBy('id', 'desc')
+            ->with('postCategory')
+            ->limit(10)
+            ->get();
+        $midBanners = Banner::query()->where('position', 'middle')
+            ->latest('updated_at')
+            ->first();
+        $parentCategories = Category::query()
+            ->whereNull('parent_id')
+            ->orderBy('id', 'desc')
+            ->limit(4)
+            ->with('categories')
+            ->get();
+//        dd($categories);
+        return view('shop-page', [
+            'parentCategories' => $parentCategories,
+            'midBanner' => $midBanners,
+            'latestPosts' => $latestPosts,
+            'categories' => $categories,
+        ]);
     }
 }
