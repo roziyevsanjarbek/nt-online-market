@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Posts;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -58,6 +59,7 @@ class HomeController extends Controller
      */
     public function show()
     {
+        $products = Product::all();
         $categories = Category::query()
             ->orderBy('id', 'desc')
             ->with(['images', 'parent'])
@@ -76,12 +78,12 @@ class HomeController extends Controller
             ->limit(4)
             ->with('categories')
             ->get();
-//        dd($categories);
         return view('shop-page', [
             'parentCategories' => $parentCategories,
             'midBanner' => $midBanners,
             'latestPosts' => $latestPosts,
             'categories' => $categories,
+            'products' => $products,
         ]);
     }
 }
