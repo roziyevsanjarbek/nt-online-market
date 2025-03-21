@@ -11,17 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('images', function (Blueprint $table) {
-            $table->unsignedBigInteger('imageable_id');
-            $table->string('imageable_type');
+        Schema::table('banners', function (Blueprint $table) {
+            $table->string('position')->after('id');
         });
+
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
-        Schema::table('images', function (Blueprint $table) {
-            $table->dropColumn(['imageable_id', 'imageable_type']);
+        Schema::table('banners', function (Blueprint $table) {
+            //
         });
     }
-
 };

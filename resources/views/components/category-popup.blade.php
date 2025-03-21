@@ -5,44 +5,6 @@
         <button type="button" class="bb-category-close transition-all duration-[0.3s] ease-in-out w-[16px] h-[20px] absolute top-[-5px] right-[27px] bg-[#e04e4eb3] rounded-[10px] cursor-pointer hover:bg-[#e04e4e]" title="Close"></button>
         <div class="w-full mx-auto">
             <div class="flex flex-wrap w-full mb-[-24px]">
-                <div class="w-full px-[12px]">
-                    <div class="bb-category-tags mb-[24px]">
-                        <div class="sub-title mb-[20px] flex justify-between">
-                            <h4 class="font-quicksand tracking-[0.03rem] leading-[1.2] text-[20px] font-bold text-[#3d4750] capitalize">keywords</h4>
-                        </div>
-                        <div class="bb-tags">
-                            <ul class="flex flex-wrap m-[-5px]">
-                                <li class="transition-all duration-[0.3s] ease-in-out m-[5px] py-[2px] px-[15px] border-[1px] border-solid border-[#eee] rounded-[10px] cursor-pointer">
-                                    <a href="javascript:void(0)" class="text-[13px] capitalize font-Poppins text-[#686e7d] font-light leading-[28px] tracking-[0.03rem]">Clothes</a>
-                                </li>
-                                <li class="transition-all duration-[0.3s] ease-in-out m-[5px] py-[2px] px-[15px] border-[1px] border-solid border-[#eee] rounded-[10px] cursor-pointer">
-                                    <a href="javascript:void(0)" class="text-[13px] capitalize font-Poppins text-[#686e7d] font-light leading-[28px] tracking-[0.03rem]">Fruits</a>
-                                </li>
-                                <li class="transition-all duration-[0.3s] ease-in-out m-[5px] py-[2px] px-[15px] border-[1px] border-solid border-[#eee] rounded-[10px] cursor-pointer">
-                                    <a href="javascript:void(0)" class="text-[13px] capitalize font-Poppins text-[#686e7d] font-light leading-[28px] tracking-[0.03rem]">Snacks</a>
-                                </li>
-                                <li class="transition-all duration-[0.3s] ease-in-out m-[5px] py-[2px] px-[15px] border-[1px] border-solid border-[#eee] rounded-[10px] cursor-pointer">
-                                    <a href="javascript:void(0)" class="text-[13px] capitalize font-Poppins text-[#686e7d] font-light leading-[28px] tracking-[0.03rem]">Dairy</a>
-                                </li>
-                                <li class="transition-all duration-[0.3s] ease-in-out m-[5px] py-[2px] px-[15px] border-[1px] border-solid border-[#eee] rounded-[10px] cursor-pointer">
-                                    <a href="javascript:void(0)" class="text-[13px] capitalize font-Poppins text-[#686e7d] font-light leading-[28px] tracking-[0.03rem]">Seafood</a>
-                                </li>
-                                <li class="transition-all duration-[0.3s] ease-in-out m-[5px] py-[2px] px-[15px] border-[1px] border-solid border-[#eee] rounded-[10px] cursor-pointer">
-                                    <a href="javascript:void(0)" class="text-[13px] capitalize font-Poppins text-[#686e7d] font-light leading-[28px] tracking-[0.03rem]">Toys</a>
-                                </li>
-                                <li class="transition-all duration-[0.3s] ease-in-out m-[5px] py-[2px] px-[15px] border-[1px] border-solid border-[#eee] rounded-[10px] cursor-pointer">
-                                    <a href="javascript:void(0)" class="text-[13px] capitalize font-Poppins text-[#686e7d] font-light leading-[28px] tracking-[0.03rem]">perfume</a>
-                                </li>
-                                <li class="transition-all duration-[0.3s] ease-in-out m-[5px] py-[2px] px-[15px] border-[1px] border-solid border-[#eee] rounded-[10px] cursor-pointer">
-                                    <a href="javascript:void(0)" class="text-[13px] capitalize font-Poppins text-[#686e7d] font-light leading-[28px] tracking-[0.03rem]">jewelry</a>
-                                </li>
-                                <li class="transition-all duration-[0.3s] ease-in-out m-[5px] py-[2px] px-[15px] border-[1px] border-solid border-[#eee] rounded-[10px] cursor-pointer">
-                                    <a href="javascript:void(0)" class="text-[13px] capitalize font-Poppins text-[#686e7d] font-light leading-[28px] tracking-[0.03rem]">Bags</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
                 <div class="w-full">
                     <div class="flex flex-wrap w-full">
                         <div class="w-full px-[12px]">

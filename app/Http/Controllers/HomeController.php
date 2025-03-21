@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Posts;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -56,8 +57,33 @@ class HomeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
-        //
+        $products = Product::all();
+        $categories = Category::query()
+            ->orderBy('id', 'desc')
+            ->with(['images', 'parent'])
+            ->get();
+        $latestPosts = Posts::query()
+            ->orderBy('id', 'desc')
+            ->with('postCategory')
+            ->limit(10)
+            ->get();
+        $midBanners = Banner::query()->where('position', 'middle')
+            ->latest('updated_at')
+            ->first();
+        $parentCategories = Category::query()
+            ->whereNull('parent_id')
+            ->orderBy('id', 'desc')
+            ->limit(4)
+            ->with('categories')
+            ->get();
+        return view('shop-page', [
+            'parentCategories' => $parentCategories,
+            'midBanner' => $midBanners,
+            'latestPosts' => $latestPosts,
+            'categories' => $categories,
+            'products' => $products,
+        ]);
     }
 }
