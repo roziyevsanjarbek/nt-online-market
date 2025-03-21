@@ -1159,48 +1159,15 @@
                         #Insta</h3>
                 </div>
                 <div class="bb-instagram-slider owl-carousel">
-                    <div class="bb-instagram-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                    @foreach($insPosts as $insPost)
+                        <div class="bb-instagram-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                         <div class="instagram-img relative overflow-hidden rounded-[30px]">
                             <a href="javascript:void(0)">
-                                <img src="assets/img/instagram/1.jpg" alt="instagram-1" class="w-full rounded-[20px]">
+                                <img src="{{\Illuminate\Support\Facades\Storage::url($insPost->image)}}" alt="instagram-1" class="w-full rounded-[20px]">
                             </a>
                         </div>
                     </div>
-                    <div class="bb-instagram-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
-                        <div class="instagram-img relative overflow-hidden rounded-[30px]">
-                            <a href="javascript:void(0)">
-                                <img src="assets/img/instagram/2.jpg" alt="instagram-2" class="w-full rounded-[20px]">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="bb-instagram-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
-                        <div class="instagram-img relative overflow-hidden rounded-[30px]">
-                            <a href="javascript:void(0)">
-                                <img src="assets/img/instagram/3.jpg" alt="instagram-3" class="w-full rounded-[20px]">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="bb-instagram-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500">
-                        <div class="instagram-img relative overflow-hidden rounded-[30px]">
-                            <a href="javascript:void(0)">
-                                <img src="assets/img/instagram/4.jpg" alt="instagram-4" class="w-full rounded-[20px]">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="bb-instagram-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
-                        <div class="instagram-img relative overflow-hidden rounded-[30px]">
-                            <a href="javascript:void(0)">
-                                <img src="assets/img/instagram/5.jpg" alt="instagram-5" class="w-full rounded-[20px]">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="bb-instagram-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="700">
-                        <div class="instagram-img relative overflow-hidden rounded-[30px]">
-                            <a href="javascript:void(0)">
-                                <img src="assets/img/instagram/6.jpg" alt="instagram-6" class="w-full rounded-[20px]">
-                            </a>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
