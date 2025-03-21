@@ -1186,7 +1186,7 @@
 <!-- Cart sidebar -->
 <x-cart-sidebar></x-cart-sidebar>
 <!-- Category Popup -->
-<x-category-popup :categories="$categories"></x-category-popup>
+<x-category-popup :categories="$categories" :products="$products"></x-category-popup>
 <!-- Quick view Modal -->
 <x-quick-view-modal></x-quick-view-modal>
 <!-- Newsletter Modal -->

@@ -1,4 +1,4 @@
-@props(['categories'])
+@props(['categories','products'])
 <div class="bb-category-sidebar transition-all duration-[0.3s] ease-in-out w-full h-full fixed top-[0] z-[17] hidden">
     <div class="bb-category-overlay hidden w-full h-screen fixed top-[0] left-[0] bg-[#00000080] z-[17]"></div>
     <div class="category-sidebar w-[calc(100%-30px)] max-[1199px]:h-[calc(100vh-60px)] max-w-[1200px] my-[15px] mx-[auto] py-[30px] px-[15px] text-[14px] font-normal transition-all duration-[0.5s] ease-in-out delay-[0s] bg-[#fff] overflow-auto rounded-[30px] z-[18] relative">
@@ -41,144 +41,30 @@
                                 <h4 class="font-quicksand tracking-[0.03rem] leading-[1.2] text-[20px] font-bold text-[#3d4750] capitalize">Related products</h4>
                             </div>
                         </div>
-                        <div class="min-[992px]:w-[33.33%] min-[576px]:w-[50%] w-full px-[12px] mb-[24px]">
-                            <div class="bb-category-cart p-[15px] overflow-hidden bg-[#f8f8fb] border-[1px] border-solid border-[#eee] rounded-[10px] flex max-[767px]:flex-col">
-                                <a href="javascript:void(0)" class="pro-img mr-[12px] max-[767px]:mb-[15px] max-[767px]:mr-[0]">
-                                    <img src="assets/img/new-product/1.jpg" alt="new-product-1" class="w-[80px] rounded-[10px] border-[1px] border-solid border-[#eee] max-[767px]:w-full">
-                                </a>
-                                <div class="side-contact flex flex-col">
-                                    <h4 class="bb-pro-title text-[15px]">
-                                        <a href="product-left-sidebar.html" class="transition-all duration-[0.3s] ease-in-out flex font-Poppins text-[15px] leading-[28px] tracking-[0.03rem] font-medium text-[#3d4750]">Ground Nuts Oil Pack</a>
-                                    </h4>
-                                    <span class="bb-pro-rating">
+                        @foreach($products as $product)
+                            <div class="min-[992px]:w-[33.33%] min-[576px]:w-[50%] w-full px-[12px] mb-[24px]">
+                                <div class="bb-category-cart p-[15px] overflow-hidden bg-[#f8f8fb] border-[1px] border-solid border-[#eee] rounded-[10px] flex max-[767px]:flex-col">
+                                    <a href="javascript:void(0)" class="pro-img mr-[12px] max-[767px]:mb-[15px] max-[767px]:mr-[0]">
+                                        <img src="{{ isset($product->images[0]) ? \Illuminate\Support\Facades\Storage::url($product->images[0]->path) : asset('default-image.jpg') }}" alt="new-product-6" class="w-[80px] rounded-[10px] border-[1px] border-solid border-[#eee] max-[767px]:w-full">
+                                    </a>
+                                    <div class="side-contact flex flex-col">
+                                        <h4 class="bb-pro-title text-[15px]">
+                                            <a href="product-left-sidebar.html" class="transition-all duration-[0.3s] ease-in-out flex font-Poppins text-[15px] leading-[28px] tracking-[0.03rem] font-medium text-[#3d4750]">{{$product->name}}</a>
+                                        </h4>
+                                        <span class="bb-pro-rating">
                                             <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[26px] text-[#fea99a]"></i>
                                             <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[26px] text-[#fea99a]"></i>
                                             <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[26px] text-[#fea99a]"></i>
                                             <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[26px] text-[#fea99a]"></i>
                                             <i class="ri-star-line float-left text-[15px] mr-[3px] leading-[26px] text-[#777]"></i>
                                         </span>
-                                    <div class="inner-price mx-[-3px]">
-                                        <span class="new-price px-[3px] text-[15px] text-[#686e7d] font-semibold">$15</span>
-                                        <span class="old-price px-[3px] text-[14px] text-[#686e7d] line-through">$22</span>
+                                        <div class="inner-price mx-[-3px]">
+                                            <span class="new-price px-[3px] text-[15px] text-[#686e7d] font-semibold">${{$product->price}}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="min-[992px]:w-[33.33%] min-[576px]:w-[50%] w-full px-[12px] mb-[24px]">
-                            <div class="bb-category-cart p-[15px] overflow-hidden bg-[#f8f8fb] border-[1px] border-solid border-[#eee] rounded-[10px] flex max-[767px]:flex-col">
-                                <a href="javascript:void(0)" class="pro-img mr-[12px] max-[767px]:mb-[15px] max-[767px]:mr-[0]">
-                                    <img src="assets/img/new-product/2.jpg" alt="new-product-2" class="w-[80px] rounded-[10px] border-[1px] border-solid border-[#eee] max-[767px]:w-full">
-                                </a>
-                                <div class="side-contact flex flex-col">
-                                    <h4 class="bb-pro-title text-[15px]">
-                                        <a href="product-left-sidebar.html" class="transition-all duration-[0.3s] ease-in-out flex font-Poppins text-[15px] leading-[28px] tracking-[0.03rem] font-medium text-[#3d4750]">Organic Litchi Juice</a>
-                                    </h4>
-                                    <span class="bb-pro-rating">
-                                            <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[26px] text-[#fea99a]"></i>
-                                            <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[26px] text-[#fea99a]"></i>
-                                            <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[26px] text-[#fea99a]"></i>
-                                            <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[26px] text-[#fea99a]"></i>
-                                            <i class="ri-star-line float-left text-[15px] mr-[3px] leading-[26px] text-[#777]"></i>
-                                        </span>
-                                    <div class="inner-price mx-[-3px]">
-                                        <span class="new-price px-[3px] text-[15px] text-[#686e7d] font-semibold">$25</span>
-                                        <span class="old-price px-[3px] text-[14px] text-[#686e7d] line-through">$30</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="min-[992px]:w-[33.33%] min-[576px]:w-[50%] w-full px-[12px] mb-[24px]">
-                            <div class="bb-category-cart p-[15px] overflow-hidden bg-[#f8f8fb] border-[1px] border-solid border-[#eee] rounded-[10px] flex max-[767px]:flex-col">
-                                <a href="javascript:void(0)" class="pro-img mr-[12px] max-[767px]:mb-[15px] max-[767px]:mr-[0]">
-                                    <img src="assets/img/new-product/3.jpg" alt="new-product-3" class="w-[80px] rounded-[10px] border-[1px] border-solid border-[#eee] max-[767px]:w-full">
-                                </a>
-                                <div class="side-contact flex flex-col">
-                                    <h4 class="bb-pro-title text-[15px]">
-                                        <a href="product-left-sidebar.html" class="transition-all duration-[0.3s] ease-in-out flex font-Poppins text-[15px] leading-[28px] tracking-[0.03rem] font-medium text-[#3d4750]">Spicy Banana Chips</a>
-                                    </h4>
-                                    <span class="bb-pro-rating">
-                                            <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[26px] text-[#fea99a]"></i>
-                                            <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[26px] text-[#fea99a]"></i>
-                                            <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[26px] text-[#fea99a]"></i>
-                                            <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[26px] text-[#fea99a]"></i>
-                                            <i class="ri-star-line float-left text-[15px] mr-[3px] leading-[26px] text-[#777]"></i>
-                                        </span>
-                                    <div class="inner-price mx-[-3px]">
-                                        <span class="new-price px-[3px] text-[15px] text-[#686e7d] font-semibold">$01</span>
-                                        <span class="old-price px-[3px] text-[14px] text-[#686e7d] line-through">$02</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="min-[992px]:w-[33.33%] min-[576px]:w-[50%] w-full px-[12px] mb-[24px]">
-                            <div class="bb-category-cart p-[15px] overflow-hidden bg-[#f8f8fb] border-[1px] border-solid border-[#eee] rounded-[10px] flex max-[767px]:flex-col">
-                                <a href="javascript:void(0)" class="pro-img mr-[12px] max-[767px]:mb-[15px] max-[767px]:mr-[0]">
-                                    <img src="assets/img/new-product/4.jpg" alt="new-product-4" class="w-[80px] rounded-[10px] border-[1px] border-solid border-[#eee] max-[767px]:w-full">
-                                </a>
-                                <div class="side-contact flex flex-col">
-                                    <h4 class="bb-pro-title text-[15px]">
-                                        <a href="product-left-sidebar.html" class="transition-all duration-[0.3s] ease-in-out flex font-Poppins text-[15px] leading-[28px] tracking-[0.03rem] font-medium text-[#3d4750]">Spicy Potato Chips</a>
-                                    </h4>
-                                    <span class="bb-pro-rating">
-                                            <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[26px] text-[#fea99a]"></i>
-                                            <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[26px] text-[#fea99a]"></i>
-                                            <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[26px] text-[#fea99a]"></i>
-                                            <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[26px] text-[#fea99a]"></i>
-                                            <i class="ri-star-line float-left text-[15px] mr-[3px] leading-[26px] text-[#777]"></i>
-                                        </span>
-                                    <div class="inner-price mx-[-3px]">
-                                        <span class="new-price px-[3px] text-[15px] text-[#686e7d] font-semibold">$25</span>
-                                        <span class="old-price px-[3px] text-[14px] text-[#686e7d] line-through">$35</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="min-[992px]:w-[33.33%] min-[576px]:w-[50%] w-full px-[12px] mb-[24px]">
-                            <div class="bb-category-cart p-[15px] overflow-hidden bg-[#f8f8fb] border-[1px] border-solid border-[#eee] rounded-[10px] flex max-[767px]:flex-col">
-                                <a href="javascript:void(0)" class="pro-img mr-[12px] max-[767px]:mb-[15px] max-[767px]:mr-[0]">
-                                    <img src="assets/img/new-product/5.jpg" alt="new-product-5" class="w-[80px] rounded-[10px] border-[1px] border-solid border-[#eee] max-[767px]:w-full">
-                                </a>
-                                <div class="side-contact flex flex-col">
-                                    <h4 class="bb-pro-title text-[15px]">
-                                        <a href="product-left-sidebar.html" class="transition-all duration-[0.3s] ease-in-out flex font-Poppins text-[15px] leading-[28px] tracking-[0.03rem] font-medium text-[#3d4750]">Black Pepper Spice</a>
-                                    </h4>
-                                    <span class="bb-pro-rating">
-                                            <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[26px] text-[#fea99a]"></i>
-                                            <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[26px] text-[#fea99a]"></i>
-                                            <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[26px] text-[#fea99a]"></i>
-                                            <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[26px] text-[#fea99a]"></i>
-                                            <i class="ri-star-line float-left text-[15px] mr-[3px] leading-[26px] text-[#777]"></i>
-                                        </span>
-                                    <div class="inner-price mx-[-3px]">
-                                        <span class="new-price px-[3px] text-[15px] text-[#686e7d] font-semibold">$32</span>
-                                        <span class="old-price px-[3px] text-[14px] text-[#686e7d] line-through">$35</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="min-[992px]:w-[33.33%] min-[576px]:w-[50%] w-full px-[12px] mb-[24px]">
-                            <div class="bb-category-cart p-[15px] overflow-hidden bg-[#f8f8fb] border-[1px] border-solid border-[#eee] rounded-[10px] flex max-[767px]:flex-col">
-                                <a href="javascript:void(0)" class="pro-img mr-[12px] max-[767px]:mb-[15px] max-[767px]:mr-[0]">
-                                    <img src="assets/img/new-product/6.jpg" alt="new-product-6" class="w-[80px] rounded-[10px] border-[1px] border-solid border-[#eee] max-[767px]:w-full">
-                                </a>
-                                <div class="side-contact flex flex-col">
-                                    <h4 class="bb-pro-title text-[15px]">
-                                        <a href="product-left-sidebar.html" class="transition-all duration-[0.3s] ease-in-out flex font-Poppins text-[15px] leading-[28px] tracking-[0.03rem] font-medium text-[#3d4750]">Small Chili Spice</a>
-                                    </h4>
-                                    <span class="bb-pro-rating">
-                                            <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[26px] text-[#fea99a]"></i>
-                                            <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[26px] text-[#fea99a]"></i>
-                                            <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[26px] text-[#fea99a]"></i>
-                                            <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[26px] text-[#fea99a]"></i>
-                                            <i class="ri-star-line float-left text-[15px] mr-[3px] leading-[26px] text-[#777]"></i>
-                                        </span>
-                                    <div class="inner-price mx-[-3px]">
-                                        <span class="new-price px-[3px] text-[15px] text-[#686e7d] font-semibold">$41</span>
-                                        <span class="old-price px-[3px] text-[14px] text-[#686e7d] line-through">$45</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
