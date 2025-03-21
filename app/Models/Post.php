@@ -22,5 +22,8 @@ class Post extends Model
         return $this->belongsTo(PostCategory::class, 'category_id', 'id');
 
     }
+    public function insPostCategory(){
+        return $this->belongsTo(PostCategory::class, 'ins_category_id', 'id');
+    }
 
 }
