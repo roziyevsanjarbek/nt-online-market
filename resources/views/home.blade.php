@@ -1,12 +1,6 @@
-<!--=========================================================
-Item Name: Blueberry - eCommerce Tailwind CSS Template.
-Author: Maraviya Infotech
-Version: 1
-Copyright 2024
-============================================================-->
+
 <x-header title="Online Market"></x-header>
 
-<body>
 
 <!-- Loader -->
 <div
