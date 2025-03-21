@@ -29,20 +29,27 @@ class HomeController extends Controller
                     ->first();
         $categories = Category::query()
             ->orderBy('id', 'desc')
-                ->with(['images', 'category'])
+                ->with(['images', 'parent'])
                     ->get();
         $latestPosts = Posts::query()
             ->orderBy('id', 'desc')
                 ->with('postCategory')
                     ->limit(10)
                         ->get();
+        $parentCategories = Category::query()
+            ->whereNull('parent_id')
+                ->orderBy('id', 'desc')
+                    ->limit(4)
+                        ->with('categories')
+                            ->get();
         return view('home', [
             'top_banners' => $top_banners,
             'midBanner' => $midBanner,
             'addBanners' => $addBanners,
             'bottomBanner' => $bottomBanner,
             'categories' => $categories,
-            'latestPosts' => $latestPosts
+            'latestPosts' => $latestPosts,
+            'parentCategories' => $parentCategories,
         ]);
     }
 

@@ -10,13 +10,16 @@ class Category extends Model
 
     protected $fillable = ['name', 'category_id'];
 
-    public function category()
+    public function parent()
     {
-        return $this->belongsTo(Category::class, 'category_id');
+        return $this->belongsTo(Category::class, 'parent_id');
     }
 
     public function images (){
-        return $this->morphMany(Image::class, 'imageable', 'imageable_type', 'imageable_id');
+        return $this->morphMany(Image::class, 'imageable');
+    }
+    public function categories(){
+        return $this->hasMany(Category::class, 'parent_id');
     }
 
     public function productCount () {

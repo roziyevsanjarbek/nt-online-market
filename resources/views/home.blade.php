@@ -7,7 +7,7 @@
 </div>
 
 <!-- Header -->
-<x-navbar></x-navbar>
+<x-navbar :parentCategories="$parentCategories" :latestPosts="$latestPosts"></x-navbar>
 
 <!-- Hero -->
 <section class="section-hero mb-[50px] max-[1199px]:mb-[35px] py-[50px] relative bg-[#f8f8fb] overflow-hidden">
@@ -523,7 +523,7 @@
                     <h4 class="font-quicksand mb-[20px] text-[40px] font-bold text-[#3d4750] tracking-[0.03rem] leading-[1.2] max-[991px]:text-[22px]">
                         {{$bottomBanner->title}}</h4>
                     <a href="javascript:void(0)"
-                       class="bb-btn-1 transition-all duration-[0.3s] ease-in-out font-Poppins leading-[28px] tracking-[0.03rem] py-[8px] px-[20px] max-[1199px]:py-[3px] max-[1199px]:px-[15px] text-[14px] font-normal text-[#3d4750] bg-transparent rounded-[10px] border-[1px] border-solid border-[#3d4750] hover:bg-[#6c7fd8] hover:border-[#6c7fd8] hover:text-[#fff]">\
+                       class="bb-btn-1 transition-all duration-[0.3s] ease-in-out font-Poppins leading-[28px] tracking-[0.03rem] py-[8px] px-[20px] max-[1199px]:py-[3px] max-[1199px]:px-[15px] text-[14px] font-normal text-[#3d4750] bg-transparent rounded-[10px] border-[1px] border-solid border-[#3d4750] hover:bg-[#6c7fd8] hover:border-[#6c7fd8] hover:text-[#fff]">
                         Shop Now</a>
                 </div>
             </div>
@@ -1210,7 +1210,7 @@
 <!-- Cart sidebar -->
 <x-cart-sidebar></x-cart-sidebar>
 <!-- Category Popup -->
-<x-category-popup></x-category-popup>
+<x-category-popup :categories="$categories"></x-category-popup>
 
 <!-- Quick view Modal -->
 <x-quick-view-modal></x-quick-view-modal>
