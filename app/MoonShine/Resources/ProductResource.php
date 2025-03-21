@@ -36,11 +36,14 @@ class ProductResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Name'),
-            Textarea::make('Description'),
-            Number::make('price'),
-            Number::make('sale_price'),
-            BelongsTo::make('Category', 'category', fn($item) => $item->id . '.'. $item->name,
+            Text::make('name')->sortable(),
+            Text::make('description')->sortable(),
+            Text::make('price')->sortable(),
+            Text::make('sale_price')->sortable(),
+            BelongsTo::make(
+                'Category ID and Name',
+                'category',
+                fn($item)=>"$item->name",
                 CategoryResource::class),
             Number::make('quantity'),
             BelongsTo::make('Volume', 'volume', fn($item) => $item->id . '-'. $item->name,
@@ -55,19 +58,20 @@ class ProductResource extends ModelResource
     protected function formFields(): iterable
     {
         return [
-            Box::make([
-                ID::make(),
-                Text::make('Name'),
-                Textarea::make('Description'),
-                Number::make('price'),
-                Number::make('sale_price'),
-                BelongsTo::make('Category', 'category', fn($item) => $item->id . '.'. $item->name,
-                    CategoryResource::class),
-                Number::make('quantity'),
-                BelongsTo::make('Volume', 'volume', fn($item) => $item->id . '-'. $item->name,
-                ProductResource::class
-                )
-            ])
+            ID::make()->sortable(),
+            Text::make('name')->sortable(),
+            Text::make('description')->sortable(),
+            Text::make('price')->sortable(),
+            Text::make('sale_price')->sortable(),
+            BelongsTo::make(
+                'Category ID and Name',
+                'category',
+                fn($item)=>"$item->name",
+                CategoryResource::class),
+            Number::make('quantity'),
+            BelongsTo::make('Volume', 'volume', fn($item) => $item->id . '-'. $item->name,
+                ProductVolumeResource::class
+            )
         ];
     }
 
@@ -77,16 +81,19 @@ class ProductResource extends ModelResource
     protected function detailFields(): iterable
     {
         return [
-            ID::make(),
-            Text::make('Name'),
-            Textarea::make('Description'),
-            Number::make('price'),
-            Number::make('sale_price'),
-            BelongsTo::make('Category', 'category', fn($item) => $item->id . '.'. $item->name,
+            ID::make()->sortable(),
+            Text::make('name')->sortable(),
+            Text::make('description')->sortable(),
+            Text::make('price')->sortable(),
+            Text::make('sale_price')->sortable(),
+            BelongsTo::make(
+                'Category ID and Name',
+                'category',
+                fn($item)=>"$item->name",
                 CategoryResource::class),
             Number::make('quantity'),
             BelongsTo::make('Volume', 'volume', fn($item) => $item->id . '-'. $item->name,
-                ProductResource::class
+                ProductVolumeResource::class
             )
         ];
     }

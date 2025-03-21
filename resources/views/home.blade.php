@@ -1,4 +1,7 @@
+
 <x-header title="Online Market"></x-header>
+
+
 <!-- Loader -->
 <div
     class="bb-loader min-w-full w-full h-screen fixed top-[0] left-[0] flex items-center justify-center bg-[#fff] z-[45]">
@@ -7,37 +10,19 @@
 </div>
 
 <!-- Header -->
-<x-navbar :parentCategories="$parentCategories"></x-navbar>
-
+<x-navbar :parentCategories="$parentCategories" :productsMenu="$productsMenu"></x-navbar>
 <!-- Hero -->
 <section class="section-hero mb-[50px] max-[1199px]:mb-[35px] py-[50px] relative bg-[#f8f8fb] overflow-hidden">
-    <div class="bb-social-follow absolute left-[20px] bottom-[30px] max-[1250px]:hidden">
-        <ul class="inner-links">
-            <li class="p-[6px] rotate-[270deg]">
-                <a href="javascript:void(0)"
-                   class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[16px] font-medium text-[#777] hover:text-[#6c7fd8] leading-[28px] tracking-[0.03rem] uppercase">Fb</a>
-            </li>
-            <li class="p-[6px] rotate-[270deg]">
-                <a href="javascript:void(0)"
-                   class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[16px] font-medium text-[#777] hover:text-[#6c7fd8] leading-[28px] tracking-[0.03rem] uppercase">Li</a>
-            </li>
-            <li class="p-[6px] rotate-[270deg]">
-                <a href="javascript:void(0)"
-                   class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[16px] font-medium text-[#777] hover:text-[#6c7fd8] leading-[28px] tracking-[0.03rem] uppercase">Dr</a>
-            </li>
-            <li class="p-[6px] rotate-[270deg]">
-                <a href="javascript:void(0)"
-                   class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[16px] font-medium text-[#777] hover:text-[#6c7fd8] leading-[28px] tracking-[0.03rem] uppercase">In</a>
-            </li>
-        </ul>
-    </div>
     <div
         class="flex flex-wrap justify-between relative items-center mx-auto min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
         <div class="flex flex-wrap w-full">
             <div class="w-full">
                 <div class="hero-slider swiper-container">
                     <div class="swiper-wrapper">
-                        @foreach($top_banners as $banner)
+
+
+
+                        @foreach($topBanners as $banner)
                                 <?php
                                 $title = trim(preg_replace('/\s+/', ' ', $banner->title));
 
@@ -100,17 +85,24 @@
 </section>
 
 <!-- Category -->
+
+@if($midBanner)
+        <?php
+        $title=trim(preg_replace('/\s+/', ' ', $midBanner->title));
+        $words=explode(' ', $title);
+        ?>
+@endif
+
 <section class="section-category overflow-hidden py-[50px] max-[1199px]:py-[35px]">
     <div
         class="flex flex-wrap justify-between relative items-center mx-auto min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
         <div class="flex flex-wrap w-full mb-[-24px]">
             <div class="min-[992px]:w-[41.66%] w-full px-[12px] mb-[24px]">
                 <div class="bb-category-img relative max-[991px]:hidden">
-                    <img src="{{ $midBanner?->image ? Storage::url($midBanner->image) : 'https://via.placeholder.com/600' }}"
-                         alt="category" class="w-[600px] h-[600px] rounded-[30px] object-cover">
+                    <img src="{{ Storage::url($midBanner->image) }}" alt="category" class="w-full rounded-[30px]">
                     <div
                         class="bb-offers py-[5px] px-[15px] absolute top-[20px] right-[20px] bg-[#000] opacity-[0.8] rounded-[15px]">
-                        <span class="text-[14px] font-normal text-[#fff]">{{$midBanner->description ?? '%off'}}</span>
+                        <span class="text-[14px] font-normal text-[#fff]">{{ $midBanner->description }}</span>
                     </div>
                 </div>
             </div>
@@ -119,25 +111,31 @@
                     <div class="category-title mb-[30px] max-[991px]:hidden" data-aos="fade-up" data-aos-duration="1000"
                          data-aos-delay="600">
                         <h2 class="font-quicksand text-[124px] text-[#fff] opacity-[0.15] font-bold leading-[1.2] tracking-[0.03rem] max-[1399px]:text-[95px] max-[1199px]:text-[70px] max-[767px]:text-[42px]">
-                            Explore Categories</h2>
+                            {{ $midBanner->title }}</h2>
                     </div>
                     <div
                         class="bb-category-block owl-carousel ml-[-150px] w-[calc(100%+150px)] pt-[30px] pl-[30px] bg-[#fff] rounded-tl-[30px] relative max-[991px]:ml-[0] max-[991px]:w-full max-[991px]:p-[0]">
                         @foreach($categories as $category)
                             <div
-                                class="bb-category-box p-[30px] rounded-[20px] flex flex-col items-center text-center max-[1399px]:p-[20px] category-items-4 bg-[#fbf9e4]"
-                                data-aos="flip-left" data-aos-duration="1000" data-aos-delay="800">
+                                class="bb-category-box p-[30px] rounded-[20px] flex flex-col items-center text-center max-[1399px]:p-[20px] category-items-1 bg-[#fef1f1]"
+                                data-aos="flip-left" data-aos-duration="1000" data-aos-delay="200">
+
                                 <div class="category-image mb-[12px]">
-                                    <img src="{{ \Illuminate\Support\Facades\Storage::url($category->images[0]->path) }}" alt="category"
+                                    <img src="{{ isset($category->images[0]) ? \Illuminate\Support\Facades\Storage::url($category->images[0]->path) : asset('default-image.jpg') }}"
+                                         alt="category"
                                          class="w-[50px] h-[50px] max-[1399px]:h-[65px] max-[1399px]:w-[65px] max-[1199px]:h-[50px] max-[1199px]:w-[50px]">
                                 </div>
+
                                 <div class="category-sub-contact">
                                     <h5 class="mb-[2px] text-[16px] font-quicksand text-[#3d4750] font-semibold tracking-[0.03rem] leading-[1.2]">
                                         <a href="shop-left-sidebar-col-3.html"
-                                           class="font-Poppins text-[16px] font-medium leading-[1.2] tracking-[0.03rem] text-[#3d4750] capitalize">{{ $category->name }}</a>
+                                           class="font-Poppins text-[16px] font-medium leading-[1.2] tracking-[0.03rem] text-[#3d4750] capitalize">
+                                            {{$category->name}}
+                                        </a>
                                     </h5>
                                     <p class="font-Poppins text-[13px] text-[#686e7d] leading-[25px] font-light tracking-[0.03rem]">
-                                        {{ $category->productCount() }} products</p>
+                                        {{$category->productCount()}} product
+                                    </p>
                                 </div>
                             </div>
                         @endforeach
@@ -147,6 +145,7 @@
         </div>
     </div>
 </section>
+
 
 <!-- Day of the deal -->
 <section class="section-deal overflow-hidden py-[50px] max-[1199px]:py-[35px]">
@@ -448,7 +447,8 @@
                                                 <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[18px] text-[#fea99a]"></i>
                                                 <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[18px] text-[#fea99a]"></i>
                                                 <i class="ri-star-line float-left text-[15px] mr-[3px] leading-[18px] text-[#777]"></i>
-                                            </span>
+        @props(['parentCategories'])
+                                    </span>
                                     </div>
                                     <h4 class="bb-pro-title mb-[8px] text-[16px] leading-[18px]">
                                         <a href="product-left-sidebar.html"
@@ -475,40 +475,50 @@
 
 <!-- Banner-one -->
 <section class="section-banner-one overflow-hidden py-[50px] max-[1199px]:py-[35px]">
-    <div
-        class="flex flex-wrap justify-between relative items-center mx-auto min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
+    <div class="flex flex-wrap justify-between relative items-center mx-auto min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
         <div class="flex flex-wrap w-full mb-[-24px]">
-            @foreach($addBanners as $banner)
-                <div class="min-[992px]:w-[50%] w-full px-[12px] mb-[24px]" data-aos="fade-up" data-aos-duration="1000"
-                     data-aos-delay="400">
-                    <div class="banner-box p-[30px] rounded-[20px] relative overflow-hidden bg-box-color-one bg-[#fbf2e5]">
-                        <div class="inner-banner-box relative z-[1] flex justify-between max-[480px]:flex-col">
-                            <div class="side-image px-[12px] flex items-center max-[480px]:p-[0] max-[480px]:mb-[12px] max-[480px]:justify-center">
-                                <img src="{{ Storage::url($banner->image) }}" alt="{{ $banner->title }}"
-                                     class="max-w-max w-[280px] h-[280px] max-[1399px]:w-[230px] max-[1399px]:h-[230px] max-[1199px]:w-[140px] max-[1199px]:h-[140px] max-[991px]:w-[280px] max-[991px]:h-[280px] max-[767px]:h-[200px] max-[767px]:w-[200px] max-[575px]:w-full max-[575px]:h-[auto] max-[480px]:w-[calc(100%-70px)]">
-                            </div>
-                            <div class="inner-contact max-w-[250px] px-[12px] flex flex-col items-start justify-center max-[480px]:p-[0] max-[480px]:max-w-[100%] max-[480px]:text-center max-[480px]:items-center">
-                                <h5 class="font-quicksand mb-[15px] text-[31px] text-[#3d4750] font-bold tracking-[0.03rem] text-[#3d4750] leading-[1.2] max-[991px]:text-[28px] max-[575px]:text-[24px] max-[480px]:mb-[2px] max-[480px]:text-[22px]">
-                                    {{ $banner->title }}
-                                </h5>
-                                <p class="font-Poppins text-[16px] font-light leading-[28px] tracking-[0.03rem] text-[#686e7d] mb-[15px] max-[480px]:mb-[8px] max-[480px]:text-[14px]">
-                                    {{ $banner->description }}
-                                </p>
-                                <a href="" class="bb-btn-1 transition-all duration-[0.3s] ease-in-out font-Poppins leading-[28px] tracking-[0.03rem] py-[5px] px-[15px] text-[14px] font-normal text-[#3d4750] bg-transparent rounded-[10px] border-[1px] border-solid border-[#3d4750] hover:bg-[#6c7fd8] hover:border-[#6c7fd8] hover:text-[#fff]">Shop
-                                    Now</a>
-                            </div>
+
+            @foreach($oneBottomBanners as $banner)
+                    <?php
+                    $title = trim(preg_replace('/\s+/', ' ', $banner->title));
+                    ?>
+
+            <div class="min-[992px]:w-[50%] w-full px-[12px] mb-[24px]" data-aos="fade-up" data-aos-duration="1000"
+                 data-aos-delay="400">
+                <div class="banner-box p-[30px] rounded-[20px] relative overflow-hidden bg-box-color-one bg-[#fbf2e5]">
+                    <div class="inner-banner-box relative z-[1] flex justify-between max-[480px]:flex-col">
+                        <div
+                            class="side-image px-[12px] flex items-center max-[480px]:p-[0] max-[480px]:mb-[12px] max-[480px]:justify-center">
+                            <img src="{{Storage::url($banner->image)}}" alt="banners"
+                                 class="max-w-max w-[280px] h-[280px] max-[1399px]:w-[230px] max-[1399px]:h-[230px] max-[1199px]:w-[140px] max-[1199px]:h-[140px] max-[991px]:w-[280px] max-[991px]:h-[280px] max-[767px]:h-[200px] max-[767px]:w-[200px] max-[575px]:w-full max-[575px]:h-[auto] max-[480px]:w-[calc(100%-70px)]">
+                        </div>
+                        <div
+                            class="inner-contact max-w-[250px] px-[12px] flex flex-col items-start justify-center max-[480px]:p-[0] max-[480px]:max-w-[100%] max-[480px]:text-center max-[480px]:items-center">
+                            <h5 class="font-quicksand mb-[15px] text-[31px] text-[#3d4750] font-bold tracking-[0.03rem] text-[#3d4750] leading-[1.2] max-[991px]:text-[28px] max-[575px]:text-[24px] max-[480px]:mb-[2px] max-[480px]:text-[22px]">
+                                {!! $title !!}</h5>
+                            <p class="font-Poppins text-[16px] font-light leading-[28px] tracking-[0.03rem] text-[#686e7d] mb-[15px] max-[480px]:mb-[8px] max-[480px]:text-[14px]">
+                                {{$banner->description}}</p>
+                            <a href="shop-left-sidebar-col-3.html"
+                               class="bb-btn-1 transition-all duration-[0.3s] ease-in-out font-Poppins leading-[28px] tracking-[0.03rem] py-[5px] px-[15px] text-[14px] font-normal text-[#3d4750] bg-transparent rounded-[10px] border-[1px] border-solid border-[#3d4750] hover:bg-[#6c7fd8] hover:border-[#6c7fd8] hover:text-[#fff]">Shop
+                                Now</a>
                         </div>
                     </div>
                 </div>
+            </div>
             @endforeach
         </div>
     </div>
 </section>
 
 <!-- Banner-two -->
+
+@if($bottomBanner)
+        <?php
+        $title = trim(preg_replace('/\s+/', ' ', $bottomBanner->title));
+        $words = explode(" ", $title);
+        ?>
 <section
-    class="section-banner-two overflow-hidden my-[50px] max-[1199px]:my-[35px] min-h-[600px] overflow-hidden bg-no-repeat bg-cover bg-center max-[991px]:max-h-[400px] max-[991px]:min-h-[auto]"
-    style="background-image: url('{{ Storage::url($bottomBanner->image) }}');">
+    class="section-banner-two overflow-hidden my-[50px] max-[1199px]:my-[35px] bg-[url('{{ asset('storage/' . $bottomBanner->image) }}')] min-h-[600px] overflow-hidden bg-no-repeat bg-cover bg-center max-[991px]:max-h-[400px] max-[991px]:min-h-[auto]">
     <div
         class="flex flex-wrap justify-between relative items-center mx-auto min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
         <div class="flex flex-wrap w-full">
@@ -520,13 +530,14 @@
                     <h4 class="font-quicksand mb-[20px] text-[40px] font-bold text-[#3d4750] tracking-[0.03rem] leading-[1.2] max-[991px]:text-[22px]">
                         {{$bottomBanner->title}}</h4>
                     <a href="javascript:void(0)"
-                       class="bb-btn-1 transition-all duration-[0.3s] ease-in-out font-Poppins leading-[28px] tracking-[0.03rem] py-[8px] px-[20px] max-[1199px]:py-[3px] max-[1199px]:px-[15px] text-[14px] font-normal text-[#3d4750] bg-transparent rounded-[10px] border-[1px] border-solid border-[#3d4750] hover:bg-[#6c7fd8] hover:border-[#6c7fd8] hover:text-[#fff]">\
-                        Shop Now</a>
+                       class="bb-btn-1 transition-all duration-[0.3s] ease-in-out font-Poppins leading-[28px] tracking-[0.03rem] py-[8px] px-[20px] max-[1199px]:py-[3px] max-[1199px]:px-[15px] text-[14px] font-normal text-[#3d4750] bg-transparent rounded-[10px] border-[1px] border-solid border-[#3d4750] hover:bg-[#6c7fd8] hover:border-[#6c7fd8] hover:text-[#fff]">Shop
+                        Now</a>
                 </div>
             </div>
         </div>
     </div>
 </section>
+@endif
 
 <!-- New Product tab Area -->
 <section class="section-product-tabs overflow-hidden py-[50px] max-[1199px]:py-[35px]">
@@ -572,7 +583,7 @@
                     <!-- 1st Product tab start -->
                     <div class="tab-product-pane" id="all">
                         <div class="flex flex-wrap w-full">
-                            {{--                                @for($i = 0; $i<10; $i++)--}}
+                            {{--                            @for($i=0; $i<8; $i++)--}}
                             <div
                                 class="min-[1200px]:w-[25%] min-[768px]:w-[33.33%] w-[50%] max-[480px]:w-full px-[12px] mb-[24px]"
                                 data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
@@ -651,13 +662,13 @@
                                     </div>
                                 </div>
                             </div>
-                            {{--                                @endfor--}}
+                            {{--                            @endfor--}}
                         </div>
                     </div>
                     <!-- 2nd Product tab start -->
                     <div class="tab-product-pane" id="snack">
                         <div class="flex flex-wrap w-full">
-                            {{--                                @for($i = 0; $i<10; $i++)--}}
+                            {{--                            @for($i=0; $i<8; $i++)--}}
                             <div
                                 class="min-[1200px]:w-[25%] min-[768px]:w-[33.33%] w-[50%] max-[480px]:w-full px-[12px] mb-[24px]"
                                 data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
@@ -736,13 +747,13 @@
                                     </div>
                                 </div>
                             </div>
-                            {{--                                @endfor--}}
+                            {{--                            @endfor--}}
                         </div>
                     </div>
                     <!-- 3rd Product tab start -->
                     <div class="tab-product-pane" id="fruit">
                         <div class="flex flex-wrap w-full">
-                            {{--                                @for($i = 0; $i<10; $i++)--}}
+                            {{--                            @for($i=0; $i<8; $i++)--}}
                             <div
                                 class="min-[1200px]:w-[25%] min-[768px]:w-[33.33%] w-[50%] max-[480px]:w-full px-[12px] mb-[24px]"
                                 data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
@@ -821,13 +832,13 @@
                                     </div>
                                 </div>
                             </div>
-                            {{--                                @endfor--}}
+                            {{--                            @endfor--}}
                         </div>
                     </div>
                     <!-- 4th Product tab start -->
                     <div class="tab-product-pane" id="veg">
                         <div class="flex flex-wrap w-full">
-                            {{--                                @for($i = 0; $i<10; $i++)--}}
+                            {{--                            @for($i=0; $i<8; $i++)--}}
                             <div
                                 class="min-[1200px]:w-[25%] min-[768px]:w-[33.33%] w-[50%] max-[480px]:w-full px-[12px] mb-[24px]"
                                 data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
@@ -906,7 +917,7 @@
                                     </div>
                                 </div>
                             </div>
-                            {{--                                @endfor--}}
+                            {{--                            @endfor--}}
                         </div>
                     </div>
                 </div>
@@ -983,6 +994,7 @@
         </div>
     </div>
 </section>
+
 
 <!-- Testimonials -->
 <section class="section-testimonials overflow-hidden py-[100px] max-[1199px]:py-[70px] max-[991px]:p-[0]">
@@ -1154,48 +1166,15 @@
                         #Insta</h3>
                 </div>
                 <div class="bb-instagram-slider owl-carousel">
-                    <div class="bb-instagram-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                    @foreach($insPosts as $insPost)
+                        <div class="bb-instagram-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                         <div class="instagram-img relative overflow-hidden rounded-[30px]">
                             <a href="javascript:void(0)">
-                                <img src="assets/img/instagram/1.jpg" alt="instagram-1" class="w-full rounded-[20px]">
+                                <img src="{{\Illuminate\Support\Facades\Storage::url($insPost->image)}}" alt="instagram-1" class="w-full rounded-[20px]">
                             </a>
                         </div>
                     </div>
-                    <div class="bb-instagram-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
-                        <div class="instagram-img relative overflow-hidden rounded-[30px]">
-                            <a href="javascript:void(0)">
-                                <img src="assets/img/instagram/2.jpg" alt="instagram-2" class="w-full rounded-[20px]">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="bb-instagram-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
-                        <div class="instagram-img relative overflow-hidden rounded-[30px]">
-                            <a href="javascript:void(0)">
-                                <img src="assets/img/instagram/3.jpg" alt="instagram-3" class="w-full rounded-[20px]">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="bb-instagram-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500">
-                        <div class="instagram-img relative overflow-hidden rounded-[30px]">
-                            <a href="javascript:void(0)">
-                                <img src="assets/img/instagram/4.jpg" alt="instagram-4" class="w-full rounded-[20px]">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="bb-instagram-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
-                        <div class="instagram-img relative overflow-hidden rounded-[30px]">
-                            <a href="javascript:void(0)">
-                                <img src="assets/img/instagram/5.jpg" alt="instagram-5" class="w-full rounded-[20px]">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="bb-instagram-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="700">
-                        <div class="instagram-img relative overflow-hidden rounded-[30px]">
-                            <a href="javascript:void(0)">
-                                <img src="assets/img/instagram/6.jpg" alt="instagram-6" class="w-full rounded-[20px]">
-                            </a>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -1207,20 +1186,18 @@
 <!-- Cart sidebar -->
 <x-cart-sidebar></x-cart-sidebar>
 <!-- Category Popup -->
-<x-category-popup></x-category-popup>
-
+<x-category-popup :categories="$categories" :products="$products"></x-category-popup>
 <!-- Quick view Modal -->
 <x-quick-view-modal></x-quick-view-modal>
-
 <!-- Newsletter Modal -->
-<x-news-letter-model></x-news-letter-model>
+<x-newsletter-modal></x-newsletter-modal>
 <!-- Tools Sidebar -->
 <x-tools-sidebar></x-tools-sidebar>
 <!-- Back to top  -->
 <x-back-to-top></x-back-to-top>
-
 <!-- Plugins -->
 <x-plugins></x-plugins>
 
 </body>
+
 </html>

@@ -24,7 +24,6 @@ class ImageResource extends ModelResource
 {
     protected string $model = Image::class;
 
-    protected string $title = 'Images';
 
     /**
      * @return list<FieldContract>
@@ -33,12 +32,12 @@ class ImageResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            ImageField::make('image', 'path'),
-            MorphTo::make('Imageable')
-                ->types([
-                    Category::class => ['Categories', 'Categories'],
-                    Product::class => ['Products', 'Products']
-                ])
+            ImageField::make('Path'),
+            MorphTo::make('ImageAble','imageable',fn($item)=>$item->id . ".". $item->name)
+            ->types([
+                 Category::class=>['Categories','Categories'],
+                 Product::class=>['Products','Products'],
+            ]),
         ];
     }
 
@@ -50,12 +49,12 @@ class ImageResource extends ModelResource
         return [
             Box::make([
                 ID::make(),
-                ImageField::make('image', 'path'),
-                MorphTo::make('Imageable')
+                ImageField::make('Path'),
+                MorphTo::make('ImageAble','imageable',fn($item)=>$item->id . ".". $item->name)
                     ->types([
-                        Category::class => ['Categories', 'Categories'],
-                        Product::class => ['Products', 'Products']
-                    ])
+                        Category::class=>['Categories','Categories'],
+                        Product::class=>['Products','Products'],
+                    ]),
             ])
         ];
     }
@@ -67,12 +66,12 @@ class ImageResource extends ModelResource
     {
         return [
             ID::make(),
-            ImageField::make('image', 'path'),
-            MorphTo::make('Imageable')
+            ImageField::make('Path'),
+            MorphTo::make('ImageAble','imageable',fn($item)=>$item->id . ".". $item->name)
                 ->types([
-                    Category::class => ['Categories', 'Categories'],
-                    Product::class => ['Products', 'Products']
-                ])
+                Category::class=>['Categories','Categories'],
+                Product::class=>['Products','Products'],
+            ]),
         ];
     }
 

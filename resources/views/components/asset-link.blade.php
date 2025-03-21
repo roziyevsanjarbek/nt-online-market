@@ -1,6 +1,7 @@
 @props(['src', 'type'])
-@if($type === 'js')
+
+@if ($type === 'js')
     <script src="{{ $src }}"></script>
-@elseif($type === 'css')
+@elseif($type   === 'css')
     <link rel="stylesheet" href="{{ $src }}">
 @endif
