@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Posts;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
 {
@@ -36,21 +39,45 @@ class HomeController extends Controller
                 ->with('postCategory')
                     ->limit(10)
                         ->get();
+
+        $parentCategories = Category::query()
+            ->whereNull('parent_id')
+                ->orderBy('id', 'desc')
+                    ->limit(4)
+                        ->with('categories')
+                            ->get();
         return view('home', [
             'top_banners' => $top_banners,
             'midBanner' => $midBanner,
             'addBanners' => $addBanners,
             'bottomBanner' => $bottomBanner,
             'categories' => $categories,
-            'latestPosts' => $latestPosts
+            'latestPosts' => $latestPosts,
+            'parentCategories' => $parentCategories
         ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
-        //
+        $parentCategories = Category::query()
+            ->whereNull('parent_id')
+                ->orderBy('id', 'desc')
+                    ->limit(4)
+                        ->with('categories')
+                            ->get();
+        $filters = request()->input('filters');
+        Product::query()
+            ->orderBy(request()->get('sort_order'), 'desc')
+                ->when($filters, function ($query) use ($filters){
+                    $query->whereHas('volume', function ($query) use ($filters){
+                        $query->whereIn('name', $filters);
+                    });
+                });
+        return view('product-filter', [
+            'parentCategories' => $parentCategories
+        ]);
     }
 }

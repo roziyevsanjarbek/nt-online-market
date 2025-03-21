@@ -7,7 +7,7 @@
 </div>
 
 <!-- Header -->
-<x-navbar></x-navbar>
+<x-navbar :parentCategories="$parentCategories"></x-navbar>
 
 <!-- Hero -->
 <section class="section-hero mb-[50px] max-[1199px]:mb-[35px] py-[50px] relative bg-[#f8f8fb] overflow-hidden">
