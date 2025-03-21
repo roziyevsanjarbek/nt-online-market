@@ -39,6 +39,11 @@ class HomeController extends Controller
                 ->with('postCategory')
                     ->limit(10)
                         ->get();
+        $insPosts = Post::query()
+            ->orderBy('id', 'desc')
+                ->with('insPostCategory')
+                    ->limit(10)
+                        ->get();
         $parentCategories = Category::query()
             ->whereNull('parent_id')
                 ->orderBy('id', 'desc')
@@ -52,13 +57,23 @@ class HomeController extends Controller
             'oneBottomBanners' => $oneBottomBanners,
             'categories' => $categories,
             'latestPosts' => $latestPosts,
-            'parentCategories' => $parentCategories
+            'parentCategories' => $parentCategories,
+            'insPosts' => $insPosts
         ]);
     }
 
 
     public function show(string $id)
     {
+        $parentCategories = Category::query()
+            ->whereNull('parent_id')
+                ->orderBy('id', 'desc')
+                    ->limit(4)
+                        ->with('categories')
+                            ->get();
+        return view('product-filter',[
+            'parentCategories' => $parentCategories
+        ]);
 
     }
 

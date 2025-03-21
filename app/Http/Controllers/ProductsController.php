@@ -36,7 +36,14 @@ class ProductsController extends Controller
      */
     public function show(Product $products)
     {
-        //
+        $filters = request()->input('filters');
+        Product::query()
+            ->orderBy(\request()->get('sort_order'), 'desc')
+                ->whereHas('volume', function ($query) use ($filters) {
+                    $query->whereHas('volume', function ($query) use ($filters) {
+                    $query->where('name', $filters);
+                    });
+                });
     }
 
     /**
