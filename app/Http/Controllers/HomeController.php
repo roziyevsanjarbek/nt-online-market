@@ -80,7 +80,7 @@ class HomeController extends Controller
             ->latest('updated_at')
             ->first();
         $parentCategories = Category::query()
-            ->whereNull('parent_id')
+            ->whereNull('category_id')
             ->orderBy('id', 'desc')
             ->limit(4)
             ->with('categories')
