@@ -36,42 +36,62 @@ class ProductsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $products)
+
+    public function show(Request $request)
     {
-        $filters = request()->input('filters');
-        Product::query()
-            ->orderBy(\request()->get('sort_order'), 'desc')
-                ->whereHas('volume', function ($query) use ($filters) {
-                    $query->whereHas('volumes', function ($query) use ($filters) {
-                    $query->where('name', $filters);
-                    });
-                });
-        $parentCategories = Category::query()
-            ->whereNull('parent_id')
-                ->orderBy('id', 'desc')
-                    ->limit(4)
-                        ->with('categories')
-                            ->get();
-        $productsMenu = Category::query()
-            ->whereNull('parent_id')
-                ->orderBy('id', 'desc')
-                    ->with('categories')
-                        ->get();
-        $products= Product::query()
+        $categories = $request->input('categories');  // Selected category names
+        $weights = $request->input('weights');        // Selected weights
+        $startPrice = $request->input('startPrice');  // Price range start
+        $endPrice = $request->input('endPrice');      // Price range end
+
+        // Get selected categories by name
+        $selectedCategories = Category::when($categories, function ($query) use ($categories) {
+            return $query->whereIn('name', $categories);
+        })->pluck('id')->toArray();
+
+        // Get all child categories in a single query
+        $categoryIds = Category::whereIn('parent_id', $selectedCategories)
+            ->orWhereIn('id', $selectedCategories)
+            ->pluck('id')
+            ->toArray();
+
+        // Get parent categories with their children
+        $parentCategories = Category::whereNull('parent_id')
             ->orderBy('id', 'desc')
-                ->limit(10)
-                    ->get();
-        $categories = Category::query()
+            ->limit(4)
+            ->with('categories')
+            ->get();
+
+        // Get all main categories (for menu)
+        $productsMenu = Category::whereNull('parent_id')
             ->orderBy('id', 'desc')
-                ->with(['images', 'parent'])
-                    ->get();
+            ->with('categories')
+            ->get();
+
+        // Filter products based on selected criteria
+        $products = Product::query()
+            ->when(empty($categoryIds), function ($query) use ($categoryIds) {
+                return $query->whereIn('category_id', $categoryIds);
+            })
+            ->when($weights, function ($query) use ($weights) {
+                $productVolumes = Volume::whereIn('name', $weights)->pluck('id');
+                return $query->whereIn('volume_id', $productVolumes);
+            })
+            ->when($startPrice && $endPrice, function ($query) use ($startPrice, $endPrice) {
+                return $query->whereBetween('price', [$startPrice, $endPrice]);
+            })
+            ->orderBy('id', 'desc')
+            ->limit(10)
+            ->get();
+        $categories = Category::all();
         return view('product-filter', [
             'products' => $products,
             'parentCategories' => $parentCategories,
             'productsMenu' => $productsMenu,
-            'categories' => $categories,
-        ]); // ['products' => $products]
+            'categories' => $categories
+        ]);
     }
+
 
     /**
      * Show the form for editing the specified resource.
