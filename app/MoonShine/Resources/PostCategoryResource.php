@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources;
 
+use Dflydev\DotAccessData\Data;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\PostCategory;
 
@@ -15,7 +16,6 @@ use MoonShine\UI\Fields\ID;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\UI\Fields\Text;
-use \Illuminate\Support\Str;
 
 /**
  * @extends ModelResource<PostCategory>
@@ -24,7 +24,7 @@ class PostCategoryResource extends ModelResource
 {
     protected string $model = PostCategory::class;
 
-    protected string $title = 'PostCategory';
+    protected string $title = 'Categories';
 
     /**
      * @return list<FieldContract>
@@ -34,7 +34,7 @@ class PostCategoryResource extends ModelResource
         return [
             ID::make()->sortable(),
             Text::make('Title', 'name'),
-            Date::make('Updated','updated_at')->sortable(),
+            Date::make('Created At', 'created_at')->sortable(),
         ];
     }
 
@@ -46,7 +46,7 @@ class PostCategoryResource extends ModelResource
         return [
             Box::make([
                 ID::make(),
-                Text::make('Title', 'name'),
+                Text::make('Title', 'name')
             ])
         ];
     }
@@ -59,12 +59,9 @@ class PostCategoryResource extends ModelResource
         return [
             ID::make(),
             Text::make('Title', 'name'),
-            Date::make('Updated','updated_at'),
-            HasMany::make(
-                'Post',
-                'posts',
-                fn($item)=>"$item->name",
-                PostResource::class)->afterFill(fn($field)=>$field->setColumn('category_id')),
+            Date::make('Created At', 'created_at'),
+            HasMany::make('posts', 'posts', fn($item)=>"$item->id. $item->name",
+                PostResource::class),
         ];
     }
 

@@ -1,4 +1,4 @@
-@props(['parentCategories','latestPosts'])
+@props(['parentCategories', 'productsMenu'])
 <header class="bb-header relative z-[5] border-b-[1px] border-solid border-[#eee]">
     <div class="top-header bg-[#3d4750] py-[6px] max-[991px]:hidden">
         <div class="flex flex-wrap justify-between relative items-center mx-auto min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
@@ -152,49 +152,43 @@
                             <i class="ri-menu-2-line"></i>
                         </button>
                         <div class="bb-main-menu relative flex flex-[auto] justify-start max-[991px]:hidden" id="navbarSupportedContent">
-                            <ul class="navbar-nav flex flex-wrap flex-row ">
+                            <ul class="navbar-nav flex flex-wrap flex-row">
                                 <li class="nav-item flex items-center font-Poppins text-[15px] text-[#686e7d] font-light leading-[28px] tracking-[0.03rem] mr-[35px]">
-                                    <a class="nav-link p-[0] font-Poppins leading-[28px] text-[15px] font-medium text-[#3d4750] tracking-[0.03rem] block" href="{{route('home')}}">Home</a>
+                                    <a class="nav-link p-[0] font-Poppins leading-[28px] text-[15px] font-medium text-[#3d4750] tracking-[0.03rem] block" href="index.html">Home</a>
                                 </li>
                                 <li class="nav-item bb-main-dropdown flex items-center mr-[45px]">
                                     <a class="nav-link bb-dropdown-item font-Poppins relative p-[0] leading-[28px] text-[15px] font-medium text-[#3d4750] block tracking-[0.03rem]" href="javascript:void(0)">Categories</a>
                                     <ul class="mega-menu min-w-full transition-all duration-[0.3s] ease-in-out mt-[25px] pl-[30px] absolute top-[40px] z-[16] text-left opacity-[0] invisible left-[0] right-[auto] bg-[#fff] border-[1px] border-solid border-[#eee] flex flex-col rounded-[10px]">
                                         <li class="m-[0] flex items-center">
-                                            @foreach($parentCategories as $parentCategory)
+                                            @foreach($parentCategories as $Categories)
                                                 <ul class="mega-block w-[calc(25%-30px)] mr-[30px] py-[15px]">
-                                                    <li class="menu_title border-b-[1px] border-solid border-[#eee] mb-[10px] pb-[5px] flex items-center leading-[28px]"><a href="javascript:void(0)" class="transition-all duration-[0.3s] ease-in-out font-Poppins h-[auto] text-[#6c7fd8] text-[15px] font-medium tracking-[0.03rem] block py-[10px] leading-[22px] capitalize">{{ $parentCategory->name }}</a></li>
-                                                    @foreach($parentCategory->categories as $childCategory)
-                                                        <li class="flex items-center leading-[28px]"><a href="{{route('shop-page')}}" class="transition-all duration-[0.3s] ease-in-out font-Poppins py-[10px] leading-[22px] text-[14px] font-normal tracking-[0.03rem] text-[#686e7d] hover:text-[#6c7fd8] capitalize">{{ $childCategory->name }}</a></li>
+                                                    <li class="menu_title border-b-[1px] border-solid border-[#eee] mb-[10px] pb-[5px] flex items-center leading-[28px]"><a href="javascript:void(0)" class="transition-all duration-[0.3s] ease-in-out font-Poppins h-[auto] text-[#6c7fd8] text-[15px] font-medium tracking-[0.03rem] block py-[10px] leading-[22px] capitalize">{{$Categories->name}}</a></li>
+                                                    @foreach($Categories->categories as $childCategories)
+                                                        <li class="flex items-center leading-[28px]"><a href="shop-left-sidebar-col-3.html" class="transition-all duration-[0.3s] ease-in-out font-Poppins py-[10px] leading-[22px] text-[14px] font-normal tracking-[0.03rem] text-[#686e7d] hover:text-[#6c7fd8] capitalize">{{$childCategories->name}}</a></li>
                                                     @endforeach
-
                                                 </ul>
                                             @endforeach
                                         </li>
                                     </ul>
                                 </li>
+
                                 <li class="nav-item bb-dropdown flex items-center relative mr-[45px]">
                                     <a class="nav-link bb-dropdown-item font-Poppins relative p-[0] leading-[28px] text-[15px] font-medium text-[#3d4750] block tracking-[0.03rem]" href="javascript:void(0)">Products</a>
                                     <ul class="bb-dropdown-menu min-w-[205px] p-[10px] transition-all duration-[0.3s] ease-in-out mt-[25px] absolute top-[40px] z-[16] text-left opacity-[0] invisible left-[0] right-[auto] bg-[#fff] border-[1px] border-solid border-[#eee] flex flex-col rounded-[10px]">
-                                        <li class="bb-mega-dropdown m-[0] py-[5px] px-[15px] relative flex items-center">
-                                            <a class="bb-mega-item transition-all duration-[0.3s] ease-in-out font-Poppins py-[5px] leading-[22px] text-[14px] font-normal text-[#686e7d] hover:text-[#6c7fd8] capitalize tracking-[0.03rem]" href="javascript:void(0)">Product page</a>
-                                            <ul class="bb-mega-menu transition-all duration-[0.3s] ease-in-out min-w-[220px] p-[10px] mt-[25px] absolute top-[-20px] left-[193px] z-[16] text-left opacity-[0] invisible right-[auto] bg-[#fff] border-[1px] border-solid border-[#eee] flex flex-col rounded-[10px]">
-                                                <li class="m-[0] py-[5px] px-[15px] flex items-center"><a class="dropdown-item transition-all duration-[0.3s] ease-in-out py-[6px] text-[14px] font-normal text-[#686e7d] hover:text-[#6c7fd8] capitalize" href="product-left-sidebar.html">Product left sidebar</a></li>
-                                                <li class="m-[0] py-[5px] px-[15px] flex items-center"><a class="dropdown-item transition-all duration-[0.3s] ease-in-out py-[6px] text-[14px] font-normal text-[#686e7d] hover:text-[#6c7fd8] capitalize" href="product-right-sidebar.html">Product right sidebar</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="bb-mega-dropdown m-[0] py-[5px] px-[15px] relative flex items-center">
-                                            <a class="bb-mega-item transition-all duration-[0.3s] ease-in-out font-Poppins py-[5px] leading-[22px] text-[14px] font-normal text-[#686e7d] hover:text-[#6c7fd8] capitalize tracking-[0.03rem]" href="javascript:void(0)">Product Accordion</a>
-                                            <ul class="bb-mega-menu transition-all duration-[0.3s] ease-in-out min-w-[220px] p-[10px] mt-[25px] absolute top-[-20px] left-[193px] z-[16] text-left opacity-[0] invisible right-[auto] bg-[#fff] border-[1px] border-solid border-[#eee] flex flex-col rounded-[10px]">
-                                                <li class="m-[0] py-[5px] px-[15px] flex items-center"><a class="dropdown-item transition-all duration-[0.3s] ease-in-out py-[6px] text-[14px] font-normal text-[#686e7d] hover:text-[#6c7fd8] capitalize" href="product-accordion-left-sidebar.html">left sidebar</a></li>
-                                                <li class="m-[0] py-[5px] px-[15px] flex items-center"><a class="dropdown-item transition-all duration-[0.3s] ease-in-out py-[6px] text-[14px] font-normal text-[#686e7d] hover:text-[#6c7fd8] capitalize" href="product-accordion-right-sidebar.html">right sidebar</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="m-[0] py-[5px] px-[15px] relative flex items-center">
-                                            <a href="product-full-width.html" class="font-Poppins transition-all duration-[0.3s] ease-in-out py-[5px] leading-[22px] text-[14px] font-normal text-[#686e7d] hover:text-[#6c7fd8] capitalize tracking-[0.03rem]">Product full width</a>
-                                        </li>
-                                        <li class="m-[0] py-[5px] px-[15px] relative flex items-center">
-                                            <a href="product-accordion-full-width.html" class="font-Poppins transition-all duration-[0.3s] ease-in-out py-[5px] leading-[22px] text-[14px] font-normal text-[#686e7d] hover:text-[#6c7fd8] capitalize tracking-[0.03rem]">accordion full width</a>
-                                        </li>
+                                        @foreach($productsMenu as $productMenu)
+                                            <li class="bb-mega-dropdown m-[0] py-[5px] px-[15px] relative flex items-center">
+                                                <a class="bb-mega-item transition-all duration-[0.3s] ease-in-out font-Poppins py-[5px] leading-[22px] text-[14px] font-normal text-[#686e7d] hover:text-[#6c7fd8] capitalize tracking-[0.03rem]" href="{{ $productMenu->link }}">{{ $productMenu->name }}</a>
+                                                @if(empty($productMenu->children))
+                                                    <ul class="bb-mega-menu transition-all duration-[0.3s] ease-in-out min-w-[220px] p-[10px] mt-[25px] absolute top-[-20px] left-[193px] z-[16] text-left opacity-[0] invisible right-[auto] bg-[#fff] border-[1px] border-solid border-[#eee] flex flex-col rounded-[10px]">
+                                                        @foreach($productMenu->categories as $childCategories)
+                                                            <li class="m-[0] py-[5px] px-[15px] flex items-center">
+                                                                <a class="dropdown-item transition-all duration-[0.3s] ease-in-out py-[6px] text-[14px] font-normal text-[#686e7d] hover:text-[#6c7fd8] capitalize" href="{{ $childCategories->link }}">{{ $childCategories->name }}</a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </li>
                                 <li class="nav-item bb-dropdown flex items-center relative mr-[45px]">
@@ -211,21 +205,24 @@
                                     </ul>
                                 </li>
                                 <li class="nav-item bb-dropdown flex items-center relative mr-[45px]">
-                                    <a class="nav-link bb-dropdown-item font-Poppins relative p-[0] leading-[28px] text-[15px] font-medium text-[#3d4750] block tracking-[0.03rem]" href="javascript:void(0)">Blogs</a>
+                                    <a class="nav-link bb-dropdown-item font-Poppins relative p-[0] leading-[28px] text-[15px] font-medium text-[#3d4750] block tracking-[0.03rem]" href="javascript:void(0)">Blog</a>
                                     <ul class="bb-dropdown-menu min-w-[205px] p-[10px] transition-all duration-[0.3s] ease-in-out mt-[25px] absolute top-[40px] z-[16] text-left opacity-[0] invisible left-[0] right-[auto] bg-[#fff] border-[1px] border-solid border-[#eee] flex flex-col rounded-[10px]">
-                                        @foreach($latestPosts as $blogPost)
-                                            <li class="m-[0] py-[5px] px-[15px] flex items-center"><a class="dropdown-item transition-all duration-[0.3s] ease-in-out py-[5px] leading-[22px] text-[14px] font-normal text-[#686e7d] hover:text-[#6c7fd8] capitalize block w-full whitespace-nowrap" href="blog-left-sidebar.html">{{$blogPost->title}}</a></li>
-                                        @endforeach
+                                        <li class="m-[0] py-[5px] px-[15px] flex items-center"><a class="dropdown-item transition-all duration-[0.3s] ease-in-out py-[5px] leading-[22px] text-[14px] font-normal text-[#686e7d] hover:text-[#6c7fd8] capitalize block w-full whitespace-nowrap" href="blog-left-sidebar.html">Left Sidebar</a></li>
+                                        <li class="m-[0] py-[5px] px-[15px] flex items-center"><a class="dropdown-item transition-all duration-[0.3s] ease-in-out py-[5px] leading-[22px] text-[14px] font-normal text-[#686e7d] hover:text-[#6c7fd8] capitalize block w-full whitespace-nowrap" href="blog-right-sidebar.html">Right Sidebar</a></li>
+                                        <li class="m-[0] py-[5px] px-[15px] flex items-center"><a class="dropdown-item transition-all duration-[0.3s] ease-in-out py-[5px] leading-[22px] text-[14px] font-normal text-[#686e7d] hover:text-[#6c7fd8] capitalize block w-full whitespace-nowrap" href="blog-full-width.html">Full Width</a></li>
+                                        <li class="m-[0] py-[5px] px-[15px] flex items-center"><a class="dropdown-item transition-all duration-[0.3s] ease-in-out py-[5px] leading-[22px] text-[14px] font-normal text-[#686e7d] hover:text-[#6c7fd8] capitalize block w-full whitespace-nowrap" href="blog-detail-left-sidebar.html">Detail Left Sidebar</a></li>
+                                        <li class="m-[0] py-[5px] px-[15px] flex items-center"><a class="dropdown-item transition-all duration-[0.3s] ease-in-out py-[5px] leading-[22px] text-[14px] font-normal text-[#686e7d] hover:text-[#6c7fd8] capitalize block w-full whitespace-nowrap" href="blog-detail-right-sidebar.html">Detail Right Sidebar</a></li>
+                                        <li class="m-[0] py-[5px] px-[15px] flex items-center"><a class="dropdown-item transition-all duration-[0.3s] ease-in-out py-[5px] leading-[22px] text-[14px] font-normal text-[#686e7d] hover:text-[#6c7fd8] capitalize block w-full whitespace-nowrap" href="blog-detail-full-width.html">Detail Full Width</a></li>
                                     </ul>
                                 </li>
                                 <li class="nav-item flex items-center">
                                     <a class="nav-link font-Poppins  p-[0] leading-[28px] text-[15px] font-medium tracking-[0.03rem] text-[#3d4750] flex" href="offer.html">
                                         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0" y="0" viewBox="0 0 64 64" style="enable-background:new 0 0 512 512" xml:space="preserve" class="w-[20px] h-[25px] mr-[5px] leading-[18px] align-middle">
-                                                <g>
-                                                    <path d="M10 16v22c0 .3.1.6.2.8.3.6 6.5 13.8 21 20h.2c.2 0 .3.1.5.1s.3 0 .5-.1h.2c14.5-6.2 20.8-19.4 21-20 .1-.3.2-.5.2-.8V16c0-.9-.6-1.7-1.5-1.9-7.6-1.9-19.3-9.6-19.4-9.7-.1-.1-.2-.1-.4-.2-.1 0-.1 0-.2-.1h-.9c-.1 0-.2.1-.3.1-.1.1-.2.1-.4.2s-11.8 7.8-19.4 9.7c-.7.2-1.3 1-1.3 1.9zm4 1.5c6.7-2.1 15-7.2 18-9.1 3 1.9 11.3 7 18 9.1v20c-1.1 2.1-6.7 12.1-18 17.3-11.3-5.2-16.9-15.2-18-17.3z" fill="#000000" opacity="1" data-original="#000000" class="fill-[#6c7fd8]"></path>
-                                                    <path d="M28.6 38.4c.4.4.9.6 1.4.6s1-.2 1.4-.6l9.9-9.9c.8-.8.8-2 0-2.8s-2-.8-2.8 0L30 34.2l-4.5-4.5c-.8-.8-2-.8-2.8 0s-.8 2 0 2.8z" fill="#000000" opacity="1" data-original="#000000" class="fill-[#6c7fd8]"></path>
-                                                </g>
-                                            </svg>
+                                            <g>
+                                                <path d="M10 16v22c0 .3.1.6.2.8.3.6 6.5 13.8 21 20h.2c.2 0 .3.1.5.1s.3 0 .5-.1h.2c14.5-6.2 20.8-19.4 21-20 .1-.3.2-.5.2-.8V16c0-.9-.6-1.7-1.5-1.9-7.6-1.9-19.3-9.6-19.4-9.7-.1-.1-.2-.1-.4-.2-.1 0-.1 0-.2-.1h-.9c-.1 0-.2.1-.3.1-.1.1-.2.1-.4.2s-11.8 7.8-19.4 9.7c-.7.2-1.3 1-1.3 1.9zm4 1.5c6.7-2.1 15-7.2 18-9.1 3 1.9 11.3 7 18 9.1v20c-1.1 2.1-6.7 12.1-18 17.3-11.3-5.2-16.9-15.2-18-17.3z" fill="#000000" opacity="1" data-original="#000000" class="fill-[#6c7fd8]"></path>
+                                                <path d="M28.6 38.4c.4.4.9.6 1.4.6s1-.2 1.4-.6l9.9-9.9c.8-.8.8-2 0-2.8s-2-.8-2.8 0L30 34.2l-4.5-4.5c-.8-.8-2-.8-2.8 0s-.8 2 0 2.8z" fill="#000000" opacity="1" data-original="#000000" class="fill-[#6c7fd8]"></path>
+                                            </g>
+                                        </svg>
                                         Offers
                                     </a>
                                 </li>
@@ -239,10 +236,10 @@
                                 </svg>
                                 <div class="custom-select transition-all duration-[0.3s] ease-in-out w-full h-full pr-[15px] text-[#777] flex items-center justify-between text-[14px] relative">
                                     <select>
-                                        <option value="option1">Surat</option>
-                                        <option value="option2">Delhi</option>
-                                        <option value="option3">Rajkot</option>
-                                        <option value="option4">Udaipur</option>
+                                        <option value="option1">Tashkent</option>
+                                        <option value="option2">Samarkhand</option>
+                                        <option value="option3">Fergana</option>
+                                        <option value="option4">Bukhara</option>
                                     </select>
                                 </div>
                             </div>
@@ -262,7 +259,7 @@
             <div class="bb-menu-content">
                 <ul>
                     <li class="relative">
-                        <a href="{{route('home')}}" class="transition-all duration-[0.3s] ease-in-out mb-[12px] p-[12px] block font-Poppins capitalize text-[#686e7d] border-[1px] border-solid border-[#eee] rounded-[10px] text-[15px] font-medium leading-[28px] tracking-[0.03rem]">Home</a>
+                        <a href="index.html" class="transition-all duration-[0.3s] ease-in-out mb-[12px] p-[12px] block font-Poppins capitalize text-[#686e7d] border-[1px] border-solid border-[#eee] rounded-[10px] text-[15px] font-medium leading-[28px] tracking-[0.03rem]">Home</a>
                     </li>
                     <li class="relative">
                         <a href="javascript:void(0)" class="transition-all duration-[0.3s] ease-in-out mb-[12px] p-[12px] block font-Poppins capitalize text-[#686e7d] border-[1px] border-solid border-[#eee] rounded-[10px] text-[15px] font-medium leading-[28px] tracking-[0.03rem]">Categories</a>

@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources;
 
+use MoonShine\Laravel\Fields\Relationships\BelongsTo;
+use MoonShine\Laravel\Fields\Relationships\HasMany;
+use \MoonShine\UI\Fields\Text;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
 
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\ID;
-use MoonShine\UI\Fields\Text;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\UI\ComponentContract;
-use MoonShine\Laravel\Fields\Relationships\BelongsTo;
 
 /**
  * @extends ModelResource<Category>
@@ -31,7 +32,9 @@ class CategoryResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Name', 'name'),
+            Text::make('name'),
+            Text::make('parent_id')->nullable(),
+            HasMany::make('Images','images')
         ];
     }
 
@@ -42,15 +45,13 @@ class CategoryResource extends ModelResource
     {
         return [
             Box::make([
-//                ID::make(),
-                Text::make('Name','name'),
-                BelongsTo::make(
-                    'Category',
-                    'parent',
-                    fn($item)=>"$item->id",
-                    CategoryResource::class)
-                    ->afterFill(fn($field) => $field->setColumn('id'))->nullable(),
-            ])
+                ID::make(),
+                Text::make('name'),
+                BelongsTo::make('parent', 'parent', fn($item)=>"$item->id. $item->name",CategoryResource::class)->nullable(),
+
+            ]),
+            HasMany::make('Images','images')
+
         ];
     }
     /**
@@ -60,7 +61,13 @@ class CategoryResource extends ModelResource
     {
         return [
             ID::make(),
-            Text::make('Name','name'),
+            Text::make('name'),
+            Text::make('parent_id')->nullable(),
+            BelongsTo::make('parent', 'parent', fn($item)=>"$item->id. $item->name",CategoryResource::class)->nullable(),
+            HasMany::make('Products', 'products', fn($item)=>"$item->id. $item->name",
+                ProductResource::class),
+            HasMany::make('Images','images')
+
         ];
     }
 

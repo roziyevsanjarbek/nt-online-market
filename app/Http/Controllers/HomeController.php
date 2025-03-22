@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use App\Models\Category;
-use App\Models\Posts;
+use App\Models\Post;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -15,82 +15,76 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $top_banners = Banner::query()
+        $topBanners = Banner::query()
             ->where('position', 'top')
-            ->get();
-
-        $midBanner = Banner::where('position', 'middle')
-            ->latest('updated_at')
-            ->first();
-
-        $addBanners = Banner::where('position','ad')
-            ->latest('updated_at')
-            ->limit(2)
-            ->get();
-
-        $bottomBanner = Banner::where('position','bottom')
-            ->latest('updated_at')
-            ->first();
-
+                ->get();
+        $midBanner = Banner::query()
+            ->where('position', 'middle')
+                ->latest('updated_at')
+                    ->first();
+        $bottomBanner = Banner::query()
+            ->where('position', 'bottom')
+                ->latest('updated_at')
+                    ->first();
+        $oneBottomBanners = Banner::query()
+            ->where('position', 'one_bottom')
+                ->latest('updated_at')
+                    ->limit(2)
+                        ->get();
         $categories = Category::query()
             ->orderBy('id', 'desc')
-            ->with(['images', 'parent'])
-            ->get();
-
-        $latestPosts = Posts::query()
+                ->with(['images', 'parent'])
+                    ->get();
+        $latestPosts = Post::query()
             ->orderBy('id', 'desc')
-            ->with('postCategory')
-            ->limit(10)
-            ->get();
-
+                ->with('postCategory')
+                    ->limit(10)
+                        ->get();
+        $insPosts = Post::query()
+            ->orderBy('id', 'desc')
+                ->with('insPostCategory')
+                    ->limit(10)
+                        ->get();
         $parentCategories = Category::query()
-            ->whereNull('category_id') // "parent_id" emas, "category_id" ishlatilmoqda
+            ->whereNull('parent_id')
+                ->orderBy('id', 'desc')
+                    ->limit(4)
+                        ->with('categories')
+                            ->get();
+        $productsMenu = Category::query()
+            ->whereNull('parent_id')
+                ->orderBy('id', 'desc')
+                    ->with('categories')
+                        ->get();
+        $products= Product::query()
             ->orderBy('id', 'desc')
-            ->limit(4)
-            ->with('categories')
-            ->get();
-
-        return view('home', [
-            'top_banners' => $top_banners,
+                ->limit(10)
+                    ->get();
+        return view('home',[
+            'topBanners' => $topBanners,
             'midBanner' => $midBanner,
-            'addBanners' => $addBanners,
             'bottomBanner' => $bottomBanner,
+            'oneBottomBanners' => $oneBottomBanners,
             'categories' => $categories,
             'latestPosts' => $latestPosts,
             'parentCategories' => $parentCategories,
+            'insPosts' => $insPosts,
+            'products' => $products,
+            'productsMenu' => $productsMenu,
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show()
+
+    public function show(string $id)
     {
-        $products = Product::all();
-        $categories = Category::query()
-            ->orderBy('id', 'desc')
-            ->with(['images', 'parent'])
-            ->get();
-        $latestPosts = Posts::query()
-            ->orderBy('id', 'desc')
-            ->with('postCategory')
-            ->limit(10)
-            ->get();
-        $midBanners = Banner::query()->where('position', 'middle')
-            ->latest('updated_at')
-            ->first();
         $parentCategories = Category::query()
-            ->whereNull('category_id')
-            ->orderBy('id', 'desc')
-            ->limit(4)
-            ->with('categories')
-            ->get();
-        return view('shop-page', [
-            'parentCategories' => $parentCategories,
-            'midBanner' => $midBanners,
-            'latestPosts' => $latestPosts,
-            'categories' => $categories,
-            'products' => $products,
+            ->whereNull('parent_id')
+                ->orderBy('id', 'desc')
+                    ->limit(4)
+                        ->with('categories')
+                            ->get();
+        return view('product-filter',[
+            'parentCategories' => $parentCategories
         ]);
     }
 }

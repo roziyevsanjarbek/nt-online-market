@@ -6,20 +6,32 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $fillable = ['name', 'category_id', 'price', 'old_price', 'weight', 'color', 'rating'];
-    protected $guarded = ['id'];
+
+    protected $fillable =
+        [
+            'product_id',
+            'name',
+            'description',
+            'price',
+            'sale_price',
+            'category_id',
+            'product_volume',
+            'stock_quantity',
+        ];
 
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+
     }
 
-    public function volume ()
+    public function volume()
     {
-        return $this->belongsTo(ProductVolume::class, 'volume_id');
+        return $this->belongsTo(Volume::class, 'volume_id', 'id');
     }
 
-    public function images (){
-        return $this->morphMany(Image::class, 'imageable', 'imageable_type', 'imageable_id');
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
     }
 }

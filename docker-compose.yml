@@ -40,6 +40,14 @@ services:
             - market_network  # ❌ Noto‘g‘ri "marker_network" emas, "market_network" bo‘lishi kerak!
         ports:
             -   "3307:3306"
+    market_redis:
+        container_name: market_redis
+        image: redis:alpine
+        restart: unless-stopped
+        ports:
+            - "6380:6379"
+        networks:
+            - market_network
 
     market_node:
         container_name: market_node
