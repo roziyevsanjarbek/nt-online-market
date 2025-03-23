@@ -48,6 +48,7 @@ class ProductResource extends ModelResource
             BelongsTo::make('Volume', 'volume', fn($item) => $item->name,
                 VolumeResource::class
             )
+
         ];
     }
 
