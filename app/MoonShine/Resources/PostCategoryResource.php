@@ -73,6 +73,8 @@ class PostCategoryResource extends ModelResource
      */
     protected function rules(mixed $item): array
     {
-        return [];
+        return [
+            'title' => ['required', 'string', 'max:255', 'regex:/^[\p{L}\p{P}\p{Zs}]+$/u'],
+        ];
     }
 }
