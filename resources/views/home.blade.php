@@ -41,9 +41,10 @@
                                             <p class="mb-[20px] font-Poppins text-[18px] text-[#777] font-light leading-[28px] tracking-[0.03rem] max-[1199px]:mb-[10px] max-[1199px]:text-[16px]">
                                                 {{ $banner->description }}</p>
                                             <h1 class="mb-[20px] font-quicksand text-[50px] text-[#3d4750] font-bold tracking-[0.03rem] leading-[1.2] max-[1199px]:mb-[10px] max-[1199px]:text-[38px] max-[991px]:text-center max-[991px]:text-[45px] max-[767px]:text-[40px] max-[575px]:text-[35px] max-[420px]:text-[30px] max-[360px]:text-[28px]">{!! $title !!}</h1>
-                                            <a href="shop-left-sidebar-col-3.html"
+                                            <a href="{{ route('filter') }}"
                                                class="bb-btn-1 transition-all duration-[0.3s] ease-in-out font-Poppins leading-[28px] tracking-[0.03rem] py-[8px] px-[20px] text-[14px] font-normal text-[#3d4750] bg-transparent rounded-[10px] border-[1px] border-solid border-[#3d4750] max-[1199px]:py-[3px] max-[1199px]:px-[15px] hover:bg-[#6c7fd8] hover:border-[#6c7fd8] hover:text-[#fff]">Shop
-                                                Now</a>
+                                                Now
+                                            </a>
                                         </div>
                                     </div>
                                     <div
@@ -128,7 +129,7 @@
 
                                 <div class="category-sub-contact">
                                     <h5 class="mb-[2px] text-[16px] font-quicksand text-[#3d4750] font-semibold tracking-[0.03rem] leading-[1.2]">
-                                        <a href="shop-left-sidebar-col-3.html"
+                                        <a href="{{ route('filter') }}"
                                            class="font-Poppins text-[16px] font-medium leading-[1.2] tracking-[0.03rem] text-[#3d4750] capitalize">
                                             {{$category->name}}
                                         </a>
@@ -216,7 +217,7 @@
                                 </div>
                                 <div class="bb-pro-contact p-[20px]">
                                     <div class="bb-pro-subtitle mb-[8px] flex flex-wrap justify-between">
-                                        <a href="shop-left-sidebar-col-3.html"
+                                        <a href="{{ route('filter') }}"
                                            class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[13px] leading-[16px] text-[#777] font-light tracking-[0.03rem]">Chocos</a>
                                         <span class="bb-pro-rating">
                                                 <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[18px] text-[#fea99a]"></i>
@@ -227,7 +228,7 @@
                                             </span>
                                     </div>
                                     <h4 class="bb-pro-title mb-[8px] text-[16px] leading-[18px]">
-                                        <a href="product-left-sidebar.html"
+                                        <a href="{{ route('filter') }}"
                                            class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">Mixed
                                             Fruits Chocolates Pack</a>
                                     </h4>
@@ -292,7 +293,7 @@
                                 </div>
                                 <div class="bb-pro-contact p-[20px]">
                                     <div class="bb-pro-subtitle mb-[8px] flex flex-wrap justify-between">
-                                        <a href="shop-left-sidebar-col-3.html"
+                                        <a href="{{ route('filter') }}"
                                            class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[13px] leading-[16px] text-[#777] font-light tracking-[0.03rem]">Juice</a>
                                         <span class="bb-pro-rating">
                                                 <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[18px] text-[#fea99a]"></i>
@@ -303,7 +304,7 @@
                                             </span>
                                     </div>
                                     <h4 class="bb-pro-title mb-[8px] text-[16px] leading-[18px]">
-                                        <a href="product-left-sidebar.html"
+                                        <a href="{{ route('filter') }}"
                                            class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">Organic
                                             Apple Juice Pack</a>
                                     </h4>
@@ -363,7 +364,7 @@
                                 </div>
                                 <div class="bb-pro-contact p-[20px]">
                                     <div class="bb-pro-subtitle mb-[8px] flex flex-wrap justify-between">
-                                        <a href="shop-left-sidebar-col-3.html"
+                                        <a href="{{ route('filter') }}"
                                            class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[13px] leading-[16px] text-[#777] font-light tracking-[0.03rem]">Juice</a>
                                         <span class="bb-pro-rating">
                                                 <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[18px] text-[#fea99a]"></i>
@@ -374,7 +375,7 @@
                                             </span>
                                     </div>
                                     <h4 class="bb-pro-title mb-[8px] text-[16px] leading-[18px]">
-                                        <a href="product-left-sidebar.html"
+                                        <a href="{{ route('filter') }}"
                                            class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">Mixed
                                             Almond nuts juice Pack</a>
                                     </h4>
@@ -439,7 +440,7 @@
                                 </div>
                                 <div class="bb-pro-contact p-[20px]">
                                     <div class="bb-pro-subtitle mb-[8px] flex flex-wrap justify-between">
-                                        <a href="shop-left-sidebar-col-3.html"
+                                        <a href="{{ route('filter') }}"
                                            class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[13px] leading-[16px] text-[#777] font-light tracking-[0.03rem]">Fruits</a>
                                         <span class="bb-pro-rating">
                                                 <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[18px] text-[#fea99a]"></i>
@@ -451,7 +452,7 @@
                                     </span>
                                     </div>
                                     <h4 class="bb-pro-title mb-[8px] text-[16px] leading-[18px]">
-                                        <a href="product-left-sidebar.html"
+                                        <a href="{{ route('filter') }}"
                                            class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">Fresh
                                             Mango Slice Juice</a>
                                     </h4>
@@ -498,7 +499,7 @@
                                 {!! $title !!}</h5>
                             <p class="font-Poppins text-[16px] font-light leading-[28px] tracking-[0.03rem] text-[#686e7d] mb-[15px] max-[480px]:mb-[8px] max-[480px]:text-[14px]">
                                 {{$banner->description}}</p>
-                            <a href="shop-left-sidebar-col-3.html"
+                            <a href="{{ route('filter') }}"
                                class="bb-btn-1 transition-all duration-[0.3s] ease-in-out font-Poppins leading-[28px] tracking-[0.03rem] py-[5px] px-[15px] text-[14px] font-normal text-[#3d4750] bg-transparent rounded-[10px] border-[1px] border-solid border-[#3d4750] hover:bg-[#6c7fd8] hover:border-[#6c7fd8] hover:text-[#fff]">Shop
                                 Now</a>
                         </div>
@@ -636,7 +637,7 @@
                                     </div>
                                     <div class="bb-pro-contact p-[20px]">
                                         <div class="bb-pro-subtitle mb-[8px] flex flex-wrap justify-between">
-                                            <a href="shop-left-sidebar-col-3.html"
+                                            <a href="{{ route('filter') }}"
                                                class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[13px] leading-[16px] text-[#777] font-light tracking-[0.03rem]">Snacks</a>
                                             <span class="bb-pro-rating">
                                                     <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[18px] text-[#fea99a]"></i>
@@ -647,7 +648,7 @@
                                                 </span>
                                         </div>
                                         <h4 class="bb-pro-title mb-[8px] text-[16px] leading-[18px]">
-                                            <a href="product-left-sidebar.html"
+                                            <a href="{{ route('filter') }}"
                                                class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">Ground
                                                 Nuts Oil
                                                 Pack</a></h4>
@@ -721,7 +722,7 @@
                                     </div>
                                     <div class="bb-pro-contact p-[20px]">
                                         <div class="bb-pro-subtitle mb-[8px] flex flex-wrap justify-between">
-                                            <a href="shop-left-sidebar-col-3.html"
+                                            <a href="{{ route('filter') }}"
                                                class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[13px] leading-[16px] text-[#777] font-light tracking-[0.03rem]">Snacks</a>
                                             <span class="bb-pro-rating">
                                                     <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[18px] text-[#fea99a]"></i>
@@ -732,7 +733,7 @@
                                                 </span>
                                         </div>
                                         <h4 class="bb-pro-title mb-[8px] text-[16px] leading-[18px]">
-                                            <a href="product-left-sidebar.html"
+                                            <a href="{{ route('filter') }}"
                                                class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">Ground
                                                 Nuts Oil
                                                 Pack</a></h4>
@@ -806,7 +807,7 @@
                                     </div>
                                     <div class="bb-pro-contact p-[20px]">
                                         <div class="bb-pro-subtitle mb-[8px] flex flex-wrap justify-between">
-                                            <a href="shop-left-sidebar-col-3.html"
+                                            <a href="{{ route('filter') }}"
                                                class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[13px] leading-[16px] text-[#777] font-light tracking-[0.03rem]">Snacks</a>
                                             <span class="bb-pro-rating">
                                                     <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[18px] text-[#fea99a]"></i>
@@ -891,7 +892,7 @@
                                     </div>
                                     <div class="bb-pro-contact p-[20px]">
                                         <div class="bb-pro-subtitle mb-[8px] flex flex-wrap justify-between">
-                                            <a href="shop-left-sidebar-col-3.html"
+                                            <a href="{{ route('filter') }}"
                                                class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[13px] leading-[16px] text-[#777] font-light tracking-[0.03rem]">Snacks</a>
                                             <span class="bb-pro-rating">
                                                     <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[18px] text-[#fea99a]"></i>
