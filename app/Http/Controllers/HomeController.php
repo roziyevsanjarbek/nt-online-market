@@ -60,7 +60,7 @@ class HomeController extends Controller
             ->orderBy('id', 'desc')
                 ->limit(10)
                     ->get();
-        return view('home',[
+        return view('welcome',[
             'topBanners' => $topBanners,
             'midBanner' => $midBanner,
             'bottomBanner' => $bottomBanner,
