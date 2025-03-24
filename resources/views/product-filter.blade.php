@@ -7,7 +7,6 @@
 
 <!-- Header -->
 <x-navbar :parentCategories="$parentCategories" :productsMenu="$productsMenu"></x-navbar>
-
 <!-- Breadcrumb -->
 <section class="section-breadcrumb mb-[50px] max-[1199px]:mb-[35px] border-b-[1px] border-solid border-[#eee] bg-[#f8f8fb]">
     <div class="flex flex-wrap justify-between relative items-center mx-auto min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
@@ -287,9 +286,9 @@
                                         </span>
                                         <a href="javascript:void(0)">
                                             <div class="inner-img relative block overflow-hidden pointer-events-none rounded-t-[20px]">
-                                                <img class="main-img transition-all duration-[0.3s] ease-in-out w-full" src="assets/img/new-product/1.jpg"
+                                                <img class="main-img transition-all duration-[0.3s] ease-in-out w-full" src="{{\Illuminate\Support\Facades\Storage::url($product->images->first()->path)}}"
                                                      alt="product-1">
-                                                <img class="hover-img transition-all duration-[0.3s] ease-in-out absolute z-[2] top-[0] left-[0] opacity-[0] w-full" src="assets/img/new-product/back-1.jpg"
+                                                <img class="hover-img transition-all duration-[0.3s] ease-in-out absolute z-[2] top-[0] left-[0] opacity-[0] w-full" src="{{\Illuminate\Support\Facades\Storage::url($product->images->first()->path)}}"
                                                      alt="product-1">
                                             </div>
                                         </a>
@@ -350,27 +349,58 @@
                         @endforeach
 
 
-
                         <div class="w-full px-[12px]">
-                            <div class="bb-pro-pagination mb-[24px] flex justify-between max-[575px]:flex-col max-[575px]:items-center">
-                                <p class="font-Poppins text-[15px] text-[#686e7d] font-light leading-[28px] tracking-[0.03rem] max-[575px]:mb-[10px]">Showing 1-12 of 21 item(s)</p>
+                            <div
+                                class="bb-pro-pagination mb-[24px] flex justify-between max-[575px]:flex-col max-[575px]:items-center">
+                                <p class="font-Poppins text-[15px] text-[#686e7d] font-light leading-[28px] tracking-[0.03rem] max-[575px]:mb-[10px]">
+                                    Showing {{ $products->firstItem() }}-{{ $products->lastItem() }} of {{ $products->total() }} item(s)</p>
                                 <ul class="flex">
-                                    <li class="leading-[28px] mr-[6px] active">
-                                        <a href="javascript:void(0)" class="transition-all duration-[0.3s] ease-in-out w-[32px] h-[32px] font-light text-[#777] leading-[32px] bg-[#f8f8fb] font-Poppins tracking-[0.03rem] text-[15px] flex text-center align-top justify-center items-center rounded-[10px] border-[1px] border-solid border-[#eee] hover:bg-[#3d4750] hover:text-[#fff]">1</a>
-                                    </li>
-                                    <li class="leading-[28px] mr-[6px]">
-                                        <a href="javascript:void(0)" class="transition-all duration-[0.3s] ease-in-out w-[32px] h-[32px] font-light text-[#777] leading-[32px] bg-[#f8f8fb] font-Poppins tracking-[0.03rem] text-[15px] flex text-center align-top justify-center items-center rounded-[10px] border-[1px] border-solid border-[#eee] hover:bg-[#3d4750] hover:text-[#fff]">2</a>
-                                    </li>
-                                    <li class="leading-[28px] mr-[6px]">
-                                        <a href="javascript:void(0)" class="transition-all duration-[0.3s] ease-in-out w-[32px] h-[32px] font-light text-[#777] leading-[32px] bg-[#f8f8fb] font-Poppins tracking-[0.03rem] text-[15px] flex text-center align-top justify-center items-center rounded-[10px] border-[1px] border-solid border-[#eee] hover:bg-[#3d4750] hover:text-[#fff]">3</a>
-                                    </li>
-                                    <li class="leading-[28px] mr-[6px]">
-                                        <a href="javascript:void(0)" class="transition-all duration-[0.3s] ease-in-out w-[32px] h-[32px] font-light text-[#777] leading-[32px] bg-[#f8f8fb] font-Poppins tracking-[0.03rem] text-[15px] flex text-center align-top justify-center items-center rounded-[10px] border-[1px] border-solid border-[#eee] hover:bg-[#3d4750] hover:text-[#fff]">4</a>
-                                    </li>
-                                    <li class="leading-[28px]">
-                                        <a href="javascript:void(0)" class="next transition-all duration-[0.3s] ease-in-out w-[auto] h-[32px] px-[13px] font-light text-[#fff] leading-[30px] bg-[#3d4750] font-Poppins tracking-[0.03rem] text-[15px] flex text-center align-top justify-center items-center rounded-[10px] border-[1px] border-solid border-[#eee]">Next <i class="ri-arrow-right-s-line transition-all duration-[0.3s] ease-in-out ml-[10px] text-[16px] w-[8px] text-[#fff]"></i></a>
-                                    </li>
+                                    {{-- Previous Page Link --}}
+                                    @if ($products->onFirstPage())
+                                        <li class="leading-[28px] mr-[6px] opacity-50 pointer-events-none">
+                                            <span
+                                                class="transition-all duration-[0.3s] ease-in-out w-[auto] h-[32px] px-[13px] font-light text-[#fff] leading-[30px] bg-gray-400 font-Poppins tracking-[0.03rem] text-[15px] flex text-center align-top justify-center items-center rounded-[10px] border-[1px] border-solid border-[#eee]">
+                                                    Prev
+                                            </span>
+                                        </li>
+                                    @else
+                                        <li class="leading-[28px] mr-[6px]">
+                                            <a href="{{ $products->previousPageUrl() }}"
+                                               class="transition-all duration-[0.3s] ease-in-out w-[auto] h-[32px] px-[13px] font-light text-[#fff] leading-[30px] bg-[#3d4750] font-Poppins tracking-[0.03rem] text-[15px] flex text-center align-top justify-center items-center rounded-[10px] border-[1px] border-solid border-[#eee]">
+                                                Prev
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                    {{-- Pagination Links --}}
+                                    @foreach ($products->links()->elements[0] as $page => $url)
+                                        <li class="leading-[28px] mr-[6px] {{ $products->currentPage() == $page ? 'active' : '' }}">
+                                            <a href="{{ $url }}"
+                                               class="transition-all duration-[0.3s] ease-in-out w-[32px] h-[32px] font-light {{ $products->currentPage() == $page ? 'text-white bg-[#3d4750]' : 'text-[#777] bg-[#f8f8fb]' }} leading-[32px] font-Poppins tracking-[0.03rem] text-[15px] flex text-center align-top justify-center items-center rounded-[10px] border-[1px] border-solid border-[#eee] hover:bg-[#3d4750] hover:text-[#fff]">
+                                                {{ $page }}
+                                            </a>
+                                        </li>
+                                    @endforeach
+
+                                    {{-- Next Page Link --}}
+                                    @if ($products->hasMorePages())
+                                        <li class="leading-[28px]">
+                                            <a href="{{ $products->nextPageUrl() }}"
+                                               class="next transition-all duration-[0.3s] ease-in-out w-[auto] h-[32px] px-[13px] font-light text-[#fff] leading-[30px] bg-[#3d4750] font-Poppins tracking-[0.03rem] text-[15px] flex text-center align-top justify-center items-center rounded-[10px] border-[1px] border-solid border-[#eee]">
+                                                Next <i
+                                                    class="ri-arrow-right-s-line transition-all duration-[0.3s] ease-in-out ml-[10px] text-[16px] w-[8px] text-[#fff]"></i>
+                                            </a>
+                                        </li>
+                                    @else
+                                        <li class="leading-[28px] opacity-50 pointer-events-none">
+                                            <span
+                                                class="transition-all duration-[0.3s] ease-in-out w-[auto] h-[32px] px-[13px] font-light text-[#fff] leading-[30px] bg-gray-400 font-Poppins tracking-[0.03rem] text-[15px] flex text-center align-top justify-center items-center rounded-[10px] border-[1px] border-solid border-[#eee]">
+                                                Next
+                                            </span>
+                                        </li>
+                                    @endif
                                 </ul>
+
                             </div>
                         </div>
                     </div>
