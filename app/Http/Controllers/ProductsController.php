@@ -86,8 +86,8 @@ class ProductsController extends Controller
                 return $query->whereBetween('price', [$startPrice, $endPrice]);
             })
             ->orderBy('id', 'desc')
-            ->limit(10)
-            ->get();
+            ->with('images')
+            ->paginate(10);
         $categories = Category::all();
 
         $images = Image::paginate(1);
