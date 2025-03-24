@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\MoonShine\Resources;
 
 
-use App\Models\ProductVolume;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Product;
 
@@ -39,16 +38,17 @@ class ProductResource extends ModelResource
             Text::make('name')->sortable(),
             Text::make('description')->sortable(),
             Text::make('price')->sortable(),
-            Text::make('sale_price')->sortable(),
+            Text::make('Sale Price','sale_price')->sortable(),
             BelongsTo::make(
                 'Category ID and Name',
                 'category',
                 fn($item)=>"$item->name",
                 CategoryResource::class),
-            Number::make('quantity'),
-            BelongsTo::make('Volume', 'volume', fn($item) => $item->id . '-'. $item->name,
-                ProductVolumeResource::class
+            Number::make('Quantity', 'stock_quantity'),
+            BelongsTo::make('Volume', 'volume', fn($item) => $item->name,
+                VolumeResource::class
             )
+
         ];
     }
 
@@ -62,15 +62,15 @@ class ProductResource extends ModelResource
             Text::make('name')->sortable(),
             Text::make('description')->sortable(),
             Text::make('price')->sortable(),
-            Text::make('sale_price')->sortable(),
+            Text::make('Sale Price','sale_price')->sortable(),
             BelongsTo::make(
                 'Category ID and Name',
                 'category',
                 fn($item)=>"$item->name",
                 CategoryResource::class),
-            Number::make('quantity'),
-            BelongsTo::make('Volume', 'volume', fn($item) => $item->id . '-'. $item->name,
-                ProductVolumeResource::class
+            Number::make('Quantity', 'stock_quantity'),
+            BelongsTo::make('Volume', 'volume', fn($item) => $item->name,
+                VolumeResource::class
             )
         ];
     }
@@ -85,15 +85,15 @@ class ProductResource extends ModelResource
             Text::make('name')->sortable(),
             Text::make('description')->sortable(),
             Text::make('price')->sortable(),
-            Text::make('sale_price')->sortable(),
+            Text::make('Sale Price','sale_price')->sortable(),
             BelongsTo::make(
                 'Category ID and Name',
                 'category',
                 fn($item)=>"$item->name",
                 CategoryResource::class),
-            Number::make('quantity'),
-            BelongsTo::make('Volume', 'volume', fn($item) => $item->id . '-'. $item->name,
-                ProductVolumeResource::class
+            Number::make('Quantity', 'stock_quantity'),
+            BelongsTo::make('Volume', 'volume', fn($item) => $item->name,
+                VolumeResource::class
             )
         ];
     }

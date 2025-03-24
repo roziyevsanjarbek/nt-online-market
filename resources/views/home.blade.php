@@ -1,4 +1,4 @@
-
+@props(['parentCategories', 'productsMenu'])
 <x-header title="Online Market"></x-header>
 
 
@@ -10,6 +10,7 @@
 </div>
 
 <!-- Header -->
+
 <x-navbar :parentCategories="$parentCategories" :productsMenu="$productsMenu"></x-navbar>
 <!-- Hero -->
 <section class="section-hero mb-[50px] max-[1199px]:mb-[35px] py-[50px] relative bg-[#f8f8fb] overflow-hidden">
