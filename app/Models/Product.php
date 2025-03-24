@@ -15,7 +15,7 @@ class Product extends Model
             'price',
             'sale_price',
             'category_id',
-            'product_volume',
+            'volume_id',
             'stock_quantity',
         ];
 

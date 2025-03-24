@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Image;
 use App\Models\Product;
+
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Volume;
+use Illuminate\Support\Facades\DB;
 
 class ProductsController extends Controller
 {
@@ -14,7 +18,9 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
+        return view('user.index', [
+            'users' => DB::table('users')->paginate(15)
+        ]);
     }
 
     /**
@@ -84,11 +90,15 @@ class ProductsController extends Controller
             ->limit(10)
             ->get();
         $categories = Category::all();
+
+        $images = Image::paginate(1);
+
         return view('product-filter', [
             'products' => $products,
             'parentCategories' => $parentCategories,
             'productsMenu' => $productsMenu,
-            'categories' => $categories
+            'categories' => $categories,
+            'images'=>$images
         ]);
     }
 

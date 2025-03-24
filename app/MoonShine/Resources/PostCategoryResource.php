@@ -73,6 +73,6 @@ class PostCategoryResource extends ModelResource
      */
     protected function rules(mixed $item): array
     {
-        return [];
+        return [ ];
     }
 }

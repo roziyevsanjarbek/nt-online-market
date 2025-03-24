@@ -33,7 +33,7 @@ class CategoryResource extends ModelResource
         return [
             ID::make()->sortable(),
             Text::make('name'),
-            Text::make('parent_id')->nullable(),
+            Text::make('parent')->nullable(),
             HasMany::make('Images','images')
         ];
     }
@@ -79,6 +79,8 @@ class CategoryResource extends ModelResource
      */
     protected function rules(mixed $item): array
     {
-        return [];
+        return [
+            'name' => ['required', 'string', 'max:255', 'regex:/^[\p{L}\p{P}\p{Zs}]+$/u'],
+        ];
     }
 }
