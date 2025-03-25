@@ -10,6 +10,7 @@ use App\Models\Post;
 
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
 use MoonShine\Laravel\Resources\ModelResource;
+use MoonShine\TinyMce\Fields\TinyMce;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\Date;
 use MoonShine\UI\Fields\ID;
@@ -55,10 +56,7 @@ class PostResource extends ModelResource
             Box::make([
                 ID::make(),
                 Text::make('Title', 'title'),
-                Textarea::make('Content')
-                ->customAttributes([
-                    'rows'=>6,
-                ]),
+                TinyMce::make('Content', 'content'),
                 Image::make('Image', 'image'),
                 BelongsTo::make(
                     'Category',
