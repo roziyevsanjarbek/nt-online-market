@@ -85,11 +85,8 @@ class ProductsController extends Controller
 
         $categories = Category::all();
 
-
         $images = Image::paginate(1);
-
-        $weights = Volume::all();
-
+        $weights = Volume::all(); // **Shu qatorni qo‘sh!**
 
         return view('product-filter', [
             'products' => $products,
@@ -98,7 +95,6 @@ class ProductsController extends Controller
             'categories' => $categories,
             'images'=>$images,
             'weights' => $weights
-
         ]);
     }
 

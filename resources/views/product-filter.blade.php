@@ -165,66 +165,6 @@
                         });
                     </script>
 
-
-                    <div class="bb-sidebar-block p-[20px] border-b-[1px] border-solid border-[#eee]">
-                        <div class="bb-sidebar-title mb-[20px]">
-                            <h3 class="font-quicksand text-[18px] tracking-[0.03rem] leading-[1.2] font-bold text-[#3d4750]">Color</h3>
-                        </div>
-                        <div class="bb-color-contact">
-                            <ul>
-                                <li class="transition-all duration-[0.3s] ease-in-out inline-block p-[2px] rounded-[20px] cursor-pointer mr-[5px] w-[26px] h-[26px] color-sidebar-active">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <span class="pro-color-1 w-[22px] h-[22px] block rounded-[20px] bg-[#c4d6f9]"></span>
-                                    </div>
-                                </li>
-                                <li class="transition-all duration-[0.3s] ease-in-out inline-block p-[2px] rounded-[20px] cursor-pointer mr-[5px] w-[26px] h-[26px]">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <span class="pro-color-2 w-[22px] h-[22px] block rounded-[20px] bg-[#ff748b]"></span>
-                                    </div>
-                                </li>
-                                <li class="transition-all duration-[0.3s] ease-in-out inline-block p-[2px] rounded-[20px] cursor-pointer mr-[5px] w-[26px] h-[26px]">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <span class="pro-color-3 w-[22px] h-[22px] block rounded-[20px] bg-[#000000]"></span>
-                                    </div>
-                                </li>
-                                <li class="transition-all duration-[0.3s] ease-in-out inline-block p-[2px] rounded-[20px] cursor-pointer mr-[5px] w-[26px] h-[26px]">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <span class="pro-color-4 w-[22px] h-[22px] block rounded-[20px] bg-[#2bff4a]"></span>
-                                    </div>
-                                </li>
-                                <li class="transition-all duration-[0.3s] ease-in-out inline-block p-[2px] rounded-[20px] cursor-pointer mr-[5px] w-[26px] h-[26px]">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <span class="pro-color-5 w-[22px] h-[22px] block rounded-[20px] bg-[#ff7c5e]"></span>
-                                    </div>
-                                </li>
-                                <li class="transition-all duration-[0.3s] ease-in-out inline-block p-[2px] rounded-[20px] cursor-pointer mr-[5px] w-[26px] h-[26px]">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <span class="pro-color-6 w-[22px] h-[22px] block rounded-[20px] bg-[#f155ff]"></span>
-                                    </div>
-                                </li>
-                                <li class="transition-all duration-[0.3s] ease-in-out inline-block p-[2px] rounded-[20px] cursor-pointer mr-[5px] w-[26px] h-[26px]">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <span class="pro-color-7 w-[22px] h-[22px] block rounded-[20px] bg-[#ffef00]"></span>
-                                    </div>
-                                </li>
-                                <li class="transition-all duration-[0.3s] ease-in-out inline-block p-[2px] rounded-[20px] cursor-pointer mr-[5px] w-[26px] h-[26px]">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <span class="pro-color-8 w-[22px] h-[22px] block rounded-[20px] bg-[#c89fff]"></span>
-                                    </div>
-                                </li>
-                                <li class="transition-all duration-[0.3s] ease-in-out inline-block p-[2px] rounded-[20px] cursor-pointer mr-[5px] w-[26px] h-[26px]">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <span class="pro-color-9 w-[22px] h-[22px] block rounded-[20px] bg-[#7bfffa]"></span>
-                                    </div>
-                                </li>
-                                <li class="transition-all duration-[0.3s] ease-in-out inline-block p-[2px] rounded-[20px] cursor-pointer mr-[5px] w-[26px] h-[26px]">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <span class="pro-color-10 w-[22px] h-[22px] block rounded-[20px] bg-[#56ffc1]"></span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
                     <div class="bb-sidebar-block p-[20px] border-b border-solid border-[#eee]">
                         <div class="bb-sidebar-title mb-[20px]">
                             <h3 class="font-quicksand text-[18px] tracking-[0.03rem] leading-[1.2] font-bold text-[#3d4750]">Price</h3>

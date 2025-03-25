@@ -11,6 +11,7 @@ use App\Models\Product;
 
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
 use MoonShine\Laravel\Resources\ModelResource;
+use MoonShine\TinyMce\Fields\TinyMce;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\ID;
 use MoonShine\Contracts\UI\FieldContract;
@@ -35,19 +36,19 @@ class ProductResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Text::make('name')->sortable(),
-            Text::make('description')->sortable(),
-            Text::make('price')->sortable(),
+            Text::make('Name')->sortable(),
+            Text::make('Description')->sortable(),
+            Text::make('Price')->sortable(),
             Text::make('Sale Price','sale_price')->sortable(),
             BelongsTo::make(
                 'Category ID and Name',
                 'category',
                 fn($item)=>"$item->name",
                 CategoryResource::class),
-            Number::make('Quantity', 'stock_quantity'),
+            Number::make('Quantity', 'quantity'),
             BelongsTo::make('Volume', 'volume', fn($item) => $item->name,
-                VolumeResource::class)
-
+                VolumeResource::class
+            )->nullable(),
 
         ];
     }
@@ -59,8 +60,8 @@ class ProductResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Text::make('name')->sortable(),
-            Text::make('description')->sortable(),
+            Text::make('Name')->sortable(),
+            TinyMce::make('Description'),
             Text::make('price')->sortable(),
             Text::make('Sale Price','sale_price')->sortable(),
             BelongsTo::make(
@@ -68,10 +69,10 @@ class ProductResource extends ModelResource
                 'category',
                 fn($item)=>"$item->name",
                 CategoryResource::class),
-            Number::make('Quantity', 'stock_quantity'),
+            Number::make('Quantity', 'quantity'),
             BelongsTo::make('Volume', 'volume', fn($item) => $item->name,
                 VolumeResource::class
-            )
+            )->nullable(),
         ];
     }
 
@@ -82,16 +83,16 @@ class ProductResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Text::make('name')->sortable(),
-            Text::make('description')->sortable(),
-            Text::make('price')->sortable(),
+            Text::make('Name')->sortable(),
+            TinyMce::make('Description'),
+            Text::make('Price')->sortable(),
             Text::make('Sale Price','sale_price')->sortable(),
             BelongsTo::make(
                 'Category ID and Name',
                 'category',
                 fn($item)=>"$item->name",
                 CategoryResource::class),
-            Number::make('Quantity', 'stock_quantity'),
+            Number::make('Quantity', 'quantity'),
             BelongsTo::make('Volume', 'volume', fn($item) => $item->name,
                 VolumeResource::class
             )
