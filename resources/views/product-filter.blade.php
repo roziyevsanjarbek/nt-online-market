@@ -110,6 +110,7 @@
                         </div>
                         <div class="bb-sidebar-contact">
                             <ul>
+<<<<<<< HEAD
                                 <li class="relative block mb-[14px]">
                                     <div class="bb-sidebar-block-item relative">
                                         <input type="checkbox" class="w-full h-[calc(100%-5px)] absolute opacity-[0] cursor-pointer z-[999] top-[50%] left-[0] translate-y-[-50%]">
@@ -124,9 +125,52 @@
                                         <span class="checked absolute top-[0] left-[0] h-[18px] w-[18px] bg-[#fff] border-[1px] border-solid border-[#eee] rounded-[5px] overflow-hidden"></span>
                                     </div>
                                 </li>
+=======
+                                @foreach($weights as $weight)
+                                    @php
+                                        $checked = request()->has('weights') && in_array($weight->name, request()->weights) ? 'checked' : '';
+                                    @endphp
+                                    <li class="relative block mb-[14px]">
+                                        <div class="bb-sidebar-block-item relative">
+                                            <input type="checkbox" name="weights[]" value="{{ $weight->name }}" {{ $checked }}
+                                            class="weight-filter w-full h-[calc(100%-5px)] absolute opacity-[0] cursor-pointer z-[999] top-[50%] left-[0] translate-y-[-50%]">
+                                            <a href="javascript:void(0)" class="ml-[30px] block text-[#777] text-[14px] leading-[20px] font-normal capitalize cursor-pointer">
+                                                {{ $weight->name }}
+                                            </a>
+                                            <span class="checked absolute top-[0] left-[0] h-[18px] w-[18px] bg-[#fff] border-[1px] border-solid border-[#eee] rounded-[5px] overflow-hidden"></span>
+                                        </div>
+                                    </li>
+                                @endforeach
+>>>>>>> 07aa8d60c7df00f1577ca1041c20215826b15b6d
                             </ul>
                         </div>
                     </div>
+
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            document.querySelectorAll(".weight-filter").forEach(input => {
+                                input.addEventListener("change", function () {
+                                    let params = new URLSearchParams(window.location.search);
+
+                                    // Agar checkbox tanlangan bo‘lsa, paramsga qo‘shamiz
+                                    if (this.checked) {
+                                        params.append('weights[]', this.value);
+                                    } else {
+                                        let values = params.getAll('weights[]');
+                                        params.delete('weights[]');
+                                        values.forEach(val => {
+                                            if (val !== this.value) params.append('weights[]', val);
+                                        });
+                                    }
+
+                                    // Sahifani yangilash
+                                    window.location.search = params.toString();
+                                });
+                            });
+                        });
+                    </script>
+
+
                     <div class="bb-sidebar-block p-[20px] border-b-[1px] border-solid border-[#eee]">
                         <div class="bb-sidebar-title mb-[20px]">
                             <h3 class="font-quicksand text-[18px] tracking-[0.03rem] leading-[1.2] font-bold text-[#3d4750]">Color</h3>

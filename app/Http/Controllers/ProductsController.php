@@ -45,35 +45,29 @@ class ProductsController extends Controller
 
     public function show(Request $request)
     {
-        $categories = $request->input('categories');  // Selected category names
-        $weights = $request->input('weights');        // Selected weights
-        $startPrice = $request->input('startPrice');  // Price range start
-        $endPrice = $request->input('endPrice');      // Price range end
+        $categories = $request->input('categories');
+        $weights = $request->input('weights');
+        $startPrice = $request->input('startPrice');
+        $endPrice = $request->input('endPrice');
 
-        // Get selected categories by name
         $selectedCategories = Category::whereIn('name', (array) $categories)->pluck('id')->toArray();
 
-
-        // Get all child categories in a single query
         $categoryIds = Category::whereIn('parent_id', $selectedCategories)
             ->orWhereIn('id', $selectedCategories)
             ->pluck('id')
             ->toArray();
 
-        // Get parent categories with their children
         $parentCategories = Category::whereNull('parent_id')
             ->orderBy('id', 'desc')
             ->limit(4)
             ->with('categories')
             ->get();
 
-        // Get all main categories (for menu)
         $productsMenu = Category::whereNull('parent_id')
             ->orderBy('id', 'desc')
             ->with('categories')
             ->get();
 
-        // Filter products based on selected criteria
         $products = Product::query()
             ->when(!empty($categoryIds), function ($query) use ($categoryIds) {
                 return $query->whereIn('category_id', $categoryIds);
@@ -88,18 +82,28 @@ class ProductsController extends Controller
             ->orderBy('id', 'desc')
             ->with('images')
             ->paginate(10);
+
         $categories = Category::all();
+<<<<<<< HEAD
 
         $images = Image::paginate(1);
+=======
+        $weights = Volume::all(); // **Shu qatorni qo‘sh!**
+>>>>>>> 07aa8d60c7df00f1577ca1041c20215826b15b6d
 
         return view('product-filter', [
             'products' => $products,
             'parentCategories' => $parentCategories,
             'productsMenu' => $productsMenu,
             'categories' => $categories,
+<<<<<<< HEAD
             'images'=>$images
+=======
+            'weights' => $weights // **Shu yerda viewga jo‘natiladi**
+>>>>>>> 07aa8d60c7df00f1577ca1041c20215826b15b6d
         ]);
     }
+
 
 
     /**
