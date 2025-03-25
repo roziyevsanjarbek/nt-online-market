@@ -10,8 +10,7 @@
 </div>
 
 <!-- Header -->
-
-<x-navbar :parentCategories="$parentCategories" :productsMenu="$productsMenu"></x-navbar>
+<x-home-navbar :parentCategories="$parentCategories" :productsMenu="$productsMenu"></x-home-navbar>
 <!-- Hero -->
 <section class="section-hero mb-[50px] max-[1199px]:mb-[35px] py-[50px] relative bg-[#f8f8fb] overflow-hidden">
     <div
@@ -484,28 +483,28 @@
                     $title = trim(preg_replace('/\s+/', ' ', $banner->title));
                     ?>
 
-            <div class="min-[992px]:w-[50%] w-full px-[12px] mb-[24px]" data-aos="fade-up" data-aos-duration="1000"
-                 data-aos-delay="400">
-                <div class="banner-box p-[30px] rounded-[20px] relative overflow-hidden bg-box-color-one bg-[#fbf2e5]">
-                    <div class="inner-banner-box relative z-[1] flex justify-between max-[480px]:flex-col">
-                        <div
-                            class="side-image px-[12px] flex items-center max-[480px]:p-[0] max-[480px]:mb-[12px] max-[480px]:justify-center">
-                            <img src="{{Storage::url($banner->image)}}" alt="banners"
-                                 class="max-w-max w-[280px] h-[280px] max-[1399px]:w-[230px] max-[1399px]:h-[230px] max-[1199px]:w-[140px] max-[1199px]:h-[140px] max-[991px]:w-[280px] max-[991px]:h-[280px] max-[767px]:h-[200px] max-[767px]:w-[200px] max-[575px]:w-full max-[575px]:h-[auto] max-[480px]:w-[calc(100%-70px)]">
-                        </div>
-                        <div
-                            class="inner-contact max-w-[250px] px-[12px] flex flex-col items-start justify-center max-[480px]:p-[0] max-[480px]:max-w-[100%] max-[480px]:text-center max-[480px]:items-center">
-                            <h5 class="font-quicksand mb-[15px] text-[31px] text-[#3d4750] font-bold tracking-[0.03rem] text-[#3d4750] leading-[1.2] max-[991px]:text-[28px] max-[575px]:text-[24px] max-[480px]:mb-[2px] max-[480px]:text-[22px]">
-                                {!! $title !!}</h5>
-                            <p class="font-Poppins text-[16px] font-light leading-[28px] tracking-[0.03rem] text-[#686e7d] mb-[15px] max-[480px]:mb-[8px] max-[480px]:text-[14px]">
-                                {{$banner->description}}</p>
-                            <a href="shop-left-sidebar-col-3.html"
-                               class="bb-btn-1 transition-all duration-[0.3s] ease-in-out font-Poppins leading-[28px] tracking-[0.03rem] py-[5px] px-[15px] text-[14px] font-normal text-[#3d4750] bg-transparent rounded-[10px] border-[1px] border-solid border-[#3d4750] hover:bg-[#6c7fd8] hover:border-[#6c7fd8] hover:text-[#fff]">Shop
-                                Now</a>
+                <div class="min-[992px]:w-[50%] w-full px-[12px] mb-[24px]" data-aos="fade-up" data-aos-duration="1000"
+                     data-aos-delay="400">
+                    <div class="banner-box p-[30px] rounded-[20px] relative overflow-hidden bg-box-color-one bg-[#fbf2e5]">
+                        <div class="inner-banner-box relative z-[1] flex justify-between max-[480px]:flex-col">
+                            <div
+                                class="side-image px-[12px] flex items-center max-[480px]:p-[0] max-[480px]:mb-[12px] max-[480px]:justify-center">
+                                <img src="{{Storage::url($banner->image)}}" alt="banners"
+                                     class="max-w-max w-[280px] h-[280px] max-[1399px]:w-[230px] max-[1399px]:h-[230px] max-[1199px]:w-[140px] max-[1199px]:h-[140px] max-[991px]:w-[280px] max-[991px]:h-[280px] max-[767px]:h-[200px] max-[767px]:w-[200px] max-[575px]:w-full max-[575px]:h-[auto] max-[480px]:w-[calc(100%-70px)]">
+                            </div>
+                            <div
+                                class="inner-contact max-w-[250px] px-[12px] flex flex-col items-start justify-center max-[480px]:p-[0] max-[480px]:max-w-[100%] max-[480px]:text-center max-[480px]:items-center">
+                                <h5 class="font-quicksand mb-[15px] text-[31px] text-[#3d4750] font-bold tracking-[0.03rem] text-[#3d4750] leading-[1.2] max-[991px]:text-[28px] max-[575px]:text-[24px] max-[480px]:mb-[2px] max-[480px]:text-[22px]">
+                                    {!! $title !!}</h5>
+                                <p class="font-Poppins text-[16px] font-light leading-[28px] tracking-[0.03rem] text-[#686e7d] mb-[15px] max-[480px]:mb-[8px] max-[480px]:text-[14px]">
+                                    {{$banner->description}}</p>
+                                <a href="shop-left-sidebar-col-3.html"
+                                   class="bb-btn-1 transition-all duration-[0.3s] ease-in-out font-Poppins leading-[28px] tracking-[0.03rem] py-[5px] px-[15px] text-[14px] font-normal text-[#3d4750] bg-transparent rounded-[10px] border-[1px] border-solid border-[#3d4750] hover:bg-[#6c7fd8] hover:border-[#6c7fd8] hover:text-[#fff]">Shop
+                                    Now</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             @endforeach
         </div>
     </div>
@@ -518,26 +517,26 @@
         $title = trim(preg_replace('/\s+/', ' ', $bottomBanner->title));
         $words = explode(" ", $title);
         ?>
-<section
-    class="section-banner-two overflow-hidden my-[50px] max-[1199px]:my-[35px] bg-[url('{{ asset('storage/' . $bottomBanner->image) }}')] min-h-[600px] overflow-hidden bg-no-repeat bg-cover bg-center max-[991px]:max-h-[400px] max-[991px]:min-h-[auto]">
-    <div
-        class="flex flex-wrap justify-between relative items-center mx-auto min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
-        <div class="flex flex-wrap w-full">
-            <div
-                class="w-full px-[12px] banner-justify-box-contact w-full h-[600px] flex justify-end items-end max-[991px]:h-[400px]">
+    <section
+        class="section-banner-two overflow-hidden my-[50px] max-[1199px]:my-[35px] bg-[url('{{ asset('storage/' . $bottomBanner->image) }}')] min-h-[600px] overflow-hidden bg-no-repeat bg-cover bg-center max-[991px]:max-h-[400px] max-[991px]:min-h-[auto]">
+        <div
+            class="flex flex-wrap justify-between relative items-center mx-auto min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
+            <div class="flex flex-wrap w-full">
                 <div
-                    class="banner-two-box bg-[#fff] rounded-t-[30px] max-w-[400px] pt-[30px] px-[30px] flex flex-col items-start relative max-[991px]:max-w-[250px] max-[575px]:my-[0] max-[575px]:mx-[auto]">
-                    <span class="text-[20px] font-semibold text-[#6c7fd8] leading-[26px] max-[991px]:text-[16px]">{{$bottomBanner->description}}</span>
-                    <h4 class="font-quicksand mb-[20px] text-[40px] font-bold text-[#3d4750] tracking-[0.03rem] leading-[1.2] max-[991px]:text-[22px]">
-                        {{$bottomBanner->title}}</h4>
-                    <a href="javascript:void(0)"
-                       class="bb-btn-1 transition-all duration-[0.3s] ease-in-out font-Poppins leading-[28px] tracking-[0.03rem] py-[8px] px-[20px] max-[1199px]:py-[3px] max-[1199px]:px-[15px] text-[14px] font-normal text-[#3d4750] bg-transparent rounded-[10px] border-[1px] border-solid border-[#3d4750] hover:bg-[#6c7fd8] hover:border-[#6c7fd8] hover:text-[#fff]">Shop
-                        Now</a>
+                    class="w-full px-[12px] banner-justify-box-contact w-full h-[600px] flex justify-end items-end max-[991px]:h-[400px]">
+                    <div
+                        class="banner-two-box bg-[#fff] rounded-t-[30px] max-w-[400px] pt-[30px] px-[30px] flex flex-col items-start relative max-[991px]:max-w-[250px] max-[575px]:my-[0] max-[575px]:mx-[auto]">
+                        <span class="text-[20px] font-semibold text-[#6c7fd8] leading-[26px] max-[991px]:text-[16px]">{{$bottomBanner->description}}</span>
+                        <h4 class="font-quicksand mb-[20px] text-[40px] font-bold text-[#3d4750] tracking-[0.03rem] leading-[1.2] max-[991px]:text-[22px]">
+                            {{$bottomBanner->title}}</h4>
+                        <a href="javascript:void(0)"
+                           class="bb-btn-1 transition-all duration-[0.3s] ease-in-out font-Poppins leading-[28px] tracking-[0.03rem] py-[8px] px-[20px] max-[1199px]:py-[3px] max-[1199px]:px-[15px] text-[14px] font-normal text-[#3d4750] bg-transparent rounded-[10px] border-[1px] border-solid border-[#3d4750] hover:bg-[#6c7fd8] hover:border-[#6c7fd8] hover:text-[#fff]">Shop
+                            Now</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 @endif
 
 <!-- New Product tab Area -->
@@ -1021,37 +1020,101 @@
                         <h4 class="font-quicksand text-[#fff] tracking-[0.03rem] opacity-[0.15] text-[42px] font-bold leading-[1.2] max-[1399px]:text-[38px] max-[1199px]:text-[34px]">
                             Testimonials</h4>
                     </div>
-                    @foreach($teams as $team)
                     <div class="owl-carousel testimonials-slider">
                         <div class="bb-testimonials-inner max-w-[900px] m-[auto] max-[1399px]:max-w-[800px]">
                             <div class="flex flex-wrap mx-[-12px] testimonials-row">
                                 <div class="min-[768px]:w-[33.33%] w-full px-[12px] max-[767px]:hidden">
                                     <div
                                         class="testimonials-image relative max-[575px]:mb-[20px] max-[575px]:max-w-[200px]">
-                                        <img src="{{ \Illuminate\Support\Facades\Storage::url($team->image) }}" alt="testimonials"
+                                        <img src="assets/img/testimonials/1.jpg" alt="testimonials"
                                              class="w-full rounded-[30px] block">
                                     </div>
                                 </div>
-                                    <div class="min-[768px]:w-[66.66%] w-full px-[12px]">
-                                        <div class="testimonials-contact h-full flex flex-col justify-end">
-                                            <div class="user max-[767px]:flex max-[767px]:items-center">
-                                                <img src="{{ \Illuminate\Support\Facades\Storage::url($team->image) }}" alt="testimonials"
-                                                     class="w-full hidden rounded-[15px] max-[767px]:max-w-[60px] max-[767px]:mr-[15px] max-[767px]:flex">
-                                                <div class="detail">
-                                                    <h4 class="font-quicksand text-[#3d4750] tracking-[0.03rem] leading-[1.2] mb-[8px] text-[20px] font-bold max-[767px]:mb-[4px] max-[767px]:text-[18px]">
-                                                        {{ $team['name'] }}</h4>
-                                                    <span
-                                                        class="font-Poppins font-normal tracking-[0.02rem] text-[14px] text-[#777]">{{ $team['occupation'] }}</span>
-                                                </div>
-                                            </div>
-                                            <div
-                                                class="inner-contact bg-[#fff] mt-[10px] border-[1px] border-solid border-[#eee] p-[20px] rounded-[30px]">
-                                                <p class="font-Poppins text-[#686e7d] text-[14px] leading-[25px] tracking-[0.03rem] font-light">
-                                                    {{ $team['description'] }}</p>
+                                <div class="min-[768px]:w-[66.66%] w-full px-[12px]">
+                                    <div class="testimonials-contact h-full flex flex-col justify-end">
+                                        <div class="user max-[767px]:flex max-[767px]:items-center">
+                                            <img src="assets/img/testimonials/1.jpg" alt="testimonials"
+                                                 class="w-full hidden rounded-[15px] max-[767px]:max-w-[60px] max-[767px]:mr-[15px] max-[767px]:flex">
+                                            <div class="detail">
+                                                <h4 class="font-quicksand text-[#3d4750] tracking-[0.03rem] leading-[1.2] mb-[8px] text-[20px] font-bold max-[767px]:mb-[4px] max-[767px]:text-[18px]">
+                                                    Isabella Oliver</h4>
+                                                <span
+                                                    class="font-Poppins font-normal tracking-[0.02rem] text-[14px] text-[#777]">(Manager)</span>
                                             </div>
                                         </div>
+                                        <div
+                                            class="inner-contact bg-[#fff] mt-[10px] border-[1px] border-solid border-[#eee] p-[20px] rounded-[30px]">
+                                            <p class="font-Poppins text-[#686e7d] text-[14px] leading-[25px] tracking-[0.03rem] font-light">
+                                                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto
+                                                at sint eligendi possimus perspiciatis asperiores reiciendis hic
+                                                amet alias aut quaerat maiores blanditiis."</p>
+                                        </div>
                                     </div>
-                                @endforeach
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bb-testimonials-inner max-w-[900px] m-[auto] max-[1399px]:max-w-[800px]">
+                            <div class="flex flex-wrap mx-[-12px] testimonials-row">
+                                <div class="min-[768px]:w-[33.33%] w-full px-[12px] max-[767px]:hidden">
+                                    <div
+                                        class="testimonials-image relative max-[575px]:mb-[20px] max-[575px]:max-w-[200px]">
+                                        <img src="assets/img/testimonials/2.jpg" alt="testimonials"
+                                             class="w-full rounded-[30px] block">
+                                    </div>
+                                </div>
+                                <div class="min-[768px]:w-[66.66%] w-full px-[12px]">
+                                    <div class="testimonials-contact h-full flex flex-col justify-end">
+                                        <div class="user max-[767px]:flex max-[767px]:items-center">
+                                            <img src="assets/img/testimonials/2.jpg" alt="testimonials"
+                                                 class="w-full hidden rounded-[15px] max-[767px]:max-w-[60px] max-[767px]:mr-[15px] max-[767px]:flex">
+                                            <div class="detail">
+                                                <h4 class="font-quicksand text-[#3d4750] tracking-[0.03rem] leading-[1.2] mb-[8px] text-[20px] font-bold max-[767px]:mb-[4px] max-[767px]:text-[18px]">
+                                                    Nikki Albart</h4>
+                                                <span
+                                                    class="font-Poppins font-normal tracking-[0.02rem] text-[14px] text-[#777]">(Team Leader)</span>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="inner-contact bg-[#fff] mt-[10px] border-[1px] border-solid border-[#eee] p-[20px] rounded-[30px]">
+                                            <p class="font-Poppins text-[#686e7d] text-[14px] leading-[25px] tracking-[0.03rem] font-light">
+                                                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto
+                                                at sint eligendi possimus perspiciatis asperiores reiciendis hic
+                                                amet alias aut quaerat maiores blanditiis."</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bb-testimonials-inner max-w-[900px] m-[auto] max-[1399px]:max-w-[800px]">
+                            <div class="flex flex-wrap mx-[-12px] testimonials-row">
+                                <div class="min-[768px]:w-[33.33%] w-full px-[12px] max-[767px]:hidden">
+                                    <div
+                                        class="testimonials-image relative max-[575px]:mb-[20px] max-[575px]:max-w-[200px]">
+                                        <img src="assets/img/testimonials/3.jpg" alt="testimonials"
+                                             class="w-full rounded-[30px] block">
+                                    </div>
+                                </div>
+                                <div class="min-[768px]:w-[66.66%] w-full px-[12px]">
+                                    <div class="testimonials-contact h-full flex flex-col justify-end">
+                                        <div class="user max-[767px]:flex max-[767px]:items-center">
+                                            <img src="assets/img/testimonials/3.jpg" alt="testimonials"
+                                                 class="w-full hidden rounded-[15px] max-[767px]:max-w-[60px] max-[767px]:mr-[15px] max-[767px]:flex">
+                                            <div class="detail">
+                                                <h4 class="font-quicksand text-[#3d4750] tracking-[0.03rem] leading-[1.2] mb-[8px] text-[20px] font-bold max-[767px]:mb-[4px] max-[767px]:text-[18px]">
+                                                    Stephen Smith</h4>
+                                                <span
+                                                    class="font-Poppins font-normal tracking-[0.02rem] text-[14px] text-[#777]">(Co Founder)</span>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="inner-contact bg-[#fff] mt-[10px] border-[1px] border-solid border-[#eee] p-[20px] rounded-[30px]">
+                                            <p class="font-Poppins text-[#686e7d] text-[14px] leading-[25px] tracking-[0.03rem] font-light">
+                                                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto
+                                                at sint eligendi possimus perspiciatis asperiores reiciendis hic
+                                                amet alias aut quaerat maiores blanditiis."</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1105,12 +1168,12 @@
                 <div class="bb-instagram-slider owl-carousel">
                     @foreach($insPosts as $insPost)
                         <div class="bb-instagram-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
-                        <div class="instagram-img relative overflow-hidden rounded-[30px]">
-                            <a href="javascript:void(0)">
-                                <img src="{{\Illuminate\Support\Facades\Storage::url($insPost->image)}}" alt="instagram-1" class="w-full rounded-[20px]">
-                            </a>
+                            <div class="instagram-img relative overflow-hidden rounded-[30px]">
+                                <a href="javascript:void(0)">
+                                    <img src="{{\Illuminate\Support\Facades\Storage::url($insPost->image)}}" alt="instagram-1" class="w-full rounded-[20px]">
+                                </a>
+                            </div>
                         </div>
-                    </div>
                     @endforeach
                 </div>
             </div>
