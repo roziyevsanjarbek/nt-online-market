@@ -46,8 +46,8 @@ class ProductResource extends ModelResource
                 CategoryResource::class),
             Number::make('Quantity', 'stock_quantity'),
             BelongsTo::make('Volume', 'volume', fn($item) => $item->name,
-                VolumeResource::class
-            )
+                VolumeResource::class)
+
 
         ];
     }

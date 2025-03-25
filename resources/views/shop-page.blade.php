@@ -7,7 +7,7 @@
 </div>
 
 <!-- Header -->
-<x-navbar :parentCategories="$parentCategories" :latestPosts="$latestPosts"></x-navbar>
+<x-navbar :parentCategories="$parentCategories" :latestPosts="$latestPosts" :productsMenu="$productsMenu"></x-navbar>
     <!-- Breadcrumb -->
     <section class="section-breadcrumb mb-[50px] max-[1199px]:mb-[35px] border-b-[1px] border-solid border-[#eee] bg-[#f8f8fb]">
         <div class="flex flex-wrap justify-between relative items-center mx-auto min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
@@ -35,7 +35,8 @@
         <div class="flex flex-wrap justify-between relative items-center mx-auto min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
             <div class="flex flex-wrap w-full">
                 <div class="w-full px-[12px]">
-                    <div class="bb-category-6-colum owl-carousel">
+                    <form name="category-filter" method="GET">
+                    <div class="bb-category-6-colum owl-carousel" id="category-filter">
                         @foreach($categories as $category)
                             <div class="bb-category-box p-[30px] rounded-[20px] flex flex-col items-center text-center max-[1399px]:p-[20px] category-items-1 bg-[#fef1f1]" data-aos="flip-left" data-aos-duration="1000" data-aos-delay="200">
                                 <div class="category-image mb-[12px]">
@@ -53,6 +54,7 @@
 
                         @endforeach
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -360,7 +362,7 @@
     <!-- Cart sidebar -->
     <x-cart-sidebar></x-cart-sidebar>
     <!-- Category Popup -->
-    <x-category-popup :categories="$categories"></x-category-popup>
+    <x-category-popup :categories="$categories" :products="$products"></x-category-popup>
 
     <!-- Quick view Modal -->
     <x-quick-view-modal></x-quick-view-modal>
