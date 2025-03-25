@@ -44,10 +44,10 @@ class ProductResource extends ModelResource
                 'category',
                 fn($item)=>"$item->name",
                 CategoryResource::class),
-            Number::make('Quantity', 'stock_quantity'),
+            Number::make('Quantity', 'quantity'),
             BelongsTo::make('Volume', 'volume', fn($item) => $item->name,
                 VolumeResource::class
-            )
+            )->nullable(),
 
         ];
     }
@@ -68,10 +68,10 @@ class ProductResource extends ModelResource
                 'category',
                 fn($item)=>"$item->name",
                 CategoryResource::class),
-            Number::make('Quantity', 'stock_quantity'),
+            Number::make('Quantity', 'quantity'),
             BelongsTo::make('Volume', 'volume', fn($item) => $item->name,
                 VolumeResource::class
-            )
+            )->nullable(),
         ];
     }
 
@@ -91,10 +91,10 @@ class ProductResource extends ModelResource
                 'category',
                 fn($item)=>"$item->name",
                 CategoryResource::class),
-            Number::make('Quantity', 'stock_quantity'),
+            Number::make('Quantity', 'quantity'),
             BelongsTo::make('Volume', 'volume', fn($item) => $item->name,
                 VolumeResource::class
-            )
+            )->nullable()
         ];
     }
 
