@@ -153,6 +153,11 @@ class HomeController extends Controller
             'productsMenu' => $productsMenu,
         ]);
     }
+    public function exit()
+    {
+        auth()->logout();
+        return redirect()->route('index');
+    }
 
 
 }
