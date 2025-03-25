@@ -10,6 +10,7 @@ use App\Models\Banner;
 
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
 use MoonShine\Laravel\Resources\ModelResource;
+use MoonShine\TinyMce\Fields\TinyMce;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\ID;
 use MoonShine\Contracts\UI\FieldContract;
@@ -35,7 +36,7 @@ class BannerResource extends ModelResource
         return [
             ID::make()->sortable(),
             Text::make('Title'),
-            Text::make('Description'),
+            TinyMce::make('Description'),
             Image::make('Image'),
             Select::make('Position')
             ->options([
@@ -58,7 +59,7 @@ class BannerResource extends ModelResource
             Box::make([
                 ID::make(),
                 Text::make('Title'),
-                Text::make('Description'),
+                TinyMce::make('Description'),
                 Image::make('Image'),
                 Select::make('Position')
                 ->options([

@@ -93,4 +93,9 @@ class HomeController extends Controller
             'parentCategories' => $parentCategories
         ]);
     }
+    public function exit()
+    {
+        auth()->logout();
+        return redirect()->route('index');
+    }
 }
