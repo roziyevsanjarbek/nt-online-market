@@ -5,25 +5,24 @@ declare(strict_types=1);
 namespace App\MoonShine\Resources;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\ProductVolume;
+use App\Models\Team;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\UI\Components\Layout\Box;
-use MoonShine\UI\Fields\Date;
 use MoonShine\UI\Fields\ID;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\UI\ComponentContract;
+use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Text;
 
 /**
- * @extends ModelResource<ProductVolume>
+ * @extends ModelResource<Team>
  */
-class ProductVolumeResource extends ModelResource
+class TeamsResource extends ModelResource
 {
-    protected string $model = ProductVolume::class;
+    protected string $model = Team::class;
 
-    protected string $title = 'ProductVolumes';
+    protected string $title = 'Teams';
 
     /**
      * @return list<FieldContract>
@@ -32,7 +31,10 @@ class ProductVolumeResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Name'),
+            Text::make('Name')->sortable(),
+            Text::make('Occupation')->sortable(),
+            Text::make('Description')->sortable(),
+            Text::make('Image'),
         ];
     }
 
@@ -44,8 +46,10 @@ class ProductVolumeResource extends ModelResource
         return [
             Box::make([
                 ID::make(),
-                Text::make('Name'),
-
+                Text::make('Name')->sortable(),
+                Text::make('Occupation')->sortable(),
+                Text::make('Description')->sortable(),
+                Image::make('Image'),
             ])
         ];
     }
@@ -57,12 +61,15 @@ class ProductVolumeResource extends ModelResource
     {
         return [
             ID::make(),
-            Text::make('Name'),
+            Text::make('Name')->sortable(),
+            Text::make('Occupation')->sortable(),
+            Text::make('Description')->sortable(),
+            Image::make('Image'),
         ];
     }
 
     /**
-     * @param ProductVolume $item
+     * @param Team $item
      *
      * @return array<string, string[]|string>
      * @see https://laravel.com/docs/validation#available-validation-rules

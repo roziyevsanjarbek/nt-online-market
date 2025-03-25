@@ -124,27 +124,6 @@
                                         <span class="checked absolute top-[0] left-[0] h-[18px] w-[18px] bg-[#fff] border-[1px] border-solid border-[#eee] rounded-[5px] overflow-hidden"></span>
                                     </div>
                                 </li>
-                                <li class="relative block mb-[14px]">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <input type="checkbox" class="w-full h-[calc(100%-5px)] absolute opacity-[0] cursor-pointer z-[999] top-[50%] left-[0] translate-y-[-50%]">
-                                        <a href="javascript:void(0)" class="ml-[30px] block text-[#777] text-[14px] leading-[20px] font-normal capitalize cursor-pointer">1kg pack</a>
-                                        <span class="checked absolute top-[0] left-[0] h-[18px] w-[18px] bg-[#fff] border-[1px] border-solid border-[#eee] rounded-[5px] overflow-hidden"></span>
-                                    </div>
-                                </li>
-                                <li class="relative block mb-[14px]">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <input type="checkbox" class="w-full h-[calc(100%-5px)] absolute opacity-[0] cursor-pointer z-[999] top-[50%] left-[0] translate-y-[-50%]">
-                                        <a href="javascript:void(0)" class="ml-[30px] block text-[#777] text-[14px] leading-[20px] font-normal capitalize cursor-pointer">5kg pack</a>
-                                        <span class="checked absolute top-[0] left-[0] h-[18px] w-[18px] bg-[#fff] border-[1px] border-solid border-[#eee] rounded-[5px] overflow-hidden"></span>
-                                    </div>
-                                </li>
-                                <li class="relative block">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <input type="checkbox" class="w-full h-[calc(100%-5px)] absolute opacity-[0] cursor-pointer z-[999] top-[50%] left-[0] translate-y-[-50%]">
-                                        <a href="javascript:void(0)" class="ml-[30px] block text-[#777] text-[14px] leading-[20px] font-normal capitalize cursor-pointer">10kg pack</a>
-                                        <span class="checked absolute top-[0] left-[0] h-[18px] w-[18px] bg-[#fff] border-[1px] border-solid border-[#eee] rounded-[5px] overflow-hidden"></span>
-                                    </div>
-                                </li>
                             </ul>
                         </div>
                     </div>
@@ -278,6 +257,7 @@
                                             <div class="custom-select w-[130px] mr-[30px] flex justify-end text-[#777]  items-center text-[14px] relative max-[420px]:w-[100px] max-[420px]:justify-left">
                                                 <select>
                                                     <option selected disabled>Sort by</option>
+                                                    <option value="1">Position</option>
                                                     <option value="2">Relevance</option>
                                                     <option value="3">Name, A to Z</option>
                                                     <option value="4">Name, Z to A</option>
@@ -417,11 +397,11 @@
 
                             </div>
                         </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 </section>
 
 

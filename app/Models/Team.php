@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProductVolume extends Model
+class Team extends Model
 {
-   protected $table = 'product_volumes';
+    //
 }
