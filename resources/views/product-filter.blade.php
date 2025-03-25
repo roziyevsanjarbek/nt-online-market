@@ -75,19 +75,35 @@
                         <div class="bb-sidebar-title mb-[20px]">
                             <h3 class="font-quicksand text-[18px] tracking-[0.03rem] leading-[1.2] font-bold text-[#3d4750]">Category</h3>
                         </div>
-                        <div class="bb-sidebar-contact">
-                            <ul>
-                                @foreach($categories as $category)
-                                    <li class="relative block mb-[14px]">
-                                        <div class="bb-sidebar-block-item relative">
-                                            <input type="checkbox" class="w-full h-[calc(100%-5px)] absolute opacity-[0] cursor-pointer z-[999] top-[50%] left-[0] translate-y-[-50%]">
-                                            <a href="javascript:void(0)" class="ml-[30px] block text-[#777] text-[14px] leading-[20px] font-normal capitalize cursor-pointer">{{$category->name}}</a>
-                                            <span class="checked absolute top-[0] left-[0] h-[18px] w-[18px] bg-[#fff] border-[1px] border-solid border-[#eee] rounded-[5px] overflow-hidden"></span>
-                                        </div>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
+                        <form action="{{ route('filter') }}" method="GET" id="filterForm">
+                            <div class="bb-sidebar-contact">
+                                <ul>
+                                    @foreach($categories as $category)
+                                        @php
+                                            $selected = in_array($category->name, request()->get('categories', []));
+                                        @endphp
+                                        <li class="relative block mb-[14px]">
+                                            <div class="bb-sidebar-block-item relative">
+                                                <input type="checkbox"
+                                                       name="categories[]"
+                                                       value="{{ $category->name }}"
+                                                       class="w-full h-[calc(100%-5px)] absolute opacity-[0] cursor-pointer z-[999] top-[50%] left-[0] translate-y-[-50%]"
+                                                       onchange="document.getElementById('filterForm').submit();"
+                                                    {{ $selected ? 'checked' : '' }}>
+                                                <a href="javascript:void(0)" class="ml-[30px] block text-[#777] text-[14px] leading-[20px] font-normal capitalize cursor-pointer">
+                                                    {{ $category->name }}
+                                                </a>
+                                                <span class="checked absolute top-[0] left-[0] h-[18px] w-[18px]
+                            {{ $selected ? 'bg-[#000] border-[#000]' : 'bg-[#fff] border-[#eee]' }}
+                            border-[1px] border-solid rounded-[5px] overflow-hidden">
+                        </span>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </form>
+
                     </div>
                     <div class="bb-sidebar-block p-[20px] border-b-[1px] border-solid border-[#eee]">
                         <div class="bb-sidebar-title mb-[20px]">
@@ -192,19 +208,18 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="bb-sidebar-block p-[20px] border-b-[1px] border-solid border-[#eee]">
+                    <div class="bb-sidebar-block p-[20px] border-b border-solid border-[#eee]">
                         <div class="bb-sidebar-title mb-[20px]">
                             <h3 class="font-quicksand text-[18px] tracking-[0.03rem] leading-[1.2] font-bold text-[#3d4750]">Price</h3>
                         </div>
                         <div class="bb-price-range">
-                            <div class="price-range-slider relative w-full mb-[7px]">
-                                <p class="range-value m-[0]">
-                                    <input type="text" id="amount" readonly class="w-full bg-[#fff] text-[#000] text-[16px] mb-[15px] font-initial border-[1px] border-solid border-[#eee] p-[10px] text-center outline-[0] rounded-[10px]">
-                                </p>
-                                <div id="slider-range" class="range-bar"></div>
+                            <div class="price-range-slider relative w-full">
+                                <p class="range-value text-center text-[16px] font-semibold text-[#3d4750] mb-[10px]" id="amount"></p>
+                                <div id="slider-range" class="range-bar h-[8px] bg-gray-300 rounded-md"></div>
                             </div>
                         </div>
                     </div>
+
                     <div class="bb-sidebar-block p-[20px]">
                         <div class="bb-sidebar-title mb-[20px]">
                             <h3 class="font-quicksand text-[18px] tracking-[0.03rem] leading-[1.2] font-bold text-[#3d4750]">Tags</h3>
@@ -397,6 +412,31 @@
 <x-back-to-top></x-back-to-top>
 <!-- Plugins -->
 <x-plugins></x-plugins>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+    $(function () {
+        let startPrice = {{ request('startPrice', 0) }};
+        let endPrice = {{ request('endPrice', 10000) }};
+
+        $("#slider-range").slider({
+            range: true,
+            min: 0,
+            max: 10000,
+            values: [startPrice, endPrice],
+            slide: function (event, ui) {
+                $("#amount").text("$" + ui.values[0] + " - $" + ui.values[1]);
+            },
+            change: function (event, ui) {
+                window.location.href = "?startPrice=" + ui.values[0] + "&endPrice=" + ui.values[1];
+            }
+        });
+
+        $("#amount").text("$" + $("#slider-range").slider("values", 0) +
+            " - $" + $("#slider-range").slider("values", 1));
+    });
+</script>
 
 
 </body>
