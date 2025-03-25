@@ -51,9 +51,8 @@ class ProductsController extends Controller
         $endPrice = $request->input('endPrice');      // Price range end
 
         // Get selected categories by name
-        $selectedCategories = Category::when($categories, function ($query) use ($categories) {
-            return $query->whereIn('name', $categories);
-        })->pluck('id')->toArray();
+        $selectedCategories = Category::whereIn('name', (array) $categories)->pluck('id')->toArray();
+
 
         // Get all child categories in a single query
         $categoryIds = Category::whereIn('parent_id', $selectedCategories)
@@ -76,14 +75,14 @@ class ProductsController extends Controller
 
         // Filter products based on selected criteria
         $products = Product::query()
-            ->when(empty($categoryIds), function ($query) use ($categoryIds) {
+            ->when(!empty($categoryIds), function ($query) use ($categoryIds) {
                 return $query->whereIn('category_id', $categoryIds);
             })
             ->when($weights, function ($query) use ($weights) {
                 $productVolumes = Volume::whereIn('name', $weights)->pluck('id');
                 return $query->whereIn('volume_id', $productVolumes);
             })
-            ->when($startPrice && $endPrice, function ($query) use ($startPrice, $endPrice) {
+            ->when(isset($startPrice) && isset($endPrice), function ($query) use ($startPrice, $endPrice) {
                 return $query->whereBetween('price', [$startPrice, $endPrice]);
             })
             ->orderBy('id', 'desc')
