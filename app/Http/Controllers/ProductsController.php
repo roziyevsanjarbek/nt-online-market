@@ -84,23 +84,21 @@ class ProductsController extends Controller
             ->paginate(10);
 
         $categories = Category::all();
-<<<<<<< HEAD
+
 
         $images = Image::paginate(1);
-=======
-        $weights = Volume::all(); // **Shu qatorni qo‘sh!**
->>>>>>> 07aa8d60c7df00f1577ca1041c20215826b15b6d
+
+        $weights = Volume::all();
+
 
         return view('product-filter', [
             'products' => $products,
             'parentCategories' => $parentCategories,
             'productsMenu' => $productsMenu,
             'categories' => $categories,
-<<<<<<< HEAD
-            'images'=>$images
-=======
-            'weights' => $weights // **Shu yerda viewga jo‘natiladi**
->>>>>>> 07aa8d60c7df00f1577ca1041c20215826b15b6d
+            'images'=>$images,
+            'weights' => $weights
+
         ]);
     }
 
