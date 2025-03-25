@@ -278,7 +278,6 @@
                                             <div class="custom-select w-[130px] mr-[30px] flex justify-end text-[#777]  items-center text-[14px] relative max-[420px]:w-[100px] max-[420px]:justify-left">
                                                 <select>
                                                     <option selected disabled>Sort by</option>
-                                                    <option value="1">Position</option>
                                                     <option value="2">Relevance</option>
                                                     <option value="3">Name, A to Z</option>
                                                     <option value="4">Name, Z to A</option>

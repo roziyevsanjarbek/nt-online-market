@@ -83,6 +83,8 @@ class ProductsController extends Controller
             ->with('images')
             ->paginate(10);
         $categories = Category::all();
+
+        
         return view('product-filter', [
             'products' => $products,
             'parentCategories' => $parentCategories,
