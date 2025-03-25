@@ -2,40 +2,74 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ProductStatuses;
+use App\Models\ProductStatus;
 use Illuminate\Http\Request;
 
 class ProductStatusesController extends Controller
 {
-    // Wishlistga mahsulot qo‘shish yoki olib tashlash
-    public function toggleWishlist(Request $request) {
-        $data = ProductStatuses::updateOrCreate(
-            ['user_id' => auth()->id(), 'product_id' => $request->product_id],
-            ['like' => !$request->like]
-        );
+    // Wishlistni o‘zgartirish
+    public function toggleWishlist(Request $request)
+    {
+        $status = ProductStatus::where('user_id', auth()->id())
+            ->where('product_id', $request->product_id)
+            ->first();
 
-        return response()->json(['message' => 'Wishlist yangilandi', 'data' => $data]);
+        if ($status) {
+            $status->like = !$status->like; // mavjud bo‘lsa, holatni o‘zgartiramiz
+            $status->save();
+        } else {
+            $status = ProductStatus::create([
+                'user_id' => auth()->id(),
+                'product_id' => $request->product_id,
+                'like' => true,
+                'shopping' => false, // default
+            ]);
+        }
+
+        return response()->json(['message' => 'Wishlist yangilandi', 'status' => $status]);
     }
 
-    // Cart'ga mahsulot qo‘shish yoki olib tashlash
-    public function toggleCart(Request $request) {
-        $data = ProductStatuses::updateOrCreate(
-            ['user_id' => auth()->id(), 'product_id' => $request->product_id],
-            ['shopping' => !$request->shopping]
-        );
+    // Cartni o‘zgartirish
+    public function toggleCart(Request $request)
+    {
+        $status = ProductStatus::where('user_id', auth()->id())
+            ->where('product_id', $request->product_id)
+            ->first();
 
-        return response()->json(['message' => 'Cart yangilandi', 'data' => $data]);
+        if ($status) {
+            $status->shopping = !$status->shopping; // mavjud bo‘lsa, holatni o‘zgartiramiz
+            $status->save();
+        } else {
+            $status = ProductStatus::create([
+                'user_id' => auth()->id(),
+                'product_id' => $request->product_id,
+                'shopping' => true,
+                'like' => false, // default
+            ]);
+        }
+
+        return response()->json(['message' => 'Cart yangilandi', 'status' => $status]);
     }
 
-    // Wishlistni ko‘rish
-    public function wishlist() {
-        $wishlist = ProductStatuses::where('user_id', auth()->id())->where('like', true)->with('product')->get();
+    // Wishlistdagi mahsulotlarni olish
+    public function wishlist()
+    {
+        $wishlist = ProductStatus::where('user_id', auth()->id())
+            ->where('like', true)
+            ->with('product')
+            ->get();
+
         return response()->json($wishlist);
     }
 
-    // Cartni ko‘rish
-    public function cart() {
-        $cart = ProductStatuses::where('user_id', auth()->id())->where('shopping', true)->with('product')->get();
+    // Cartdagi mahsulotlarni olish
+    public function cart()
+    {
+        $cart = ProductStatus::where('user_id', auth()->id())
+            ->where('shopping', true)
+            ->with('product')
+            ->get();
+
         return response()->json($cart);
     }
 }
