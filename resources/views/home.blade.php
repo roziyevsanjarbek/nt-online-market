@@ -908,67 +908,80 @@
     </div>
 </section>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            // Yurakcha tugmasi
-            $('.bb-pro-actions').on('click', '.ri-heart-line', function(e){
-                e.preventDefault();
-                var $icon = $(this);
-                var productId = $icon.closest('.bb-deal-card').data('product-id'); // mahsulot ID sini olamiz
-                console.log("Wishlist tugmasi bosildi, productId:", productId);
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function(){
+        // Wishlist va cart holatini yuklash
+        $('.bb-deal-card').each(function() {
+            var productId = $(this).data('product-id');
 
-                $.ajax({
-                    url: '/wishlist/toggle',
-                    type: 'POST',
-                    data: {
-                        product_id: productId,
-                        _token: '{{ csrf_token() }}'
-                    },
-                    success: function(response) {
-                        console.log("Wishlist javobi:", response);
-                        // Javobga qarab aktiv klassni qo‘shamiz yoki olib tashlaymiz
-                        if(response.status.like){
-                            $icon.closest('.bb-btn-group').addClass('heart-active');
-                        } else {
-                            $icon.closest('.bb-btn-group').removeClass('heart-active');
-                        }
-                    },
-                    error: function(xhr) {
-                        console.error("Wishlist so'rovida xato:", xhr);
+            if (localStorage.getItem('wishlist_' + productId) === 'true') {
+                $(this).find('.ri-heart-line').closest('.bb-btn-group').addClass('heart-active');
+            }
+
+            if (localStorage.getItem('cart_' + productId) === 'true') {
+                $(this).find('.ri-shopping-bag-4-line').closest('.bb-btn-group').addClass('cart-active');
+            }
+        });
+
+        // Wishlist tugmasi
+        $('.bb-pro-actions').on('click', '.ri-heart-line', function(e){
+            e.preventDefault();
+            var $icon = $(this);
+            var productId = $icon.closest('.bb-deal-card').data('product-id');
+
+            $.ajax({
+                url: '/wishlist/toggle',
+                type: 'POST',
+                data: {
+                    product_id: productId,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    if(response.status.like){
+                        $icon.closest('.bb-btn-group').addClass('heart-active');
+                        localStorage.setItem('wishlist_' + productId, 'true'); // Saqlash
+                    } else {
+                        $icon.closest('.bb-btn-group').removeClass('heart-active');
+                        localStorage.removeItem('wishlist_' + productId); // O'chirish
                     }
-                });
-            });
-
-            // Sumka tugmasi
-            $('.bb-pro-actions').on('click', '.ri-shopping-bag-4-line', function(e){
-                e.preventDefault();
-                var $icon = $(this);
-                var productId = $icon.closest('.bb-deal-card').data('product-id'); // mahsulot ID sini olamiz
-                console.log("Cart tugmasi bosildi, productId:", productId);
-
-                $.ajax({
-                    url: '/cart/toggle',
-                    type: 'POST',
-                    data: {
-                        product_id: productId,
-                        _token: '{{ csrf_token() }}'
-                    },
-                    success: function(response) {
-                        console.log("Cart javobi:", response);
-                        if(response.status.shopping){
-                            $icon.closest('.bb-btn-group').addClass('cart-active');
-                        } else {
-                            $icon.closest('.bb-btn-group').removeClass('cart-active');
-                        }
-                    },
-                    error: function(xhr) {
-                        console.error("Cart so'rovida xato:", xhr);
-                    }
-                });
+                },
+                error: function(xhr) {
+                    console.error("Wishlist xatosi:", xhr);
+                }
             });
         });
-    </script>
+
+        // Cart tugmasi
+        $('.bb-pro-actions').on('click', '.ri-shopping-bag-4-line', function(e){
+            e.preventDefault();
+            var $icon = $(this);
+            var productId = $icon.closest('.bb-deal-card').data('product-id');
+
+            $.ajax({
+                url: '/cart/toggle',
+                type: 'POST',
+                data: {
+                    product_id: productId,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    if(response.status.shopping){
+                        $icon.closest('.bb-btn-group').addClass('cart-active');
+                        localStorage.setItem('cart_' + productId, 'true'); // Saqlash
+                    } else {
+                        $icon.closest('.bb-btn-group').removeClass('cart-active');
+                        localStorage.removeItem('cart_' + productId); // O'chirish
+                    }
+                },
+                error: function(xhr) {
+                    console.error("Cart xatosi:", xhr);
+                }
+            });
+        });
+    });
+</script>
+
 
 
 
