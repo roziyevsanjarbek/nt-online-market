@@ -12,15 +12,18 @@ return new class extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->unsignedBigInteger('volume_id')->after('quantity');
+            if (!Schema::hasColumn('products', 'volume_id')) {
+                $table->unsignedBigInteger('volume_id')->after('quantity');
+            }
         });
     }
 
     public function down()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->dropColumn('volume_id');
+            if (Schema::hasColumn('products', 'volume_id')) {
+                $table->dropColumn('volume_id');
+            }
         });
     }
-
 };

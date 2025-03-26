@@ -60,19 +60,19 @@ final class MoonShineLayout extends AppLayout
                 MenuItem::make('Roles', MoonShineUserRoleResource::class),
 //                MenuItem::make('Permissions', PermissionResource::class),
             ]),
-            MenuGroup::make('Create Posts', [
+            MenuGroup::make('Posts', [
                 MenuItem::make('Post Categories', PostCategoryResource::class),
                 MenuItem::make('Posts', PostResource::class),
             ]),
 
-            MenuGroup::make('Add Products', [
+            MenuGroup::make('Products', [
                 MenuItem::make('Categories', CategoryResource::class),
                 MenuItem::make('Volumes', VolumeResource::class),
+                MenuItem::make('Images', ImageResource::class),
                 MenuItem::make('Products', ProductResource::class),
             ]),
 
-            MenuGroup::make('Create Images', [
-                MenuItem::make('Images', ImageResource::class),
+            MenuGroup::make('Images', [
                 MenuItem::make('Banner', BannerResource::class),
                 MenuItem::make('Teams', TeamsResource::class),
             ]),
