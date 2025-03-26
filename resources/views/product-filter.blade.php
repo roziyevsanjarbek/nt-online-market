@@ -110,20 +110,6 @@
                         </div>
                         <div class="bb-sidebar-contact">
                             <ul>
-                                <li class="relative block mb-[14px]">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <input type="checkbox" class="w-full h-[calc(100%-5px)] absolute opacity-[0] cursor-pointer z-[999] top-[50%] left-[0] translate-y-[-50%]">
-                                        <a href="javascript:void(0)" class="ml-[30px] block text-[#777] text-[14px] leading-[20px] font-normal capitalize cursor-pointer">200gm pack</a>
-                                        <span class="checked absolute top-[0] left-[0] h-[18px] w-[18px] bg-[#fff] border-[1px] border-solid border-[#eee] rounded-[5px] overflow-hidden"></span>
-                                    </div>
-                                </li>
-                                <li class="relative block mb-[14px]">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <input type="checkbox" class="w-full h-[calc(100%-5px)] absolute opacity-[0] cursor-pointer z-[999] top-[50%] left-[0] translate-y-[-50%]">
-                                        <a href="javascript:void(0)" class="ml-[30px] block text-[#777] text-[14px] leading-[20px] font-normal capitalize cursor-pointer">500gm pack</a>
-                                        <span class="checked absolute top-[0] left-[0] h-[18px] w-[18px] bg-[#fff] border-[1px] border-solid border-[#eee] rounded-[5px] overflow-hidden"></span>
-                                    </div>
-                                </li>
                                 @foreach($weights as $weight)
                                     @php
                                         $checked = request()->has('weights') && in_array($weight->name, request()->weights) ? 'checked' : '';
@@ -165,77 +151,20 @@
                         });
                     </script>
 
-
-                    <div class="bb-sidebar-block p-[20px] border-b-[1px] border-solid border-[#eee]">
-                        <div class="bb-sidebar-title mb-[20px]">
-                            <h3 class="font-quicksand text-[18px] tracking-[0.03rem] leading-[1.2] font-bold text-[#3d4750]">Color</h3>
-                        </div>
-                        <div class="bb-color-contact">
-                            <ul>
-                                <li class="transition-all duration-[0.3s] ease-in-out inline-block p-[2px] rounded-[20px] cursor-pointer mr-[5px] w-[26px] h-[26px] color-sidebar-active">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <span class="pro-color-1 w-[22px] h-[22px] block rounded-[20px] bg-[#c4d6f9]"></span>
-                                    </div>
-                                </li>
-                                <li class="transition-all duration-[0.3s] ease-in-out inline-block p-[2px] rounded-[20px] cursor-pointer mr-[5px] w-[26px] h-[26px]">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <span class="pro-color-2 w-[22px] h-[22px] block rounded-[20px] bg-[#ff748b]"></span>
-                                    </div>
-                                </li>
-                                <li class="transition-all duration-[0.3s] ease-in-out inline-block p-[2px] rounded-[20px] cursor-pointer mr-[5px] w-[26px] h-[26px]">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <span class="pro-color-3 w-[22px] h-[22px] block rounded-[20px] bg-[#000000]"></span>
-                                    </div>
-                                </li>
-                                <li class="transition-all duration-[0.3s] ease-in-out inline-block p-[2px] rounded-[20px] cursor-pointer mr-[5px] w-[26px] h-[26px]">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <span class="pro-color-4 w-[22px] h-[22px] block rounded-[20px] bg-[#2bff4a]"></span>
-                                    </div>
-                                </li>
-                                <li class="transition-all duration-[0.3s] ease-in-out inline-block p-[2px] rounded-[20px] cursor-pointer mr-[5px] w-[26px] h-[26px]">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <span class="pro-color-5 w-[22px] h-[22px] block rounded-[20px] bg-[#ff7c5e]"></span>
-                                    </div>
-                                </li>
-                                <li class="transition-all duration-[0.3s] ease-in-out inline-block p-[2px] rounded-[20px] cursor-pointer mr-[5px] w-[26px] h-[26px]">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <span class="pro-color-6 w-[22px] h-[22px] block rounded-[20px] bg-[#f155ff]"></span>
-                                    </div>
-                                </li>
-                                <li class="transition-all duration-[0.3s] ease-in-out inline-block p-[2px] rounded-[20px] cursor-pointer mr-[5px] w-[26px] h-[26px]">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <span class="pro-color-7 w-[22px] h-[22px] block rounded-[20px] bg-[#ffef00]"></span>
-                                    </div>
-                                </li>
-                                <li class="transition-all duration-[0.3s] ease-in-out inline-block p-[2px] rounded-[20px] cursor-pointer mr-[5px] w-[26px] h-[26px]">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <span class="pro-color-8 w-[22px] h-[22px] block rounded-[20px] bg-[#c89fff]"></span>
-                                    </div>
-                                </li>
-                                <li class="transition-all duration-[0.3s] ease-in-out inline-block p-[2px] rounded-[20px] cursor-pointer mr-[5px] w-[26px] h-[26px]">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <span class="pro-color-9 w-[22px] h-[22px] block rounded-[20px] bg-[#7bfffa]"></span>
-                                    </div>
-                                </li>
-                                <li class="transition-all duration-[0.3s] ease-in-out inline-block p-[2px] rounded-[20px] cursor-pointer mr-[5px] w-[26px] h-[26px]">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <span class="pro-color-10 w-[22px] h-[22px] block rounded-[20px] bg-[#56ffc1]"></span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="bb-sidebar-block p-[20px] border-b border-solid border-[#eee]">
-                        <div class="bb-sidebar-title mb-[20px]">
-                            <h3 class="font-quicksand text-[18px] tracking-[0.03rem] leading-[1.2] font-bold text-[#3d4750]">Price</h3>
-                        </div>
-                        <div class="bb-price-range">
-                            <div class="price-range-slider relative w-full">
-                                <p class="range-value text-center text-[16px] font-semibold text-[#3d4750] mb-[10px]" id="amount"></p>
-                                <div id="slider-range" class="range-bar h-[8px] bg-gray-300 rounded-md"></div>
+                    @if($products->isNotEmpty() && $products->count() !== 1)
+                        <div class="bb-sidebar-block p-[20px] border-b border-solid border-[#eee]">
+                            <div class="bb-sidebar-title mb-[20px]">
+                                <h3 class="font-quicksand text-[18px] tracking-[0.03rem] leading-[1.2] font-bold text-[#3d4750]">Price</h3>
+                            </div>
+                            <div class="bb-price-range">
+                                <div class="price-range-slider relative w-full">
+                                    <p class="range-value text-center text-[16px] font-semibold text-[#3d4750] mb-[10px]" id="amount"></p>
+                                    <div id="slider-range" class="range-bar h-[8px] bg-gray-300 rounded-md"></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
+
 
                     <div class="bb-sidebar-block p-[20px]">
                         <div class="bb-sidebar-title mb-[20px]">
@@ -294,14 +223,14 @@
                                     <div class="w-[50%] px-[12px] max-[420px]:w-full">
                                         <div class="bb-select-inner h-full py-[10px] flex items-center justify-end max-[420px]:justify-center">
                                             <div class="custom-select w-[130px] mr-[30px] flex justify-end text-[#777]  items-center text-[14px] relative max-[420px]:w-[100px] max-[420px]:justify-left">
-                                                <select>
-                                                    <option selected disabled>Sort by</option>
-                                                    <option value="1">Position</option>
-                                                    <option value="2">Relevance</option>
-                                                    <option value="3">Name, A to Z</option>
-                                                    <option value="4">Name, Z to A</option>
-                                                    <option value="5">Price, low to high</option>
-                                                    <option value="6">Price, high to low</option>
+                                                <select id="sortSelect">
+                                                    <option disabled>Sort by</option>
+                                                    <option value="position">Position</option>
+                                                    <option value="relevance">Relevance</option>
+                                                    <option value="name_asc">Name, A to Z</option>
+                                                    <option value="name_desc">Name, Z to A</option>
+                                                    <option value="price_asc">Price, low to high</option>
+                                                    <option value="price_desc">Price, high to low</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -465,24 +394,49 @@
 
 <script>
     $(function () {
-        let startPrice = {{ request('startPrice', 0) }};
-        let endPrice = {{ request('endPrice', 10000) }};
+        let urlParams = new URLSearchParams(window.location.search);
+
+        let startPrice = urlParams.get('startPrice') || {{ $minSalePrice ?? 0 }};
+        let endPrice = urlParams.get('endPrice') || {{ $maxSalePrice ?? 10000 }};
 
         $("#slider-range").slider({
             range: true,
-            min: 0,
-            max: 10000,
+            min: {{ $minSalePrice ?? 0 }},
+            max: {{ $maxSalePrice ?? 10000 }},
             values: [startPrice, endPrice],
             slide: function (event, ui) {
                 $("#amount").text("$" + ui.values[0] + " - $" + ui.values[1]);
             },
             change: function (event, ui) {
-                window.location.href = "?startPrice=" + ui.values[0] + "&endPrice=" + ui.values[1];
+                let newParams = new URLSearchParams(window.location.search);
+                newParams.set('startPrice', ui.values[0]);
+                newParams.set('endPrice', ui.values[1]);
+
+                window.location.search = newParams.toString();
             }
         });
 
         $("#amount").text("$" + $("#slider-range").slider("values", 0) +
             " - $" + $("#slider-range").slider("values", 1));
+    });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let sortSelect = document.getElementById("sortSelect");
+        sortSelect.classList.remove('hide-select')
+        if (!sortSelect) return; // Если select не найден, выходим
+
+        let url = new URL(window.location.href);
+        let sortParam = url.searchParams.get("sort");
+
+        if (sortParam) {
+            sortSelect.value = sortParam; // Устанавливаем выбранный вариант
+        }
+
+        sortSelect.addEventListener("change", function() {
+            url.searchParams.set("sort", this.value);
+            window.location.href = url.toString(); // Обновляем страницу с новым параметром
+        });
     });
 </script>
 
