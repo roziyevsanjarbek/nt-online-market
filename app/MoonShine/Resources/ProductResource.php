@@ -37,7 +37,10 @@ class ProductResource extends ModelResource
         return [
             ID::make()->sortable(),
             Text::make('Name')->sortable(),
-            Text::make('Description')->sortable(),
+            Textarea::make('Description')
+                ->customAttributes([
+                'rows'=>7,
+            ]),
             Text::make('Price')->sortable(),
             Text::make('Sale Price','sale_price')->sortable(),
             BelongsTo::make(
@@ -61,7 +64,10 @@ class ProductResource extends ModelResource
         return [
             ID::make()->sortable(),
             Text::make('Name')->sortable(),
-            TinyMce::make('Description'),
+            Textarea::make('Description')
+                ->customAttributes([
+                    'rows'=>7,
+                ]),
             Text::make('price')->sortable(),
             Text::make('Sale Price','sale_price')->sortable(),
             BelongsTo::make(
@@ -84,7 +90,10 @@ class ProductResource extends ModelResource
         return [
             ID::make()->sortable(),
             Text::make('Name')->sortable(),
-            TinyMce::make('Description'),
+            Textarea::make('Description')
+                ->customAttributes([
+                    'rows'=>7,
+                ]),
             Text::make('Price')->sortable(),
             Text::make('Sale Price','sale_price')->sortable(),
             BelongsTo::make(
