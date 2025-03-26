@@ -318,7 +318,8 @@
                                     Showing {{ $products->firstItem() }}-{{ $products->lastItem() }} of {{ $products->total() }} item(s)</p>
                                 <ul class="flex">
                                     {{-- Previous Page Link --}}
-                                    @if ($products->onFirstPage())
+                                    @if ($products->onFirstPage())\
+                                
                                         <li class="leading-[28px] mr-[6px] opacity-50 pointer-events-none">
                                             <span
                                                 class="transition-all duration-[0.3s] ease-in-out w-[auto] h-[32px] px-[13px] font-light text-[#fff] leading-[30px] bg-gray-400 font-Poppins tracking-[0.03rem] text-[15px] flex text-center align-top justify-center items-center rounded-[10px] border-[1px] border-solid border-[#eee]">
