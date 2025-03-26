@@ -77,16 +77,24 @@ class ProductsController extends Controller
                 return $query->whereIn('volume_id', $productVolumes);
             })
             ->when(isset($startPrice) && isset($endPrice), function ($query) use ($startPrice, $endPrice) {
-                return $query->whereBetween('price', [$startPrice, $endPrice]);
+                return $query->whereBetween('sale_price', [$startPrice, $endPrice]);
             })
             ->orderBy('id', 'desc')
             ->with('images')
             ->paginate(10);
 
         $categories = Category::all();
+<<<<<<< HEAD
 
         $images = Image::paginate(1);
         $weights = Volume::all(); // **Shu qatorni qo‘sh!**
+=======
+        $images = Image::paginate(1);
+        $weights = Volume::all();
+        $minSalePrice = $products->min('sale_price');
+        $maxSalePrice = $products->max('sale_price');
+
+>>>>>>> 6766f969a3cfa96647bcf1ae9de43bff316d7efb
 
         return view('product-filter', [
             'products' => $products,
@@ -94,7 +102,14 @@ class ProductsController extends Controller
             'productsMenu' => $productsMenu,
             'categories' => $categories,
             'images'=>$images,
+<<<<<<< HEAD
             'weights' => $weights
+=======
+            'weights' => $weights,
+            'minSalePrice' => $minSalePrice,
+            'maxSalePrice' => $maxSalePrice,
+
+>>>>>>> 6766f969a3cfa96647bcf1ae9de43bff316d7efb
         ]);
     }
 
