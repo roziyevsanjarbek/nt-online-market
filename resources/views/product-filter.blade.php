@@ -110,20 +110,6 @@
                         </div>
                         <div class="bb-sidebar-contact">
                             <ul>
-                                <li class="relative block mb-[14px]">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <input type="checkbox" class="w-full h-[calc(100%-5px)] absolute opacity-[0] cursor-pointer z-[999] top-[50%] left-[0] translate-y-[-50%]">
-                                        <a href="javascript:void(0)" class="ml-[30px] block text-[#777] text-[14px] leading-[20px] font-normal capitalize cursor-pointer">200gm pack</a>
-                                        <span class="checked absolute top-[0] left-[0] h-[18px] w-[18px] bg-[#fff] border-[1px] border-solid border-[#eee] rounded-[5px] overflow-hidden"></span>
-                                    </div>
-                                </li>
-                                <li class="relative block mb-[14px]">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <input type="checkbox" class="w-full h-[calc(100%-5px)] absolute opacity-[0] cursor-pointer z-[999] top-[50%] left-[0] translate-y-[-50%]">
-                                        <a href="javascript:void(0)" class="ml-[30px] block text-[#777] text-[14px] leading-[20px] font-normal capitalize cursor-pointer">500gm pack</a>
-                                        <span class="checked absolute top-[0] left-[0] h-[18px] w-[18px] bg-[#fff] border-[1px] border-solid border-[#eee] rounded-[5px] overflow-hidden"></span>
-                                    </div>
-                                </li>
                                 @foreach($weights as $weight)
                                     @php
                                         $checked = request()->has('weights') && in_array($weight->name, request()->weights) ? 'checked' : '';
@@ -167,17 +153,19 @@
                         });
                     </script>
 
-                    <div class="bb-sidebar-block p-[20px] border-b border-solid border-[#eee]">
-                        <div class="bb-sidebar-title mb-[20px]">
-                            <h3 class="font-quicksand text-[18px] tracking-[0.03rem] leading-[1.2] font-bold text-[#3d4750]">Price</h3>
-                        </div>
-                        <div class="bb-price-range">
-                            <div class="price-range-slider relative w-full">
-                                <p class="range-value text-center text-[16px] font-semibold text-[#3d4750] mb-[10px]" id="amount"></p>
-                                <div id="slider-range" class="range-bar h-[8px] bg-gray-300 rounded-md"></div>
+                    @if($products->isNotEmpty() && $products->count() !== 1)
+                        <div class="bb-sidebar-block p-[20px] border-b border-solid border-[#eee]">
+                            <div class="bb-sidebar-title mb-[20px]">
+                                <h3 class="font-quicksand text-[18px] tracking-[0.03rem] leading-[1.2] font-bold text-[#3d4750]">Price</h3>
+                            </div>
+                            <div class="bb-price-range">
+                                <div class="price-range-slider relative w-full">
+                                    <p class="range-value text-center text-[16px] font-semibold text-[#3d4750] mb-[10px]" id="amount"></p>
+                                    <div id="slider-range" class="range-bar h-[8px] bg-gray-300 rounded-md"></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
 
                     <div class="bb-sidebar-block p-[20px]">
                         <div class="bb-sidebar-title mb-[20px]">
@@ -331,7 +319,8 @@
                                     Showing {{ $products->firstItem() }}-{{ $products->lastItem() }} of {{ $products->total() }} item(s)</p>
                                 <ul class="flex">
                                     {{-- Previous Page Link --}}
-                                    @if ($products->onFirstPage())
+                                    @if ($products->onFirstPage())\
+
                                         <li class="leading-[28px] mr-[6px] opacity-50 pointer-events-none">
                                             <span
                                                 class="transition-all duration-[0.3s] ease-in-out w-[auto] h-[32px] px-[13px] font-light text-[#fff] leading-[30px] bg-gray-400 font-Poppins tracking-[0.03rem] text-[15px] flex text-center align-top justify-center items-center rounded-[10px] border-[1px] border-solid border-[#eee]">
@@ -407,19 +396,25 @@
 
 <script>
     $(function () {
-        let startPrice = {{ request('startPrice', 0) }};
-        let endPrice = {{ request('endPrice', 10000) }};
+        let urlParams = new URLSearchParams(window.location.search);
+
+        let startPrice = urlParams.get('startPrice') || {{ $minSalePrice ?? 0 }};
+        let endPrice = urlParams.get('endPrice') || {{ $maxSalePrice ?? 10000 }};
 
         $("#slider-range").slider({
             range: true,
-            min: 0,
-            max: 10000,
+            min: {{ $minSalePrice ?? 0 }},
+            max: {{ $maxSalePrice ?? 10000 }},
             values: [startPrice, endPrice],
             slide: function (event, ui) {
                 $("#amount").text("$" + ui.values[0] + " - $" + ui.values[1]);
             },
             change: function (event, ui) {
-                window.location.href = "?startPrice=" + ui.values[0] + "&endPrice=" + ui.values[1];
+                let newParams = new URLSearchParams(window.location.search);
+                newParams.set('startPrice', ui.values[0]);
+                newParams.set('endPrice', ui.values[1]);
+
+                window.location.search = newParams.toString();
             }
         });
 
