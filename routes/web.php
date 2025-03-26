@@ -1,15 +1,16 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductStatusesController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
-Route::get('/exit', [HomeController::class, 'exit'])->name('exit');
 
 
-Route::get('/dashboard', [HomeController::class, 'home'])->middleware('auth')->name('home');
+
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
 Route::middleware('auth')->group(function ()
 {

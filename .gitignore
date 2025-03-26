@@ -21,5 +21,7 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
-/composer.json
-/package-lock.json
+composer.lock
+yarn.lock
+package-lock.json
+.github/workflows/laravel.yml

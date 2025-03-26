@@ -65,8 +65,27 @@ class ShopPageController extends Controller
 
         // So‘nggi postlarni olish
         $latestPosts = Product::orderBy('created_at', 'desc')->take(5)->get();
+        $productsMenu = Category::query()
+            ->whereNull('parent_id')
+            ->orderBy('id', 'desc')
+            ->with('categories')
+            ->get();
+        $products= Product::query()
+            ->orderBy('id', 'desc')
+            ->limit(10)
+            ->get();
 
-        return view('shop-page', compact('posts', 'categories', 'parentCategories', 'latestPosts'));
+        return view('shop-page', [
+            'posts' => $posts,
+            'categories' => $categories,
+            'parentCategories' => $parentCategories,
+            'latestPosts' => $latestPosts,
+            'products' => $products,
+            'productsMenu' => $productsMenu,
+            'weight' => $weight,
+            'minPrice' => $minPrice,
+            'maxPrice' => $maxPrice,
+        ]);
     }
 
     public function show($id)

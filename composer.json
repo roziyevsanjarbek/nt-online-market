@@ -11,6 +11,7 @@
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "moonshine/moonshine": "^3.7",
+        "moonshine/tinymce": "^1.0",
         "nesbot/carbon": "^3.8"
     },
     "require-dev": {

@@ -7,7 +7,6 @@
 
 <!-- Header -->
 <x-navbar :parentCategories="$parentCategories" :productsMenu="$productsMenu"></x-navbar>
-
 <!-- Breadcrumb -->
 <section class="section-breadcrumb mb-[50px] max-[1199px]:mb-[35px] border-b-[1px] border-solid border-[#eee] bg-[#f8f8fb]">
     <div class="flex flex-wrap justify-between relative items-center mx-auto min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
@@ -75,19 +74,35 @@
                         <div class="bb-sidebar-title mb-[20px]">
                             <h3 class="font-quicksand text-[18px] tracking-[0.03rem] leading-[1.2] font-bold text-[#3d4750]">Category</h3>
                         </div>
-                        <div class="bb-sidebar-contact">
-                            <ul>
-                                @foreach($categories as $category)
-                                    <li class="relative block mb-[14px]">
-                                        <div class="bb-sidebar-block-item relative">
-                                            <input type="checkbox" class="w-full h-[calc(100%-5px)] absolute opacity-[0] cursor-pointer z-[999] top-[50%] left-[0] translate-y-[-50%]">
-                                            <a href="javascript:void(0)" class="ml-[30px] block text-[#777] text-[14px] leading-[20px] font-normal capitalize cursor-pointer">{{$category->name}}</a>
-                                            <span class="checked absolute top-[0] left-[0] h-[18px] w-[18px] bg-[#fff] border-[1px] border-solid border-[#eee] rounded-[5px] overflow-hidden"></span>
-                                        </div>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
+                        <form action="{{ route('filter') }}" method="GET" id="filterForm">
+                            <div class="bb-sidebar-contact">
+                                <ul>
+                                    @foreach($categories as $category)
+                                        @php
+                                            $selected = in_array($category->name, request()->get('categories', []));
+                                        @endphp
+                                        <li class="relative block mb-[14px]">
+                                            <div class="bb-sidebar-block-item relative">
+                                                <input type="checkbox"
+                                                       name="categories[]"
+                                                       value="{{ $category->name }}"
+                                                       class="w-full h-[calc(100%-5px)] absolute opacity-[0] cursor-pointer z-[999] top-[50%] left-[0] translate-y-[-50%]"
+                                                       onchange="document.getElementById('filterForm').submit();"
+                                                    {{ $selected ? 'checked' : '' }}>
+                                                <a href="javascript:void(0)" class="ml-[30px] block text-[#777] text-[14px] leading-[20px] font-normal capitalize cursor-pointer">
+                                                    {{ $category->name }}
+                                                </a>
+                                                <span class="checked absolute top-[0] left-[0] h-[18px] w-[18px]
+                            {{ $selected ? 'bg-[#000] border-[#000]' : 'bg-[#fff] border-[#eee]' }}
+                            border-[1px] border-solid rounded-[5px] overflow-hidden">
+                        </span>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </form>
+
                     </div>
                     <div class="bb-sidebar-block p-[20px] border-b-[1px] border-solid border-[#eee]">
                         <div class="bb-sidebar-title mb-[20px]">
@@ -109,84 +124,95 @@
                                         <span class="checked absolute top-[0] left-[0] h-[18px] w-[18px] bg-[#fff] border-[1px] border-solid border-[#eee] rounded-[5px] overflow-hidden"></span>
                                     </div>
                                 </li>
+                                @foreach($weights as $weight)
+                                    @php
+                                        $checked = request()->has('weights') && in_array($weight->name, request()->weights) ? 'checked' : '';
+                                    @endphp
+                                    <li class="relative block mb-[14px]">
+                                        <div class="bb-sidebar-block-item relative">
+                                            <input type="checkbox" name="weights[]" value="{{ $weight->name }}" {{ $checked }}
+                                            class="weight-filter w-full h-[calc(100%-5px)] absolute opacity-[0] cursor-pointer z-[999] top-[50%] left-[0] translate-y-[-50%]">
+                                            <a href="javascript:void(0)" class="ml-[30px] block text-[#777] text-[14px] leading-[20px] font-normal capitalize cursor-pointer">
+                                                {{ $weight->name }}
+                                            </a>
+                                            <span class="checked absolute top-[0] left-[0] h-[18px] w-[18px] bg-[#fff] border-[1px] border-solid border-[#eee] rounded-[5px] overflow-hidden"></span>
+                                        </div>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
-                    <div class="bb-sidebar-block p-[20px] border-b-[1px] border-solid border-[#eee]">
-                        <div class="bb-sidebar-title mb-[20px]">
-                            <h3 class="font-quicksand text-[18px] tracking-[0.03rem] leading-[1.2] font-bold text-[#3d4750]">Color</h3>
-                        </div>
-                        <div class="bb-color-contact">
-                            <ul>
-                                <li class="transition-all duration-[0.3s] ease-in-out inline-block p-[2px] rounded-[20px] cursor-pointer mr-[5px] w-[26px] h-[26px] color-sidebar-active">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <span class="pro-color-1 w-[22px] h-[22px] block rounded-[20px] bg-[#c4d6f9]"></span>
-                                    </div>
-                                </li>
-                                <li class="transition-all duration-[0.3s] ease-in-out inline-block p-[2px] rounded-[20px] cursor-pointer mr-[5px] w-[26px] h-[26px]">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <span class="pro-color-2 w-[22px] h-[22px] block rounded-[20px] bg-[#ff748b]"></span>
-                                    </div>
-                                </li>
-                                <li class="transition-all duration-[0.3s] ease-in-out inline-block p-[2px] rounded-[20px] cursor-pointer mr-[5px] w-[26px] h-[26px]">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <span class="pro-color-3 w-[22px] h-[22px] block rounded-[20px] bg-[#000000]"></span>
-                                    </div>
-                                </li>
-                                <li class="transition-all duration-[0.3s] ease-in-out inline-block p-[2px] rounded-[20px] cursor-pointer mr-[5px] w-[26px] h-[26px]">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <span class="pro-color-4 w-[22px] h-[22px] block rounded-[20px] bg-[#2bff4a]"></span>
-                                    </div>
-                                </li>
-                                <li class="transition-all duration-[0.3s] ease-in-out inline-block p-[2px] rounded-[20px] cursor-pointer mr-[5px] w-[26px] h-[26px]">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <span class="pro-color-5 w-[22px] h-[22px] block rounded-[20px] bg-[#ff7c5e]"></span>
-                                    </div>
-                                </li>
-                                <li class="transition-all duration-[0.3s] ease-in-out inline-block p-[2px] rounded-[20px] cursor-pointer mr-[5px] w-[26px] h-[26px]">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <span class="pro-color-6 w-[22px] h-[22px] block rounded-[20px] bg-[#f155ff]"></span>
-                                    </div>
-                                </li>
-                                <li class="transition-all duration-[0.3s] ease-in-out inline-block p-[2px] rounded-[20px] cursor-pointer mr-[5px] w-[26px] h-[26px]">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <span class="pro-color-7 w-[22px] h-[22px] block rounded-[20px] bg-[#ffef00]"></span>
-                                    </div>
-                                </li>
-                                <li class="transition-all duration-[0.3s] ease-in-out inline-block p-[2px] rounded-[20px] cursor-pointer mr-[5px] w-[26px] h-[26px]">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <span class="pro-color-8 w-[22px] h-[22px] block rounded-[20px] bg-[#c89fff]"></span>
-                                    </div>
-                                </li>
-                                <li class="transition-all duration-[0.3s] ease-in-out inline-block p-[2px] rounded-[20px] cursor-pointer mr-[5px] w-[26px] h-[26px]">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <span class="pro-color-9 w-[22px] h-[22px] block rounded-[20px] bg-[#7bfffa]"></span>
-                                    </div>
-                                </li>
-                                <li class="transition-all duration-[0.3s] ease-in-out inline-block p-[2px] rounded-[20px] cursor-pointer mr-[5px] w-[26px] h-[26px]">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <span class="pro-color-10 w-[22px] h-[22px] block rounded-[20px] bg-[#56ffc1]"></span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="bb-sidebar-block p-[20px] border-b-[1px] border-solid border-[#eee]">
+
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            document.querySelectorAll(".weight-filter").forEach(input => {
+                                input.addEventListener("change", function () {
+                                    let params = new URLSearchParams(window.location.search);
+
+                                    // Agar checkbox tanlangan bo‘lsa, paramsga qo‘shamiz
+                                    if (this.checked) {
+                                        params.append('weights[]', this.value);
+                                    } else {
+                                        let values = params.getAll('weights[]');
+                                        params.delete('weights[]');
+                                        values.forEach(val => {
+                                            if (val !== this.value) params.append('weights[]', val);
+                                        });
+                                    }
+
+                                    // Sahifani yangilash
+                                    window.location.search = params.toString();
+                                });
+                            });
+                        });
+                    </script>
+
+                    <div class="bb-sidebar-block p-[20px] border-b border-solid border-[#eee]">
                         <div class="bb-sidebar-title mb-[20px]">
                             <h3 class="font-quicksand text-[18px] tracking-[0.03rem] leading-[1.2] font-bold text-[#3d4750]">Price</h3>
                         </div>
                         <div class="bb-price-range">
-                            <div class="price-range-slider relative w-full mb-[7px]">
-                                <p class="range-value m-[0]">
-                                    <input type="text" id="amount" readonly class="w-full bg-[#fff] text-[#000] text-[16px] mb-[15px] font-initial border-[1px] border-solid border-[#eee] p-[10px] text-center outline-[0] rounded-[10px]">
-                                </p>
-                                <div id="slider-range" class="range-bar"></div>
+                            <div class="price-range-slider relative w-full">
+                                <p class="range-value text-center text-[16px] font-semibold text-[#3d4750] mb-[10px]" id="amount"></p>
+                                <div id="slider-range" class="range-bar h-[8px] bg-gray-300 rounded-md"></div>
                             </div>
                         </div>
                     </div>
+
                     <div class="bb-sidebar-block p-[20px]">
                         <div class="bb-sidebar-title mb-[20px]">
                             <h3 class="font-quicksand text-[18px] tracking-[0.03rem] leading-[1.2] font-bold text-[#3d4750]">Tags</h3>
+                        </div>
+                        <div class="bb-tags">
+                            <ul class="flex flex-wrap m-[-5px]">
+                                <li class="transition-all duration-[0.3s] ease-in-out m-[5px] py-[2px] px-[15px] border-[1px] border-solid border-[#eee] rounded-[10px] hover:bg-[#6c7fd8] cursor-pointer">
+                                    <a href="javascript:void(0)" class="font-Poppins text-[13px] capitalize font-light leading-[28px] tracking-[0.03rem] text-[#686e7d]">Clothes</a>
+                                </li>
+                                <li class="transition-all duration-[0.3s] ease-in-out m-[5px] py-[2px] px-[15px] border-[1px] border-solid border-[#eee] rounded-[10px] hover:bg-[#6c7fd8] cursor-pointer">
+                                    <a href="javascript:void(0)" class="font-Poppins text-[13px] capitalize font-light leading-[28px] tracking-[0.03rem] text-[#686e7d]">Fruits</a>
+                                </li>
+                                <li class="transition-all duration-[0.3s] ease-in-out m-[5px] py-[2px] px-[15px] border-[1px] border-solid border-[#eee] rounded-[10px] hover:bg-[#6c7fd8] cursor-pointer">
+                                    <a href="javascript:void(0)" class="font-Poppins text-[13px] capitalize font-light leading-[28px] tracking-[0.03rem] text-[#686e7d]">Snacks</a>
+                                </li>
+                                <li class="transition-all duration-[0.3s] ease-in-out m-[5px] py-[2px] px-[15px] border-[1px] border-solid border-[#eee] rounded-[10px] hover:bg-[#6c7fd8] cursor-pointer">
+                                    <a href="javascript:void(0)" class="font-Poppins text-[13px] capitalize font-light leading-[28px] tracking-[0.03rem] text-[#686e7d]">Dairy</a>
+                                </li>
+                                <li class="transition-all duration-[0.3s] ease-in-out m-[5px] py-[2px] px-[15px] border-[1px] border-solid border-[#eee] rounded-[10px] hover:bg-[#6c7fd8] cursor-pointer">
+                                    <a href="javascript:void(0)" class="font-Poppins text-[13px] capitalize font-light leading-[28px] tracking-[0.03rem] text-[#686e7d]">Seafood</a>
+                                </li>
+                                <li class="transition-all duration-[0.3s] ease-in-out m-[5px] py-[2px] px-[15px] border-[1px] border-solid border-[#eee] rounded-[10px] hover:bg-[#6c7fd8] cursor-pointer">
+                                    <a href="javascript:void(0)" class="font-Poppins text-[13px] capitalize font-light leading-[28px] tracking-[0.03rem] text-[#686e7d]">Toys</a>
+                                </li>
+                                <li class="transition-all duration-[0.3s] ease-in-out m-[5px] py-[2px] px-[15px] border-[1px] border-solid border-[#eee] rounded-[10px] hover:bg-[#6c7fd8] cursor-pointer">
+                                    <a href="javascript:void(0)" class="font-Poppins text-[13px] capitalize font-light leading-[28px] tracking-[0.03rem] text-[#686e7d]">perfume</a>
+                                </li>
+                                <li class="transition-all duration-[0.3s] ease-in-out m-[5px] py-[2px] px-[15px] border-[1px] border-solid border-[#eee] rounded-[10px] hover:bg-[#6c7fd8] cursor-pointer">
+                                    <a href="javascript:void(0)" class="font-Poppins text-[13px] capitalize font-light leading-[28px] tracking-[0.03rem] text-[#686e7d]">jewelry</a>
+                                </li>
+                                <li class="transition-all duration-[0.3s] ease-in-out m-[5px] py-[2px] px-[15px] border-[1px] border-solid border-[#eee] rounded-[10px] hover:bg-[#6c7fd8] cursor-pointer">
+                                    <a href="javascript:void(0)" class="font-Poppins text-[13px] capitalize font-light leading-[28px] tracking-[0.03rem] text-[#686e7d]">Bags</a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -235,9 +261,9 @@
                                         </span>
                                         <a href="javascript:void(0)">
                                             <div class="inner-img relative block overflow-hidden pointer-events-none rounded-t-[20px]">
-                                                <img class="main-img transition-all duration-[0.3s] ease-in-out w-full" src="assets/img/new-product/1.jpg"
+                                                <img class="main-img transition-all duration-[0.3s] ease-in-out w-full" src="{{\Illuminate\Support\Facades\Storage::url($product->images->first()->path)}}"
                                                      alt="product-1">
-                                                <img class="hover-img transition-all duration-[0.3s] ease-in-out absolute z-[2] top-[0] left-[0] opacity-[0] w-full" src="assets/img/new-product/back-1.jpg"
+                                                <img class="hover-img transition-all duration-[0.3s] ease-in-out absolute z-[2] top-[0] left-[0] opacity-[0] w-full" src="{{\Illuminate\Support\Facades\Storage::url($product->images->first()->path)}}"
                                                      alt="product-1">
                                             </div>
                                         </a>
@@ -297,14 +323,59 @@
                             </div>
                         @endforeach
 
+
                         <div class="w-full px-[12px]">
-                            <div class="bb-pro-pagination mb-[24px] flex justify-between max-[575px]:flex-col max-[575px]:items-center">
-                                <div class="container">
-                                    @foreach ($images as $image)
-                                        {{ $image->name }}
+                            <div
+                                class="bb-pro-pagination mb-[24px] flex justify-between max-[575px]:flex-col max-[575px]:items-center">
+                                <p class="font-Poppins text-[15px] text-[#686e7d] font-light leading-[28px] tracking-[0.03rem] max-[575px]:mb-[10px]">
+                                    Showing {{ $products->firstItem() }}-{{ $products->lastItem() }} of {{ $products->total() }} item(s)</p>
+                                <ul class="flex">
+                                    {{-- Previous Page Link --}}
+                                    @if ($products->onFirstPage())
+                                        <li class="leading-[28px] mr-[6px] opacity-50 pointer-events-none">
+                                            <span
+                                                class="transition-all duration-[0.3s] ease-in-out w-[auto] h-[32px] px-[13px] font-light text-[#fff] leading-[30px] bg-gray-400 font-Poppins tracking-[0.03rem] text-[15px] flex text-center align-top justify-center items-center rounded-[10px] border-[1px] border-solid border-[#eee]">
+                                                    Prev
+                                            </span>
+                                        </li>
+                                    @else
+                                        <li class="leading-[28px] mr-[6px]">
+                                            <a href="{{ $products->previousPageUrl() }}"
+                                               class="transition-all duration-[0.3s] ease-in-out w-[auto] h-[32px] px-[13px] font-light text-[#fff] leading-[30px] bg-[#3d4750] font-Poppins tracking-[0.03rem] text-[15px] flex text-center align-top justify-center items-center rounded-[10px] border-[1px] border-solid border-[#eee]">
+                                                Prev
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                    {{-- Pagination Links --}}
+                                    @foreach ($products->links()->elements[0] as $page => $url)
+                                        <li class="leading-[28px] mr-[6px] {{ $products->currentPage() == $page ? 'active' : '' }}">
+                                            <a href="{{ $url }}"
+                                               class="transition-all duration-[0.3s] ease-in-out w-[32px] h-[32px] font-light {{ $products->currentPage() == $page ? 'text-white bg-[#3d4750]' : 'text-[#777] bg-[#f8f8fb]' }} leading-[32px] font-Poppins tracking-[0.03rem] text-[15px] flex text-center align-top justify-center items-center rounded-[10px] border-[1px] border-solid border-[#eee] hover:bg-[#3d4750] hover:text-[#fff]">
+                                                {{ $page }}
+                                            </a>
+                                        </li>
                                     @endforeach
-                                </div>
-                                {{ $images->links() }}
+
+                                    {{-- Next Page Link --}}
+                                    @if ($products->hasMorePages())
+                                        <li class="leading-[28px]">
+                                            <a href="{{ $products->nextPageUrl() }}"
+                                               class="next transition-all duration-[0.3s] ease-in-out w-[auto] h-[32px] px-[13px] font-light text-[#fff] leading-[30px] bg-[#3d4750] font-Poppins tracking-[0.03rem] text-[15px] flex text-center align-top justify-center items-center rounded-[10px] border-[1px] border-solid border-[#eee]">
+                                                Next <i
+                                                    class="ri-arrow-right-s-line transition-all duration-[0.3s] ease-in-out ml-[10px] text-[16px] w-[8px] text-[#fff]"></i>
+                                            </a>
+                                        </li>
+                                    @else
+                                        <li class="leading-[28px] opacity-50 pointer-events-none">
+                                            <span
+                                                class="transition-all duration-[0.3s] ease-in-out w-[auto] h-[32px] px-[13px] font-light text-[#fff] leading-[30px] bg-gray-400 font-Poppins tracking-[0.03rem] text-[15px] flex text-center align-top justify-center items-center rounded-[10px] border-[1px] border-solid border-[#eee]">
+                                                Next
+                                            </span>
+                                        </li>
+                                    @endif
+                                </ul>
+
                             </div>
                         </div>
                         </div>
@@ -312,7 +383,6 @@
                 </div>
             </div>
         </div>
-    </div>
 </section>
 
 
@@ -332,6 +402,31 @@
 <x-back-to-top></x-back-to-top>
 <!-- Plugins -->
 <x-plugins></x-plugins>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+    $(function () {
+        let startPrice = {{ request('startPrice', 0) }};
+        let endPrice = {{ request('endPrice', 10000) }};
+
+        $("#slider-range").slider({
+            range: true,
+            min: 0,
+            max: 10000,
+            values: [startPrice, endPrice],
+            slide: function (event, ui) {
+                $("#amount").text("$" + ui.values[0] + " - $" + ui.values[1]);
+            },
+            change: function (event, ui) {
+                window.location.href = "?startPrice=" + ui.values[0] + "&endPrice=" + ui.values[1];
+            }
+        });
+
+        $("#amount").text("$" + $("#slider-range").slider("values", 0) +
+            " - $" + $("#slider-range").slider("values", 1));
+    });
+</script>
 
 
 </body>
