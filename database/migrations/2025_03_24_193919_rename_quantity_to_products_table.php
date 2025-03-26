@@ -12,21 +12,14 @@ return new class extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            if (!Schema::hasColumn('products', 'sale_price')) {
-                $table->decimal('sale_price', 8, 2)->after('price')->nullable();
-            }
+            $table->float('quantity')->after('stock_quantity')->default(0);
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down()
     {
         Schema::table('products', function (Blueprint $table) {
-            if (Schema::hasColumn('products', 'sale_price')) {
-                $table->dropColumn('sale_price');
-            }
+            $table->dropColumn('quantity');
         });
     }
 
