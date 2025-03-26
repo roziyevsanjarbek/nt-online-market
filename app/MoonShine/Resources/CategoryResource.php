@@ -80,7 +80,7 @@ class CategoryResource extends ModelResource
     protected function rules(mixed $item): array
     {
         return [
-            'name' => ['required', 'string', 'max:255', 'regex:/^[\p{L}\p{P}\p{Zs}]+$/u'],
+            'name' => ['required', 'string', 'max:255'],
         ];
     }
 }
