@@ -145,11 +145,33 @@
 
                     <script>
                         document.addEventListener("DOMContentLoaded", function () {
-                            document.querySelectorAll(".weight-filter").forEach(input => {
-                                input.addEventListener("change", function () {
-                                    let params = new URLSearchParams(window.location.search);
+                            let params = new URLSearchParams(window.location.search);
 
-                                    // Agar checkbox tanlangan bo‘lsa, paramsga qo‘shamiz
+                            // Kategoriya checkboxlarini tiklash
+                            document.querySelectorAll("input[name='categories[]']").forEach(input => {
+                                if (params.getAll('categories[]').includes(input.value)) {
+                                    input.checked = true;
+                                }
+                                input.addEventListener("change", function () {
+                                    if (this.checked) {
+                                        params.append('categories[]', this.value);
+                                    } else {
+                                        let values = params.getAll('categories[]');
+                                        params.delete('categories[]');
+                                        values.forEach(val => {
+                                            if (val !== this.value) params.append('categories[]', val);
+                                        });
+                                    }
+                                    window.location.search = params.toString();
+                                });
+                            });
+
+                            // Og‘irlik checkboxlarini tiklash
+                            document.querySelectorAll(".weight-filter").forEach(input => {
+                                if (params.getAll('weights[]').includes(input.value)) {
+                                    input.checked = true;
+                                }
+                                input.addEventListener("change", function () {
                                     if (this.checked) {
                                         params.append('weights[]', this.value);
                                     } else {
@@ -159,12 +181,11 @@
                                             if (val !== this.value) params.append('weights[]', val);
                                         });
                                     }
-
-                                    // Sahifani yangilash
                                     window.location.search = params.toString();
                                 });
                             });
                         });
+
                     </script>
 
                     <div class="bb-sidebar-block p-[20px] border-b border-solid border-[#eee]">
@@ -407,25 +428,31 @@
 
 <script>
     $(function () {
-        let startPrice = {{ request('startPrice', 0) }};
-        let endPrice = {{ request('endPrice', 10000) }};
+        let minPrice = {{ $minSalePrice }};
+        let maxPrice = {{ $maxSalePrice }};
+        let startPrice = {{ request('startPrice', $minSalePrice) }};
+        let endPrice = {{ request('endPrice', $maxSalePrice) }};
 
         $("#slider-range").slider({
             range: true,
-            min: 0,
-            max: 10000,
+            min: minPrice,
+            max: maxPrice,
             values: [startPrice, endPrice],
             slide: function (event, ui) {
                 $("#amount").text("$" + ui.values[0] + " - $" + ui.values[1]);
             },
             change: function (event, ui) {
-                window.location.href = "?startPrice=" + ui.values[0] + "&endPrice=" + ui.values[1];
+                let params = new URLSearchParams(window.location.search);
+                params.set("startPrice", ui.values[0]);
+                params.set("endPrice", ui.values[1]);
+                window.location.search = params.toString();
             }
         });
 
         $("#amount").text("$" + $("#slider-range").slider("values", 0) +
             " - $" + $("#slider-range").slider("values", 1));
     });
+
 </script>
 
 
