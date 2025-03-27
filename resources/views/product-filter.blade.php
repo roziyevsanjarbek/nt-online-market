@@ -129,56 +129,6 @@
                             </ul>
                         </div>
                     </div>
-
-                    <script>
-                        document.addEventListener("DOMContentLoaded", function () {
-                            let params = new URLSearchParams(window.location.search);
-
-                            // Kategoriya checkboxlarini tiklash
-                            document.querySelectorAll("input[name='categories[]']").forEach(input => {
-                                if (params.getAll('categories[]').includes(input.value)) {
-                                    input.checked = true;
-                                }
-                                input.addEventListener("change", function () {
-                                    if (this.checked) {
-                                        params.append('categories[]', this.value);
-                                    } else {
-                                        let values = params.getAll('categories[]');
-                                        params.delete('categories[]');
-                                        values.forEach(val => {
-                                            if (val !== this.value) params.append('categories[]', val);
-                                        });
-                                    }
-                                    window.location.search = params.toString();
-                                });
-                            });
-
-                            // Og‘irlik checkboxlarini tiklash
-                            document.querySelectorAll(".weight-filter").forEach(input => {
-                                if (params.getAll('weights[]').includes(input.value)) {
-                                    input.checked = true;
-                                }
-                                input.addEventListener("change", function () {
-                                    let params = new URLSearchParams(window.location.search);
-
-                                    // Agar checkbox tanlangan bo‘lsa, paramsga qo‘shamiz
-                                    if (this.checked) {
-                                        params.append('weights[]', this.value);
-                                    } else {
-                                        let values = params.getAll('weights[]');
-                                        params.delete('weights[]');
-                                        values.forEach(val => {
-                                            if (val !== this.value) params.append('weights[]', val);
-                                        });
-                                    }
-
-                                    // Sahifani yangilash
-                                    window.location.search = params.toString();
-                                });
-                            });
-                        });
-                    </script>
-
                     @if($products->isNotEmpty() && $products->count() !== 1)
                         <div class="bb-sidebar-block p-[20px] border-b border-solid border-[#eee]">
                             <div class="bb-sidebar-title mb-[20px]">
@@ -447,8 +397,7 @@
         $("#amount").text("$" + $("#slider-range").slider("values", 0) +
             " - $" + $("#slider-range").slider("values", 1));
     });
-</script>
-<script>
+    
     document.addEventListener("DOMContentLoaded", function () {
         const sortButton = document.getElementById("sortButton");
         const sortDropdown = document.getElementById("sortDropdown");
@@ -535,9 +484,33 @@
         window.location.href = url.toString();
     }
 
+    document.addEventListener("DOMContentLoaded", function () {
+        let params = new URLSearchParams(window.location.search);
+        // Og‘irlik checkboxlarini tiklash
+        document.querySelectorAll(".weight-filter").forEach(input => {
+            if (params.getAll('weights[]').includes(input.value)) {
+                input.checked = true;
+            }
+            input.addEventListener("change", function () {
+                let params = new URLSearchParams(window.location.search);
 
+                // Agar checkbox tanlangan bo‘lsa, paramsga qo‘shamiz
+                if (this.checked) {
+                    params.append('weights[]', this.value);
+                } else {
+                    let values = params.getAll('weights[]');
+                    params.delete('weights[]');
+                    values.forEach(val => {
+                        if (val !== this.value) params.append('weights[]', val);
+                    });
+                }
+
+                // Sahifani yangilash
+                window.location.search = params.toString();
+            });
+        });
+    });
 </script>
 
 </body>
-
 </html>
