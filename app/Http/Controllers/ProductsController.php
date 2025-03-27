@@ -106,8 +106,10 @@ class ProductsController extends Controller
         $categories = Category::all();
         $images = Image::paginate(1);
         $weights = Volume::all(); // **Shu qatorni qo‘sh!**
-        $minSalePrice = $products->min('sale_price');
-        $maxSalePrice = $products->max('sale_price');
+        $minSalePrice = $products->min('price');
+        $maxSalePrice = $products->max('price');
+
+
 
 
 

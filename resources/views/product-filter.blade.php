@@ -132,7 +132,32 @@
 
                     <script>
                         document.addEventListener("DOMContentLoaded", function () {
+                            let params = new URLSearchParams(window.location.search);
+
+                            // Kategoriya checkboxlarini tiklash
+                            document.querySelectorAll("input[name='categories[]']").forEach(input => {
+                                if (params.getAll('categories[]').includes(input.value)) {
+                                    input.checked = true;
+                                }
+                                input.addEventListener("change", function () {
+                                    if (this.checked) {
+                                        params.append('categories[]', this.value);
+                                    } else {
+                                        let values = params.getAll('categories[]');
+                                        params.delete('categories[]');
+                                        values.forEach(val => {
+                                            if (val !== this.value) params.append('categories[]', val);
+                                        });
+                                    }
+                                    window.location.search = params.toString();
+                                });
+                            });
+
+                            // Og‘irlik checkboxlarini tiklash
                             document.querySelectorAll(".weight-filter").forEach(input => {
+                                if (params.getAll('weights[]').includes(input.value)) {
+                                    input.checked = true;
+                                }
                                 input.addEventListener("change", function () {
                                     let params = new URLSearchParams(window.location.search);
 
@@ -321,8 +346,7 @@
                                     Showing {{ $products->firstItem() }}-{{ $products->lastItem() }} of {{ $products->total() }} item(s)</p>
                                 <ul class="flex">
                                     {{-- Previous Page Link --}}
-                                    @if ($products->onFirstPage())\
-
+                                    @if ($products->onFirstPage())
                                         <li class="leading-[28px] mr-[6px] opacity-50 pointer-events-none">
                                             <span
                                                 class="transition-all duration-[0.3s] ease-in-out w-[auto] h-[32px] px-[13px] font-light text-[#fff] leading-[30px] bg-gray-400 font-Poppins tracking-[0.03rem] text-[15px] flex text-center align-top justify-center items-center rounded-[10px] border-[1px] border-solid border-[#eee]">
