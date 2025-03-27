@@ -374,7 +374,7 @@
                     <!-- 1st Product tab start -->
                     <div class="tab-product-pane" id="all">
                         <div class="flex flex-wrap w-full">
-                            {{--                            @for($i=0; $i<8; $i++)--}}
+                            @for($i=0; $i<8; $i++)
                             <div
                                 class="min-[1200px]:w-[25%] min-[768px]:w-[33.33%] w-[50%] max-[480px]:w-full px-[12px] mb-[24px]"
                                 data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
@@ -453,13 +453,13 @@
                                     </div>
                                 </div>
                             </div>
-                            {{--                            @endfor--}}
+                            @endfor
                         </div>
                     </div>
                     <!-- 2nd Product tab start -->
                     <div class="tab-product-pane" id="snack">
                         <div class="flex flex-wrap w-full">
-                            {{--                            @for($i=0; $i<8; $i++)--}}
+                            @for($i=0; $i<8; $i++)
                             <div
                                 class="min-[1200px]:w-[25%] min-[768px]:w-[33.33%] w-[50%] max-[480px]:w-full px-[12px] mb-[24px]"
                                 data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
@@ -538,13 +538,13 @@
                                     </div>
                                 </div>
                             </div>
-                            {{--                            @endfor--}}
+                            @endfor
                         </div>
                     </div>
                     <!-- 3rd Product tab start -->
                     <div class="tab-product-pane" id="fruit">
                         <div class="flex flex-wrap w-full">
-                            {{--                            @for($i=0; $i<8; $i++)--}}
+                            @for($i=0; $i<8; $i++)
                             <div
                                 class="min-[1200px]:w-[25%] min-[768px]:w-[33.33%] w-[50%] max-[480px]:w-full px-[12px] mb-[24px]"
                                 data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
@@ -623,13 +623,13 @@
                                     </div>
                                 </div>
                             </div>
-                            {{--                            @endfor--}}
+                            @endfor
                         </div>
                     </div>
                     <!-- 4th Product tab start -->
                     <div class="tab-product-pane" id="veg">
                         <div class="flex flex-wrap w-full">
-                            {{--                            @for($i=0; $i<8; $i++)--}}
+                            @for($i=0; $i<8; $i++)
                             <div
                                 class="min-[1200px]:w-[25%] min-[768px]:w-[33.33%] w-[50%] max-[480px]:w-full px-[12px] mb-[24px]"
                                 data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
@@ -708,7 +708,7 @@
                                     </div>
                                 </div>
                             </div>
-                            {{--                            @endfor--}}
+                            @endfor
                         </div>
                     </div>
                 </div>

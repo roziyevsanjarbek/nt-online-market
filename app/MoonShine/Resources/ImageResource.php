@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Image;
 
+use MoonShine\Laravel\DependencyInjection\Request;
 use MoonShine\Laravel\Fields\Relationships\MorphTo;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\UI\Components\Layout\Box;
@@ -22,6 +23,7 @@ use MoonShine\UI\Fields\Image as ImageField;
 class ImageResource extends ModelResource
 {
     protected string $model = Image::class;
+    protected string $title = 'Images';
 
 
     /**
@@ -32,11 +34,11 @@ class ImageResource extends ModelResource
         return [
             ID::make()->sortable(),
             ImageField::make('Path'),
-            MorphTo::make('ImageAble','imageable',fn($item)=>$item->id . ".". $item->name)
-            ->types([
-                 Category::class=>['Categories','Categories'],
-                 Product::class=>['Products','Products'],
-            ]),
+            MorphTo::make('ImageAble', 'imageable', fn($item) => $item->id . "." . $item->name)
+                ->types([
+                    Category::class => ['Categories', 'Categories'],
+                    Product::class => ['Products', 'Products'],
+                ]),
         ];
     }
 
@@ -49,10 +51,10 @@ class ImageResource extends ModelResource
             Box::make([
                 ID::make(),
                 ImageField::make('Path'),
-                MorphTo::make('ImageAble','imageable',fn($item)=>$item->id . ".". $item->name)
+                MorphTo::make('ImageAble', 'imageable', fn($item) => $item->id . "." . $item->name)
                     ->types([
-                        Category::class=>['Categories','Categories'],
-                        Product::class=>['Products','Products'],
+                        Category::class => ['Categories', 'Categories'],
+                        Product::class => ['Products', 'Products'],
                     ]),
             ])
         ];
@@ -66,11 +68,11 @@ class ImageResource extends ModelResource
         return [
             ID::make(),
             ImageField::make('Path'),
-            MorphTo::make('ImageAble','imageable',fn($item)=>$item->id . ".". $item->name)
+            MorphTo::make('ImageAble', 'imageable', fn($item) => $item->id . "." . $item->name)
                 ->types([
-                Category::class=>['Categories','Categories'],
-                Product::class=>['Products','Products'],
-            ]),
+                    Category::class => ['Categories', 'Categories'],
+                    Product::class => ['Products', 'Products'],
+                ]),
         ];
     }
 

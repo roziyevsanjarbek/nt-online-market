@@ -12,6 +12,6 @@ class Pilgrim extends Model
 
     public function pilgrim()
     {
-        return $this->belongsTo(Pilgrim::class);
+        return $this->belongsToMany(Pilgrim::class);
     }
 }
