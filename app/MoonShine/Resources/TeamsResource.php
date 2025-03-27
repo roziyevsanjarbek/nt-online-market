@@ -14,6 +14,7 @@ use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Text;
+use MoonShine\UI\Fields\Textarea;
 
 /**
  * @extends ModelResource<Team>
@@ -33,7 +34,10 @@ class TeamsResource extends ModelResource
             ID::make()->sortable(),
             Text::make('Name')->sortable(),
             Text::make('Occupation')->sortable(),
-            Text::make('Description')->sortable(),
+            Textarea::make('Description')
+                ->customAttributes([
+                    'rows'=>7,
+                ]),
             Text::make('Image'),
         ];
     }
@@ -48,7 +52,10 @@ class TeamsResource extends ModelResource
                 ID::make(),
                 Text::make('Name')->sortable(),
                 Text::make('Occupation')->sortable(),
-                Text::make('Description')->sortable(),
+                Textarea::make('Description')
+                    ->customAttributes([
+                        'rows'=>7,
+                    ]),
                 Image::make('Image'),
             ])
         ];
@@ -63,7 +70,10 @@ class TeamsResource extends ModelResource
             ID::make(),
             Text::make('Name')->sortable(),
             Text::make('Occupation')->sortable(),
-            Text::make('Description')->sortable(),
+            Textarea::make('Description')
+                ->customAttributes([
+                    'rows'=>7,
+                ]),
             Image::make('Image'),
         ];
     }
