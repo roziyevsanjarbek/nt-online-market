@@ -50,7 +50,7 @@ class ProductsController extends Controller
         $startPrice = $request->input('startPrice');
         $endPrice = $request->input('endPrice');
 
-x        $selectedCategories = Category::whereIn('name', (array) $categories)->pluck('id')->toArray();
+        $selectedCategories = Category::whereIn('name', (array) $categories)->pluck('id')->toArray();
 
         $categoryIds = Category::whereIn('parent_id', $selectedCategories)
             ->orWhereIn('id', $selectedCategories)
