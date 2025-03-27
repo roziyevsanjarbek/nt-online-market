@@ -107,8 +107,8 @@ class ProductsController extends Controller
         $weights = Volume::all();
 
         // Get min and max price dynamically
-        $minSalePrice = $products->min('sale_price');
-        $maxSalePrice = $products->max('sale_price');
+        $minSalePrice = $products->min('price');
+        $maxSalePrice = $products->max('price');
 
         return view('product-filter', [
             'products' => $products,
