@@ -81,6 +81,7 @@ class HomeController extends Controller
     }
 
 
+
     public function show(string $id)
     {
         $parentCategories = Category::query()

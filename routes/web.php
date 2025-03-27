@@ -1,13 +1,16 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\DiscountProductController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProductStatusesController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/filter', [ProductsController::class, 'show'])->name('filter');
+Route::post('/', [DiscountProductController::class, 'store'])->name('discount.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
