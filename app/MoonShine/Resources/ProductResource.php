@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\MoonShine\Resources;
 
 
-use Illuminate\Database\Eloquent\Model;
 use App\Models\Product;
 
 
@@ -47,8 +46,9 @@ class ProductResource extends ModelResource
                 'Category ID and Name',
                 'category',
                 fn($item)=>"$item->name",
-                CategoryResource::class),
+                CategoryResource::class)->nullable(),
             Number::make('Quantity', 'quantity'),
+            Number::make('Pilgrim','pilgrim'),
             BelongsTo::make('Volume', 'volume', fn($item) => $item->name,
                 VolumeResource::class
             )->nullable(),
@@ -74,8 +74,9 @@ class ProductResource extends ModelResource
                 'Category ID and Name',
                 'category',
                 fn($item)=>"$item->name",
-                CategoryResource::class),
+                CategoryResource::class)->nullable(),
             Number::make('Quantity', 'quantity'),
+            Number::make('Pilgrim','pilgrim'),
             BelongsTo::make('Volume', 'volume', fn($item) => $item->name,
                 VolumeResource::class
             )->nullable(),
@@ -100,11 +101,12 @@ class ProductResource extends ModelResource
                 'Category ID and Name',
                 'category',
                 fn($item)=>"$item->name",
-                CategoryResource::class),
+                CategoryResource::class)->nullable(),
             Number::make('Quantity', 'quantity'),
+            Number::make('Pilgrim','pilgrim'),
             BelongsTo::make('Volume', 'volume', fn($item) => $item->name,
                 VolumeResource::class
-            )
+            )->nullable(),
         ];
     }
 

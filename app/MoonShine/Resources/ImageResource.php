@@ -6,7 +6,6 @@ namespace App\MoonShine\Resources;
 
 use App\Models\Category;
 use App\Models\Product;
-use Illuminate\Database\Eloquent\Model;
 use App\Models\Image;
 
 use MoonShine\Laravel\Fields\Relationships\MorphTo;
