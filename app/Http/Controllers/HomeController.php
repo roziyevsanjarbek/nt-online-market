@@ -57,10 +57,16 @@ class HomeController extends Controller
                 ->orderBy('id', 'desc')
                     ->with('categories')
                         ->get();
-        $products= Product::query()
+        $products = Product::query()
             ->orderBy('id', 'desc')
                 ->limit(10)
                     ->get();
+        $newArrivalProducts = Product::query()
+            ->orderBy('id', 'desc')
+                ->with('categories')
+                    ->limit(4)
+                        ->get();
+
         $teams = Team::query()
             ->orderBy('id', 'desc')
                 ->limit(10)
@@ -77,6 +83,7 @@ class HomeController extends Controller
             'products' => $products,
             'productsMenu' => $productsMenu,
             'teams' => $teams,
+            'newArrivalProducts' => $newArrivalProducts,
         ]);
     }
 
