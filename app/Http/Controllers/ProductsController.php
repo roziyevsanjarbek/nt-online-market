@@ -52,25 +52,22 @@ class ProductsController extends Controller
 
         $selectedCategories = Category::whereIn('name', (array) $categories)->pluck('id')->toArray();
 
-        $categoryIds = Category::whereIn('parent_id', $selectedCategories)
-            ->orWhereIn('id', $selectedCategories)
-            ->pluck('id')
-            ->toArray();
+        // 🔹 Get all child categories recursively
+        function getChildCategoryIds($parentIds)
+        {
+            $childIds = Category::whereIn('parent_id', $parentIds)->pluck('id')->toArray();
+            if (!empty($childIds)) {
+                return array_merge($childIds, getChildCategoryIds($childIds)); // Recursive call
+            }
+            return [];
+        }
 
-        $parentCategories = Category::whereNull('parent_id')
-            ->orderBy('id', 'desc')
-            ->limit(4)
-            ->with('categories')
-            ->get();
-
-        $productsMenu = Category::whereNull('parent_id')
-            ->orderBy('id', 'desc')
-            ->with('categories')
-            ->get();
+        // Merge selected categories with their children
+        $allCategoryIds = array_merge($selectedCategories, getChildCategoryIds($selectedCategories));
 
         $products = Product::query()
-            ->when(!empty($categoryIds), function ($query) use ($categoryIds) {
-                return $query->whereIn('category_id', $categoryIds);
+            ->when(!empty($categoryIds), function ($query) use ($allCategoryIds) {
+                return $query->whereIn('category_id', $allCategoryIds);
             })
             ->when($weights, function ($query) use ($weights) {
                 $productVolumes = Volume::whereIn('name', $weights)->pluck('id');
@@ -104,14 +101,14 @@ class ProductsController extends Controller
             ->paginate(10);
 
         $categories = Category::all();
+        $parentCategories = Category::whereNull('parent_id')->orderBy('id', 'desc')->limit(4)->with('categories')->get();
+        $productsMenu = Category::whereNull('parent_id')->orderBy('id', 'desc')->with('categories')->get();
         $images = Image::paginate(1);
-        $weights = Volume::all(); // **Shu qatorni qo‘sh!**
-        $minSalePrice = $products->min('price');
-        $maxSalePrice = $products->max('price');
+        $weights = Volume::all();
 
-
-
-
+        // Get min and max price dynamically
+        $minSalePrice = $products->min('sale_price');
+        $maxSalePrice = $products->max('sale_price');
 
         return view('product-filter', [
             'products' => $products,
