@@ -215,6 +215,24 @@
                             </ul>
                         </div>
                     </div>
+                    <div class="bb-sidebar-block p-[20px] border-b-[1px] border-solid border-[#eee]">
+                        <div class="bb-sidebar-title mb-[20px]">
+                            <h3 class="font-quicksand text-[18px] tracking-[0.03rem] leading-[1.2] font-bold text-[#3d4750]">Price</h3>
+                        </div>
+                        <div class="bb-price-range">
+                            <div class="price-range-slider relative w-full mb-[7px]">
+                                <p class="range-value m-[0]">
+                                    <input type="text" id="amount" readonly class="w-full bg-[#fff] text-[#000] text-[16px] mb-[15px] font-initial border-[1px] border-solid border-[#eee] p-[10px] text-center outline-[0] rounded-[10px]">
+                                </p>
+                                <div id="slider-range" class="range-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bb-sidebar-block p-[20px]">
+                        <div class="bb-sidebar-title mb-[20px]">
+                            <h3 class="font-quicksand text-[18px] tracking-[0.03rem] leading-[1.2] font-bold text-[#3d4750]">Tags</h3>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="min-[992px]:w-[75%] w-full px-[12px] mb-[24px]">
@@ -383,6 +401,7 @@
                 </div>
             </div>
         </div>
+    </div>
 </section>
 
 
