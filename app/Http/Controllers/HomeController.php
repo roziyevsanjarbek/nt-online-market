@@ -6,6 +6,7 @@ use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Product;
+use App\Models\Team;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -60,6 +61,10 @@ class HomeController extends Controller
             ->orderBy('id', 'desc')
                 ->limit(10)
                     ->get();
+        $teams = Team::query()
+            ->orderBy('id', 'desc')
+                ->limit(10)
+                    ->get();
         return view('home',[
             'topBanners' => $topBanners,
             'midBanner' => $midBanner,
@@ -71,6 +76,7 @@ class HomeController extends Controller
             'insPosts' => $insPosts,
             'products' => $products,
             'productsMenu' => $productsMenu,
+            'teams' => $teams,
         ]);
     }
 
@@ -86,5 +92,10 @@ class HomeController extends Controller
         return view('product-filter',[
             'parentCategories' => $parentCategories
         ]);
+    }
+    public function exit()
+    {
+        auth()->logout();
+        return redirect()->route('index');
     }
 }

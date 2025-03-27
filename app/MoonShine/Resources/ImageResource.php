@@ -6,7 +6,6 @@ namespace App\MoonShine\Resources;
 
 use App\Models\Category;
 use App\Models\Product;
-use Illuminate\Database\Eloquent\Model;
 use App\Models\Image;
 
 use MoonShine\Laravel\Fields\Relationships\MorphTo;
@@ -35,8 +34,8 @@ class ImageResource extends ModelResource
             ImageField::make('Path'),
             MorphTo::make('ImageAble','imageable',fn($item)=>$item->id . ".". $item->name)
             ->types([
+                Product::class=>['Products','Products'],
                  Category::class=>['Categories','Categories'],
-                 Product::class=>['Products','Products'],
             ]),
         ];
     }
@@ -52,8 +51,8 @@ class ImageResource extends ModelResource
                 ImageField::make('Path'),
                 MorphTo::make('ImageAble','imageable',fn($item)=>$item->id . ".". $item->name)
                     ->types([
-                        Category::class=>['Categories','Categories'],
                         Product::class=>['Products','Products'],
+                        Category::class=>['Categories','Categories'],
                     ]),
             ])
         ];

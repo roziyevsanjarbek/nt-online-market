@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Layouts;
 
-use App\MoonShine\Resources\BannersResource;
+use App\MoonShine\Resources\BannerResource;
+use App\MoonShine\Resources\MoonShineUserResource;
+use App\MoonShine\Resources\MoonShineUserRoleResource;
 use MoonShine\Laravel\Layouts\AppLayout;
 use MoonShine\ColorManager\ColorManager;
 use MoonShine\Contracts\ColorManager\ColorManagerContract;
@@ -32,13 +34,14 @@ use MoonShine\UI\Components\{Breadcrumbs,
     Layout\Wrapper,
     When};
 use App\MoonShine\Resources\PostCategoryResource;
+use MoonShine\MenuManager\MenuGroup;
 use MoonShine\MenuManager\MenuItem;
 use App\MoonShine\Resources\PostResource;
-use App\MoonShine\Resources\ProductVolumeResource;
-use App\MoonShine\Resources\CategoryResource;
 use App\MoonShine\Resources\VolumeResource;
+use App\MoonShine\Resources\CategoryResource;
 use App\MoonShine\Resources\ProductResource;
 use App\MoonShine\Resources\ImageResource;
+use App\MoonShine\Resources\TeamsResource;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -52,15 +55,29 @@ final class MoonShineLayout extends AppLayout
     protected function menu(): array
     {
         return [
-            ...parent::menu(),
-            MenuItem::make('Post Categories', PostCategoryResource::class),
-            MenuItem::make('Posts', PostResource::class),
-            MenuItem::make('ProductVolume', ProductVolumeResource::class),
-            MenuItem::make('Categories', CategoryResource::class),
-            MenuItem::make('Products', ProductResource::class),
-            MenuItem::make('Images', ImageResource::class),
-            MenuItem::make('Banner', BannersResource::class),
+            MenuGroup::make('System', [
+                MenuItem::make('Admins', MoonShineUserResource::class),
+                MenuItem::make('Roles', MoonShineUserRoleResource::class),
+//                MenuItem::make('Permissions', PermissionResource::class),
+            ]),
+            MenuGroup::make('Posts', [
+                MenuItem::make('Post Categories', PostCategoryResource::class),
+                MenuItem::make('Posts', PostResource::class),
+            ]),
+
+            MenuGroup::make('Products', [
+                MenuItem::make('Categories', CategoryResource::class),
+                MenuItem::make('Volumes', VolumeResource::class),
+                MenuItem::make('Images', ImageResource::class),
+                MenuItem::make('Products', ProductResource::class),
+            ]),
+
+            MenuGroup::make('Images', [
+                MenuItem::make('Banner', BannerResource::class),
+                MenuItem::make('Teams', TeamsResource::class),
+            ]),
         ];
+
     }
 
     /**

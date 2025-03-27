@@ -10,13 +10,17 @@ use App\Models\Banner;
 
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
 use MoonShine\Laravel\Resources\ModelResource;
+use MoonShine\TinyMce\Fields\TinyMce;
 use MoonShine\UI\Components\Layout\Box;
+use MoonShine\UI\Components\Layout\Column;
+use MoonShine\UI\Components\Layout\Grid;
 use MoonShine\UI\Fields\ID;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Text;
+use MoonShine\UI\Fields\Textarea;
 
 /**
  * @extends ModelResource<Banner>
@@ -35,7 +39,10 @@ class BannerResource extends ModelResource
         return [
             ID::make()->sortable(),
             Text::make('Title'),
-            Text::make('Description'),
+            Textarea::make('Description')
+                ->customAttributes([
+                    'rows'=>7,
+                ]),
             Image::make('Image'),
             Select::make('Position')
             ->options([
@@ -58,14 +65,17 @@ class BannerResource extends ModelResource
             Box::make([
                 ID::make(),
                 Text::make('Title'),
-                Text::make('Description'),
+                Textarea::make('Description')
+                    ->customAttributes([
+                        'rows'=>7,
+                    ]),
                 Image::make('Image'),
                 Select::make('Position')
                 ->options([
-                    'top'=>'top',
-                    'middle'=>'middle',
-                    'one_bottom'=>'one_bottom',
-                    'bottom'=>'bottom'
+                    'top'=>'Top',
+                    'middle'=>'Middle',
+                    'one_bottom'=>'One bottom',
+                    'bottom'=>'Bottom'
                 ])->nullable(),
                 BelongsTo::make('Category','category',
                         fn($item)=>$item->id . ". " . $item->name,
@@ -82,14 +92,18 @@ class BannerResource extends ModelResource
         return [
             ID::make(),
             Text::make('Title'),
-            Text::make('Description'),
+            Textarea::make('Description')
+                ->customAttributes([
+                    'rows'=>7,
+                ]),
             Image::make('Image'),
             Select::make('Position')
-            ->options([
-                'top'=>'top',
-                'middle'=>'middle',
-                'one_bottom'=>'one_bottom',
-                'bottom'=>'bottom'            ])->nullable(),
+                ->options([
+                    'top'=>'Top',
+                    'middle'=>'Middle',
+                    'one_bottom'=>'One bottom',
+                    'bottom'=>'Bottom'
+                ])->nullable(),
             BelongsTo::make('Category','category',
                     fn($item)=>$item->id . ". " . $item->name,
                     CategoryResource::class)->nullable()

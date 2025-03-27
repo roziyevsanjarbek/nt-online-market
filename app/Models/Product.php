@@ -15,8 +15,9 @@ class Product extends Model
             'price',
             'sale_price',
             'category_id',
-            'product_volume',
+            'volume_id',
             'stock_quantity',
+            'pilgrim_id',
         ];
 
     public function category()
@@ -28,6 +29,10 @@ class Product extends Model
     public function volume()
     {
         return $this->belongsTo(Volume::class, 'volume_id', 'id');
+    }
+    public function pilgrim_count()
+    {
+        return $this->belongsTo(Pilgrim::class, 'pilgrim_id', 'id');
     }
 
     public function images()

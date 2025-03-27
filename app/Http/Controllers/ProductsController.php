@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Image;
 use App\Models\Product;
+
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Volume;
+use Illuminate\Support\Facades\DB;
 
 class ProductsController extends Controller
 {
@@ -14,7 +18,9 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
+        return view('user.index', [
+            'users' => DB::table('users')->paginate(15)
+        ]);
     }
 
     /**
@@ -46,49 +52,76 @@ class ProductsController extends Controller
 
         $selectedCategories = Category::whereIn('name', (array) $categories)->pluck('id')->toArray();
 
-        $categoryIds = Category::whereIn('parent_id', $selectedCategories)
-            ->orWhereIn('id', $selectedCategories)
-            ->pluck('id')
-            ->toArray();
+        // 🔹 Get all child categories recursively
+        function getChildCategoryIds($parentIds)
+        {
+            $childIds = Category::whereIn('parent_id', $parentIds)->pluck('id')->toArray();
+            if (!empty($childIds)) {
+                return array_merge($childIds, getChildCategoryIds($childIds)); // Recursive call
+            }
+            return [];
+        }
 
-        $parentCategories = Category::whereNull('parent_id')
-            ->orderBy('id', 'desc')
-            ->limit(4)
-            ->with('categories')
-            ->get();
-
-        $productsMenu = Category::whereNull('parent_id')
-            ->orderBy('id', 'desc')
-            ->with('categories')
-            ->get();
+        // Merge selected categories with their children
+        $allCategoryIds = array_merge($selectedCategories, getChildCategoryIds($selectedCategories));
 
         $products = Product::query()
-            ->when(!empty($categoryIds), function ($query) use ($categoryIds) {
-                return $query->whereIn('category_id', $categoryIds);
+            ->when(!empty($categoryIds), function ($query) use ($allCategoryIds) {
+                return $query->whereIn('category_id', $allCategoryIds);
             })
             ->when($weights, function ($query) use ($weights) {
                 $productVolumes = Volume::whereIn('name', $weights)->pluck('id');
                 return $query->whereIn('volume_id', $productVolumes);
             })
             ->when(isset($startPrice) && isset($endPrice), function ($query) use ($startPrice, $endPrice) {
-                return $query->whereBetween('price', [$startPrice, $endPrice]);
+                return $query->whereBetween('sale_price', [$startPrice, $endPrice]);
             })
-            ->orderBy('id', 'desc')
+            ->when(request()->has('sort'), function ($query) {
+                $sortBy = request('sort'); // Get sorting parameter from URL
+
+                switch ($sortBy) {
+                    case 'name_asc':
+                        $query->orderBy('name', 'asc');
+                        break;
+                    case 'name_desc':
+                        $query->orderBy('name', 'desc');
+                        break;
+                    case 'price_asc':
+                        $query->orderBy('sale_price', 'asc');
+                        break;
+                    case 'price_desc':
+                        $query->orderBy('sale_price', 'desc');
+                        break;
+                    default:
+                        $query->orderBy('id', 'desc'); // Default sorting
+                        break;
+                }
+            })
             ->with('images')
             ->paginate(10);
 
         $categories = Category::all();
-        $weights = Volume::all(); // **Shu qatorni qo‘sh!**
+        $parentCategories = Category::whereNull('parent_id')->orderBy('id', 'desc')->limit(4)->with('categories')->get();
+        $productsMenu = Category::whereNull('parent_id')->orderBy('id', 'desc')->with('categories')->get();
+        $images = Image::paginate(1);
+        $weights = Volume::all();
+
+        // Get min and max price dynamically
+        $minSalePrice = $products->min('price');
+        $maxSalePrice = $products->max('price');
 
         return view('product-filter', [
             'products' => $products,
             'parentCategories' => $parentCategories,
             'productsMenu' => $productsMenu,
             'categories' => $categories,
-            'weights' => $weights // **Shu yerda viewga jo‘natiladi**
+            'images'=>$images,
+            'weights' => $weights,
+            'minSalePrice' => $minSalePrice,
+            'maxSalePrice' => $maxSalePrice,
+
         ]);
     }
-
 
 
     /**
