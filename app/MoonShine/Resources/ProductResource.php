@@ -9,6 +9,7 @@ use App\Models\Product;
 
 
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
+use MoonShine\Laravel\Fields\Relationships\BelongsToMany;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\TinyMce\Fields\TinyMce;
 use MoonShine\UI\Components\Layout\Box;
@@ -52,6 +53,8 @@ class ProductResource extends ModelResource
             BelongsTo::make('Volume', 'volume', fn($item) => $item->name,
                 VolumeResource::class
             )->nullable(),
+            BelongsToMany::make('Discounts', 'discounts', DiscountResource::class),
+
 
         ];
     }
