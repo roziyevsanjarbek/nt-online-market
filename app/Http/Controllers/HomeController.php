@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use App\Models\Category;
+use App\Models\Customer;
 use App\Models\Post;
 use App\Models\Product;
 use App\Models\Team;
@@ -16,6 +17,13 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if (!isset($_COOKIE['customer_token'])){
+            $uniqueId = uniqid();
+            Customer::query()->create([
+                'token' => $uniqueId
+            ]);
+            setcookie('customer_token', $uniqueId, time() + (86400 * 30), "/");
+        }
         $topBanners = Banner::query()
             ->where('position', 'top')
                 ->get();
@@ -57,10 +65,26 @@ class HomeController extends Controller
                 ->orderBy('id', 'desc')
                     ->with('categories')
                         ->get();
-        $products= Product::query()
+        $products = Product::query()
             ->orderBy('id', 'desc')
                 ->limit(10)
                     ->get();
+        $newArrivalProductFruits = Product::whereHas('category', function ($query) {
+            $query->where('name', 'Fruits');
+                 })->orderBy('id', 'desc')->limit(4)->get();
+
+        $newArrivalProductVegetables = Product::whereHas('category', function ($query) {
+            $query->where('name', 'Vegetables');
+                 })->orderBy('id', 'desc')->limit(4)->get();
+
+        $newArrivalProductSpicesAndSnacks = Product::whereHas('category', function ($query) {
+            $query->whereIn('name', ['Snack', 'Spices']);
+        })->orderBy('id', 'desc')->limit(4)->get();
+
+
+
+
+
         $teams = Team::query()
             ->orderBy('id', 'desc')
                 ->limit(10)
@@ -77,6 +101,9 @@ class HomeController extends Controller
             'products' => $products,
             'productsMenu' => $productsMenu,
             'teams' => $teams,
+            'newArrivalProductFruits' => $newArrivalProductFruits,
+            'newArrivalProductSpicesAndSnacks' => $newArrivalProductSpicesAndSnacks,
+            'newArrivalProductVegetables' => $newArrivalProductVegetables,
         ]);
     }
 

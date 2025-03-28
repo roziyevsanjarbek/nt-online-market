@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Customer;
 use App\Models\Image;
 use App\Models\Product;
 
@@ -46,6 +47,13 @@ class ProductsController extends Controller
 
     public function show(Request $request)
     {
+        if (!isset($_COOKIE['customer_token'])){
+            $uniqueId = uniqid();
+            Customer::query()->create([
+                'token' => $uniqueId
+            ]);
+            setcookie('customer_token', $uniqueId, time() + (86400 * 30), "/");
+        }
         $categories = $request->input('categories');
         $weights = $request->input('weights');
         $startPrice = $request->input('startPrice');

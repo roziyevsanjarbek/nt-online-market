@@ -35,11 +35,11 @@ class DiscountResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Nomi', 'name')->required(),
-            Number::make('Foiz', 'percentage')->required()->min(1)->max(100),
-            Date::make('Boshlanish vaqti', 'start_time'),
-            Date::make('Tugash vaqti', 'end_time'),
-            BelongsToMany::make('Mahsulotlar', 'products', 'name'),
+            Text::make('name', 'Chegirma nomi')->required(),
+            Number::make('percentage', 'Foiz (%)')->required()->min(1)->max(100),
+            Date::make('start_date', 'Qachondan')->required(),
+            Date::make('end_date', 'Qachongacha')->required(),
+            BelongsToMany::make('products', 'Mahsulotlar')->async(),
         ];
     }
 
@@ -51,11 +51,11 @@ class DiscountResource extends ModelResource
         return [
             Box::make([
                 ID::make(),
-                Text::make('Nomi', 'name')->required(),
-                Number::make('Foiz', 'percentage')->required()->min(1)->max(100),
-                Date::make('Boshlanish vaqti', 'start_time'),
-                Date::make('Tugash vaqti', 'end_time'),
-                BelongsToMany::make('Mahsulotlar', 'products', 'name'),
+                Text::make('name', 'Chegirma nomi')->required(),
+                Number::make('percentage', 'Foiz (%)')->required()->min(1)->max(100),
+                Date::make('start_date', 'Qachondan')->required(),
+                Date::make('end_date', 'Qachongacha')->required(),
+                BelongsToMany::make('products', 'Mahsulotlar')->async(),
             ])
         ];
     }
@@ -67,11 +67,11 @@ class DiscountResource extends ModelResource
     {
         return [
             ID::make(),
-            Text::make('Nomi', 'name')->required(),
-            Number::make('Foiz', 'percentage')->required()->min(1)->max(100),
-            Date::make('Boshlanish vaqti', 'start_time'),
-            Date::make('Tugash vaqti', 'end_time'),
-            BelongsToMany::make('Mahsulotlar', 'products', 'name'),
+            Text::make('name', 'Chegirma nomi')->required(),
+            Number::make('percentage', 'Foiz (%)')->required()->min(1)->max(100),
+            Date::make('start_date', 'Qachondan')->required(),
+            Date::make('end_date', 'Qachongacha')->required(),
+            BelongsToMany::make('products', 'Mahsulotlar')->async(),
         ];
     }
 
