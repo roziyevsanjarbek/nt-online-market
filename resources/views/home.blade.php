@@ -23,7 +23,6 @@
                     <div class="swiper-wrapper">
 
 
-
                         @foreach($topBanners as $banner)
                                 <?php
                                 $title = trim(preg_replace('/\s+/', ' ', $banner->title));
@@ -90,8 +89,8 @@
 
 @if($midBanner)
         <?php
-        $title=trim(preg_replace('/\s+/', ' ', $midBanner->title));
-        $words=explode(' ', $title);
+        $title = trim(preg_replace('/\s+/', ' ', $midBanner->title));
+        $words = explode(' ', $title);
         ?>
 @endif
 
@@ -123,9 +122,10 @@
                                 data-aos="flip-left" data-aos-duration="1000" data-aos-delay="200">
 
                                 <div class="category-image mb-[12px]">
-                                    <img src="{{ isset($category->images[0]) ? \Illuminate\Support\Facades\Storage::url($category->images[0]->path) : asset('default-image.jpg') }}"
-                                         alt="category"
-                                         class="w-[50px] h-[50px] max-[1399px]:h-[65px] max-[1399px]:w-[65px] max-[1199px]:h-[50px] max-[1199px]:w-[50px]">
+                                    <img
+                                        src="{{ isset($category->images[0]) ? \Illuminate\Support\Facades\Storage::url($category->images[0]->path) : asset('default-image.jpg') }}"
+                                        alt="category"
+                                        class="w-[50px] h-[50px] max-[1399px]:h-[65px] max-[1399px]:w-[65px] max-[1199px]:h-[50px] max-[1199px]:w-[50px]">
                                 </div>
 
                                 <div class="category-sub-contact">
@@ -318,6 +318,27 @@
                     <div
                         class="banner-two-box bg-[#fff] rounded-t-[30px] max-w-[400px] pt-[30px] px-[30px] flex flex-col items-start relative max-[991px]:max-w-[250px] max-[575px]:my-[0] max-[575px]:mx-[auto]">
                         <span class="text-[20px] font-semibold text-[#6c7fd8] leading-[26px] max-[991px]:text-[16px]">{{$bottomBanner->description}}</span>
+                        <h4 class="font-quicksand mb-[20px] text-[40px] font-bold text-[#3d4750] tracking-[0.03rem] leading-[1.2] max-[991px]:text-[22px]">
+                            {{$bottomBanner->title}}</h4>
+                        <a href="javascript:void(0)"
+                           class="bb-btn-1 transition-all duration-[0.3s] ease-in-out font-Poppins leading-[28px] tracking-[0.03rem] py-[8px] px-[20px] max-[1199px]:py-[3px] max-[1199px]:px-[15px] text-[14px] font-normal text-[#3d4750] bg-transparent rounded-[10px] border-[1px] border-solid border-[#3d4750] hover:bg-[#6c7fd8] hover:border-[#6c7fd8] hover:text-[#fff]">Shop
+                            Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section
+        class="section-banner-two overflow-hidden my-[50px] max-[1199px]:my-[35px] bg-[url('{{ asset('storage/' . $bottomBanner->image) }}')] min-h-[600px] overflow-hidden bg-no-repeat bg-cover bg-center max-[991px]:max-h-[400px] max-[991px]:min-h-[auto]">
+        <div
+            class="flex flex-wrap justify-between relative items-center mx-auto min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
+            <div class="flex flex-wrap w-full">
+                <div
+                    class="w-full px-[12px] banner-justify-box-contact w-full h-[600px] flex justify-end items-end max-[991px]:h-[400px]">
+                    <div
+                        class="banner-two-box bg-[#fff] rounded-t-[30px] max-w-[400px] pt-[30px] px-[30px] flex flex-col items-start relative max-[991px]:max-w-[250px] max-[575px]:my-[0] max-[575px]:mx-[auto]">
+                        <span
+                            class="text-[20px] font-semibold text-[#6c7fd8] leading-[26px] max-[991px]:text-[16px]">{{$bottomBanner->description}}</span>
                         <h4 class="font-quicksand mb-[20px] text-[40px] font-bold text-[#3d4750] tracking-[0.03rem] leading-[1.2] max-[991px]:text-[22px]">
                             {{$bottomBanner->title}}</h4>
                         <a href="javascript:void(0)"
@@ -822,7 +843,8 @@
                                     <div class="min-[768px]:w-[66.66%] w-full px-[12px]">
                                         <div class="testimonials-contact h-full flex flex-col justify-end">
                                             <div class="user max-[767px]:flex max-[767px]:items-center">
-                                                <img src="{{ \Illuminate\Support\Facades\Storage::url($team->image) }}" alt="testimonials"
+                                                <img src="{{ \Illuminate\Support\Facades\Storage::url($team->image) }}"
+                                                     alt="testimonials"
                                                      class="w-full hidden rounded-[15px] max-[767px]:max-w-[60px] max-[767px]:mr-[15px] max-[767px]:flex">
                                                 <div class="detail">
                                                     <h4 class="font-quicksand text-[#3d4750] tracking-[0.03rem] leading-[1.2] mb-[8px] text-[20px] font-bold max-[767px]:mb-[4px] max-[767px]:text-[18px]">
@@ -859,7 +881,8 @@
                         <div class="blog-2-card relative overflow-hidden rounded-[30px]" data-aos="fade-up"
                              data-aos-duration="1000" data-aos-delay="800">
                             <div class="blog-img">
-                                <img src="{{ \Illuminate\Support\Facades\Storage::url($latestPost->image) }}" alt="blog-10"
+                                <img src="{{ \Illuminate\Support\Facades\Storage::url($latestPost->image) }}"
+                                     alt="blog-10"
                                      class="transition-all duration-[0.3s] ease-in-out w-full block">
                             </div>
                             <div
