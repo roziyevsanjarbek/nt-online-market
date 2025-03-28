@@ -61,11 +61,21 @@ class HomeController extends Controller
             ->orderBy('id', 'desc')
                 ->limit(10)
                     ->get();
-        $newArrivalProducts = Product::query()
-            ->orderBy('id', 'desc')
-                ->with('categories')
-                    ->limit(4)
-                        ->get();
+        $newArrivalProductFruits = Product::whereHas('category', function ($query) {
+            $query->where('name', 'Fruits');
+                 })->orderBy('id', 'desc')->limit(4)->get();
+
+        $newArrivalProductVegetables = Product::whereHas('category', function ($query) {
+            $query->where('name', 'Vegetables');
+                 })->orderBy('id', 'desc')->limit(4)->get();
+
+        $newArrivalProductSpicesAndSnacks = Product::whereHas('category', function ($query) {
+            $query->whereIn('name', ['Snack', 'Spices']);
+        })->orderBy('id', 'desc')->limit(4)->get();
+
+
+
+
 
         $teams = Team::query()
             ->orderBy('id', 'desc')
@@ -83,7 +93,9 @@ class HomeController extends Controller
             'products' => $products,
             'productsMenu' => $productsMenu,
             'teams' => $teams,
-            'newArrivalProducts' => $newArrivalProducts,
+            'newArrivalProductFruits' => $newArrivalProductFruits,
+            'newArrivalProductSpicesAndSnacks' => $newArrivalProductSpicesAndSnacks,
+            'newArrivalProductVegetables' => $newArrivalProductVegetables,
         ]);
     }
 

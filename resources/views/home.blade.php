@@ -1,4 +1,4 @@
-@props(['parentCategories', 'productsMenu','newArrivalProducts'])
+@props(['parentCategories', 'productsMenu','$newArrivalProductFruits','$newArrivalProductSpicesAndSnacks'])
 @yield('content')
 <x-header title="Online Market"></x-header>
 
@@ -392,10 +392,10 @@
                                                     <img class="main-img transition-all duration-[0.3s] ease-in-out w-full"
                                                          src=" {{ isset($product->images[0]) ? \Illuminate\Support\Facades\Storage::url($product->images[0]->path) : asset('default-image.jpg') }}"
                                                          alt="product-1">
-{{--                                                    <img--}}
-{{--                                                        class="hover-img transition-all duration-[0.3s] ease-in-out absolute z-[2] top-[0] left-[0] opacity-[0] w-full"--}}
-{{--                                                        src=" {{ isset($product->images[1]) ? \Illuminate\Support\Facades\Storage::url($product->images[1]->path) : asset('default-image.jpg') }}"--}}
-{{--                                                        alt="product-1">--}}
+                                                    <img
+                                                        class="hover-img transition-all duration-[0.3s] ease-in-out absolute z-[2] top-[0] left-[0] opacity-[0] w-full"
+                                                        src=" {{ isset($product->images[1]) ? \Illuminate\Support\Facades\Storage::url($product->images[1]->path) : asset('default-image.jpg') }}"
+                                                        alt="product-1">
                                                 </div>
                                             </a>
                                             <ul class="bb-pro-actions transition-all duration-[0.3s] ease-in-out my-[0] mx-[auto] absolute z-[9] left-[0] right-[0] bottom-[0] flex flex-row items-center justify-center opacity-[0]">
@@ -458,14 +458,14 @@
                     <!-- 2nd Product tab start -->
                     <div class="tab-product-pane" id="snack">
                         <div class="flex flex-wrap w-full">
-                            @for($i=0; $i<8; $i++)
-                            <div
-                                class="min-[1200px]:w-[25%] min-[768px]:w-[33.33%] w-[50%] max-[480px]:w-full px-[12px] mb-[24px]"
-                                data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                            @foreach($newArrivalProductSpicesAndSnacks as $newArrivalProductSpicesAndSnack)
                                 <div
-                                    class="bb-pro-box bg-[#fff] border-[1px] border-solid border-[#eee] rounded-[20px]">
+                                    class="min-[1200px]:w-[25%] min-[768px]:w-[33.33%] w-[50%] max-[480px]:w-full px-[12px] mb-[24px]"
+                                    data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                                     <div
-                                        class="bb-pro-img overflow-hidden relative border-b-[1px] border-solid border-[#eee] z-[4]">
+                                        class="bb-pro-box bg-[#fff] border-[1px] border-solid border-[#eee] rounded-[20px]">
+                                        <div
+                                            class="bb-pro-img overflow-hidden relative border-b-[1px] border-solid border-[#eee] z-[4]">
                                             <span
                                                 class="flags transition-all duration-[0.3s] ease-in-out absolute z-[5] top-[10px] left-[6px]">
                                                 <span class="text-[14px] text-[#777] font-medium uppercase">New</span>
@@ -474,11 +474,11 @@
                                             <div
                                                 class="inner-img relative block overflow-hidden pointer-events-none rounded-t-[20px]">
                                                 <img class="main-img transition-all duration-[0.3s] ease-in-out w-full"
-                                                     src="assets/img/new-product/1.jpg"
+                                                     src="{{ isset($newArrivalProductSpicesAndSnack->images[0]) ? \Illuminate\Support\Facades\Storage::url($newArrivalProductSpicesAndSnack->images[0]->path) : asset('default-image.jpg') }}"
                                                      alt="product-1">
                                                 <img
                                                     class="hover-img transition-all duration-[0.3s] ease-in-out absolute z-[2] top-[0] left-[0] opacity-[0] w-full"
-                                                    src="assets/img/new-product/back-1.jpg"
+                                                    src="{{ isset($newArrivalProductSpicesAndSnack->images[1]) ? \Illuminate\Support\Facades\Storage::url($newArrivalProductSpicesAndSnack->images[1]->path) : asset('default-image.jpg') }}"
                                                     alt="product-1">
                                             </div>
                                         </a>
@@ -520,30 +520,31 @@
                                                     <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[18px] text-[#fea99a]"></i>
                                                     <i class="ri-star-line float-left text-[15px] mr-[3px] leading-[18px] text-[#777]"></i>
                                                 </span>
-                                        </div>
-                                        <h4 class="bb-pro-title mb-[8px] text-[16px] leading-[18px]">
-                                            <a href="product-left-sidebar.html"
-                                               class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">Ground
-                                                Nuts Oil
-                                                Pack</a></h4>
-                                        <div class="bb-price flex flex-wrap justify-between">
-                                            <div class="inner-price mx-[-3px]">
-                                                <span class="new-price px-[3px] text-[16px] text-[#686e7d] font-bold">$15</span>
-                                                <span
-                                                    class="old-price px-[3px] text-[14px] text-[#686e7d] line-through">$22</span>
                                             </div>
-                                            <span class="last-items text-[14px] text-[#686e7d]">500g</span>
+                                            <h4 class="bb-pro-title mb-[8px] text-[16px] leading-[18px]">
+                                                <a href="product-left-sidebar.html"
+                                                   class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">Ground
+                                                    Nuts Oil
+                                                    Pack</a></h4>
+                                            <div class="bb-price flex flex-wrap justify-between">
+                                                <div class="inner-price mx-[-3px]">
+                                                    <span class="new-price px-[3px] text-[16px] text-[#686e7d] font-bold">${{ $newArrivalProductSpicesAndSnack->price }}</span>
+                                                    <span
+                                                        class="old-price px-[3px] text-[14px] text-[#686e7d] line-through">${{ $newArrivalProductSpicesAndSnack->sale_price }}</span>
+                                                </div>
+                                                <span class="last-items text-[14px] text-[#686e7d]">{{ $newArrivalProductSpicesAndSnack->pilgrim }} {{ $newArrivalProductSpicesAndSnack->volume->name }}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            @endfor
+                            @endforeach
+
                         </div>
                     </div>
                     <!-- 3rd Product tab start -->
                     <div class="tab-product-pane" id="fruit">
                         <div class="flex flex-wrap w-full">
-                            @for($i=0; $i<8; $i++)
+                            @foreach($newArrivalProductFruits as $newArrivalProductFruit)
                             <div
                                 class="min-[1200px]:w-[25%] min-[768px]:w-[33.33%] w-[50%] max-[480px]:w-full px-[12px] mb-[24px]"
                                 data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
@@ -559,11 +560,11 @@
                                             <div
                                                 class="inner-img relative block overflow-hidden pointer-events-none rounded-t-[20px]">
                                                 <img class="main-img transition-all duration-[0.3s] ease-in-out w-full"
-                                                     src="assets/img/new-product/1.jpg"
+                                                     src="{{ isset($newArrivalProductFruit->images[0]) ? \Illuminate\Support\Facades\Storage::url($newArrivalProductFruit->images[0]->path) : asset('default-image.jpg') }}"
                                                      alt="product-1">
                                                 <img
                                                     class="hover-img transition-all duration-[0.3s] ease-in-out absolute z-[2] top-[0] left-[0] opacity-[0] w-full"
-                                                    src="assets/img/new-product/back-1.jpg"
+                                                    src="{{ isset($newArrivalProductFruit->images[1]) ? \Illuminate\Support\Facades\Storage::url($newArrivalProductFruit->images[1]->path) : asset('default-image.jpg') }}"
                                                     alt="product-1">
                                             </div>
                                         </a>
@@ -597,7 +598,7 @@
                                     <div class="bb-pro-contact p-[20px]">
                                         <div class="bb-pro-subtitle mb-[8px] flex flex-wrap justify-between">
                                             <a href="shop-left-sidebar-col-3.html"
-                                               class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[13px] leading-[16px] text-[#777] font-light tracking-[0.03rem]">Snacks</a>
+                                               class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[13px] leading-[16px] text-[#777] font-light tracking-[0.03rem]">{{  $product->category->name }}</a>
                                             <span class="bb-pro-rating">
                                                     <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[18px] text-[#fea99a]"></i>
                                                     <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[18px] text-[#fea99a]"></i>
@@ -608,27 +609,25 @@
                                         </div>
                                         <h4 class="bb-pro-title mb-[8px] text-[16px] leading-[18px]">
                                             <a href="product-left-sidebar.html"
-                                               class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">Ground
-                                                Nuts Oil
-                                                Pack</a></h4>
+                                               class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">{{  $product->name }}</a></h4>
                                         <div class="bb-price flex flex-wrap justify-between">
                                             <div class="inner-price mx-[-3px]">
-                                                <span class="new-price px-[3px] text-[16px] text-[#686e7d] font-bold">$15</span>
+                                                <span class="new-price px-[3px] text-[16px] text-[#686e7d] font-bold">${{ $newArrivalProductFruit->price }}</span>
                                                 <span
-                                                    class="old-price px-[3px] text-[14px] text-[#686e7d] line-through">$22</span>
+                                                    class="old-price px-[3px] text-[14px] text-[#686e7d] line-through">${{ $newArrivalProductFruit->sale_price }}</span>
                                             </div>
-                                            <span class="last-items text-[14px] text-[#686e7d]">500g</span>
+                                            <span class="last-items text-[14px] text-[#686e7d]">{{  $newArrivalProductFruit->pilgrim }} {{ $newArrivalProductFruit->volume->name}}</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            @endfor
+                            @endforeach
                         </div>
                     </div>
                     <!-- 4th Product tab start -->
                     <div class="tab-product-pane" id="veg">
                         <div class="flex flex-wrap w-full">
-                            @for($i=0; $i<8; $i++)
+                            @foreach($newArrivalProductVegetables  as $newArrivalProductVegetable)
                             <div
                                 class="min-[1200px]:w-[25%] min-[768px]:w-[33.33%] w-[50%] max-[480px]:w-full px-[12px] mb-[24px]"
                                 data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
@@ -644,11 +643,11 @@
                                             <div
                                                 class="inner-img relative block overflow-hidden pointer-events-none rounded-t-[20px]">
                                                 <img class="main-img transition-all duration-[0.3s] ease-in-out w-full"
-                                                     src="assets/img/new-product/1.jpg"
+                                                     src="{{ isset($newArrivalProductVegetable->images[0]) ? \Illuminate\Support\Facades\Storage::url($newArrivalProductVegetable->images[0]->path) : asset('default-image.jpg') }}"
                                                      alt="product-1">
                                                 <img
                                                     class="hover-img transition-all duration-[0.3s] ease-in-out absolute z-[2] top-[0] left-[0] opacity-[0] w-full"
-                                                    src="assets/img/new-product/back-1.jpg"
+                                                    src="{{ isset($newArrivalProductVegetable->images[1]) ? \Illuminate\Support\Facades\Storage::url($newArrivalProductVegetable->images[1]->path) : asset('default-image.jpg') }}"
                                                     alt="product-1">
                                             </div>
                                         </a>
@@ -682,7 +681,7 @@
                                     <div class="bb-pro-contact p-[20px]">
                                         <div class="bb-pro-subtitle mb-[8px] flex flex-wrap justify-between">
                                             <a href="shop-left-sidebar-col-3.html"
-                                               class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[13px] leading-[16px] text-[#777] font-light tracking-[0.03rem]">Snacks</a>
+                                               class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[13px] leading-[16px] text-[#777] font-light tracking-[0.03rem]">{{ $newArrivalProductVegetable->category->name }}</a>
                                             <span class="bb-pro-rating">
                                                     <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[18px] text-[#fea99a]"></i>
                                                     <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[18px] text-[#fea99a]"></i>
@@ -693,21 +692,20 @@
                                         </div>
                                         <h4 class="bb-pro-title mb-[8px] text-[16px] leading-[18px]">
                                             <a href="product-left-sidebar.html"
-                                               class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">Ground
-                                                Nuts Oil
-                                                Pack</a></h4>
+                                               class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">{{  $newArrivalProductFruit->name }}
+ </a></h4>
                                         <div class="bb-price flex flex-wrap justify-between">
                                             <div class="inner-price mx-[-3px]">
-                                                <span class="new-price px-[3px] text-[16px] text-[#686e7d] font-bold">$15</span>
+                                                <span class="new-price px-[3px] text-[16px] text-[#686e7d] font-bold">${{  $newArrivalProductVegetable->sale_price }}</span>
                                                 <span
-                                                    class="old-price px-[3px] text-[14px] text-[#686e7d] line-through">$22</span>
+                                                    class="old-price px-[3px] text-[14px] text-[#686e7d] line-through">${{  $newArrivalProductVegetable->price }}</span>
                                             </div>
-                                            <span class="last-items text-[14px] text-[#686e7d]">500g</span>
+                                            <span class="last-items text-[14px] text-[#686e7d]">{{  $newArrivalProductVegetable->pilgrim }} {{ $newArrivalProductVegetable->volume->name}}</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            @endfor
+                            @endforeach
                         </div>
                     </div>
                 </div>
