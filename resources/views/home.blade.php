@@ -42,7 +42,7 @@
                                             <p class="mb-[20px] font-Poppins text-[18px] text-[#777] font-light leading-[28px] tracking-[0.03rem] max-[1199px]:mb-[10px] max-[1199px]:text-[16px]">
                                                 {{ $banner->description }}</p>
                                             <h1 class="mb-[20px] font-quicksand text-[50px] text-[#3d4750] font-bold tracking-[0.03rem] leading-[1.2] max-[1199px]:mb-[10px] max-[1199px]:text-[38px] max-[991px]:text-center max-[991px]:text-[45px] max-[767px]:text-[40px] max-[575px]:text-[35px] max-[420px]:text-[30px] max-[360px]:text-[28px]">{!! $title !!}</h1>
-                                            <a href="shop-left-sidebar-col-3.html"
+                                            <a href="/filter?categories[]={{$banner->category->name}}"
                                                class="bb-btn-1 transition-all duration-[0.3s] ease-in-out font-Poppins leading-[28px] tracking-[0.03rem] py-[8px] px-[20px] text-[14px] font-normal text-[#3d4750] bg-transparent rounded-[10px] border-[1px] border-solid border-[#3d4750] max-[1199px]:py-[3px] max-[1199px]:px-[15px] hover:bg-[#6c7fd8] hover:border-[#6c7fd8] hover:text-[#fff]">Shop
                                                 Now</a>
                                         </div>
@@ -130,7 +130,7 @@
 
                                 <div class="category-sub-contact">
                                     <h5 class="mb-[2px] text-[16px] font-quicksand text-[#3d4750] font-semibold tracking-[0.03rem] leading-[1.2]">
-                                        <a href="shop-left-sidebar-col-3.html"
+                                        <a href="/filter?categories[]={{$category->name}}"
                                            class="font-Poppins text-[16px] font-medium leading-[1.2] tracking-[0.03rem] text-[#3d4750] capitalize">
                                             {{$category->name}}
                                         </a>
@@ -223,7 +223,7 @@
                                     </div>
                                     <div class="bb-pro-contact p-[20px]">
                                         <div class="bb-pro-subtitle mb-[8px] flex flex-wrap justify-between">
-                                            <a href="shop-left-sidebar-col-3.html"
+                                            <a href="/filter?categories[]={{$product->category->name}}"
                                                class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[13px] leading-[16px] text-[#777] font-light tracking-[0.03rem]">
                                                 {{ $product->category->name }}
                                             </a>
@@ -236,7 +236,7 @@
                                             </span>
                                         </div>
                                         <h4 class="bb-pro-title mb-[8px] text-[16px] leading-[18px]">
-                                            <a href="product-left-sidebar.html"
+                                            <a href="/filter?categories[]={{$product->category->name}}"
                                                class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">
                                                 {{$product->name}}
                                             </a>
@@ -254,7 +254,6 @@
                                 </div>
                             </div>
                         @endforeach
-
                     </div>
                 </div>
             </div>
@@ -289,7 +288,7 @@
                                     {!! $title !!}</h5>
                                 <p class="font-Poppins text-[16px] font-light leading-[28px] tracking-[0.03rem] text-[#686e7d] mb-[15px] max-[480px]:mb-[8px] max-[480px]:text-[14px]">
                                     {{$banner->description}}</p>
-                                <a href="shop-left-sidebar-col-3.html"
+                                <a href="/filter?categories[]={{$banner->category->name}}"
                                    class="bb-btn-1 transition-all duration-[0.3s] ease-in-out font-Poppins leading-[28px] tracking-[0.03rem] py-[5px] px-[15px] text-[14px] font-normal text-[#3d4750] bg-transparent rounded-[10px] border-[1px] border-solid border-[#3d4750] hover:bg-[#6c7fd8] hover:border-[#6c7fd8] hover:text-[#fff]">Shop
                                     Now</a>
                             </div>
@@ -318,27 +317,6 @@
                     <div
                         class="banner-two-box bg-[#fff] rounded-t-[30px] max-w-[400px] pt-[30px] px-[30px] flex flex-col items-start relative max-[991px]:max-w-[250px] max-[575px]:my-[0] max-[575px]:mx-[auto]">
                         <span class="text-[20px] font-semibold text-[#6c7fd8] leading-[26px] max-[991px]:text-[16px]">{{$bottomBanner->description}}</span>
-                        <h4 class="font-quicksand mb-[20px] text-[40px] font-bold text-[#3d4750] tracking-[0.03rem] leading-[1.2] max-[991px]:text-[22px]">
-                            {{$bottomBanner->title}}</h4>
-                        <a href="javascript:void(0)"
-                           class="bb-btn-1 transition-all duration-[0.3s] ease-in-out font-Poppins leading-[28px] tracking-[0.03rem] py-[8px] px-[20px] max-[1199px]:py-[3px] max-[1199px]:px-[15px] text-[14px] font-normal text-[#3d4750] bg-transparent rounded-[10px] border-[1px] border-solid border-[#3d4750] hover:bg-[#6c7fd8] hover:border-[#6c7fd8] hover:text-[#fff]">Shop
-                            Now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section
-        class="section-banner-two overflow-hidden my-[50px] max-[1199px]:my-[35px] bg-[url('{{ asset('storage/' . $bottomBanner->image) }}')] min-h-[600px] overflow-hidden bg-no-repeat bg-cover bg-center max-[991px]:max-h-[400px] max-[991px]:min-h-[auto]">
-        <div
-            class="flex flex-wrap justify-between relative items-center mx-auto min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
-            <div class="flex flex-wrap w-full">
-                <div
-                    class="w-full px-[12px] banner-justify-box-contact w-full h-[600px] flex justify-end items-end max-[991px]:h-[400px]">
-                    <div
-                        class="banner-two-box bg-[#fff] rounded-t-[30px] max-w-[400px] pt-[30px] px-[30px] flex flex-col items-start relative max-[991px]:max-w-[250px] max-[575px]:my-[0] max-[575px]:mx-[auto]">
-                        <span
-                            class="text-[20px] font-semibold text-[#6c7fd8] leading-[26px] max-[991px]:text-[16px]">{{$bottomBanner->description}}</span>
                         <h4 class="font-quicksand mb-[20px] text-[40px] font-bold text-[#3d4750] tracking-[0.03rem] leading-[1.2] max-[991px]:text-[22px]">
                             {{$bottomBanner->title}}</h4>
                         <a href="javascript:void(0)"
@@ -448,7 +426,7 @@
                                     </div>
                                     <div class="bb-pro-contact p-[20px]">
                                         <div class="bb-pro-subtitle mb-[8px] flex flex-wrap justify-between">
-                                            <a href="shop-left-sidebar-col-3.html"
+                                            <a href="/filter?product[]=All Snacks Ground Nuts Oil Pack"
                                                class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[13px] leading-[16px] text-[#777] font-light tracking-[0.03rem]">Snacks</a>
                                             <span class="bb-pro-rating">
                                                     <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[18px] text-[#fea99a]"></i>
@@ -459,7 +437,7 @@
                                                 </span>
                                         </div>
                                         <h4 class="bb-pro-title mb-[8px] text-[16px] leading-[18px]">
-                                            <a href="product-left-sidebar.html"
+                                            <a href="/filter?product[]=All Ground Nuts Oil Pack"
                                                class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">Ground
                                                 Nuts Oil
                                                 Pack</a></h4>
@@ -533,7 +511,7 @@
                                     </div>
                                     <div class="bb-pro-contact p-[20px]">
                                         <div class="bb-pro-subtitle mb-[8px] flex flex-wrap justify-between">
-                                            <a href="shop-left-sidebar-col-3.html"
+                                            <a href="/filter?categories[]=Snack and Spices Snacks Ground Nuts Oil Pack"
                                                class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[13px] leading-[16px] text-[#777] font-light tracking-[0.03rem]">Snacks</a>
                                             <span class="bb-pro-rating">
                                                     <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[18px] text-[#fea99a]"></i>
@@ -544,10 +522,11 @@
                                                 </span>
                                         </div>
                                         <h4 class="bb-pro-title mb-[8px] text-[16px] leading-[18px]">
-                                            <a href="product-left-sidebar.html"
-                                               class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">Ground
-                                                Nuts Oil
-                                                Pack</a></h4>
+                                            <a href="/filter?categories[]=Snack and Spices Ground Nuts Oil Pack"
+                                               class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">
+                                                Ground Nuts Oil Pack
+                                            </a>
+                                        </h4>
                                         <div class="bb-price flex flex-wrap justify-between">
                                             <div class="inner-price mx-[-3px]">
                                                 <span class="new-price px-[3px] text-[16px] text-[#686e7d] font-bold">$15</span>
@@ -618,7 +597,7 @@
                                     </div>
                                     <div class="bb-pro-contact p-[20px]">
                                         <div class="bb-pro-subtitle mb-[8px] flex flex-wrap justify-between">
-                                            <a href="shop-left-sidebar-col-3.html"
+                                            <a href="/filter?categories[]=Fruits Snacks Ground Nuts Oil Pack"
                                                class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[13px] leading-[16px] text-[#777] font-light tracking-[0.03rem]">Snacks</a>
                                             <span class="bb-pro-rating">
                                                     <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[18px] text-[#fea99a]"></i>
@@ -629,10 +608,11 @@
                                                 </span>
                                         </div>
                                         <h4 class="bb-pro-title mb-[8px] text-[16px] leading-[18px]">
-                                            <a href="product-left-sidebar.html"
-                                               class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">Ground
-                                                Nuts Oil
-                                                Pack</a></h4>
+                                            <a href="/filter?categories[]=Fruits Ground Nuts Oil Pack"
+                                               class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">
+                                                Ground Nuts Oil Pack
+                                            </a>
+                                        </h4>
                                         <div class="bb-price flex flex-wrap justify-between">
                                             <div class="inner-price mx-[-3px]">
                                                 <span class="new-price px-[3px] text-[16px] text-[#686e7d] font-bold">$15</span>
@@ -703,7 +683,7 @@
                                     </div>
                                     <div class="bb-pro-contact p-[20px]">
                                         <div class="bb-pro-subtitle mb-[8px] flex flex-wrap justify-between">
-                                            <a href="shop-left-sidebar-col-3.html"
+                                            <a href="/filter?categories[]=Vegetables Snacks Ground Nuts Oil Pack"
                                                class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[13px] leading-[16px] text-[#777] font-light tracking-[0.03rem]">Snacks</a>
                                             <span class="bb-pro-rating">
                                                     <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[18px] text-[#fea99a]"></i>
@@ -714,10 +694,11 @@
                                                 </span>
                                         </div>
                                         <h4 class="bb-pro-title mb-[8px] text-[16px] leading-[18px]">
-                                            <a href="product-left-sidebar.html"
-                                               class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">Ground
-                                                Nuts Oil
-                                                Pack</a></h4>
+                                            <a href="/filter?categories[]=Vegetables Ground Nuts Oil Pack"
+                                               class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">
+                                                Ground Nuts Oil Pack
+                                            </a>
+                                        </h4>
                                         <div class="bb-price flex flex-wrap justify-between">
                                             <div class="inner-price mx-[-3px]">
                                                 <span class="new-price px-[3px] text-[16px] text-[#686e7d] font-bold">$15</span>
