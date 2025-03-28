@@ -39,4 +39,10 @@ class Product extends Model
     {
         return $this->morphMany(Image::class, 'imageable');
     }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class)->withTimestamps();
+    }
+
 }
