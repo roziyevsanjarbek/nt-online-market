@@ -1,4 +1,5 @@
 <x-header title="Online Market"></x-header>
+
 <!-- Loader -->
 <div class="bb-loader min-w-full w-full h-screen fixed top-[0] left-[0] flex items-center justify-center bg-[#fff] z-[45]">
     <img src="assets/img/logo/loader.png" alt="loader" class="absolute">
@@ -8,6 +9,7 @@
 <!-- Header -->
 <x-navbar :parentCategories="$parentCategories" :productsMenu="$productsMenu"></x-navbar>
 <!-- Breadcrumb -->
+
 <section class="section-breadcrumb mb-[50px] max-[1199px]:mb-[35px] border-b-[1px] border-solid border-[#eee] bg-[#f8f8fb]">
     <div class="flex flex-wrap justify-between relative items-center mx-auto min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
         <div class="flex flex-wrap w-full">
@@ -66,6 +68,7 @@
 
 <!-- Shop section -->
 <section class="section-shop pb-[50px] max-[1199px]:pb-[35px]">
+
     <div class="flex flex-wrap justify-between relative items-center mx-auto min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
         <div class="flex flex-wrap w-full mb-[-24px]">
             <div class="min-[992px]:w-[25%] w-full px-[12px] mb-[24px]">
@@ -105,6 +108,7 @@
                         </form>
 
                     </div>
+
                     <div class="bb-sidebar-block p-[20px] border-b-[1px] border-solid border-[#eee]">
                         <div class="bb-sidebar-title mb-[20px]">
                             <h3 class="font-quicksand text-[18px] tracking-[0.03rem] leading-[1.2] font-bold text-[#3d4750]">Weight</h3>
@@ -226,10 +230,13 @@
                                         </span>
                                         <a href="javascript:void(0)">
                                             <div class="inner-img relative block overflow-hidden pointer-events-none rounded-t-[20px]">
-                                                <img class="main-img transition-all duration-[0.3s] ease-in-out w-full" src="{{\Illuminate\Support\Facades\Storage::url($product->images->first()->path)}}"
-                                                     alt="product-1">
-                                                <img class="hover-img transition-all duration-[0.3s] ease-in-out absolute z-[2] top-[0] left-[0] opacity-[0] w-full" src="{{\Illuminate\Support\Facades\Storage::url($product->images->first()->path)}}"
-                                                     alt="product-1">
+                                            <img class="main-img transition-all duration-[0.3s] ease-in-out w-full" 
+     src="{{ \Illuminate\Support\Facades\Storage::url($product->images->first()?->path ?? 'default-image.jpg') }}" 
+     alt="product-1">
+
+<img class="hover-img transition-all duration-[0.3s] ease-in-out absolute z-[2] top-[0] left-[0] opacity-[0] w-full" 
+     src="{{ \Illuminate\Support\Facades\Storage::url($product->images->first()?->path ?? 'default-image.jpg') }}" 
+     alt="product-1">
                                             </div>
                                         </a>
                                         <ul class="bb-pro-actions transition-all duration-[0.3s] ease-in-out my-[0] mx-[auto] absolute z-[9] left-[0] right-[0] bottom-[0] flex flex-row items-center justify-center opacity-[0]">
