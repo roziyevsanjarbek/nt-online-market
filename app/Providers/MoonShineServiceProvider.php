@@ -42,6 +42,7 @@ class MoonShineServiceProvider extends ServiceProvider
                 ProductResource::class,
                 ImageResource::class,
                 BannerResource::class,
+                TeamsResource::class,
             ])
             ->pages([
                 ...$config->getPages(),

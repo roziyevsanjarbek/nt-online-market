@@ -42,7 +42,7 @@
                                             <p class="mb-[20px] font-Poppins text-[18px] text-[#777] font-light leading-[28px] tracking-[0.03rem] max-[1199px]:mb-[10px] max-[1199px]:text-[16px]">
                                                 {{ $banner->description }}</p>
                                             <h1 class="mb-[20px] font-quicksand text-[50px] text-[#3d4750] font-bold tracking-[0.03rem] leading-[1.2] max-[1199px]:mb-[10px] max-[1199px]:text-[38px] max-[991px]:text-center max-[991px]:text-[45px] max-[767px]:text-[40px] max-[575px]:text-[35px] max-[420px]:text-[30px] max-[360px]:text-[28px]">{!! $title !!}</h1>
-                                            <a href="shop-left-sidebar-col-3.html"
+                                            <a href="/filter?categories[]={{$banner->category->name}}"
                                                class="bb-btn-1 transition-all duration-[0.3s] ease-in-out font-Poppins leading-[28px] tracking-[0.03rem] py-[8px] px-[20px] text-[14px] font-normal text-[#3d4750] bg-transparent rounded-[10px] border-[1px] border-solid border-[#3d4750] max-[1199px]:py-[3px] max-[1199px]:px-[15px] hover:bg-[#6c7fd8] hover:border-[#6c7fd8] hover:text-[#fff]">Shop
                                                 Now</a>
                                         </div>
@@ -130,7 +130,7 @@
 
                                 <div class="category-sub-contact">
                                     <h5 class="mb-[2px] text-[16px] font-quicksand text-[#3d4750] font-semibold tracking-[0.03rem] leading-[1.2]">
-                                        <a href="shop-left-sidebar-col-3.html"
+                                        <a href="/filter?categories[]={{$category->name}}"
                                            class="font-Poppins text-[16px] font-medium leading-[1.2] tracking-[0.03rem] text-[#3d4750] capitalize">
                                             {{$category->name}}
                                         </a>
@@ -174,11 +174,9 @@
                     <div class="bb-deal-block owl-carousel">
 
                         @foreach ($products as $product)
-                            <div class="bb-deal-card p-[12px]" data-product-id="{{ $product->id }}" data-aos="fade-up"
-                                 data-aos-duration="1000" data-aos-delay="200">
+                            <div class="bb-deal-card p-[12px]" data-product-id="{{ $product->id }}" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                                 <!-- Mahsulot ma'lumotlari -->
-                                <div
-                                    class="bb-pro-box bg-[#fff] border-[1px] border-solid border-[#eee] rounded-[20px]">
+                                <div class="bb-pro-box bg-[#fff] border-[1px] border-solid border-[#eee] rounded-[20px]">
                                     <div
                                         class="bb-pro-img overflow-hidden relative border-b-[1px] border-solid border-[#eee] z-[4]">
                                         <span
@@ -225,7 +223,7 @@
                                     </div>
                                     <div class="bb-pro-contact p-[20px]">
                                         <div class="bb-pro-subtitle mb-[8px] flex flex-wrap justify-between">
-                                            <a href="shop-left-sidebar-col-3.html"
+                                            <a href="/filter?products[]={{$product->name}}"
                                                class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[13px] leading-[16px] text-[#777] font-light tracking-[0.03rem]">
                                                 {{ $product->category->name }}
                                             </a>
@@ -238,7 +236,7 @@
                                             </span>
                                         </div>
                                         <h4 class="bb-pro-title mb-[8px] text-[16px] leading-[18px]">
-                                            <a href="product-left-sidebar.html"
+                                            <a href="/filter?products[]={{$product->category->name}}"
                                                class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">
                                                 {{$product->name}}
                                             </a>
@@ -250,14 +248,12 @@
                                                 <span
                                                     class="old-price px-[3px] text-[14px] text-[#686e7d] line-through">${{$product->sale_price }}</span>
                                             </div>
-                                            <span
-                                                class="last-items text-[14px] text-[#686e7d]">{{ $product->volume->name }}</span>
+                                            <span class="last-items text-[14px] text-[#686e7d]">{{ $product->volume->name }}</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
-
                     </div>
                 </div>
             </div>
@@ -269,8 +265,7 @@
 
 <!-- Banner-one -->
 <section class="section-banner-one overflow-hidden py-[50px] max-[1199px]:py-[35px]">
-    <div
-        class="flex flex-wrap justify-between relative items-center mx-auto min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
+    <div class="flex flex-wrap justify-between relative items-center mx-auto min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
         <div class="flex flex-wrap w-full mb-[-24px]">
 
             @foreach($oneBottomBanners as $banner)
@@ -280,8 +275,7 @@
 
                 <div class="min-[992px]:w-[50%] w-full px-[12px] mb-[24px]" data-aos="fade-up" data-aos-duration="1000"
                      data-aos-delay="400">
-                    <div
-                        class="banner-box p-[30px] rounded-[20px] relative overflow-hidden bg-box-color-one bg-[#fbf2e5]">
+                    <div class="banner-box p-[30px] rounded-[20px] relative overflow-hidden bg-box-color-one bg-[#fbf2e5]">
                         <div class="inner-banner-box relative z-[1] flex justify-between max-[480px]:flex-col">
                             <div
                                 class="side-image px-[12px] flex items-center max-[480px]:p-[0] max-[480px]:mb-[12px] max-[480px]:justify-center">
@@ -294,7 +288,7 @@
                                     {!! $title !!}</h5>
                                 <p class="font-Poppins text-[16px] font-light leading-[28px] tracking-[0.03rem] text-[#686e7d] mb-[15px] max-[480px]:mb-[8px] max-[480px]:text-[14px]">
                                     {{$banner->description}}</p>
-                                <a href="shop-left-sidebar-col-3.html"
+                                <a href="/filter?categories[]={{$banner->title}}"
                                    class="bb-btn-1 transition-all duration-[0.3s] ease-in-out font-Poppins leading-[28px] tracking-[0.03rem] py-[5px] px-[15px] text-[14px] font-normal text-[#3d4750] bg-transparent rounded-[10px] border-[1px] border-solid border-[#3d4750] hover:bg-[#6c7fd8] hover:border-[#6c7fd8] hover:text-[#fff]">Shop
                                     Now</a>
                             </div>
@@ -322,8 +316,7 @@
                     class="w-full px-[12px] banner-justify-box-contact w-full h-[600px] flex justify-end items-end max-[991px]:h-[400px]">
                     <div
                         class="banner-two-box bg-[#fff] rounded-t-[30px] max-w-[400px] pt-[30px] px-[30px] flex flex-col items-start relative max-[991px]:max-w-[250px] max-[575px]:my-[0] max-[575px]:mx-[auto]">
-                        <span
-                            class="text-[20px] font-semibold text-[#6c7fd8] leading-[26px] max-[991px]:text-[16px]">{{$bottomBanner->description}}</span>
+                        <span class="text-[20px] font-semibold text-[#6c7fd8] leading-[26px] max-[991px]:text-[16px]">{{$bottomBanner->description}}</span>
                         <h4 class="font-quicksand mb-[20px] text-[40px] font-bold text-[#3d4750] tracking-[0.03rem] leading-[1.2] max-[991px]:text-[22px]">
                             {{$bottomBanner->title}}</h4>
                         <a href="javascript:void(0)"
@@ -433,7 +426,7 @@
                                     </div>
                                     <div class="bb-pro-contact p-[20px]">
                                         <div class="bb-pro-subtitle mb-[8px] flex flex-wrap justify-between">
-                                            <a href="shop-left-sidebar-col-3.html"
+                                            <a href="/filter?product[]=All Snacks Ground Nuts Oil Pack"
                                                class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[13px] leading-[16px] text-[#777] font-light tracking-[0.03rem]">Snacks</a>
                                             <span class="bb-pro-rating">
                                                     <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[18px] text-[#fea99a]"></i>
@@ -444,7 +437,7 @@
                                                 </span>
                                         </div>
                                         <h4 class="bb-pro-title mb-[8px] text-[16px] leading-[18px]">
-                                            <a href="product-left-sidebar.html"
+                                            <a href="/filter?product[]=All Ground Nuts Oil Pack"
                                                class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">Ground
                                                 Nuts Oil
                                                 Pack</a></h4>
@@ -518,7 +511,7 @@
                                     </div>
                                     <div class="bb-pro-contact p-[20px]">
                                         <div class="bb-pro-subtitle mb-[8px] flex flex-wrap justify-between">
-                                            <a href="shop-left-sidebar-col-3.html"
+                                            <a href="/filter?products[]=Snack and Spices Snacks Ground Nuts Oil Pack"
                                                class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[13px] leading-[16px] text-[#777] font-light tracking-[0.03rem]">Snacks</a>
                                             <span class="bb-pro-rating">
                                                     <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[18px] text-[#fea99a]"></i>
@@ -529,10 +522,11 @@
                                                 </span>
                                         </div>
                                         <h4 class="bb-pro-title mb-[8px] text-[16px] leading-[18px]">
-                                            <a href="product-left-sidebar.html"
-                                               class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">Ground
-                                                Nuts Oil
-                                                Pack</a></h4>
+                                            <a href="/filter?products[]=Snack and Spices Ground Nuts Oil Pack"
+                                               class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">
+                                                Ground Nuts Oil Pack
+                                            </a>
+                                        </h4>
                                         <div class="bb-price flex flex-wrap justify-between">
                                             <div class="inner-price mx-[-3px]">
                                                 <span class="new-price px-[3px] text-[16px] text-[#686e7d] font-bold">$15</span>
@@ -603,7 +597,7 @@
                                     </div>
                                     <div class="bb-pro-contact p-[20px]">
                                         <div class="bb-pro-subtitle mb-[8px] flex flex-wrap justify-between">
-                                            <a href="shop-left-sidebar-col-3.html"
+                                            <a href="/filter?products[]=Fruits Snacks Ground Nuts Oil Pack"
                                                class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[13px] leading-[16px] text-[#777] font-light tracking-[0.03rem]">Snacks</a>
                                             <span class="bb-pro-rating">
                                                     <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[18px] text-[#fea99a]"></i>
@@ -614,10 +608,11 @@
                                                 </span>
                                         </div>
                                         <h4 class="bb-pro-title mb-[8px] text-[16px] leading-[18px]">
-                                            <a href="product-left-sidebar.html"
-                                               class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">Ground
-                                                Nuts Oil
-                                                Pack</a></h4>
+                                            <a href="/filter?products[]=Fruits Ground Nuts Oil Pack"
+                                               class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">
+                                                Ground Nuts Oil Pack
+                                            </a>
+                                        </h4>
                                         <div class="bb-price flex flex-wrap justify-between">
                                             <div class="inner-price mx-[-3px]">
                                                 <span class="new-price px-[3px] text-[16px] text-[#686e7d] font-bold">$15</span>
@@ -688,7 +683,7 @@
                                     </div>
                                     <div class="bb-pro-contact p-[20px]">
                                         <div class="bb-pro-subtitle mb-[8px] flex flex-wrap justify-between">
-                                            <a href="shop-left-sidebar-col-3.html"
+                                            <a href="/filter?products[]=Vegetables Snacks Ground Nuts Oil Pack"
                                                class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[13px] leading-[16px] text-[#777] font-light tracking-[0.03rem]">Snacks</a>
                                             <span class="bb-pro-rating">
                                                     <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[18px] text-[#fea99a]"></i>
@@ -699,10 +694,11 @@
                                                 </span>
                                         </div>
                                         <h4 class="bb-pro-title mb-[8px] text-[16px] leading-[18px]">
-                                            <a href="product-left-sidebar.html"
-                                               class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">Ground
-                                                Nuts Oil
-                                                Pack</a></h4>
+                                            <a href="/filter?products[]=Vegetables Ground Nuts Oil Pack"
+                                               class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">
+                                                Ground Nuts Oil Pack
+                                            </a>
+                                        </h4>
                                         <div class="bb-price flex flex-wrap justify-between">
                                             <div class="inner-price mx-[-3px]">
                                                 <span class="new-price px-[3px] text-[16px] text-[#686e7d] font-bold">$15</span>
@@ -824,8 +820,7 @@
                                     <div class="min-[768px]:w-[33.33%] w-full px-[12px] max-[767px]:hidden">
                                         <div
                                             class="testimonials-image relative max-[575px]:mb-[20px] max-[575px]:max-w-[200px]">
-                                            <img src="{{ \Illuminate\Support\Facades\Storage::url($team->image) }}"
-                                                 alt="testimonials"
+                                            <img src="{{ \Illuminate\Support\Facades\Storage::url($team->image) }}" alt="testimonials"
                                                  class="w-full rounded-[30px] block">
                                         </div>
                                     </div>
@@ -906,8 +901,7 @@
                         <div class="bb-instagram-card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                             <div class="instagram-img relative overflow-hidden rounded-[30px]">
                                 <a href="javascript:void(0)">
-                                    <img src="{{\Illuminate\Support\Facades\Storage::url($insPost->image)}}"
-                                         alt="instagram-1" class="w-full rounded-[20px]">
+                                    <img src="{{\Illuminate\Support\Facades\Storage::url($insPost->image)}}" alt="instagram-1" class="w-full rounded-[20px]">
                                 </a>
                             </div>
                         </div>
@@ -920,9 +914,9 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function () {
+    $(document).ready(function(){
         // Wishlist va cart holatini yuklash
-        $('.bb-deal-card').each(function () {
+        $('.bb-deal-card').each(function() {
             var productId = $(this).data('product-id');
 
             if (localStorage.getItem('wishlist_' + productId) === 'true') {
@@ -935,7 +929,7 @@
         });
 
         // Wishlist tugmasi
-        $('.bb-pro-actions').on('click', '.ri-heart-line', function (e) {
+        $('.bb-pro-actions').on('click', '.ri-heart-line', function(e){
             e.preventDefault();
             var $icon = $(this);
             var productId = $icon.closest('.bb-deal-card').data('product-id');
@@ -947,8 +941,8 @@
                     product_id: productId,
                     _token: '{{ csrf_token() }}'
                 },
-                success: function (response) {
-                    if (response.status.like) {
+                success: function(response) {
+                    if(response.status.like){
                         $icon.closest('.bb-btn-group').addClass('heart-active');
                         localStorage.setItem('wishlist_' + productId, 'true'); // Saqlash
                     } else {
@@ -956,14 +950,14 @@
                         localStorage.removeItem('wishlist_' + productId); // O'chirish
                     }
                 },
-                error: function (xhr) {
+                error: function(xhr) {
                     console.error("Wishlist xatosi:", xhr);
                 }
             });
         });
 
         // Cart tugmasi
-        $('.bb-pro-actions').on('click', '.ri-shopping-bag-4-line', function (e) {
+        $('.bb-pro-actions').on('click', '.ri-shopping-bag-4-line', function(e){
             e.preventDefault();
             var $icon = $(this);
             var productId = $icon.closest('.bb-deal-card').data('product-id');
@@ -975,8 +969,8 @@
                     product_id: productId,
                     _token: '{{ csrf_token() }}'
                 },
-                success: function (response) {
-                    if (response.status.shopping) {
+                success: function(response) {
+                    if(response.status.shopping){
                         $icon.closest('.bb-btn-group').addClass('cart-active');
                         localStorage.setItem('cart_' + productId, 'true'); // Saqlash
                     } else {
@@ -984,13 +978,15 @@
                         localStorage.removeItem('cart_' + productId); // O'chirish
                     }
                 },
-                error: function (xhr) {
+                error: function(xhr) {
                     console.error("Cart xatosi:", xhr);
                 }
             });
         });
     });
 </script>
+
+
 
 
 <!-- Footer -->
