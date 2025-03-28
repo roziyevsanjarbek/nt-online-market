@@ -33,7 +33,7 @@ class CategoryResource extends ModelResource
         return [
             ID::make()->sortable(),
             Text::make('name'),
-            Text::make('parent')->nullable(),
+            BelongsTo::make('parent', 'parent', fn($item)=>"$item->id. $item->name",CategoryResource::class)->nullable(),
             HasMany::make('Images','images')
         ];
     }

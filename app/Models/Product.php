@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
 
+    public function discount() {
+        return $this->belongsToMany(Discount::class);
+    }
+
+
     protected $fillable =
         [
             'product_id',

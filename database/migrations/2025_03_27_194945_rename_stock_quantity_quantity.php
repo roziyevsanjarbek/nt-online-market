@@ -9,13 +9,15 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->renameColumn('stock_quantity', 'quantity');
+            if (Schema::hasColumn('products', 'stock_quantity')) {
+                $table->renameColumn('stock_quantity', 'quantity');
+            }
         });
-
     }
+
 
     /**
      * Reverse the migrations.
@@ -23,7 +25,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->renameColumn('stock_quantity', 'quantity');
+            if (Schema::hasColumn('products', 'stock_quantity')) {
+                $table->renameColumn('stock_quantity', 'quantity');
+            }
         });
 
     }

@@ -21,6 +21,7 @@ class ProductsController extends Controller
         return view('user.index', [
             'users' => DB::table('users')->paginate(15)
         ]);
+
     }
 
     /**
