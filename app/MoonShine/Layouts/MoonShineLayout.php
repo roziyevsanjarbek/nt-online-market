@@ -77,7 +77,7 @@ final class MoonShineLayout extends AppLayout
                 MenuItem::make('Banner', BannerResource::class),
                 MenuItem::make('Teams', TeamsResource::class),
             ]),
-            MenuItem::make('DiscountWeights', DiscountResource::class),
+            MenuItem::make('Discounts', DiscountResource::class),
         ];
 
     }

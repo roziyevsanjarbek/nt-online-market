@@ -11,21 +11,10 @@ Route::middleware(GenerateCustomerToken::class)->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/filter',[ProductsController::class, 'show'])->name('filter');
 
-
-
-    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-
-
-    Route::middleware('auth')->group(function ()
-    {
+    Route::middleware('auth')->group(function () {
+        Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
 });
-
-
-
-
 
 require __DIR__.'/auth.php';
