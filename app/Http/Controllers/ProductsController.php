@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\Product;
-
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Volume;
@@ -106,7 +105,6 @@ class ProductsController extends Controller
         $images = Image::paginate(1);
         $weights = Volume::all();
 
-        // Get min and max price dynamically
         $minSalePrice = $products->min('price');
         $maxSalePrice = $products->max('price');
 
@@ -122,7 +120,6 @@ class ProductsController extends Controller
 
         ]);
     }
-
 
     /**
      * Show the form for editing the specified resource.

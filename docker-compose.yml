@@ -39,13 +39,13 @@ services:
         networks:
             - market_network
         ports:
-            -   "3307:3306"
+            -   "3207:3206"
     market_redis:
         container_name: market_redis
         image: redis:alpine
         restart: unless-stopped
         ports:
-            - "6380:6379"
+            - "6388:6380"
         networks:
             - market_network
 
