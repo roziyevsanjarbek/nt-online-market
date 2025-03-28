@@ -9,6 +9,8 @@ use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Volume;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 
 class ProductsController extends Controller
@@ -99,27 +101,20 @@ class ProductsController extends Controller
     }
 
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Product $products)
+
+    public function likeProduct($productId)
     {
-        //
+        if (Auth::check()) {
+            $user = Auth::user();
+            $user->likedProducts()->attach($productId);
+        } else {
+            $likedProducts = Session::get('liked_products', []);
+            if (!in_array($productId, $likedProducts)) {
+                $likedProducts[] = $productId;
+                Session::put('liked_products', $likedProducts);
+            }
+        }
+        return response()->json(['success' => true]); // JavaScript uchun javob
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Product $products)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Product $products)
-    {
-        //
-    }
 }
