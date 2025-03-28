@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use App\Models\Category;
+use App\Models\Customer;
 use App\Models\Post;
 use App\Models\Product;
 use App\Models\Team;
@@ -16,6 +17,13 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if (!isset($_COOKIE['customer_token'])){
+            $uniqueId = uniqid();
+            Customer::query()->create([
+                'token' => $uniqueId
+            ]);
+            setcookie('customer_token', $uniqueId, time() + (86400 * 30), "/");
+        }
         $topBanners = Banner::query()
             ->where('position', 'top')
                 ->get();
