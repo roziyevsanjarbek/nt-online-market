@@ -106,7 +106,7 @@ class ProductResource extends ModelResource
             Number::make('Pilgrim','pilgrim'),
             BelongsTo::make('Volume', 'volume', fn($item) => $item->name,
                 VolumeResource::class
-            )
+            )->nullable(),
         ];
     }
 
