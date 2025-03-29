@@ -8,6 +8,7 @@ use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Number;
 use MoonShine\UI\Fields\Date;
+use MoonShine\UI\Fields\Select;
 use MoonShine\Laravel\Fields\Relationships\BelongsToMany;
 
 /**
@@ -21,7 +22,8 @@ class DiscountResource extends ModelResource {
         return [
             ID::make()->sortable(),
             Text::make('Name'),
-            Number::make('Discount Price', 'discount_price')->step(0.01),
+            Select::make('Discount (%)', 'discount_price')
+                ->options([10 => '10%', 20 => '20%', 30 => '30%', 40 => '40%', 50 => '50%', 60 => '60%', 70 => '70%', 80 => '80%', 90 => '90%', 100 => '100%']),
             Date::make('Start Date', 'start_date'),
             Date::make('End Date', 'end_date'),
             BelongsToMany::make('Products', 'products', fn($item) => $item->name),
