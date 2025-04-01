@@ -98,13 +98,21 @@ class ProductsController extends Controller
         $images = Image::paginate(1);
         $weights = Volume::all(); // **Shu qatorni qo‘sh!**
 
+        $newArrivalProducts = Product::whereHas('category', function ($query) use ($parentCategories) {
+            $query->whereHas('parent', function ($q) use ($parentCategories) {
+                $q->whereNotNull('id')->where('name', $parentCategories->name);
+            });
+        })->orderBy('id', 'desc')->limit(4)->get();
+
+
         return view('product-filter', [
             'products' => $products,
             'parentCategories' => $parentCategories,
             'productsMenu' => $productsMenu,
             'categories' => $categories,
             'images'=>$images,
-            'weights' => $weights
+            'weights' => $weights,
+            'newArrivalProducts' => $newArrivalProducts,
         ]);
     }
 

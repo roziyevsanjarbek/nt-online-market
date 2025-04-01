@@ -68,19 +68,20 @@ class HomeService
                 ->limit(10)
                 ->get(),
 
-            'newArrivalProductFruits' => Product::whereHas('category', function ($query) {
-                $query->where('name', 'Fruits');
-            })->orderBy('id', 'desc')->limit(4)->get(),
 
-            'newArrivalProductVegetables' => Product::whereHas('category', function ($query) {
-                $query->where('name', 'Vegetables');
-            })->orderBy('id', 'desc')->limit(4)->get(),
+            $parentCategories = Category::query()
+                ->whereNull('parent_id')
+                ->orderBy('id', 'desc')
+                ->limit(10)
+                ->with('categories')
+                ->get(), // <<< Vergul emas, nuqta-vergul qo‘ying!
 
-            'newArrivalProductSpicesAndSnacks' => Product::whereHas('category', function ($query) {
-                $query->whereIn('name', ['Snack', 'Spices']);
-            })->orderBy('id', 'desc')->limit(4)->get(),
+            'newArrivalProducts' => Product::whereHas('category', function ($query) use ($parentCategories) {
+                $query->whereIn('id', $parentCategories->pluck('id'));
+                })->orderBy('id', 'desc')->limit(4)->get(),
 
-            'teams' => Team::query()
+
+        'teams' => Team::query()
                 ->orderBy('id', 'desc')
                 ->limit(10)
                 ->get(),
