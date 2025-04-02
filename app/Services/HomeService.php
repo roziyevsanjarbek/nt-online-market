@@ -74,7 +74,7 @@ class HomeService
                 ->orderBy('id', 'desc')
                 ->limit(10)
                 ->with('categories')
-                ->get(), // <<< Vergul emas, nuqta-vergul qo‘ying!
+                ->get(),
 
             'newArrivalProducts' => Product::whereHas('category', function ($query) use ($parentCategories) {
                 $query->whereIn('id', $parentCategories->pluck('id'));
