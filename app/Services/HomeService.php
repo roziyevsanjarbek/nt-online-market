@@ -81,7 +81,7 @@ class HomeService
                 })->orderBy('id', 'desc')->limit(4)->get(),
 
 
-        'teams' => Team::query()
+        'groupTeam' => Team::query()
                 ->orderBy('id', 'desc')
                 ->limit(10)
                 ->get(),
