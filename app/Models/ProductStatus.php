@@ -11,7 +11,7 @@ class ProductStatus extends Model
 
     protected $table = 'user_product_statuses'; // Jadval nomi aniq belgilandi
 
-    protected $fillable = ['product_id', 'user_id', 'like', 'shopping'];
+    protected $fillable = ['product_id', 'customer_id', 'like', 'shopping'];
 
     public function product()
     {
