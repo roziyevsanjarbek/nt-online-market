@@ -48,13 +48,6 @@ class ProductsController extends Controller
 
     public function show(Request $request)
     {
-        if (!isset($_COOKIE['customer_token'])){
-            $uniqueId = uniqid();
-            Customer::query()->create([
-                'token' => $uniqueId
-            ]);
-            setcookie('customer_token', $uniqueId, time() + (86400 * 30), "/");
-        }
         $categories = $request->input('categories');
         $weights = $request->input('weights');
         $startPrice = $request->input('startPrice');
