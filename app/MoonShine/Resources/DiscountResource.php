@@ -1,14 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\MoonShine\Resources;
 
+use Illuminate\Database\Eloquent\Model;
 use App\Models\Discount;
-use MoonShine\Laravel\Resources\ModelResource;
-use MoonShine\UI\Fields\ID;
-use MoonShine\UI\Fields\Text;
-use MoonShine\UI\Fields\Number;
-use MoonShine\UI\Fields\Date;
+
 use MoonShine\Laravel\Fields\Relationships\BelongsToMany;
+use MoonShine\Laravel\Resources\ModelResource;
+use MoonShine\UI\Components\Layout\Box;
+use MoonShine\UI\Fields\Date;
+use MoonShine\UI\Fields\ID;
+use MoonShine\Contracts\UI\FieldContract;
+use MoonShine\Contracts\UI\ComponentContract;
+use MoonShine\UI\Fields\Number;
+use MoonShine\UI\Fields\Text;
 
 /**
  * @extends ModelResource<Discount>
