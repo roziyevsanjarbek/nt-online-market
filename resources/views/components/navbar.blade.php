@@ -49,8 +49,8 @@
                             <!-- Header Logo Start -->
                             <div class="header-logo flex items-center max-[575px]:justify-center">
                                 <a href="index.html">
-                                    <img src="assets/img/logo/logo.png" alt="logo" class="light w-[125px] max-[991px]:w-[115px] block">
-                                    <img src="assets/img/logo/logo-dark.png" alt="logo" class="dark w-[125px] max-[991px]:w-[115px] hidden">
+                                    <img src="/assets/img/logo/logo.png" alt="logo" class="light w-[125px] max-[991px]:w-[115px] block">
+                                    <img src="/assets/img/logo/logo-dark.png" alt="logo" class="dark w-[125px] max-[991px]:w-[115px] hidden">
                                 </a>
                             </div>
                             <!-- Header Logo End -->
