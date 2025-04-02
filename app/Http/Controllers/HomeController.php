@@ -22,7 +22,6 @@ class HomeController extends Controller
         $data = (new HomeService)->getHomeData(); // Static chaqirish
         return view('home', $data);
     }
-
     public function show(string $id)
     {
         $data = (new HomeService)->getHomeData(); // Static chaqirish
