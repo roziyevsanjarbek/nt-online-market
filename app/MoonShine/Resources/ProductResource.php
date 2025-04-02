@@ -9,6 +9,7 @@ use App\Models\Product;
 
 
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
+use MoonShine\Laravel\Fields\Relationships\BelongsToMany;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\TinyMce\Fields\TinyMce;
 use MoonShine\UI\Components\Layout\Box;
@@ -48,10 +49,12 @@ class ProductResource extends ModelResource
                 fn($item)=>"$item->name",
                 CategoryResource::class)->nullable(),
             Number::make('Quantity', 'quantity'),
-            Number::make('Pilgrim','pilgrim'),
+        Number::make('Amount','pilgrim'),
             BelongsTo::make('Volume', 'volume', fn($item) => $item->name,
                 VolumeResource::class
             )->nullable(),
+            BelongsToMany::make('Discounts', 'discounts', DiscountResource::class),
+
 
         ];
     }
@@ -68,15 +71,15 @@ class ProductResource extends ModelResource
                 ->customAttributes([
                     'rows'=>7,
                 ]),
-            Text::make('price')->sortable(),
-            Text::make('Sale Price','sale_price')->sortable(),
+            Number::make('price')->sortable(),
+            Number::make('Sale Price','sale_price')->sortable(),
             BelongsTo::make(
                 'Category ID and Name',
                 'category',
                 fn($item)=>"$item->name",
                 CategoryResource::class)->nullable(),
             Number::make('Quantity', 'quantity'),
-            Number::make('Pilgrim','pilgrim'),
+            Number::make('Amount','pilgrim'),
             BelongsTo::make('Volume', 'volume', fn($item) => $item->name,
                 VolumeResource::class
             )->nullable(),
@@ -103,7 +106,7 @@ class ProductResource extends ModelResource
                 fn($item)=>"$item->name",
                 CategoryResource::class)->nullable(),
             Number::make('Quantity', 'quantity'),
-            Number::make('Pilgrim','pilgrim'),
+        Number::make('Amount','pilgrim'),
             BelongsTo::make('Volume', 'volume', fn($item) => $item->name,
                 VolumeResource::class
             )->nullable(),

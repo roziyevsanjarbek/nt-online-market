@@ -6,15 +6,11 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up()
+
+     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            if (!Schema::hasColumn('products', 'volume_id')) {
-                $table->unsignedBigInteger('volume_id')->after('quantity');
-            }
+            $table->unsignedBigInteger('volume_id')->after('quantity');
         });
     }
 

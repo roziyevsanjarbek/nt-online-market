@@ -42,6 +42,7 @@ use App\MoonShine\Resources\CategoryResource;
 use App\MoonShine\Resources\ProductResource;
 use App\MoonShine\Resources\ImageResource;
 use App\MoonShine\Resources\TeamsResource;
+use App\MoonShine\Resources\DiscountResource;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -68,14 +69,15 @@ final class MoonShineLayout extends AppLayout
             MenuGroup::make('Products', [
                 MenuItem::make('Categories', CategoryResource::class),
                 MenuItem::make('Volumes', VolumeResource::class),
-                MenuItem::make('Images', ImageResource::class),
                 MenuItem::make('Product', ProductResource::class),
+                MenuItem::make('Images', ImageResource::class),
             ]),
 
             MenuGroup::make('Images', [
                 MenuItem::make('Banner', BannerResource::class),
                 MenuItem::make('Teams', TeamsResource::class),
             ]),
+            MenuItem::make('Discounts', DiscountResource::class),
         ];
 
     }
