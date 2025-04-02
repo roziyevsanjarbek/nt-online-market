@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Customer;
 use App\Models\Image;
 use App\Models\Product;
+
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Volume;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 
 class ProductsController extends Controller
@@ -44,6 +48,13 @@ class ProductsController extends Controller
 
     public function show(Request $request)
     {
+        if (!isset($_COOKIE['customer_token'])){
+            $uniqueId = uniqid();
+            Customer::query()->create([
+                'token' => $uniqueId
+            ]);
+            setcookie('customer_token', $uniqueId, time() + (86400 * 30), "/");
+        }
         $categories = $request->input('categories');
         $weights = $request->input('weights');
         $startPrice = $request->input('startPrice');
@@ -121,6 +132,7 @@ class ProductsController extends Controller
         ]);
     }
 
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -129,19 +141,18 @@ class ProductsController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Product $products)
+    public function likeProduct($productId)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Product $products)
-    {
-        //
+        if (Auth::check()) {
+            $user = Auth::user();
+            $user->likedProducts()->attach($productId);
+        } else {
+            $likedProducts = Session::get('liked_products', []);
+            if (!in_array($productId, $likedProducts)) {
+                $likedProducts[] = $productId;
+                Session::put('liked_products', $likedProducts);
+            }
+        }
+        return response()->json(['success' => true]); // JavaScript uchun javob
     }
 }

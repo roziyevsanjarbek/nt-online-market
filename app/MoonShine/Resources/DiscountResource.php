@@ -7,61 +7,39 @@ namespace App\MoonShine\Resources;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Discount;
 
+use MoonShine\Laravel\Fields\Relationships\BelongsToMany;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\UI\Components\Layout\Box;
+use MoonShine\UI\Fields\Date;
 use MoonShine\UI\Fields\ID;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\UI\ComponentContract;
+use MoonShine\UI\Fields\Number;
+use MoonShine\UI\Fields\Text;
 
 /**
  * @extends ModelResource<Discount>
  */
-class DiscountResource extends ModelResource
-{
+class DiscountResource extends ModelResource {
     protected string $model = Discount::class;
-
     protected string $title = 'Discounts';
-    
-    /**
-     * @return list<FieldContract>
-     */
-    protected function indexFields(): iterable
-    {
+
+    protected function indexFields(): iterable {
         return [
             ID::make()->sortable(),
+            Text::make('Name'),
+            Number::make('Discount Price', 'discount_price')->step(0.01),
+            Date::make('Start Date', 'start_date'),
+            Date::make('End Date', 'end_date'),
+            BelongsToMany::make('Products', 'products', fn($item) => $item->name),
         ];
     }
 
-    /**
-     * @return list<ComponentContract|FieldContract>
-     */
-    protected function formFields(): iterable
-    {
-        return [
-            Box::make([
-                ID::make(),
-            ])
-        ];
+    protected function formFields(): iterable {
+        return $this->indexFields();
     }
 
-    /**
-     * @return list<FieldContract>
-     */
-    protected function detailFields(): iterable
-    {
-        return [
-            ID::make(),
-        ];
-    }
-
-    /**
-     * @param Discount $item
-     *
-     * @return array<string, string[]|string>
-     * @see https://laravel.com/docs/validation#available-validation-rules
-     */
-    protected function rules(mixed $item): array
-    {
-        return [];
+    protected function detailFields(): iterable {
+        return $this->indexFields();
     }
 }

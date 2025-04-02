@@ -11,8 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->dropColumn('stock_quantity'); // Replace with your column name
+        Schema::create('customers', function (Blueprint $table) {
+            $table->id();
+            $table->string('token');
+            $table->timestamps();
         });
     }
 
@@ -21,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('customers');
     }
 };

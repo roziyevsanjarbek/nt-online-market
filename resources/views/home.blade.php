@@ -1,4 +1,4 @@
-@props(['parentCategories', 'productsMenu'])
+@props(['parentCategories', 'productsMenu','$newArrivalProductFruits','$newArrivalProductSpicesAndSnacks'])
 @yield('content')
 <x-header title="Online Market"></x-header>
 
@@ -42,7 +42,7 @@
                                             <p class="mb-[20px] font-Poppins text-[18px] text-[#777] font-light leading-[28px] tracking-[0.03rem] max-[1199px]:mb-[10px] max-[1199px]:text-[16px]">
                                                 {{ $banner->description }}</p>
                                             <h1 class="mb-[20px] font-quicksand text-[50px] text-[#3d4750] font-bold tracking-[0.03rem] leading-[1.2] max-[1199px]:mb-[10px] max-[1199px]:text-[38px] max-[991px]:text-center max-[991px]:text-[45px] max-[767px]:text-[40px] max-[575px]:text-[35px] max-[420px]:text-[30px] max-[360px]:text-[28px]">{!! $title !!}</h1>
-                                            <a href="shop-left-sidebar-col-3.html"
+                                            <a href="/filter?categories[]={{$banner->category->name}}"
                                                class="bb-btn-1 transition-all duration-[0.3s] ease-in-out font-Poppins leading-[28px] tracking-[0.03rem] py-[8px] px-[20px] text-[14px] font-normal text-[#3d4750] bg-transparent rounded-[10px] border-[1px] border-solid border-[#3d4750] max-[1199px]:py-[3px] max-[1199px]:px-[15px] hover:bg-[#6c7fd8] hover:border-[#6c7fd8] hover:text-[#fff]">Shop
                                                 Now</a>
                                         </div>
@@ -223,7 +223,7 @@
                                     </div>
                                     <div class="bb-pro-contact p-[20px]">
                                         <div class="bb-pro-subtitle mb-[8px] flex flex-wrap justify-between">
-                                            <a href="shop-left-sidebar-col-3.html"
+                                            <a href="/filter?categories[]={{$product->category->name}}"
                                                class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[13px] leading-[16px] text-[#777] font-light tracking-[0.03rem]">
                                                 {{ $product->category->name }}
                                             </a>
@@ -248,7 +248,7 @@
                                                 <span
                                                     class="old-price px-[3px] text-[14px] text-[#686e7d] line-through">${{$product->sale_price }}</span>
                                             </div>
-                                            <span class="last-items text-[14px] text-[#686e7d]">{{ $product->volume->name }}</span>
+                                            <span class="last-items text-[14px] text-[#686e7d]"> {{$product->pilgrim}} {{ $product->volume->name }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -308,26 +308,7 @@
         $title = trim(preg_replace('/\s+/', ' ', $bottomBanner->title));
         $words = explode(" ", $title);
         ?>
-    <section
-        class="section-banner-two overflow-hidden my-[50px] max-[1199px]:my-[35px] bg-[url('{{ asset('storage/' . $bottomBanner->image) }}')] min-h-[600px] overflow-hidden bg-no-repeat bg-cover bg-center max-[991px]:max-h-[400px] max-[991px]:min-h-[auto]">
-        <div
-            class="flex flex-wrap justify-between relative items-center mx-auto min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
-            <div class="flex flex-wrap w-full">
-                <div
-                    class="w-full px-[12px] banner-justify-box-contact w-full h-[600px] flex justify-end items-end max-[991px]:h-[400px]">
-                    <div
-                        class="banner-two-box bg-[#fff] rounded-t-[30px] max-w-[400px] pt-[30px] px-[30px] flex flex-col items-start relative max-[991px]:max-w-[250px] max-[575px]:my-[0] max-[575px]:mx-[auto]">
-                        <span class="text-[20px] font-semibold text-[#6c7fd8] leading-[26px] max-[991px]:text-[16px]">{{$bottomBanner->description}}</span>
-                        <h4 class="font-quicksand mb-[20px] text-[40px] font-bold text-[#3d4750] tracking-[0.03rem] leading-[1.2] max-[991px]:text-[22px]">
-                            {{$bottomBanner->title}}</h4>
-                        <a href="javascript:void(0)"
-                           class="bb-btn-1 transition-all duration-[0.3s] ease-in-out font-Poppins leading-[28px] tracking-[0.03rem] py-[8px] px-[20px] max-[1199px]:py-[3px] max-[1199px]:px-[15px] text-[14px] font-normal text-[#3d4750] bg-transparent rounded-[10px] border-[1px] border-solid border-[#3d4750] hover:bg-[#6c7fd8] hover:border-[#6c7fd8] hover:text-[#fff]">Shop
-                            Now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+
     <section
         class="section-banner-two overflow-hidden my-[50px] max-[1199px]:my-[35px] bg-[url('{{ asset('storage/' . $bottomBanner->image) }}')] min-h-[600px] overflow-hidden bg-no-repeat bg-cover bg-center max-[991px]:max-h-[400px] max-[991px]:min-h-[auto]">
         <div
@@ -395,99 +376,98 @@
                     <!-- 1st Product tab start -->
                     <div class="tab-product-pane" id="all">
                         <div class="flex flex-wrap w-full">
-                            {{--                            @for($i=0; $i<8; $i++)--}}
-                            <div
-                                class="min-[1200px]:w-[25%] min-[768px]:w-[33.33%] w-[50%] max-[480px]:w-full px-[12px] mb-[24px]"
-                                data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                            @foreach($products as $product)
                                 <div
-                                    class="bb-pro-box bg-[#fff] border-[1px] border-solid border-[#eee] rounded-[20px]">
+                                    class="min-[1200px]:w-[25%] min-[768px]:w-[33.33%] w-[50%] max-[480px]:w-full px-[12px] mb-[24px]"
+                                    data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                                     <div
-                                        class="bb-pro-img overflow-hidden relative border-b-[1px] border-solid border-[#eee] z-[4]">
+                                        class="bb-pro-box bg-[#fff] border-[1px] border-solid border-[#eee] rounded-[20px]">
+                                        <div
+                                            class="bb-pro-img overflow-hidden relative border-b-[1px] border-solid border-[#eee] z-[4]">
                                             <span
                                                 class="flags transition-all duration-[0.3s] ease-in-out absolute z-[5] top-[10px] left-[6px]">
                                                 <span class="text-[14px] text-[#777] font-medium uppercase">New</span>
                                             </span>
-                                        <a href="javascript:void(0)">
-                                            <div
-                                                class="inner-img relative block overflow-hidden pointer-events-none rounded-t-[20px]">
-                                                <img class="main-img transition-all duration-[0.3s] ease-in-out w-full"
-                                                     src="assets/img/new-product/1.jpg"
-                                                     alt="product-1">
-                                                <img
-                                                    class="hover-img transition-all duration-[0.3s] ease-in-out absolute z-[2] top-[0] left-[0] opacity-[0] w-full"
-                                                    src="assets/img/new-product/back-1.jpg"
-                                                    alt="product-1">
-                                            </div>
-                                        </a>
-                                        <ul class="bb-pro-actions transition-all duration-[0.3s] ease-in-out my-[0] mx-[auto] absolute z-[9] left-[0] right-[0] bottom-[0] flex flex-row items-center justify-center opacity-[0]">
-                                            <li class="bb-btn-group transition-all duration-[0.3s] ease-in-out w-[35px] h-[35px] mx-[2px] flex items-center justify-center text-[#fff] bg-[#fff] border-[1px] border-solid border-[#eee] rounded-[10px]">
-                                                <a href="javascript:void(0)" title="Wishlist"
-                                                   class="w-[35px] h-[35px] flex items-center justify-center">
-                                                    <i class="ri-heart-line transition-all duration-[0.3s] ease-in-out text-[18px] text-[#777] leading-[10px]"></i>
-                                                </a>
-                                            </li>
-                                            <li class="bb-btn-group transition-all duration-[0.3s] ease-in-out w-[35px] h-[35px] mx-[2px] flex items-center justify-center text-[#fff] bg-[#fff] border-[1px] border-solid border-[#eee] rounded-[10px]">
-                                                <a href="javascript:void(0)" title="Quick View"
-                                                   class="bb-modal-toggle w-[35px] h-[35px] flex items-center justify-center">
-                                                    <i class="ri-eye-line transition-all duration-[0.3s] ease-in-out text-[18px] text-[#777] leading-[10px]"></i>
-                                                </a>
-                                            </li>
-                                            <li class="bb-btn-group transition-all duration-[0.3s] ease-in-out w-[35px] h-[35px] mx-[2px] flex items-center justify-center text-[#fff] bg-[#fff] border-[1px] border-solid border-[#eee] rounded-[10px]">
-                                                <a href="compare.html" title="Compare"
-                                                   class="w-[35px] h-[35px] flex items-center justify-center">
-                                                    <i class="ri-repeat-line transition-all duration-[0.3s] ease-in-out text-[18px] text-[#777] leading-[10px]"></i>
-                                                </a>
-                                            </li>
-                                            <li class="bb-btn-group transition-all duration-[0.3s] ease-in-out w-[35px] h-[35px] mx-[2px] flex items-center justify-center text-[#fff] bg-[#fff] border-[1px] border-solid border-[#eee] rounded-[10px]">
-                                                <a href="javascript:void(0)" title="Add To Cart"
-                                                   class="w-[35px] h-[35px] flex items-center justify-center">
-                                                    <i class="ri-shopping-bag-4-line transition-all duration-[0.3s] ease-in-out text-[18px] text-[#777] leading-[10px]"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="bb-pro-contact p-[20px]">
-                                        <div class="bb-pro-subtitle mb-[8px] flex flex-wrap justify-between">
-                                            <a href="shop-left-sidebar-col-3.html"
-                                               class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[13px] leading-[16px] text-[#777] font-light tracking-[0.03rem]">Snacks</a>
-                                            <span class="bb-pro-rating">
+                                            <a href="javascript:void(0)">
+                                                <div
+                                                    class="inner-img relative block overflow-hidden pointer-events-none rounded-t-[20px]">
+                                                    <img class="main-img transition-all duration-[0.3s] ease-in-out w-full"
+                                                         src=" {{ isset($product->images[0]) ? \Illuminate\Support\Facades\Storage::url($product->images[0]->path) : asset('default-image.jpg') }}"
+                                                         alt="product-1">
+                                                    <img
+                                                        class="hover-img transition-all duration-[0.3s] ease-in-out absolute z-[2] top-[0] left-[0] opacity-[0] w-full"
+                                                        src=" {{ isset($product->images[1]) ? \Illuminate\Support\Facades\Storage::url($product->images[1]->path) : asset('default-image.jpg') }}"
+                                                        alt="product-1">
+                                                </div>
+                                            </a>
+                                            <ul class="bb-pro-actions transition-all duration-[0.3s] ease-in-out my-[0] mx-[auto] absolute z-[9] left-[0] right-[0] bottom-[0] flex flex-row items-center justify-center opacity-[0]">
+                                                <li class="bb-btn-group transition-all duration-[0.3s] ease-in-out w-[35px] h-[35px] mx-[2px] flex items-center justify-center text-[#fff] bg-[#fff] border-[1px] border-solid border-[#eee] rounded-[10px]">
+                                                    <a href="javascript:void(0)" title="Wishlist"
+                                                       class="w-[35px] h-[35px] flex items-center justify-center">
+                                                        <i class="ri-heart-line transition-all duration-[0.3s] ease-in-out text-[18px] text-[#777] leading-[10px]"></i>
+                                                    </a>
+                                                </li>
+                                                <li class="bb-btn-group transition-all duration-[0.3s] ease-in-out w-[35px] h-[35px] mx-[2px] flex items-center justify-center text-[#fff] bg-[#fff] border-[1px] border-solid border-[#eee] rounded-[10px]">
+                                                    <a href="javascript:void(0)" title="Quick View"
+                                                       class="bb-modal-toggle w-[35px] h-[35px] flex items-center justify-center">
+                                                        <i class="ri-eye-line transition-all duration-[0.3s] ease-in-out text-[18px] text-[#777] leading-[10px]"></i>
+                                                    </a>
+                                                </li>
+                                                <li class="bb-btn-group transition-all duration-[0.3s] ease-in-out w-[35px] h-[35px] mx-[2px] flex items-center justify-center text-[#fff] bg-[#fff] border-[1px] border-solid border-[#eee] rounded-[10px]">
+                                                    <a href="compare.html" title="Compare"
+                                                       class="w-[35px] h-[35px] flex items-center justify-center">
+                                                        <i class="ri-repeat-line transition-all duration-[0.3s] ease-in-out text-[18px] text-[#777] leading-[10px]"></i>
+                                                    </a>
+                                                </li>
+                                                <li class="bb-btn-group transition-all duration-[0.3s] ease-in-out w-[35px] h-[35px] mx-[2px] flex items-center justify-center text-[#fff] bg-[#fff] border-[1px] border-solid border-[#eee] rounded-[10px]">
+                                                    <a href="javascript:void(0)" title="Add To Cart"
+                                                       class="w-[35px] h-[35px] flex items-center justify-center">
+                                                        <i class="ri-shopping-bag-4-line transition-all duration-[0.3s] ease-in-out text-[18px] text-[#777] leading-[10px]"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="bb-pro-contact p-[20px]">
+                                            <div class="bb-pro-subtitle mb-[8px] flex flex-wrap justify-between">
+                                                <a href="shop-left-sidebar-col-3.html"
+                                                   class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[13px] leading-[16px] text-[#777] font-light tracking-[0.03rem]">{{ $product->category->name }}</a>
+                                                <span class="bb-pro-rating">
                                                     <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[18px] text-[#fea99a]"></i>
                                                     <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[18px] text-[#fea99a]"></i>
                                                     <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[18px] text-[#fea99a]"></i>
                                                     <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[18px] text-[#fea99a]"></i>
                                                     <i class="ri-star-line float-left text-[15px] mr-[3px] leading-[18px] text-[#777]"></i>
                                                 </span>
-                                        </div>
-                                        <h4 class="bb-pro-title mb-[8px] text-[16px] leading-[18px]">
-                                            <a href="product-left-sidebar.html"
-                                               class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">Ground
-                                                Nuts Oil
-                                                Pack</a></h4>
-                                        <div class="bb-price flex flex-wrap justify-between">
-                                            <div class="inner-price mx-[-3px]">
-                                                <span class="new-price px-[3px] text-[16px] text-[#686e7d] font-bold">$15</span>
-                                                <span
-                                                    class="old-price px-[3px] text-[14px] text-[#686e7d] line-through">$22</span>
                                             </div>
-                                            <span class="last-items text-[14px] text-[#686e7d]">500g</span>
+                                            <h4 class="bb-pro-title mb-[8px] text-[16px] leading-[18px]">
+                                                <a href="product-left-sidebar.html"
+                                                   class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">{{$product->name}}</a></h4>
+                                            <div class="bb-price flex flex-wrap justify-between">
+                                                <div class="inner-price mx-[-3px]">
+                                                    <span class="new-price px-[3px] text-[16px] text-[#686e7d] font-bold">${{ $product->price }}</span>
+                                                    <span
+                                                        class="old-price px-[3px] text-[14px] text-[#686e7d] line-through">${{$product->salary_price}}</span>
+                                                </div>
+                                                <span class="last-items text-[14px] text-[#686e7d]">{{$product->pilgrim}} {{$product->volume->name}}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            {{--                            @endfor--}}
+                            @endforeach
+
                         </div>
                     </div>
                     <!-- 2nd Product tab start -->
                     <div class="tab-product-pane" id="snack">
                         <div class="flex flex-wrap w-full">
-                            {{--                            @for($i=0; $i<8; $i++)--}}
-                            <div
-                                class="min-[1200px]:w-[25%] min-[768px]:w-[33.33%] w-[50%] max-[480px]:w-full px-[12px] mb-[24px]"
-                                data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                            @foreach($newArrivalProductSpicesAndSnacks as $newArrivalProductSpicesAndSnack)
                                 <div
-                                    class="bb-pro-box bg-[#fff] border-[1px] border-solid border-[#eee] rounded-[20px]">
+                                    class="min-[1200px]:w-[25%] min-[768px]:w-[33.33%] w-[50%] max-[480px]:w-full px-[12px] mb-[24px]"
+                                    data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                                     <div
-                                        class="bb-pro-img overflow-hidden relative border-b-[1px] border-solid border-[#eee] z-[4]">
+                                        class="bb-pro-box bg-[#fff] border-[1px] border-solid border-[#eee] rounded-[20px]">
+                                        <div
+                                            class="bb-pro-img overflow-hidden relative border-b-[1px] border-solid border-[#eee] z-[4]">
                                             <span
                                                 class="flags transition-all duration-[0.3s] ease-in-out absolute z-[5] top-[10px] left-[6px]">
                                                 <span class="text-[14px] text-[#777] font-medium uppercase">New</span>
@@ -496,11 +476,11 @@
                                             <div
                                                 class="inner-img relative block overflow-hidden pointer-events-none rounded-t-[20px]">
                                                 <img class="main-img transition-all duration-[0.3s] ease-in-out w-full"
-                                                     src="assets/img/new-product/1.jpg"
+                                                     src="{{ isset($newArrivalProductSpicesAndSnack->images[0]) ? \Illuminate\Support\Facades\Storage::url($newArrivalProductSpicesAndSnack->images[0]->path) : asset('default-image.jpg') }}"
                                                      alt="product-1">
                                                 <img
                                                     class="hover-img transition-all duration-[0.3s] ease-in-out absolute z-[2] top-[0] left-[0] opacity-[0] w-full"
-                                                    src="assets/img/new-product/back-1.jpg"
+                                                    src="{{ isset($newArrivalProductSpicesAndSnack->images[1]) ? \Illuminate\Support\Facades\Storage::url($newArrivalProductSpicesAndSnack->images[1]->path) : asset('default-image.jpg') }}"
                                                     alt="product-1">
                                             </div>
                                         </a>
@@ -542,30 +522,31 @@
                                                     <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[18px] text-[#fea99a]"></i>
                                                     <i class="ri-star-line float-left text-[15px] mr-[3px] leading-[18px] text-[#777]"></i>
                                                 </span>
-                                        </div>
-                                        <h4 class="bb-pro-title mb-[8px] text-[16px] leading-[18px]">
-                                            <a href="product-left-sidebar.html"
-                                               class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">Ground
-                                                Nuts Oil
-                                                Pack</a></h4>
-                                        <div class="bb-price flex flex-wrap justify-between">
-                                            <div class="inner-price mx-[-3px]">
-                                                <span class="new-price px-[3px] text-[16px] text-[#686e7d] font-bold">$15</span>
-                                                <span
-                                                    class="old-price px-[3px] text-[14px] text-[#686e7d] line-through">$22</span>
                                             </div>
-                                            <span class="last-items text-[14px] text-[#686e7d]">500g</span>
+                                            <h4 class="bb-pro-title mb-[8px] text-[16px] leading-[18px]">
+                                                <a href="product-left-sidebar.html"
+                                                   class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">Ground
+                                                    Nuts Oil
+                                                    Pack</a></h4>
+                                            <div class="bb-price flex flex-wrap justify-between">
+                                                <div class="inner-price mx-[-3px]">
+                                                    <span class="new-price px-[3px] text-[16px] text-[#686e7d] font-bold">${{ $newArrivalProductSpicesAndSnack->price }}</span>
+                                                    <span
+                                                        class="old-price px-[3px] text-[14px] text-[#686e7d] line-through">${{ $newArrivalProductSpicesAndSnack->sale_price }}</span>
+                                                </div>
+                                                <span class="last-items text-[14px] text-[#686e7d]">{{ $newArrivalProductSpicesAndSnack->pilgrim }} {{ $newArrivalProductSpicesAndSnack->volume->name }}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            {{--                            @endfor--}}
+                            @endforeach
+
                         </div>
                     </div>
                     <!-- 3rd Product tab start -->
                     <div class="tab-product-pane" id="fruit">
                         <div class="flex flex-wrap w-full">
-                            {{--                            @for($i=0; $i<8; $i++)--}}
+                            @foreach($newArrivalProductFruits as $newArrivalProductFruit)
                             <div
                                 class="min-[1200px]:w-[25%] min-[768px]:w-[33.33%] w-[50%] max-[480px]:w-full px-[12px] mb-[24px]"
                                 data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
@@ -581,11 +562,11 @@
                                             <div
                                                 class="inner-img relative block overflow-hidden pointer-events-none rounded-t-[20px]">
                                                 <img class="main-img transition-all duration-[0.3s] ease-in-out w-full"
-                                                     src="assets/img/new-product/1.jpg"
+                                                     src="{{ isset($newArrivalProductFruit->images[0]) ? \Illuminate\Support\Facades\Storage::url($newArrivalProductFruit->images[0]->path) : asset('default-image.jpg') }}"
                                                      alt="product-1">
                                                 <img
                                                     class="hover-img transition-all duration-[0.3s] ease-in-out absolute z-[2] top-[0] left-[0] opacity-[0] w-full"
-                                                    src="assets/img/new-product/back-1.jpg"
+                                                    src="{{ isset($newArrivalProductFruit->images[1]) ? \Illuminate\Support\Facades\Storage::url($newArrivalProductFruit->images[1]->path) : asset('default-image.jpg') }}"
                                                     alt="product-1">
                                             </div>
                                         </a>
@@ -619,7 +600,7 @@
                                     <div class="bb-pro-contact p-[20px]">
                                         <div class="bb-pro-subtitle mb-[8px] flex flex-wrap justify-between">
                                             <a href="shop-left-sidebar-col-3.html"
-                                               class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[13px] leading-[16px] text-[#777] font-light tracking-[0.03rem]">Snacks</a>
+                                               class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[13px] leading-[16px] text-[#777] font-light tracking-[0.03rem]">{{  $product->category->name }}</a>
                                             <span class="bb-pro-rating">
                                                     <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[18px] text-[#fea99a]"></i>
                                                     <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[18px] text-[#fea99a]"></i>
@@ -630,27 +611,25 @@
                                         </div>
                                         <h4 class="bb-pro-title mb-[8px] text-[16px] leading-[18px]">
                                             <a href="product-left-sidebar.html"
-                                               class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">Ground
-                                                Nuts Oil
-                                                Pack</a></h4>
+                                               class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">{{  $product->name }}</a></h4>
                                         <div class="bb-price flex flex-wrap justify-between">
                                             <div class="inner-price mx-[-3px]">
-                                                <span class="new-price px-[3px] text-[16px] text-[#686e7d] font-bold">$15</span>
+                                                <span class="new-price px-[3px] text-[16px] text-[#686e7d] font-bold">${{ $newArrivalProductFruit->price }}</span>
                                                 <span
-                                                    class="old-price px-[3px] text-[14px] text-[#686e7d] line-through">$22</span>
+                                                    class="old-price px-[3px] text-[14px] text-[#686e7d] line-through">${{ $newArrivalProductFruit->sale_price }}</span>
                                             </div>
-                                            <span class="last-items text-[14px] text-[#686e7d]">500g</span>
+                                            <span class="last-items text-[14px] text-[#686e7d]">{{  $newArrivalProductFruit->pilgrim }} {{ $newArrivalProductFruit->volume->name}}</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            {{--                            @endfor--}}
+                            @endforeach
                         </div>
                     </div>
                     <!-- 4th Product tab start -->
                     <div class="tab-product-pane" id="veg">
                         <div class="flex flex-wrap w-full">
-                            {{--                            @for($i=0; $i<8; $i++)--}}
+                            @foreach($newArrivalProductVegetables  as $newArrivalProductVegetable)
                             <div
                                 class="min-[1200px]:w-[25%] min-[768px]:w-[33.33%] w-[50%] max-[480px]:w-full px-[12px] mb-[24px]"
                                 data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
@@ -666,11 +645,11 @@
                                             <div
                                                 class="inner-img relative block overflow-hidden pointer-events-none rounded-t-[20px]">
                                                 <img class="main-img transition-all duration-[0.3s] ease-in-out w-full"
-                                                     src="assets/img/new-product/1.jpg"
+                                                     src="{{ isset($newArrivalProductVegetable->images[0]) ? \Illuminate\Support\Facades\Storage::url($newArrivalProductVegetable->images[0]->path) : asset('default-image.jpg') }}"
                                                      alt="product-1">
                                                 <img
                                                     class="hover-img transition-all duration-[0.3s] ease-in-out absolute z-[2] top-[0] left-[0] opacity-[0] w-full"
-                                                    src="assets/img/new-product/back-1.jpg"
+                                                    src="{{ isset($newArrivalProductVegetable->images[1]) ? \Illuminate\Support\Facades\Storage::url($newArrivalProductVegetable->images[1]->path) : asset('default-image.jpg') }}"
                                                     alt="product-1">
                                             </div>
                                         </a>
@@ -704,7 +683,7 @@
                                     <div class="bb-pro-contact p-[20px]">
                                         <div class="bb-pro-subtitle mb-[8px] flex flex-wrap justify-between">
                                             <a href="shop-left-sidebar-col-3.html"
-                                               class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[13px] leading-[16px] text-[#777] font-light tracking-[0.03rem]">Snacks</a>
+                                               class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[13px] leading-[16px] text-[#777] font-light tracking-[0.03rem]">{{ $newArrivalProductVegetable->category->name }}</a>
                                             <span class="bb-pro-rating">
                                                     <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[18px] text-[#fea99a]"></i>
                                                     <i class="ri-star-fill float-left text-[15px] mr-[3px] leading-[18px] text-[#fea99a]"></i>
@@ -715,21 +694,20 @@
                                         </div>
                                         <h4 class="bb-pro-title mb-[8px] text-[16px] leading-[18px]">
                                             <a href="product-left-sidebar.html"
-                                               class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">Ground
-                                                Nuts Oil
-                                                Pack</a></h4>
+                                               class="transition-all duration-[0.3s] ease-in-out font-quicksand w-full block whitespace-nowrap overflow-hidden text-ellipsis text-[15px] leading-[18px] text-[#3d4750] font-semibold tracking-[0.03rem]">{{  $newArrivalProductFruit->name }}
+ </a></h4>
                                         <div class="bb-price flex flex-wrap justify-between">
                                             <div class="inner-price mx-[-3px]">
-                                                <span class="new-price px-[3px] text-[16px] text-[#686e7d] font-bold">$15</span>
+                                                <span class="new-price px-[3px] text-[16px] text-[#686e7d] font-bold">${{  $newArrivalProductVegetable->sale_price }}</span>
                                                 <span
-                                                    class="old-price px-[3px] text-[14px] text-[#686e7d] line-through">$22</span>
+                                                    class="old-price px-[3px] text-[14px] text-[#686e7d] line-through">${{  $newArrivalProductVegetable->price }}</span>
                                             </div>
-                                            <span class="last-items text-[14px] text-[#686e7d]">500g</span>
+                                            <span class="last-items text-[14px] text-[#686e7d]">{{  $newArrivalProductVegetable->pilgrim }} {{ $newArrivalProductVegetable->volume->name}}</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            {{--                            @endfor--}}
+                            @endforeach
                         </div>
                     </div>
                 </div>

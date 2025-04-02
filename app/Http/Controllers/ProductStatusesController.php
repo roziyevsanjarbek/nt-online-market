@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\ProductStatus;
 use Illuminate\Http\Request;
 
@@ -10,7 +11,8 @@ class ProductStatusesController extends Controller
     // Wishlistni o‘zgartirish
     public function toggleWishlist(Request $request)
     {
-        $status = ProductStatus::where('user_id', auth()->id())
+        $customer_id = Customer::query()->where('token', $_COOKIE['customer_token'])->first()->id;
+        $status = ProductStatus::where('user_id', $customer_id)
             ->where('product_id', $request->product_id)
             ->first();
 
@@ -18,8 +20,9 @@ class ProductStatusesController extends Controller
             $status->like = !$status->like; // mavjud bo‘lsa, holatni o‘zgartiramiz
             $status->save();
         } else {
+            $customer_id = Customer::query()->where('token', $_COOKIE['customer_token'])->first()->id;
             $status = ProductStatus::create([
-                'user_id' => auth()->id(),
+                'user_id' => $customer_id,
                 'product_id' => $request->product_id,
                 'like' => true,
                 'shopping' => false, // default
@@ -32,7 +35,8 @@ class ProductStatusesController extends Controller
     // Cartni o‘zgartirish
     public function toggleCart(Request $request)
     {
-        $status = ProductStatus::where('user_id', auth()->id())
+        $customer_id = Customer::query()->where('token', $_COOKIE['customer_token'])->first()->id;
+        $status = ProductStatus::where('user_id', $customer_id)
             ->where('product_id', $request->product_id)
             ->first();
 

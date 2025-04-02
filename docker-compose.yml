@@ -51,7 +51,7 @@ services:
         image: node:alpine
         volumes:
             - ./:/var/www
-        command: sh -c "cd /var/www yarn install && npm run build"
+        command: sh -c "npm install && npm run build"
         depends_on:
             -   market_app
         ports:
