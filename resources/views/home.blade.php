@@ -609,7 +609,7 @@
                         <h4 class="font-quicksand text-[#fff] tracking-[0.03rem] opacity-[0.15] text-[42px] font-bold leading-[1.2] max-[1399px]:text-[38px] max-[1199px]:text-[34px]">
                             Testimonials</h4>
                     </div>
-                    @foreach($teams as $team)
+                    @foreach($groupTeam as $team)
                         <div class="owl-carousel testimonials-slider">
                             <div class="bb-testimonials-inner max-w-[900px] m-[auto] max-[1399px]:max-w-[800px]">
                                 <div class="flex flex-wrap mx-[-12px] testimonials-row">
