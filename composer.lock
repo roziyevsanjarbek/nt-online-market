@@ -2272,16 +2272,16 @@
         },
         {
             "name": "moonshine/moonshine",
-            "version": "3.8.10",
+            "version": "3.8.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/moonshine-software/moonshine.git",
-                "reference": "107c94040a3a1240827578b54eb3d0cce9065d8b"
+                "reference": "33473d69cbb513393aed560824a1e1defec9d27e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/moonshine-software/moonshine/zipball/107c94040a3a1240827578b54eb3d0cce9065d8b",
-                "reference": "107c94040a3a1240827578b54eb3d0cce9065d8b",
+                "url": "https://api.github.com/repos/moonshine-software/moonshine/zipball/33473d69cbb513393aed560824a1e1defec9d27e",
+                "reference": "33473d69cbb513393aed560824a1e1defec9d27e",
                 "shasum": ""
             },
             "require": {
@@ -2375,7 +2375,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2025-03-06T07:09:10+00:00"
+            "time": "2025-03-26T13:20:49+00:00"
         },
         {
             "name": "moonshine/tinymce",

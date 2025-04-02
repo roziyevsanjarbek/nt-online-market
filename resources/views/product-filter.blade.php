@@ -1,4 +1,5 @@
 <x-header title="Online Market"></x-header>
+
 <!-- Loader -->
 <div class="bb-loader min-w-full w-full h-screen fixed top-[0] left-[0] flex items-center justify-center bg-[#fff] z-[45]">
     <img src="assets/img/logo/loader.png" alt="loader" class="absolute">
@@ -8,6 +9,7 @@
 <!-- Header -->
 <x-navbar :parentCategories="$parentCategories" :productsMenu="$productsMenu"></x-navbar>
 <!-- Breadcrumb -->
+
 <section class="section-breadcrumb mb-[50px] max-[1199px]:mb-[35px] border-b-[1px] border-solid border-[#eee] bg-[#f8f8fb]">
     <div class="flex flex-wrap justify-between relative items-center mx-auto min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
         <div class="flex flex-wrap w-full">
@@ -66,6 +68,7 @@
 
 <!-- Shop section -->
 <section class="section-shop pb-[50px] max-[1199px]:pb-[35px]">
+
     <div class="flex flex-wrap justify-between relative items-center mx-auto min-[1400px]:max-w-[1320px] min-[1200px]:max-w-[1140px] min-[992px]:max-w-[960px] min-[768px]:max-w-[720px] min-[576px]:max-w-[540px]">
         <div class="flex flex-wrap w-full mb-[-24px]">
             <div class="min-[992px]:w-[25%] w-full px-[12px] mb-[24px]">
@@ -87,43 +90,31 @@
                                                        name="categories[]"
                                                        value="{{ $category->name }}"
                                                        class="w-full h-[calc(100%-5px)] absolute opacity-[0] cursor-pointer z-[999] top-[50%] left-[0] translate-y-[-50%]"
-                                                       onchange="document.getElementById('filterForm').submit();"
+                                                       onchange="updateCategoryFilters()"
                                                     {{ $selected ? 'checked' : '' }}>
                                                 <a href="javascript:void(0)" class="ml-[30px] block text-[#777] text-[14px] leading-[20px] font-normal capitalize cursor-pointer">
                                                     {{ $category->name }}
                                                 </a>
                                                 <span class="checked absolute top-[0] left-[0] h-[18px] w-[18px]
-                            {{ $selected ? 'bg-[#000] border-[#000]' : 'bg-[#fff] border-[#eee]' }}
-                            border-[1px] border-solid rounded-[5px] overflow-hidden">
-                        </span>
+                                                    {{ $selected ? 'bg-[#000] border-[#000]' : 'bg-[#fff] border-[#eee]' }}
+                                                        border-[1px] border-solid rounded-[5px] overflow-hidden">
+                                                </span>
                                             </div>
                                         </li>
                                     @endforeach
+
                                 </ul>
                             </div>
                         </form>
 
                     </div>
+
                     <div class="bb-sidebar-block p-[20px] border-b-[1px] border-solid border-[#eee]">
                         <div class="bb-sidebar-title mb-[20px]">
                             <h3 class="font-quicksand text-[18px] tracking-[0.03rem] leading-[1.2] font-bold text-[#3d4750]">Weight</h3>
                         </div>
                         <div class="bb-sidebar-contact">
                             <ul>
-                                <li class="relative block mb-[14px]">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <input type="checkbox" class="w-full h-[calc(100%-5px)] absolute opacity-[0] cursor-pointer z-[999] top-[50%] left-[0] translate-y-[-50%]">
-                                        <a href="javascript:void(0)" class="ml-[30px] block text-[#777] text-[14px] leading-[20px] font-normal capitalize cursor-pointer">200gm pack</a>
-                                        <span class="checked absolute top-[0] left-[0] h-[18px] w-[18px] bg-[#fff] border-[1px] border-solid border-[#eee] rounded-[5px] overflow-hidden"></span>
-                                    </div>
-                                </li>
-                                <li class="relative block mb-[14px]">
-                                    <div class="bb-sidebar-block-item relative">
-                                        <input type="checkbox" class="w-full h-[calc(100%-5px)] absolute opacity-[0] cursor-pointer z-[999] top-[50%] left-[0] translate-y-[-50%]">
-                                        <a href="javascript:void(0)" class="ml-[30px] block text-[#777] text-[14px] leading-[20px] font-normal capitalize cursor-pointer">500gm pack</a>
-                                        <span class="checked absolute top-[0] left-[0] h-[18px] w-[18px] bg-[#fff] border-[1px] border-solid border-[#eee] rounded-[5px] overflow-hidden"></span>
-                                    </div>
-                                </li>
                                 @foreach($weights as $weight)
                                     @php
                                         $checked = request()->has('weights') && in_array($weight->name, request()->weights) ? 'checked' : '';
@@ -142,42 +133,19 @@
                             </ul>
                         </div>
                     </div>
-
-                    <script>
-                        document.addEventListener("DOMContentLoaded", function () {
-                            document.querySelectorAll(".weight-filter").forEach(input => {
-                                input.addEventListener("change", function () {
-                                    let params = new URLSearchParams(window.location.search);
-
-                                    // Agar checkbox tanlangan bo‘lsa, paramsga qo‘shamiz
-                                    if (this.checked) {
-                                        params.append('weights[]', this.value);
-                                    } else {
-                                        let values = params.getAll('weights[]');
-                                        params.delete('weights[]');
-                                        values.forEach(val => {
-                                            if (val !== this.value) params.append('weights[]', val);
-                                        });
-                                    }
-
-                                    // Sahifani yangilash
-                                    window.location.search = params.toString();
-                                });
-                            });
-                        });
-                    </script>
-
-                    <div class="bb-sidebar-block p-[20px] border-b border-solid border-[#eee]">
-                        <div class="bb-sidebar-title mb-[20px]">
-                            <h3 class="font-quicksand text-[18px] tracking-[0.03rem] leading-[1.2] font-bold text-[#3d4750]">Price</h3>
-                        </div>
-                        <div class="bb-price-range">
-                            <div class="price-range-slider relative w-full">
-                                <p class="range-value text-center text-[16px] font-semibold text-[#3d4750] mb-[10px]" id="amount"></p>
-                                <div id="slider-range" class="range-bar h-[8px] bg-gray-300 rounded-md"></div>
+                    @if($products->isNotEmpty() && $products->count() !== 1)
+                        <div class="bb-sidebar-block p-[20px] border-b border-solid border-[#eee]">
+                            <div class="bb-sidebar-title mb-[20px]">
+                                <h3 class="font-quicksand text-[18px] tracking-[0.03rem] leading-[1.2] font-bold text-[#3d4750]">Price</h3>
+                            </div>
+                            <div class="bb-price-range">
+                                <div class="price-range-slider relative w-full">
+                                    <p class="range-value text-center text-[16px] font-semibold text-[#3d4750] mb-[10px]" id="amount"></p>
+                                    <div id="slider-range" class="range-bar h-[8px] bg-gray-300 rounded-md"></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
 
                     <div class="bb-sidebar-block p-[20px]">
                         <div class="bb-sidebar-title mb-[20px]">
@@ -215,24 +183,6 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="bb-sidebar-block p-[20px] border-b-[1px] border-solid border-[#eee]">
-                        <div class="bb-sidebar-title mb-[20px]">
-                            <h3 class="font-quicksand text-[18px] tracking-[0.03rem] leading-[1.2] font-bold text-[#3d4750]">Price</h3>
-                        </div>
-                        <div class="bb-price-range">
-                            <div class="price-range-slider relative w-full mb-[7px]">
-                                <p class="range-value m-[0]">
-                                    <input type="text" id="amount" readonly class="w-full bg-[#fff] text-[#000] text-[16px] mb-[15px] font-initial border-[1px] border-solid border-[#eee] p-[10px] text-center outline-[0] rounded-[10px]">
-                                </p>
-                                <div id="slider-range" class="range-bar"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bb-sidebar-block p-[20px]">
-                        <div class="bb-sidebar-title mb-[20px]">
-                            <h3 class="font-quicksand text-[18px] tracking-[0.03rem] leading-[1.2] font-bold text-[#3d4750]">Tags</h3>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="min-[992px]:w-[75%] w-full px-[12px] mb-[24px]">
@@ -251,19 +201,20 @@
                                             </button>
                                         </div>
                                     </div>
-                                    <div class="w-[50%] px-[12px] max-[420px]:w-full">
-                                        <div class="bb-select-inner h-full py-[10px] flex items-center justify-end max-[420px]:justify-center">
-                                            <div class="custom-select w-[130px] mr-[30px] flex justify-end text-[#777]  items-center text-[14px] relative max-[420px]:w-[100px] max-[420px]:justify-left">
-                                                <select>
-                                                    <option selected disabled>Sort by</option>
-                                                    <option value="1">Position</option>
-                                                    <option value="2">Relevance</option>
-                                                    <option value="3">Name, A to Z</option>
-                                                    <option value="4">Name, Z to A</option>
-                                                    <option value="5">Price, low to high</option>
-                                                    <option value="6">Price, high to low</option>
-                                                </select>
-                                            </div>
+                                    <div class="relative inline-block text-left">
+                                        <button id="sortButton" class="bg-gray-100 text-gray-700 font-medium px-4 py-2 rounded-lg shadow-md flex items-center">
+                                            <span id="selectedSort">Sort by</span>
+                                            <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                            </svg>
+                                        </button>
+
+                                        <div id="sortDropdown" class="hidden absolute mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                                            <a href="?sort=position" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Position</a>
+                                            <a href="?sort=name_asc" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Name A-Z</a>
+                                            <a href="?sort=name_desc" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Name Z-A</a>
+                                            <a href="?sort=price_asc" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Price: Low to High</a>
+                                            <a href="?sort=price_desc" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Price: High to Low</a>
                                         </div>
                                     </div>
                                 </div>
@@ -279,10 +230,13 @@
                                         </span>
                                         <a href="javascript:void(0)">
                                             <div class="inner-img relative block overflow-hidden pointer-events-none rounded-t-[20px]">
-                                                <img class="main-img transition-all duration-[0.3s] ease-in-out w-full" src="{{\Illuminate\Support\Facades\Storage::url($product->images->first()->path)}}"
-                                                     alt="product-1">
-                                                <img class="hover-img transition-all duration-[0.3s] ease-in-out absolute z-[2] top-[0] left-[0] opacity-[0] w-full" src="{{\Illuminate\Support\Facades\Storage::url($product->images->first()->path)}}"
-                                                     alt="product-1">
+                                            <img class="main-img transition-all duration-[0.3s] ease-in-out w-full" 
+     src="{{ \Illuminate\Support\Facades\Storage::url($product->images->first()?->path ?? 'default-image.jpg') }}" 
+     alt="product-1">
+
+<img class="hover-img transition-all duration-[0.3s] ease-in-out absolute z-[2] top-[0] left-[0] opacity-[0] w-full" 
+     src="{{ \Illuminate\Support\Facades\Storage::url($product->images->first()?->path ?? 'default-image.jpg') }}" 
+     alt="product-1">
                                             </div>
                                         </a>
                                         <ul class="bb-pro-actions transition-all duration-[0.3s] ease-in-out my-[0] mx-[auto] absolute z-[9] left-[0] right-[0] bottom-[0] flex flex-row items-center justify-center opacity-[0]">
@@ -396,7 +350,6 @@
 
                             </div>
                         </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -426,28 +379,145 @@
 
 <script>
     $(function () {
-        let startPrice = {{ request('startPrice', 0) }};
-        let endPrice = {{ request('endPrice', 10000) }};
+        let urlParams = new URLSearchParams(window.location.search);
+
+        let startPrice = urlParams.get('startPrice') || {{ $minSalePrice ?? 0 }};
+        let endPrice = urlParams.get('endPrice') || {{ $maxSalePrice ?? 10000 }};
 
         $("#slider-range").slider({
             range: true,
-            min: 0,
-            max: 10000,
+            min: {{ $minSalePrice ?? 0 }},
+            max: {{ $maxSalePrice ?? 10000 }},
             values: [startPrice, endPrice],
             slide: function (event, ui) {
                 $("#amount").text("$" + ui.values[0] + " - $" + ui.values[1]);
             },
             change: function (event, ui) {
-                window.location.href = "?startPrice=" + ui.values[0] + "&endPrice=" + ui.values[1];
+                let newParams = new URLSearchParams(window.location.search);
+                newParams.set('startPrice', ui.values[0]);
+                newParams.set('endPrice', ui.values[1]);
+
+                window.location.search = newParams.toString();
             }
         });
 
         $("#amount").text("$" + $("#slider-range").slider("values", 0) +
             " - $" + $("#slider-range").slider("values", 1));
     });
+    
+    document.addEventListener("DOMContentLoaded", function () {
+        const sortButton = document.getElementById("sortButton");
+        const sortDropdown = document.getElementById("sortDropdown");
+        const sortLinks = document.querySelectorAll("#sortDropdown a");
+        const selectedSortText = document.getElementById("selectedSort");
+
+        // Function to get URL parameters
+        function getParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Toggle dropdown on button click
+        sortButton.addEventListener("click", function () {
+            sortDropdown.classList.toggle("hidden"); // Show/hide dropdown
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener("click", function (event) {
+            if (!sortButton.contains(event.target) && !sortDropdown.contains(event.target)) {
+                sortDropdown.classList.add("hidden");
+            }
+        });
+
+        // Get the current selected sort value from the URL
+        const selectedValue = getParam("sort");
+
+        // Update the button text based on the selected value
+        if (selectedValue) {
+            const activeLink = Array.from(sortLinks).find(link =>
+                link.getAttribute("href").includes(`sort=${selectedValue}`)
+            );
+            if (activeLink) {
+                selectedSortText.textContent = activeLink.textContent; // Update button text
+            }
+        }
+
+        // Add event listeners to update the URL when clicking a link
+        sortLinks.forEach(link => {
+            link.addEventListener("click", function (event) {
+                event.preventDefault(); // Prevent default link navigation
+
+                const selectedOption = new URL(this.href, window.location.origin).searchParams.get("sort");
+                if (selectedOption) {
+                    const url = new URL(window.location);
+                    const params = new URLSearchParams(window.location.search);
+
+                    // Set the new sort value while keeping other params
+                    params.set("sort", selectedOption);
+                    url.search = params.toString();
+
+                    window.location.href = url.toString(); // Reload page with updated parameters
+                }
+            });
+        });
+    });
+
+    function updateCategoryFilters() {
+        const url = new URL(window.location);
+        const params = new URLSearchParams(url.search);
+
+        // Get all checked category inputs
+        const selectedCategories = new Set(); // Use Set to avoid duplicates
+        document.querySelectorAll('input[name="categories[]"]:checked').forEach(input => {
+            selectedCategories.add(input.value);
+        });
+
+        // Remove existing categories from URL before updating
+        params.delete('categories[]');
+
+        // Add only unique selected categories back to the URL
+        selectedCategories.forEach(category => {
+            params.append('categories[]', category);
+        });
+
+        // Preserve the sort parameter if it exists
+        const sort = params.get('sort');
+        if (sort) {
+            params.set('sort', sort);
+        }
+
+        // Update the URL and reload the page
+        url.search = params.toString();
+        window.location.href = url.toString();
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        let params = new URLSearchParams(window.location.search);
+        // Og‘irlik checkboxlarini tiklash
+        document.querySelectorAll(".weight-filter").forEach(input => {
+            if (params.getAll('weights[]').includes(input.value)) {
+                input.checked = true;
+            }
+            input.addEventListener("change", function () {
+                let params = new URLSearchParams(window.location.search);
+
+                // Agar checkbox tanlangan bo‘lsa, paramsga qo‘shamiz
+                if (this.checked) {
+                    params.append('weights[]', this.value);
+                } else {
+                    let values = params.getAll('weights[]');
+                    params.delete('weights[]');
+                    values.forEach(val => {
+                        if (val !== this.value) params.append('weights[]', val);
+                    });
+                }
+
+                // Sahifani yangilash
+                window.location.search = params.toString();
+            });
+        });
+    });
 </script>
 
-
 </body>
-
 </html>

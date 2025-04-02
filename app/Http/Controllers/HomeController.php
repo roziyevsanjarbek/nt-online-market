@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use App\Models\Category;
-use App\Models\Customer;
 use App\Models\Post;
 use App\Models\Product;
 use App\Models\Team;
@@ -106,6 +105,7 @@ class HomeController extends Controller
             'newArrivalProductVegetables' => $newArrivalProductVegetables,
         ]);
     }
+
 
 
     public function show(string $id)
