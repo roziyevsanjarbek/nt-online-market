@@ -11,10 +11,7 @@ Route::middleware(GenerateCustomerToken::class)->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/filter',[ProductsController::class, 'show'])->name('filter');
 
-
-
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-
 
     Route::middleware('auth')->group(function ()
     {
@@ -23,9 +20,5 @@ Route::middleware(GenerateCustomerToken::class)->group(function () {
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
 });
-
-
-
-
 
 require __DIR__.'/auth.php';

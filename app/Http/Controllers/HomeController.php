@@ -17,13 +17,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (!isset($_COOKIE['customer_token'])){
-            $uniqueId = uniqid();
-            Customer::query()->create([
-                'token' => $uniqueId
-            ]);
-            setcookie('customer_token', $uniqueId, time() + (86400 * 30), "/");
-        }
         $topBanners = Banner::query()
             ->where('position', 'top')
                 ->get();
