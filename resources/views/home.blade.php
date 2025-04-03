@@ -159,10 +159,10 @@
                     data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                     <div class="section-detail max-[991px]:mb-[12px]">
                         <h2 class="bb-title font-quicksand mb-[0] p-[0] text-[25px] font-bold text-[#3d4750] relative inline capitalize leading-[1] tracking-[0.03rem] max-[767px]:text-[23px]">
-                            {{$discount_name}}
-                        </h2>
+                            Day of the <span class="text-[#6c7fd8]">deal</span></h2>
+                        <p class="font-Poppins max-w-[400px] mt-[10px] text-[14px] text-[#686e7d] leading-[18px] font-light tracking-[0.03rem] max-[991px]:mx-[auto]">
+                            Don't wait. The time will never be just right.</p>
                     </div>
-
                     <div id="dealend" class="dealend-timer"></div>
                 </div>
             </div>
@@ -257,12 +257,10 @@
                                             </div>
                                             <span class="last-items text-[14px] text-[#686e7d]">{{$product->pilgrim}} {{$product->volume->name}}</span>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
                         @endforeach
-
                     </div>
                 </div>
             </div>
@@ -316,6 +314,7 @@
         $title = trim(preg_replace('/\s+/', ' ', $bottomBanner->title));
         $words = explode(" ", $title);
         ?>
+
     <section
         class="section-banner-two overflow-hidden my-[50px] max-[1199px]:my-[35px] bg-[url('{{ asset('storage/' . $bottomBanner->image) }}')] min-h-[600px] overflow-hidden bg-no-repeat bg-cover bg-center max-[991px]:max-h-[400px] max-[991px]:min-h-[auto]">
         <div
@@ -435,7 +434,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                    </div>$product->stock > 0
+                                    </div>
                                 </div>
                             @endforeach
                         </div>
