@@ -23,6 +23,8 @@ Route::middleware(GenerateCustomerToken::class)->group(function () {
     Route::get('/faq', [HomeController::class, 'faq'])->name('faq');
     Route::get('/offers', [HomeController::class, 'offers'])->name('offers');
     Route::get('/terms', [HomeController::class, 'terms'])->name('terms');
+    Route::get('/products/{id}', [ProductsController::class, 'singleProduct'])->name('single-product');
+
 
     Route::middleware('auth')->group(function ()
     {

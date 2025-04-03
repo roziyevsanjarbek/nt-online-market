@@ -20,7 +20,6 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained('categories')->nullable();
             $table->float('quantity')->default(0);
             $table->float('pilgrim')->default(0);
-            $table->foreignId('volume_id')->constrained('product_volumes');
             $table->timestamps();
         });
     }
