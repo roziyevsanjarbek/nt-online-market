@@ -4,6 +4,7 @@ namespace App\Services;
 
     use App\Models\Banner;
     use App\Models\Category;
+    use App\Models\Discount;
     use App\Models\Post;
     use App\Models\Product;
     use App\Models\Team;
@@ -80,12 +81,26 @@ class HomeService
                 $query->whereIn('id', $parentCategories->pluck('id'));
                 })->orderBy('id', 'desc')->limit(4)->get(),
 
+            'discount_price' => Discount::query()->value('discount_price'),
+
+            'discount_name' => Discount::query()->value('name'),
+
+            'discount_start_date' => Discount::query()->value('start_date'),
+            'discount_end_date' => Discount::query()->value('end_date'),
+
 
         'groupTeam' => Team::query()
                 ->orderBy('id', 'desc')
                 ->limit(10)
                 ->get(),
+
+
+
+
+
         ];
+
+
     }
 
 

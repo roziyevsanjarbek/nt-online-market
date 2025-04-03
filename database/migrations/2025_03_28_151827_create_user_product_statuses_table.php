@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
             $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade');
             $table->boolean('like')->default(false);
-            $table->boolean('shopping')->default(false);
+//            $table->boolean('shopping')->default(false);
             $table->timestamps();
         });
     }

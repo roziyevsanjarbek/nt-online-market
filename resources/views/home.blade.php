@@ -1,4 +1,4 @@
-@props(['parentCategories', 'productsMenu','newArrivalProducts','products'])
+@props(['parentCategories', 'productsMenu','newArrivalProducts','products', 'discount_price','discount_name','discount_start_date', 'discount_end_date'])
 @yield('content')
 <x-header title="Online Market"></x-header>
 
@@ -159,10 +159,10 @@
                     data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                     <div class="section-detail max-[991px]:mb-[12px]">
                         <h2 class="bb-title font-quicksand mb-[0] p-[0] text-[25px] font-bold text-[#3d4750] relative inline capitalize leading-[1] tracking-[0.03rem] max-[767px]:text-[23px]">
-                            Day of the <span class="text-[#6c7fd8]">deal</span></h2>
-                        <p class="font-Poppins max-w-[400px] mt-[10px] text-[14px] text-[#686e7d] leading-[18px] font-light tracking-[0.03rem] max-[991px]:mx-[auto]">
-                            Don't wait. The time will never be just right.</p>
+                            {{$discount_name}}
+                        </h2>
                     </div>
+
                     <div id="dealend" class="dealend-timer"></div>
                 </div>
             </div>
@@ -207,7 +207,7 @@
                                                 </a>
                                             </li>
                                             <li class="bb-btn-group transition-all duration-[0.3s] ease-in-out w-[35px] h-[35px] mx-[2px] flex items-center justify-center bg-[#fff] border-[1px] border-solid border-[#eee] rounded-[10px]">
-                                                <a href="compare.html" title="Compare"
+                                                <a href="{{route('compare')}}}" title="Compare"
                                                    class="w-[35px] h-[35px] flex items-center justify-center">
                                                     <i class="ri-repeat-line transition-all duration-[0.3s] ease-in-out text-[18px] text-[#777] leading-[10px]"></i>
                                                 </a>
@@ -242,13 +242,22 @@
                                         </h4>
                                         <div class="bb-price flex flex-wrap justify-between">
                                             <div class="inner-price mx-[-3px]">
-                                            <span
-                                                class="new-price px-[3px] text-[16px] text-[#686e7d] font-bold">${{$product->price}}</span>
-                                                <span
-                                                    class="old-price px-[3px] text-[14px] text-[#686e7d] line-through">${{$product->sale_price }}</span>
+{{--                                                @dd($discount_price)--}}
+                                                @if(isset($discount_price))
+                                                    <!-- Chegirma bo'lsa -->
+                                                    <?php
+                                                        $discountedPrice = (($product->sale_price-($product->sale_price*$discount_price/100)));
+                                                    ?>
+                                                    <span class="new-price px-[3px] text-[16px] text-[#686e7d] font-bold">${{ number_format($discountedPrice, 2) }}</span>
+                                                    <span class="old-price px-[3px] text-[14px] text-[#686e7d] line-through">${{$product->sale_price}}</span>
+                                                @else
+                                                    <!-- Chegirma bo'lmasa -->
+                                                    <span class="new-price px-[3px] text-[16px] text-[#686e7d] font-bold">${{$product->sale_price}}</span>
+                                                @endif
                                             </div>
-                                            <span class="last-items text-[14px] text-[#686e7d]"> {{$product->pilgrim}} {{ $product->volume->name }}</span>
+                                            <span class="last-items text-[14px] text-[#686e7d]">{{$product->pilgrim}} {{$product->volume->name}}</span>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
