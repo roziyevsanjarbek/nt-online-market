@@ -16,12 +16,19 @@ class DiscountProductController extends Controller
 
         $product = Product::findOrFail($validatedData['product_id']);
 
+
         $product->discount()->associate($validatedData['discount_id']);
         $product->save();
 
+
+
+
         return view('home', [
             'product' => $product,
+
         ]);
     }
+
+
 
 }
