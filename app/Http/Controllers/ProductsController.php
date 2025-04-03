@@ -49,13 +49,6 @@ class ProductsController extends Controller
 
     public function show(Request $request)
     {
-        if (!isset($_COOKIE['customer_token'])){
-            $uniqueId = uniqid();
-            Customer::query()->create([
-                'token' => $uniqueId
-            ]);
-            setcookie('customer_token', $uniqueId, time() + (86400 * 30), "/");
-        }
         $categories = $request->input('categories');
         $weights = $request->input('weights');
         $startPrice = $request->input('startPrice');
@@ -63,12 +56,11 @@ class ProductsController extends Controller
 
         $selectedCategories = Category::whereIn('name', (array) $categories)->pluck('id')->toArray();
 
-        // 🔹 Get all child categories recursively
         function getChildCategoryIds($parentIds)
         {
             $childIds = Category::whereIn('parent_id', $parentIds)->pluck('id')->toArray();
             if (!empty($childIds)) {
-                return array_merge($childIds, getChildCategoryIds($childIds)); // Recursive call
+                return array_merge($childIds, getChildCategoryIds($childIds));
             }
             return [];
         }
@@ -87,25 +79,11 @@ class ProductsController extends Controller
             ->when(isset($startPrice) && isset($endPrice), function ($query) use ($startPrice, $endPrice) {
                 return $query->whereBetween('sale_price', [$startPrice, $endPrice]);
             })
-            ->when(request()->has('sort'), function ($query) {
-                $sortBy = request('sort'); // Get sorting parameter from URL
-
-                switch ($sortBy) {
-                    case 'name_asc':
-                        $query->orderBy('name', 'asc');
-                        break;
-                    case 'name_desc':
-                        $query->orderBy('name', 'desc');
-                        break;
-                    case 'price_asc':
-                        $query->orderBy('sale_price', 'asc');
-                        break;
-                    case 'price_desc':
-                        $query->orderBy('sale_price', 'desc');
-                        break;
-                    default:
-                        $query->orderBy('id', 'desc'); // Default sorting
-                        break;
+            ->when(request()->has('sort_by'), function ($query) {
+                $sortBy = request('sort_by', 'id');
+                $sortOrder = request('sort_order', 'asc');
+                if ($sortBy && $sortOrder) {
+                    $query->orderBy($sortBy, $sortOrder);
                 }
             })
             ->with('images')
@@ -117,9 +95,15 @@ class ProductsController extends Controller
         $images = Image::paginate(1);
         $weights = Volume::all();
 
-        // Get min and max price dynamically
         $minSalePrice = $products->min('price');
         $maxSalePrice = $products->max('price');
+
+//        $newArrivalProducts = Product::whereHas('category', function ($query) use ($parentCategories) {
+//            $query->whereHas('parent', function ($q) use ($parentCategories) {
+//                $q->whereNotNull('id')->where('name', $parentCategories->name);
+//            });
+//        })->orderBy('id', 'desc')->limit(4)->get();
+
 
         return view('product-filter', [
             'products' => $products,
@@ -128,13 +112,62 @@ class ProductsController extends Controller
             'categories' => $categories,
             'images'=>$images,
             'weights' => $weights,
+//            'newArrivalProducts' => $newArrivalProducts,
             'minSalePrice' => $minSalePrice,
             'maxSalePrice' => $maxSalePrice,
+        ]);
+    }
 
+    public function singleProduct (Request $request, string $productId) {
+        $categories = $request->input('categories');
+        $weights = $request->input('weights');
+        $startPrice = $request->input('startPrice');
+        $endPrice = $request->input('endPrice');
+
+        $selectedCategories = Category::whereIn('name', (array) $categories)->pluck('id')->toArray();
+
+        $categoryIds = Category::whereIn('parent_id', $selectedCategories)
+            ->orWhereIn('id', $selectedCategories)
+            ->pluck('id')
+            ->toArray();
+
+        $parentCategories = Category::whereNull('parent_id')
+            ->orderBy('id', 'desc')
+            ->limit(4)
+            ->with('categories')
+            ->get();
+
+        $productsMenu = Category::whereNull('parent_id')
+            ->orderBy('id', 'desc')
+            ->with('categories')
+            ->get();
+
+        $categories = Category::all();
+
+        $images = Image::paginate(1);
+        $weights = Volume::all(); // **Shu qatorni qo‘sh!**
+
+        $product = Product::with('images')
+            ->where('id', $productId)
+            ->first();
+        return view('product', [
+            'product' => $product,
+            'parentCategories' => $parentCategories,
+            'productsMenu' => $productsMenu,
+            'categories' => $categories,
+            'images'=>$images,
+            'weights' => $weights
         ]);
     }
 
 
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Product $products)
+    {
+        //
+    }
 
     public function likeProduct($productId)
     {
@@ -150,5 +183,4 @@ class ProductsController extends Controller
         }
         return response()->json(['success' => true]); // JavaScript uchun javob
     }
-
 }

@@ -23,7 +23,8 @@ class DiscountResource extends ModelResource {
             ID::make()->sortable(),
             Text::make('Name'),
             Select::make('Discount (%)', 'discount_price')
-                ->options([10 => '10%', 20 => '20%', 30 => '30%', 40 => '40%', 50 => '50%', 60 => '60%', 70 => '70%', 80 => '80%', 90 => '90%', 100 => '100%']),
+                ->options(array_combine(range(1, 100), array_map(fn($i) => "$i%", range(1, 100))))
+                ->required(),
             Date::make('Start Date', 'start_date'),
             Date::make('End Date', 'end_date'),
             BelongsToMany::make('Products', 'products', fn($item) => $item->name),
