@@ -180,7 +180,7 @@
                                                 <ul class="mega-block w-[calc(25%-30px)] mr-[30px] py-[15px]">
                                                     <li class="menu_title border-b-[1px] border-solid border-[#eee] mb-[10px] pb-[5px] flex items-center leading-[28px]"><a href="javascript:void(0)" class="transition-all duration-[0.3s] ease-in-out font-Poppins h-[auto] text-[#6c7fd8] text-[15px] font-medium tracking-[0.03rem] block py-[10px] leading-[22px] capitalize">{{$Categories->name}}</a></li>
                                                     @foreach($Categories->categories as $childCategories)
-                                                        <li class="flex items-center leading-[28px]"><a href="shop-left-sidebar-col-3.html" class="transition-all duration-[0.3s] ease-in-out font-Poppins py-[10px] leading-[22px] text-[14px] font-normal tracking-[0.03rem] text-[#686e7d] hover:text-[#6c7fd8] capitalize">{{$childCategories->name}}</a></li>
+                                                        <li class="flex items-center leading-[28px]"><a href="/filter?categories%5B%5D={{ $childCategories->name }}" class="transition-all duration-[0.3s] ease-in-out font-Poppins py-[10px] leading-[22px] text-[14px] font-normal tracking-[0.03rem] text-[#686e7d] hover:text-[#6c7fd8] capitalize">{{$childCategories->name}}</a></li>
                                                     @endforeach
                                                 </ul>
                                             @endforeach
@@ -198,7 +198,7 @@
                                                     <ul class="bb-mega-menu transition-all duration-[0.3s] ease-in-out min-w-[220px] p-[10px] mt-[25px] absolute top-[-20px] left-[193px] z-[16] text-left opacity-[0] invisible right-[auto] bg-[#fff] border-[1px] border-solid border-[#eee] flex flex-col rounded-[10px]">
                                                         @foreach($productMenu->categories as $childCategories)
                                                             <li class="m-[0] py-[5px] px-[15px] flex items-center">
-                                                                <a class="dropdown-item transition-all duration-[0.3s] ease-in-out py-[6px] text-[14px] font-normal text-[#686e7d] hover:text-[#6c7fd8] capitalize" href="{{ $childCategories->link }}">{{ $childCategories->name }}</a>
+                                                                <a class="dropdown-item transition-all duration-[0.3s] ease-in-out py-[6px] text-[14px] font-normal text-[#686e7d] hover:text-[#6c7fd8] capitalize" href="/filter?categories%5B%5D={{ $childCategories->name }}">{{ $childCategories->name }}</a>
                                                             </li>
                                                         @endforeach
                                                     </ul>

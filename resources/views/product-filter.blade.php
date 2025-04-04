@@ -2,7 +2,7 @@
 
 <!-- Loader -->
 <div class="bb-loader min-w-full w-full h-screen fixed top-[0] left-[0] flex items-center justify-center bg-[#fff] z-[45]">
-    <img src="assets/img/logo/loader.png" alt="loader" class="absolute">
+    <img src="/assets/img/logo/loader.png" alt="loader" class="absolute">
     <span class="loader w-[60px] h-[60px] relative"></span>
 </div>
 
@@ -49,7 +49,7 @@
 
                             <div class="category-sub-contact">
                                 <h5 class="mb-[2px] text-[16px] font-quicksand text-[#3d4750] font-semibold tracking-[0.03rem] leading-[1.2]">
-                                    <a href="#"
+                                    <a href="/filter?categories%5B%5D={{ $category->name }}"
                                        class="font-Poppins text-[16px] font-medium leading-[1.2] tracking-[0.03rem] text-[#3d4750] capitalize">
                                         {{$category->name}}
                                     </a>
