@@ -12,7 +12,7 @@ class ProductStatusesController extends Controller
     public function toggleWishlist(Request $request)
     {
         $customer_id = Customer::query()->where('token', $_COOKIE['customer_token'])->first()->id;
-        $status = ProductStatus::where('user_id', $customer_id)
+        $status = ProductStatus::where('customer_id', $customer_id)
             ->where('product_id', $request->product_id)
             ->first();
 
@@ -20,9 +20,8 @@ class ProductStatusesController extends Controller
             $status->like = !$status->like; // mavjud bo‘lsa, holatni o‘zgartiramiz
             $status->save();
         } else {
-            $customer_id = Customer::query()->where('token', $_COOKIE['customer_token'])->first()->id;
             $status = ProductStatus::create([
-                'user_id' => $customer_id,
+                'customer_id' => $customer_id,
                 'product_id' => $request->product_id,
                 'like' => true,
                 'shopping' => false, // default
@@ -36,7 +35,7 @@ class ProductStatusesController extends Controller
     public function toggleCart(Request $request)
     {
         $customer_id = Customer::query()->where('token', $_COOKIE['customer_token'])->first()->id;
-        $status = ProductStatus::where('user_id', $customer_id)
+        $status = ProductStatus::where('customer_id', $customer_id)
             ->where('product_id', $request->product_id)
             ->first();
 
@@ -45,7 +44,7 @@ class ProductStatusesController extends Controller
             $status->save();
         } else {
             $status = ProductStatus::create([
-                'user_id' => auth()->id(),
+                'customer_id' => auth()->id(),
                 'product_id' => $request->product_id,
                 'shopping' => true,
                 'like' => false, // default
@@ -58,7 +57,7 @@ class ProductStatusesController extends Controller
     // Wishlistdagi mahsulotlarni olish
     public function wishlist()
     {
-        $wishlist = ProductStatus::where('user_id', auth()->id())
+        $wishlist = ProductStatus::where('customer_id', auth()->id())
             ->where('like', true)
             ->with('product')
             ->get();
@@ -69,7 +68,7 @@ class ProductStatusesController extends Controller
     // Cartdagi mahsulotlarni olish
     public function cart()
     {
-        $cart = ProductStatus::where('user_id', auth()->id())
+        $cart = ProductStatus::where('customer_id', auth()->id())
             ->where('shopping', true)
             ->with('product')
             ->get();
