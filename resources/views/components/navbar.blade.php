@@ -10,10 +10,10 @@
                         </div>
                         <div class="col-right-bar flex">
                             <div class="cols px-[12px]">
-                                <a href="faq.html" class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[14px] text-[#fff] font-light leading-[28px] tracking-[0.03rem]">Help?</a>
+                                <a href="{{route('faq')}}" class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[14px] text-[#fff] font-light leading-[28px] tracking-[0.03rem]">Help?</a>
                             </div>
                             <div class="cols px-[12px]">
-                                <a href="track-order.html" class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[14px] text-[#fff] font-light leading-[28px] tracking-[0.03rem]">Track Order</a>
+                                <a href="{{route('faq')}}" class="transition-all duration-[0.3s] ease-in-out font-Poppins text-[14px] text-[#fff] font-light leading-[28px] tracking-[0.03rem]">Track Order</a>
                             </div>
                             <div class="cols px-[12px]">
                                 <div class="custom-dropdown relative z-[5]">
@@ -48,9 +48,9 @@
                         <div class="cols bb-logo-detail flex max-[767px]:justify-between">
                             <!-- Header Logo Start -->
                             <div class="header-logo flex items-center max-[575px]:justify-center">
-                                <a href="index.html">
-                                    <img src="/assets/img/logo/logo.png" alt="logo" class="light w-[125px] max-[991px]:w-[115px] block">
-                                    <img src="/assets/img/logo/logo-dark.png" alt="logo" class="dark w-[125px] max-[991px]:w-[115px] hidden">
+                                <a href="{{route('index')}}">
+                                    <img src="assets/img/logo/logo.png" alt="logo" class="light w-[125px] max-[991px]:w-[115px] block">
+                                    <img src="assets/img/logo/logo-dark.png" alt="logo" class="dark w-[125px] max-[991px]:w-[115px] hidden">
                                 </a>
                             </div>
                             <!-- Header Logo End -->
@@ -191,20 +191,27 @@
                                 <li class="nav-item bb-dropdown flex items-center relative mr-[45px]">
                                     <a class="nav-link bb-dropdown-item font-Poppins relative p-[0] leading-[28px] text-[15px] font-medium text-[#3d4750] block tracking-[0.03rem]" href="javascript:void(0)">Products</a>
                                     <ul class="bb-dropdown-menu min-w-[205px] p-[10px] transition-all duration-[0.3s] ease-in-out mt-[25px] absolute top-[40px] z-[16] text-left opacity-[0] invisible left-[0] right-[auto] bg-[#fff] border-[1px] border-solid border-[#eee] flex flex-col rounded-[10px]">
-                                        @foreach($productsMenu as $productMenu)
-                                            <li class="bb-mega-dropdown m-[0] py-[5px] px-[15px] relative flex items-center">
-                                                <a class="bb-mega-item transition-all duration-[0.3s] ease-in-out font-Poppins py-[5px] leading-[22px] text-[14px] font-normal text-[#686e7d] hover:text-[#6c7fd8] capitalize tracking-[0.03rem]" href="{{ $productMenu->link }}">{{ $productMenu->name }}</a>
-                                                @if(empty($productMenu->children))
-                                                    <ul class="bb-mega-menu transition-all duration-[0.3s] ease-in-out min-w-[220px] p-[10px] mt-[25px] absolute top-[-20px] left-[193px] z-[16] text-left opacity-[0] invisible right-[auto] bg-[#fff] border-[1px] border-solid border-[#eee] flex flex-col rounded-[10px]">
-                                                        @foreach($productMenu->categories as $childCategories)
-                                                            <li class="m-[0] py-[5px] px-[15px] flex items-center">
-                                                                <a class="dropdown-item transition-all duration-[0.3s] ease-in-out py-[6px] text-[14px] font-normal text-[#686e7d] hover:text-[#6c7fd8] capitalize" href="{{ $childCategories->link }}">{{ $childCategories->name }}</a>
-                                                            </li>
-                                                        @endforeach
-                                                    </ul>
-                                                @endif
-                                            </li>
-                                        @endforeach
+
+                                        @if(!empty($productsMenu) && is_iterable($productsMenu))
+                                            @foreach($productsMenu as $productMenu)
+                                                <li class="bb-mega-dropdown m-[0] py-[5px] px-[15px] relative flex items-center">
+                                                    <a class="bb-mega-item transition-all duration-[0.3s] ease-in-out font-Poppins py-[5px] leading-[22px] text-[14px] font-normal text-[#686e7d] hover:text-[#6c7fd8] capitalize tracking-[0.03rem]" href="{{ $productMenu->link }}">{{ $productMenu->name }}</a>
+
+                                                    @if(empty($productMenu->children))
+                                                        <ul class="bb-mega-menu transition-all duration-[0.3s] ease-in-out min-w-[220px] p-[10px] mt-[25px] absolute top-[-20px] left-[193px] z-[16] text-left opacity-[0] invisible right-[auto] bg-[#fff] border-[1px] border-solid border-[#eee] flex flex-col rounded-[10px]">
+                                                            @if(!empty($productMenu->categories) && is_iterable($productMenu->categories))
+                                                                @foreach($productMenu->categories as $childCategories)
+                                                                    <li class="m-[0] py-[5px] px-[15px] flex items-center">
+                                                                        <a class="dropdown-item transition-all duration-[0.3s] ease-in-out py-[6px] text-[14px] font-normal text-[#686e7d] hover:text-[#6c7fd8] capitalize" href="{{ $childCategories->link }}">{{ $childCategories->name }}</a>
+                                                                    </li>
+                                                                @endforeach
+                                                            @endif
+                                                        </ul>
+                                                    @endif
+                                                </li>
+                                            @endforeach
+                                        @endif
+
                                     </ul>
                                 </li>
                                 <li class="nav-item bb-dropdown flex items-center relative mr-[45px]">
@@ -365,16 +372,16 @@
                     <div class="header-top-social">
                         <ul class="flex flex-row justify-center mb-[0]">
                             <li class="list-inline-item w-[30px] h-[30px] flex items-center justify-center bg-[#3d4750] rounded-[10px] mr-[.5rem]">
-                                <a href="#" class="transition-all duration-[0.3s] ease-in-out"><i class="ri-facebook-fill text-[#fff] text-[15px]"></i></a>
+                                <a href="" class="transition-all duration-[0.3s] ease-in-out"><i class="ri-facebook-fill text-[#fff] text-[15px]"></i></a>
                             </li>
                             <li class="list-inline-item w-[30px] h-[30px] flex items-center justify-center bg-[#3d4750] rounded-[10px] mr-[.5rem]">
-                                <a href="#" class="transition-all duration-[0.3s] ease-in-out"><i class="ri-twitter-fill text-[#fff] text-[15px]"></i></a>
+                                <a href="" class="transition-all duration-[0.3s] ease-in-out"><i class="ri-twitter-fill text-[#fff] text-[15px]"></i></a>
                             </li>
                             <li class="list-inline-item w-[30px] h-[30px] flex items-center justify-center bg-[#3d4750] rounded-[10px] mr-[.5rem]">
-                                <a href="#" class="transition-all duration-[0.3s] ease-in-out"><i class="ri-instagram-line text-[#fff] text-[15px]"></i></a>
+                                <a href="" class="transition-all duration-[0.3s] ease-in-out"><i class="ri-instagram-line text-[#fff] text-[15px]"></i></a>
                             </li>
                             <li class="list-inline-item w-[30px] h-[30px] flex items-center justify-center bg-[#3d4750] rounded-[10px]">
-                                <a href="#" class="transition-all duration-[0.3s] ease-in-out"><i class="ri-linkedin-fill text-[#fff] text-[15px]"></i></a>
+                                <a href="https://www.linkedin.com/in/mexriddin-nuriddinov-72092a348/" class="transition-all duration-[0.3s] ease-in-out"><i class="ri-linkedin-fill text-[#fff] text-[15px]"></i></a>
                             </li>
                         </ul>
                     </div>

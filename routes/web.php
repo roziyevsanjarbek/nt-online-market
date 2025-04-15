@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\DiscountProductController;
 use App\Http\Controllers\HomeController;
 
+use App\Http\Controllers\OffersController;
 use App\Http\Controllers\ProductsController;
 
 use App\Http\Controllers\ProfileController;
@@ -21,7 +22,7 @@ Route::middleware(GenerateCustomerToken::class)->group(function () {
     Route::get('/checkout', [HomeController::class, 'checkout'])->name('checkout');
     Route::get('/compare', [HomeController::class, 'compare'])->name('compare');
     Route::get('/faq', [HomeController::class, 'faq'])->name('faq');
-    Route::get('/offers', [HomeController::class, 'offers'])->name('offers');
+    Route::get('/offers', [OffersController::class, 'index'])->name('offers');
     Route::get('/terms', [HomeController::class, 'terms'])->name('terms');
     Route::get('/products/{id}', [ProductsController::class, 'singleProduct'])->name('single-product');
 

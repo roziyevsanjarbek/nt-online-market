@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Discount;
 use Illuminate\Http\Request;
 
 class DiscountProductController extends Controller
@@ -15,13 +16,11 @@ class DiscountProductController extends Controller
         ]);
 
         $product = Product::findOrFail($validatedData['product_id']);
+        $discount = Discount::findOrFail($validatedData['discount_id']);
 
-        $product->discount()->associate($validatedData['discount_id']);
-        $product->save();
+        // Mahsulotga chegirma qo‘shish
+        $product->discounts()->syncWithoutDetaching([$discount->id]);
 
-        return view('home', [
-            'product' => $product,
-        ]);
+        return redirect()->route('offers')->with('success', 'Discount applied to product successfully.');
     }
-
 }
