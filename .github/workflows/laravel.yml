@@ -5,23 +5,22 @@ on:
 
 jobs:
   deploy:
-    name: Deploy to AWS (EC2)
+    name: Deploy to DigitalOcean Droplet
     runs-on: ubuntu-latest
     steps:
       - name: executing remote ssh commands using private key
         uses: appleboy/ssh-action@v1.1.0
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
+          host: ${{ secrets.DOHOST }}
+          username: ${{ secrets.DOUSERNAME }}
+          key: ${{ secrets.DOKEY }}
           script: |
-            cd /var/www/OnlineMarketApp
+            cd /var/www/nt-online-market
             sudo docker compose down
             sudo git reset --hard
-            sudo git pull
+            sudo git pull origin main
             sudo docker compose up -d --build
             sleep 2
-            sudo docker exec market_app php artisan migrate
+            sudo docker exec market_app php artisan migrate --force
             sudo docker exec market_app php artisan optimize
-             sudo docker exec market_app chmod -R 775 /var/www
-            echo "Deploy Completed!"
+            echo "✅ Deploy to DigitalOcean completed!"
