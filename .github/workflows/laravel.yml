@@ -11,7 +11,7 @@ jobs:
       - name: executing remote ssh commands using private key
         uses: appleboy/ssh-action@v1.1.0
         with:
-          host: ${{ secrets.DOHOST }}
+          host: ${{ secrets.DOHOST }}   # Bu yerda DOHOST ishlatiladi
           username: ${{ secrets.DOUSERNAME }}
           key: ${{ secrets.DOKEY }}
           script: |
