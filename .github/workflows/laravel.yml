@@ -8,12 +8,15 @@ jobs:
     name: Deploy to DigitalOcean Droplet
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: executing remote ssh commands using private key
         uses: appleboy/ssh-action@v1.1.0
         with:
-          host: ${{ secrets.DOHOST }}   # Bu yerda DOHOST ishlatiladi
-          username: ${{ secrets.DOUSERNAME }}
-          key: ${{ secrets.DOKEY }}
+          host: ${{ secrets.DOHOST }}  # IP manzilingiz
+          username: ${{ secrets.DOUSERNAME }}  # Foydalanuvchi nomi
+          key: ${{ secrets.DOKEY }}  # Private SSH kalit
           script: |
             cd /var/www/nt-online-market
             sudo docker compose down
