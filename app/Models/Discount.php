@@ -17,3 +17,5 @@ class Discount extends Model
             ->withTimestamps();
     }
 }
+
+
