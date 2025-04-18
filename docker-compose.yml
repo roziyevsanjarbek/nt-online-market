@@ -66,3 +66,5 @@ networks:
         driver: bridge
 volumes:
     market_database:
+
+        
