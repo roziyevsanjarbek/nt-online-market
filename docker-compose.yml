@@ -67,4 +67,4 @@ networks:
 volumes:
     market_database:
 
-        
+
